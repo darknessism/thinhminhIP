@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinh Minh Eco-Industrial Park | Premium Investment Destination</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Configuration & Styling -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#050505',
+                        panel: '#0a0a0a',
+                        accent: {
+                            DEFAULT: '#10B981', // Emerald 500
+                            light: '#34D399',
+                            dark: '#059669',
+                            glow: 'rgba(16, 185, 129, 0.15)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': `linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+        
+        .glass-panel:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Glow effects */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        .bg-glow {
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10B981;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-position: center top;
+        }
+        
+        /* NEW IMAGE & ANIMATION CLASSES */
+        .img-zoom-hover {
+            overflow: hidden;
+            position: relative;
+        }
+        .img-zoom-hover img {
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .img-zoom-hover:hover img {
+            transform: scale(1.08);
+        }
+        
+        .slow-pan {
+            animation: panImage 30s linear infinite alternate;
+        }
+        @keyframes panImage {
+            0% { transform: scale(1.05) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-2%, -2%); }
+        }
+
+        .floating-img {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-white relative">
+
+    <!-- Ambient Background Gradients -->
+    <div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-accent/5 blur-[120px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-accent/10 blur-[150px] pointer-events-none z-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/5 bg-dark/80 transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i data-lucide="leaf" class="text-accent w-6 h-6"></i>
+                <span class="font-serif text-xl tracking-wider text-white">THINH MINH <span class="text-accent italic">IP</span></span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 text-sm tracking-wide font-light text-gray-300">
+                <a href="#overview" class="hover:text-accent transition-colors">Eco-Industrial Hub</a>
+                <a href="#location" class="hover:text-accent transition-colors">Overview</a>
+                <a href="#infrastructure" class="hover:text-accent transition-colors">Infrastructure</a>
+                <a href="#japan-desk" class="hover:text-accent transition-colors">ESG-Ecosystem</a>
+                <a href="#japan-desk" class="hover:text-accent transition-colors">Sectors</a>
+                <a href="#japan-desk" class="hover:text-accent transition-colors">Logistics</a>
+                <a href="#japan-desk" class="hover:text-accent transition-colors">Benefits</a>
+                <a href="#japan-desk" class="hover:text-accent transition-colors">Partnership</a>
+            </div>
+            <a href="#contact" class="hidden md:inline-block px-5 py-2 border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 text-sm tracking-widest uppercase">
+                Inquire
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden z-10">
+        <!-- New Background Image with slow pan -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" alt="Modern Tech Facility" class="w-full h-full object-cover opacity-40 slow-pan">
+        </div>
+
+        <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-30 z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/30 to-dark z-0"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center reveal active">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-medium tracking-widest uppercase mb-8">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                Phu Tho Province, Vietnam
+            </div>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-tight mb-6">
+                A Next-Generation <br>
+                <span class="italic text-accent text-glow">Eco-Industrial Hub</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed mb-12">
+                Engineered for high-tech manufacturing, aligned with rigorous ESG standards, and perfectly positioned to secure your global supply chain.
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass-panel p-6 text-center">
+                    <div class="text-accent font-serif text-3xl mb-1">429.5</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">Hectares Scale</div>
+                </div>
+                <div class="glass-panel p-6 text-center">
+                    <div class="text-white font-serif text-3xl mb-1">4.365</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">Trillion VND</div>
+                </div>
+                <div class="glass-panel p-6 text-center">
+                    <div class="text-accent font-serif text-3xl mb-1">50</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">Years Lease</div>
+                </div>
+                <div class="glass-panel p-6 text-center">
+                    <div class="text-white font-serif text-3xl mb-1">Q1</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">2026 Readiness</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary & Tech Specs -->
+    <section id="executive-specs" class="py-24 relative z-10 border-t border-white/5 bg-panel/30">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <!-- Overview Map -->
+            <div class="mb-32 reveal">
+                <div class="text-center mb-10">
+                    <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3">Master Plan</h4>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Project Overview Map</h2>
+                    <div class="w-16 h-px bg-accent mx-auto mb-6"></div>
+                    <p class="text-gray-400 font-light max-w-2xl mx-auto">Explore the integrated 429.5 ha layout featuring dedicated industrial zones, robust utility infrastructure, and lush green corridors.</p>
+                </div>
+                
+                <div class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass-panel group cursor-pointer hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500 border border-white/10">
+                    <!-- Map Image from Unsplash -->
+                    <img src="https://dahop.vn/wp-content/uploads/2025/11/anh-1-1-scaled-1200x800.jpg?q=80&w=2074&auto=format&fit=crop" alt="Master Plan Map Overview" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-luminosity group-hover:mix-blend-normal">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent"></div>
+                    
+                    <div class="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+                        <div class="transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/20 backdrop-blur-md border border-accent/30 text-xs text-white font-medium mb-3">
+                                <i data-lucide="map" class="w-3 h-3 text-accent"></i> 429.5 Hectares
+                            </div>
+                            <h3 class="text-white font-serif text-2xl md:text-3xl drop-shadow-md">Comprehensive Eco-Industrial Layout</h3>
+                        </div>
+                        <div class="hidden md:flex items-center gap-2 text-accent text-sm font-medium group-hover:translate-x-2 transition-transform duration-300">
+                            View Full Scale <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Executive Summary -->
+            <div class="mb-24 reveal">
+                <div class="text-center mb-12">
+                    <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3">At a Glance</h4>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Executive Summary</h2>
+                    <div class="w-16 h-px bg-accent mx-auto"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Card 1 -->
+                    <div class="glass-panel group relative overflow-hidden rounded-xl min-h-[280px] p-8 hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20 flex flex-col justify-end cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop" alt="Strategic Location Highway" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/70 to-dark/30"></div>
+                        <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <i data-lucide="map-pin" class="w-8 h-8 text-accent mb-4 drop-shadow-md"></i>
+                            <h3 class="text-xl font-serif text-white mb-3 drop-shadow-md">Strategic Location</h3>
+                            <p class="text-gray-300 font-light text-sm leading-relaxed drop-shadow-md">It sits at the western gateway of Hanoi with direct access to the Hoa Lac - Hoa Binh Expressway, just 22 km from Hoa Lac Hi-Tech Park and 45 km from central Hanoi.</p>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="glass-panel group relative overflow-hidden rounded-xl min-h-[280px] p-8 hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20 flex flex-col justify-end cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="Corporate Financial Growth" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/70 to-dark/30"></div>
+                        <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <i data-lucide="coins" class="w-8 h-8 text-accent mb-4 drop-shadow-md"></i>
+                            <h3 class="text-xl font-serif text-white mb-3 drop-shadow-md">Cost Incentives</h3>
+                            <p class="text-gray-300 font-light text-sm leading-relaxed drop-shadow-md">Offers strong financial perks, including up to 15 years of land rental exemption, corporate tax reductions, and 15-30% land lease discounts for early investors.</p>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="glass-panel group relative overflow-hidden rounded-xl min-h-[280px] p-8 hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20 flex flex-col justify-end cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070&auto=format&fit=crop" alt="Sustainable Energy" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/70 to-dark/30"></div>
+                        <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <i data-lucide="leaf" class="w-8 h-8 text-accent mb-4 drop-shadow-md"></i>
+                            <h3 class="text-xl font-serif text-white mb-3 drop-shadow-md">Modern & Sustainable</h3>
+                            <p class="text-gray-300 font-light text-sm leading-relaxed drop-shadow-md">Designed as an Eco-Industrial Park aligned with ESG standards, featuring smart digital/AI management and integrated solar power.</p>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="glass-panel group relative overflow-hidden rounded-xl min-h-[280px] p-8 hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20 flex flex-col justify-end cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop" alt="Modern Architecture Building" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/70 to-dark/30"></div>
+                        <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <i data-lucide="blocks" class="w-8 h-8 text-accent mb-4 drop-shadow-md"></i>
+                            <h3 class="text-xl font-serif text-white mb-3 drop-shadow-md">Customizable Solutions</h3>
+                            <p class="text-gray-300 font-light text-sm leading-relaxed drop-shadow-md">The developer offers customized technical infrastructure (Built-to-Suit) and dedicated zones tailored for Korean, Japanese, and Chinese investors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Specs Table -->
+            <div class="grid lg:grid-cols-12 gap-12 items-center reveal">
+                <!-- Left: Tech Image -->
+                <div class="lg:col-span-5 relative h-full min-h-[400px] lg:min-h-[600px] rounded-2xl overflow-hidden group cursor-pointer hover:shadow-[0_0_40px_rgba(16,185,129,0.4)] transition-all duration-500 border border-white/5">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?q=80&w=2070&auto=format&fit=crop" alt="High Tech Infrastructure" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8 right-8">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/20 backdrop-blur-md border border-accent/30 text-xs text-white font-medium mb-3">
+                            <i data-lucide="cpu" class="w-3 h-3 text-accent"></i> Engineered for Stability
+                        </div>
+                        <h3 class="text-white font-serif text-2xl drop-shadow-md">Absolute Operational Reliability</h3>
+                    </div>
+                </div>
+
+                <!-- Right: Content & Table -->
+                <div class="lg:col-span-7">
+                    <div class="mb-8">
+                        <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Technical Infrastructure Specifications</h2>
+                        <p class="text-gray-400 font-light">Comprehensive, robust systems engineered to guarantee absolute stability for high-tech manufacturing.</p>
+                    </div>
+                    
+                    <div class="flex flex-col gap-4">
+                        <!-- Spec 1: Internal Roads -->
+                        <div class="glass-panel p-3 rounded-xl flex items-center gap-5 group hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all duration-300">
+                            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=200&auto=format&fit=crop" alt="Internal Roads" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm flex items-center gap-2 mb-1.5"><i data-lucide="route" class="w-4 h-4 text-accent"></i> Internal Roads</h4>
+                                <p class="text-[13px] text-gray-400 font-light leading-snug">Main roads: 54-64m width (4 lanes) <br> Branch roads: 28-36m width (4 lanes)</p>
+                            </div>
+                        </div>
+
+                        <!-- Spec 2: Power Supply -->
+                        <div class="glass-panel p-3 rounded-xl flex items-center gap-5 group hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all duration-300">
+                            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1720351453923-6d24431a1905?q=80&w=200&auto=format&fit=crop" alt="Power Supply" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm flex items-center gap-2 mb-1.5"><i data-lucide="zap" class="w-4 h-4 text-accent"></i> Power Supply</h4>
+                                <p class="text-[13px] text-gray-400 font-light leading-snug">110 kV substation to 22 kV network. 126 MVA capacity (expandable by 103 MVA). Integrated solar power system.</p>
+                            </div>
+                        </div>
+
+                        <!-- Spec 3: Clean Water -->
+                        <div class="glass-panel p-3 rounded-xl flex items-center gap-5 group hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all duration-300">
+                            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?q=80&w=200&auto=format&fit=crop" alt="Clean Water" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm flex items-center gap-2 mb-1.5"><i data-lucide="droplet" class="w-4 h-4 text-accent"></i> Clean Water</h4>
+                                <p class="text-[13px] text-gray-400 font-light leading-snug">15,000 m³/day-night (expandable to 20,000-30,000 m³). WHO-standard.</p>
+                            </div>
+                        </div>
+
+                        <!-- Spec 4: Wastewater Treatment -->
+                        <div class="glass-panel p-3 rounded-xl flex items-center gap-5 group hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all duration-300">
+                            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1622322977767-2c71d1787205?q=80&w=200&auto=format&fit=crop" alt="Wastewater Treatment" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm flex items-center gap-2 mb-1.5"><i data-lucide="recycle" class="w-4 h-4 text-accent"></i> Wastewater Treatment</h4>
+                                <p class="text-[13px] text-gray-400 font-light leading-snug">12,000 m³/day-night (expandable to 20,000 m³).</p>
+                            </div>
+                        </div>
+
+                        <!-- Spec 5: Drainage & Regulation -->
+                        <div class="glass-panel p-3 rounded-xl flex items-center gap-5 group hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all duration-300">
+                            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1465447142348-e9952c393450?q=80&w=200&auto=format&fit=crop" alt="Drainage" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm flex items-center gap-2 mb-1.5"><i data-lucide="waves" class="w-4 h-4 text-accent"></i> Drainage & Regulation</h4>
+                                <p class="text-[13px] text-gray-400 font-light leading-snug">21.89 ha of canals and regulation lakes. Integrated flood-drainage pumping system.</p>
+                            </div>
+                        </div>
+
+                        <!-- Spec 6: Telecommunications -->
+                        <div class="glass-panel p-3 rounded-xl flex items-center gap-5 group hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all duration-300">
+                            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=200&auto=format&fit=crop" alt="Telecommunications" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm flex items-center gap-2 mb-1.5"><i data-lucide="network" class="w-4 h-4 text-accent"></i> Telecommunications</h4>
+                                <p class="text-[13px] text-gray-400 font-light leading-snug">International standard. Digital operation management with AI.</p>
+                            </div>
+                        </div>
+
+                        <!-- Spec 7: Firefighting & Security -->
+                        <div class="glass-panel p-3 rounded-xl flex items-center gap-5 group hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all duration-300">
+                            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=200&auto=format&fit=crop" alt="Firefighting & Security" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-sm flex items-center gap-2 mb-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-accent"></i> Firefighting & Security</h4>
+                                <p class="text-[13px] text-gray-400 font-light leading-snug">National-standard firefighting (24/7). Smart security system (24/7).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ESG Ecosystem Section -->
+    <section id="esg-ecosystem" class="py-24 relative z-10 border-t border-white/5 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div class="reveal">
+                    <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3">Sustainable Future</h4>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mb-6 leading-tight">The ESG-Aligned <br><span class="italic text-accent">Green Ecosystem</span></h2>
+                    <p class="text-gray-400 font-light leading-relaxed mb-8">
+                        Thinh Minh is designed not just as an industrial park, but as a sustainable ecosystem that aligns with the rigorous ESG (Environmental, Social, and Governance) commitments of global Japanese corporations.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="glass-panel p-6 rounded-xl flex items-start gap-4 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] transition-all duration-300 group cursor-pointer">
+                            <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0 border border-accent/20 group-hover:bg-accent/20 transition-colors">
+                                <i data-lucide="home" class="w-5 h-5 text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-2">Integrated Worker Housing</h4>
+                                <p class="text-sm text-gray-400 font-light leading-relaxed">23 ha dedicated to high-quality worker housing and amenities, ensuring a stable, well-rested, and high-retention workforce.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-xl flex items-start gap-4 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] transition-all duration-300 group cursor-pointer">
+                            <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0 border border-accent/20 group-hover:bg-accent/20 transition-colors">
+                                <i data-lucide="leaf" class="w-5 h-5 text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-2">Green Corridors</h4>
+                                <p class="text-sm text-gray-400 font-light leading-relaxed">Extensive landscaping and carbon-offset initiatives embedded throughout the master plan to create a healthy, productive working environment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Content -->
+                <div class="relative reveal h-full min-h-[400px] lg:min-h-[500px] rounded-2xl overflow-hidden group cursor-pointer border border-white/5 hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=2000&auto=format&fit=crop" alt="Green Architecture" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8 right-8 text-center transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <i data-lucide="leaf" class="w-8 h-8 text-accent mx-auto mb-3 drop-shadow-md"></i>
+                        <h3 class="text-white font-serif text-2xl drop-shadow-md">Harmonizing Industry & Nature</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Industries -->
+    <section id="overview" class="py-24 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Targeting Advanced Sectors</h2>
+                <div class="w-16 h-px bg-accent mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <!-- Card 1 -->
+                <div class="glass-panel group relative overflow-hidden rounded-xl h-48 flex items-end p-6 cursor-pointer hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" alt="Electronics" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <i data-lucide="cpu" class="w-6 h-6 text-accent mb-3 drop-shadow-md"></i>
+                        <h3 class="text-white font-medium text-lg drop-shadow-md">Advanced Electronics</h3>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-panel group relative overflow-hidden rounded-xl h-48 flex items-end p-6 cursor-pointer hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop" alt="Engineering" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <i data-lucide="settings" class="w-6 h-6 text-accent mb-3 drop-shadow-md"></i>
+                        <h3 class="text-white font-medium text-lg drop-shadow-md">Precision Engineering</h3>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-panel group relative overflow-hidden rounded-xl h-48 flex items-end p-6 cursor-pointer hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20">
+                    <img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?q=80&w=2070&auto=format&fit=crop" alt="Semiconductor" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <i data-lucide="microchip" class="w-6 h-6 text-accent mb-3 drop-shadow-md"></i>
+                        <h3 class="text-white font-medium text-lg drop-shadow-md">Semiconductor Support</h3>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-panel group relative overflow-hidden rounded-xl h-48 flex items-end p-6 cursor-pointer hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20">
+                    <img src="https://images.unsplash.com/photo-1562408590-e32931084e23?q=80&w=2070&auto=format&fit=crop" alt="Automotive" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <i data-lucide="car" class="w-6 h-6 text-accent mb-3 drop-shadow-md"></i>
+                        <h3 class="text-white font-medium text-lg drop-shadow-md">Automotive Assembly</h3>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="glass-panel group relative overflow-hidden rounded-xl h-48 flex items-end p-6 cursor-pointer hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20">
+                    <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=2070&auto=format&fit=crop" alt="Biotech" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <i data-lucide="microscope" class="w-6 h-6 text-accent mb-3 drop-shadow-md"></i>
+                        <h3 class="text-white font-medium text-lg drop-shadow-md">Biotechnology</h3>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="glass-panel group relative overflow-hidden rounded-xl h-48 flex items-end p-6 cursor-pointer hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-500 hover:z-20">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" alt="Automation" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent"></div>
+                    <div class="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500">
+                        <i data-lucide="bot" class="w-6 h-6 text-accent mb-3 drop-shadow-md"></i>
+                        <h3 class="text-white font-medium text-lg drop-shadow-md">Automation & AI</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Location -->
+    <section id="location" class="py-24 relative z-10 bg-panel/30 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <!-- NEW: Logistics Overview Map & Details -->
+            <div class="mb-32 reveal">
+                <!-- Big Map Photo with Matching Design -->
+                <div class="text-center mb-10">
+                    <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3">Strategic Connectivity</h4>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Logistics Network Map</h2>
+                    <div class="w-16 h-px bg-accent mx-auto mb-6"></div>
+                    <p class="text-gray-400 font-light max-w-2xl mx-auto"><strong class="text-white font-medium">Map Highlights:</strong> Phu Tho Province, Ha Noi, Thinh Minh Industrial Park, Thinh Minh Industrial Cluster, and Worker Housing and Industrial Services.</p>
+                </div>
+                
+                <div class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass-panel group cursor-pointer hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500 border border-white/10 mb-12">
+                    <img src="https://dahop.vn/wp-content/uploads/2026/03/Anh-Map-xa-Thinh-Minh.jpg?q=80&w=2072&auto=format&fit=crop" alt="Logistics Network Map Overview" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-luminosity group-hover:mix-blend-normal">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent"></div>
+                    
+                    <div class="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+                        <div class="transform group-hover:-translate-y-2 transition-transform duration-500">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/20 backdrop-blur-md border border-accent/30 text-xs text-white font-medium mb-3">
+                                <i data-lucide="map" class="w-3 h-3 text-accent"></i> Regional Logistics Network
+                            </div>
+                            <h3 class="text-white font-serif text-2xl md:text-3xl drop-shadow-md">Seamless Access to Global Markets</h3>
+                        </div>
+                        <div class="hidden md:flex items-center gap-2 text-accent text-sm font-medium group-hover:translate-x-2 transition-transform duration-300">
+                            View Full Scale <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Descriptive Text & Distances -->
+                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-7 space-y-6">
+                        <p class="text-gray-400 font-light leading-relaxed mb-8">
+                            Thinh Minh Industrial Park has a strategic location with direct access to the Hoa Lac - Hoa Binh Expressway, adjacent to the western gateway of Hanoi. The project benefits directly from planned infrastructure upgrades including the expressway expansion to six lanes, Metro Line No.5 (Van Cao - Hoa Lac), and Hanoi Ring Road No.5, enabling convenient cargo movement to provinces and Northern key economic zones.
+                        </p>
+                        <p class="text-gray-400 font-light leading-relaxed mb-8">
+                            Bordering Hanoi, near Hoa Lac Hi-Tech Park where major global manufacturers gather, Thinh Minh Industrial Park targets high-tech industries and supply chain enterprises.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 glass-panel p-8 rounded-2xl">
+                        <h3 class="text-white font-serif text-xl mb-6 flex items-center gap-3"><i data-lucide="navigation" class="text-accent w-5 h-5"></i> Distances to Key Locations</h3>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Hanoi</span>
+                                <span class="text-sm font-medium text-white">45 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Phu Tho</span>
+                                <span class="text-sm font-medium text-white">50 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Hoa Lac Hi-Tech Park</span>
+                                <span class="text-sm font-medium text-white">22 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Nat. University</span>
+                                <span class="text-sm font-medium text-white">20 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Ring Road No.5</span>
+                                <span class="text-sm font-medium text-white">07 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Ho Chi Minh Road</span>
+                                <span class="text-sm font-medium text-white">22 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Hoa Binh-Hanoi Exp.</span>
+                                <span class="text-sm font-medium text-white">07 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Metro Line No.5</span>
+                                <span class="text-sm font-medium text-white">07 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Noi Bai Airport</span>
+                                <span class="text-sm font-medium text-white">80 km</span>
+                            </li>
+                            <li class="flex items-center justify-between border-b border-white/5 pb-2">
+                                <span class="text-sm text-gray-400">Hai Phong Seaport</span>
+                                <span class="text-sm font-medium text-white">145 km</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Existing Content -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3">Logistics & Connectivity</h4>
+                    <h2 class="font-serif text-4xl md:text-5xl text-white mb-6 leading-tight">Securing Your <br><span class="italic text-gray-400">Global Supply Chain</span></h2>
+                    <p class="text-gray-400 font-light leading-relaxed mb-8">
+                        Located at the strategic western gateway of Hanoi, Thinh Minh IP offers unparalleled logistical advantages, serving as a critical node in the Northern Vietnam economic corridor. Perfectly positioned for companies executing a "China Plus One" diversification strategy.
+                    </p>
+                    
+                    
+                </div>
+
+                <div class="relative reveal h-full min-h-[400px] flex items-center justify-center">
+                    <!-- Decorative animated rings -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="w-[350px] h-[350px] rounded-full border border-accent/20 animate-[spin_20s_linear_infinite]"></div>
+                        <div class="absolute w-[250px] h-[250px] rounded-full border border-accent/30 animate-[spin_15s_linear_infinite_reverse]"></div>
+                    </div>
+                    <!-- Floating Image -->
+                    <div class="relative z-10 w-4/5 floating-img rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_50px_rgba(16,185,129,0.7)] border border-white/10 group cursor-pointer transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=2070&auto=format&fit=crop" alt="Logistics Highway" class="w-full h-auto object-cover transition-all duration-1000 group-hover:scale-110 group-hover:brightness-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-dark/80 backdrop-blur border border-white/10 text-xs text-accent font-medium mb-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span> Optimal Transit
+                            </div>
+                            <h3 class="text-white font-serif text-xl drop-shadow-md">Direct Highway Access</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Infrastructure -->
+    <section id="infrastructure" class="py-24 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3">THINH MINH IPARK</h4>
+                <h2 class="font-serif text-4xl md:text-5xl text-white mb-6">04 Outstanding Advantages</h2>
+                <p class="text-gray-400 font-light max-w-2xl mx-auto">High-tech manufacturing requires absolute stability and zero downtime. Our infrastructure is engineered with redundancy, scalability, and ESG compliance at its core.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <!-- Power -->
+                <div class="glass-panel p-8 reveal">
+                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-6 h-6 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">20 Years of Experience</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">
+                        Uninterrupted power via a dedicated 110 kV substation to a 22 kV network (126 MVA base, expandable by 103 MVA). Features a secure ring-type distribution and integrated on-site solar power.
+                    </p>
+                </div>
+                <!-- Water -->
+                <div class="glass-panel p-8 reveal">
+                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
+                        <i data-lucide="droplet" class="w-6 h-6 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">Strategic Location</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">
+                        High-capacity, WHO-standard purification system delivering up to 15,000 m³/day (scalable to 30,000 m³), ensuring absolute purity and pressure for sensitive processes.
+                    </p>
+                </div>
+                <!-- Waste -->
+                <div class="glass-panel p-8 reveal">
+                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
+                        <i data-lucide="recycle" class="w-6 h-6 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">100% Newly Developed</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">
+                        Centralized, automated treatment facility processing 12,000 m³/day (expandable to 20,000 m³), strictly adhering to Vietnam's highest environmental discharge standards.
+                    </p>
+                </div>
+                <!-- Drainage -->
+                <div class="glass-panel p-8 reveal">
+                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
+                        <i data-lucide="waves" class="w-6 h-6 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">Legal Transparency</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">
+                        Centralized, automated treatment facility processing 12,000 m³/day (expandable to 20,000 m³), strictly adhering to Vietnam's highest environmental discharge standards.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Parallax Break -->
+    <section class="relative h-[40vh] flex items-center justify-center overflow-hidden border-t border-b border-white/5 bg-fixed bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-dark/50 z-0 backdrop-blur-[1px]"></div>
+        <div class="relative z-10 text-center reveal">
+            <i data-lucide="leaf" class="w-10 h-10 text-accent mx-auto mb-4 drop-shadow-[0_0_15px_rgba(16,185,129,0.8)]"></i>
+            <h2 class="font-serif text-3xl md:text-5xl text-white mb-2 drop-shadow-lg">Sustainable by Design</h2>
+            <p class="text-accent tracking-widest uppercase text-sm font-medium drop-shadow-md">100% ESG Compliant Ecosystem</p>
+        </div>
+    </section>
+
+    <!-- ESG Ecosystem Section -->
+    <section id="esg-ecosystem" class="py-24 relative z-10 border-t border-white/5 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Left: Incentives -->
+                <div class="reveal">
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mb-8">Exclusive Financial <br><span class="italic text-accent">Advantages</span></h2>
+                    
+                    <div class="space-y-4">
+                        <div class="glass-panel p-6 border-l-2 border-l-accent">
+                            <h4 class="text-white font-medium mb-2">Extended Land Usage</h4>
+                            <p class="text-sm text-gray-400 font-light">50-year lease term securing long-term operational stability for major capital investments.</p>
+                        </div>
+                        <div class="glass-panel p-6 border-l-2 border-l-accent">
+                            <h4 class="text-white font-medium mb-2">FDI Tax Holidays</h4>
+                            <p class="text-sm text-gray-400 font-light">Highly competitive Corporate Income Tax (CIT) exemptions and reductions tailored for high-tech foreign direct investments.</p>
+                        </div>
+                        <div class="glass-panel p-6 border-l-2 border-l-accent">
+                            <h4 class="text-white font-medium mb-2">Rent Exemptions & Early Discounts</h4>
+                            <p class="text-sm text-gray-400 font-light">Land rental fee exemptions ranging from 10 to 15 years, plus 15-30% lease discounts for early pioneer investors.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Japan Desk -->
+                <div class="reveal">
+                    <div class="glass-panel p-10 h-full border-accent/20 relative overflow-hidden rounded-2xl group cursor-pointer hover:shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-all duration-500">
+                        <!-- Background Image -->
+                        <img src="https://plus.unsplash.com/premium_photo-1661764559869-f6052a14b4c9?q=80&w=2070&auto=format&fit=crop" alt="Corporate Support" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-700 group-hover:scale-105 transform">
+                        <div class="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-transparent"></div>
+                        
+                        <div class="flex items-center gap-4 mb-6 relative z-10">
+                            <i data-lucide="globe" class="w-8 h-8 text-accent"></i>
+                            <h2 class="font-serif text-3xl text-white">The "Japan Desk" Support</h2>
+                        </div>
+                        <p class="text-gray-400 font-light mb-8 relative z-10">
+                            We offer a bespoke support structure designed to eliminate bureaucratic friction and accelerate your time-to-market in Vietnam.
+                        </p>
+                        
+                        <ul class="space-y-5 relative z-10">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-gray-300 font-light"><strong class="text-white font-medium">Dedicated Precincts:</strong> Master-planned zones customized for the operational and cultural preferences of Japanese enterprises.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-gray-300 font-light"><strong class="text-white font-medium">Built-to-Suit (BTS):</strong> Bespoke technical infrastructure and factory construction to your precise engineering specs.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-gray-300 font-light"><strong class="text-white font-medium">One-Stop Concierge:</strong> Full-service handling of investment licensing, EPE registration, and legal procedures.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-gray-300 font-light"><strong class="text-white font-medium">Labor Procurement:</strong> Integrated recruitment pipelines via partnerships with local technical universities.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Partner With Us / Footer CTA -->
+    <section class="py-24 relative z-10 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6 text-center reveal">
+            <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3">Why Partner With Us?</h4>
+            <h2 class="font-serif text-3xl md:text-5xl text-white mb-12">Partner with a Proven Leader</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-16 text-left">
+                <!-- Point 1 -->
+                <div class="glass-panel p-8 rounded-xl group hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-300">
+                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
+                        <i data-lucide="award" class="w-6 h-6 text-accent group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="text-white font-serif text-xl mb-3">Proven Track Record</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">Da Hop brings nearly 20 years of successful, financially stable experience in developing premium industrial-urban ecosystems.</p>
+                </div>
+                <!-- Point 2 -->
+                <div class="glass-panel p-8 rounded-xl group hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-300">
+                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
+                        <i data-lucide="rocket" class="w-6 h-6 text-accent group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="text-white font-serif text-xl mb-3">Speed to Operations</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">Construction commences Q1/2026, offering immediate Built-to-Suit (BTS) readiness upon investor request.</p>
+                </div>
+                <!-- Point 3 -->
+                <div class="glass-panel p-8 rounded-xl group hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-300">
+                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-accent group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="text-white font-serif text-xl mb-3">Complete Legal Transparency</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">Fully cleared land with transparent, unencumbered legal status ensuring absolute peace of mind for your investment.</p>
+                </div>
+            </div>
+            
+            <div class="glass-panel p-10 bg-accent/5 border-accent/30 inline-block text-left w-full max-w-3xl mx-auto" id="contact">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div>
+                        <h4 class="text-white font-serif text-2xl mb-2">Initiate a Conversation</h4>
+                        <p class="text-sm text-gray-400 font-light mb-6">Contact our dedicated investment team to schedule a site visit or request a customized proposal.</p>
+                        <div class="space-y-3">
+                            <a href="tel:+84966366555" class="flex items-center gap-3 text-white hover:text-accent transition-colors">
+                                <i data-lucide="phone" class="w-4 h-4 text-accent"></i>
+                                <span class="tracking-wider">(+84) 90174 0904</span>
+                            </a>
+                            <a href="mailto:bankinhdoanh@dahop.vn" class="flex items-center gap-3 text-white hover:text-accent transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4 text-accent"></i>
+                                <span>daotuankhai@gmail.com</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="shrink-0">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=DH&backgroundColor=10b981&textColor=ffffff" alt="Da Hop Logo" class="w-24 h-24 rounded-full opacity-80 border border-white/20">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-dark py-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-gray-500 text-sm font-light">
+                &copy; 2026 Thinh Minh Industrial Park. Developed by Da Hop Win-Win Partnership.
+            </div>
+            <div class="flex gap-6 text-sm text-gray-500 font-light">
+                <a href="#" class="hover:text-white transition-colors">www.dahop.vn</a>
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Scroll Reveal Animation Logic
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 100; // Adjust for trigger point
+
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+
+        // Navbar blur effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'shadow-black/50');
+                navbar.style.backgroundColor = 'rgba(5, 5, 5, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-black/50');
+                navbar.style.backgroundColor = 'rgba(5, 5, 5, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
