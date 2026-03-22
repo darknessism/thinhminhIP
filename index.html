@@ -170,6 +170,9 @@
                     <button onclick="setLanguage('ja')" id="btn-ja" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
                         <img src="https://flagcdn.com/w40/jp.png" alt="Japanese" class="w-full h-full object-cover">
                     </button>
+                    <button onclick="setLanguage('vn')" id="btn-vn" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
+                        <img src="https://flagcdn.com/w40/vn.png" alt="Vietnamese" class="w-full h-full object-cover">
+                    </button>
                 </div>
             </div>
         </div>
@@ -193,7 +196,7 @@
                     <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
                     <span data-i18n="hero-loc">Phu Tho Province, Vietnam</span>
                 </div>
-                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-tight mb-6 drop-shadow-xl" data-i18n="hero-title">
+                <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6 drop-shadow-xl" data-i18n="hero-title">
                     A Next-Generation <br>
                     <span class="italic text-accent text-glow">Eco-Industrial Hub</span>
                 </h1>
@@ -667,44 +670,71 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
                 <!-- Point 1 -->
-                <div class="glass-panel p-8 reveal">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
-                        <i data-lucide="zap" class="w-6 h-6 text-accent"></i>
+                <div class="glass-panel p-0 rounded-2xl overflow-hidden reveal group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500">
+                    <div class="relative h-56 w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop" alt="Experience and Master Planning" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-8 translate-y-1/2 w-14 h-14 rounded-xl bg-dark border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                            <i data-lucide="award" class="w-6 h-6 text-accent"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv1-t">20 Years of Experience</h3>
-                    <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv1-d">
-                        With 20 years of mastery in shaping industrial landscapes, we offer more than just land; we offer a proven track record. Our deep-rooted expertise ensures that every aspect of the park—from master planning to operational support—is backed by two decades of refined best practices and a steadfast commitment to long-term partner success.
-                    </p>
+                    <div class="p-8 pt-10 flex-grow bg-dark/50">
+                        <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv1-t">20 Years of Experience</h3>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv1-d">
+                            With 20 years of mastery in shaping industrial landscapes, we offer more than just land; we offer a proven track record. Our deep-rooted expertise ensures that every aspect of the park—from master planning to operational support—is backed by two decades of refined best practices and a steadfast commitment to long-term partner success.
+                        </p>
+                    </div>
                 </div>
+
                 <!-- Point 2 -->
-                <div class="glass-panel p-8 reveal">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
-                        <i data-lucide="droplet" class="w-6 h-6 text-accent"></i>
+                <div class="glass-panel p-0 rounded-2xl overflow-hidden reveal group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500">
+                    <div class="relative h-56 w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=2070&auto=format&fit=crop" alt="Strategic Location and Logistics" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-8 translate-y-1/2 w-14 h-14 rounded-xl bg-dark border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-accent"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv2-t">Strategic Location</h3>
-                    <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv2-d">
-                        Perfectly positioned within the capital’s economic orbit, our location provides a competitive edge in logistics and connectivity. Investors benefit from immediate access to Hanoi’s massive labor pool, world-class consumer markets, and seamless integration into the region's primary transport arteries, including international airports and deep-sea ports.
-                    </p>
+                    <div class="p-8 pt-10 flex-grow bg-dark/50">
+                        <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv2-t">Strategic Location</h3>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv2-d">
+                            Perfectly positioned within the capital’s economic orbit, our location provides a competitive edge in logistics and connectivity. Investors benefit from immediate access to Hanoi’s massive labor pool, world-class consumer markets, and seamless integration into the region's primary transport arteries, including international airports and deep-sea ports.
+                        </p>
+                    </div>
                 </div>
+
                 <!-- Point 3 -->
-                <div class="glass-panel p-8 reveal">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
-                        <i data-lucide="recycle" class="w-6 h-6 text-accent"></i>
+                <div class="glass-panel p-0 rounded-2xl overflow-hidden reveal group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500">
+                    <div class="relative h-56 w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?q=80&w=2058&auto=format&fit=crop" alt="100% Newly Developed Modern Infrastructure" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-8 translate-y-1/2 w-14 h-14 rounded-xl bg-dark border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                            <i data-lucide="sparkles" class="w-6 h-6 text-accent"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv3-t">100% Newly Developed</h3>
-                    <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv3-d">
-                        Built for the Future of Industry. Experience a "clean slate" designed for modern efficiency. Our park features 100% newly commissioned, state-of-the-art infrastructure. Built to satisfy global ESG standards and support advanced smart-factory technologies, our facilities offer high-spec utility systems that ensure your operations run at peak performance from day one.
-                    </p>
+                    <div class="p-8 pt-10 flex-grow bg-dark/50">
+                        <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv3-t">100% Newly Developed</h3>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv3-d">
+                            Built for the Future of Industry. Experience a "clean slate" designed for modern efficiency. Our park features 100% newly commissioned, state-of-the-art infrastructure. Built to satisfy global ESG standards and support advanced smart-factory technologies, our facilities offer high-spec utility systems that ensure your operations run at peak performance from day one.
+                        </p>
+                    </div>
                 </div>
+
                 <!-- Point 4 -->
-                <div class="glass-panel p-8 reveal">
-                    <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
-                        <i data-lucide="waves" class="w-6 h-6 text-accent"></i>
+                <div class="glass-panel p-0 rounded-2xl overflow-hidden reveal group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500">
+                    <div class="relative h-56 w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop" alt="Legal Transparency and Contract Signing" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-8 translate-y-1/2 w-14 h-14 rounded-xl bg-dark border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-accent"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv4-t">Legal Transparency</h3>
-                    <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv4-d">
-                        Foundations of Trust and Speed. Eliminate the risks of entry with a rock-solid legal framework. We prioritize full compliance and absolute transparency in all land-use and investment procedures. This "clean" legal status provides peace of mind and facilitates a high-speed path from initial investment to full-scale operation without bureaucratic delays.
-                    </p>
+                    <div class="p-8 pt-10 flex-grow bg-dark/50">
+                        <h3 class="text-xl font-serif text-white mb-3" data-i18n="adv4-t">Legal Transparency</h3>
+                        <p class="text-sm text-gray-400 font-light leading-relaxed" data-i18n="adv4-d">
+                            Foundations of Trust and Speed. Eliminate the risks of entry with a rock-solid legal framework. We prioritize full compliance and absolute transparency in all land-use and investment procedures. This "clean" legal status provides peace of mind and facilitates a high-speed path from initial investment to full-scale operation without bureaucratic delays.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -817,6 +847,183 @@
                 </div>
             </div>
             
+            <!-- NEW: The THINH MINH Ecosystem Section -->
+            <div class="mb-24 reveal text-left">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-3xl md:text-5xl text-white mb-6" data-i18n="eco-title">The THINH MINH Ecosystem: <br><span class="italic text-accent">A Self-Sustaining Urban Economy</span></h2>
+                    <p class="text-gray-400 font-light max-w-4xl mx-auto leading-relaxed" data-i18n="eco-desc">
+                        Our "Live, Work, and Play" philosophy is not just an urban design concept; it is a strategic business model. By moving beyond isolated industrial parks to fully integrated townships, we create a closed-loop ecosystem. This model generates multiple, overlapping revenue streams, ensures high tenant retention, and creates a highly defensible market position.<br><br>Here is how the components of our ecosystem interconnect to drive mutual success:
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Component 1 -->
+                    <div class="glass-panel p-0 rounded-2xl overflow-hidden group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]">
+                        <div class="relative h-48 w-full overflow-hidden shrink-0">
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" alt="Utilities and Infrastructure" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-6 right-6 flex items-center gap-4">
+                                <div class="w-12 h-12 shrink-0 rounded-xl bg-dark/80 backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                                    <i data-lucide="settings" class="w-6 h-6 text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-serif text-white leading-tight drop-shadow-md" data-i18n="eco1-t">1. The Foundational Backbone: <br>Utilities & Infrastructure</h3>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-6 flex-grow bg-dark/40">
+                            <p class="text-sm font-medium text-white mb-4" data-i18n="eco1-sub">Electricity & Clean Water Supply Infrastructure</p>
+                            <div class="space-y-3">
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-accent" data-i18n="eco-conn">The Connection:</strong> <span data-i18n="eco1-c">Reliable power and clean water are the lifeblood of any industrial operation. By owning and operating this infrastructure, we guarantee operational continuity for our industrial tenants, which is a massive competitive advantage.</span></p>
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-white font-medium" data-i18n="eco-inv">The Investor Value:</strong> <span data-i18n="eco1-v">This provides stable, recurring, and long-term utility revenue while completely de-risking the broader development for both us and our tenants. Furthermore, our alignment with global sustainability standards (UN SDGs) means this infrastructure is designed to be future-proof and resource-efficient.</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Component 2 -->
+                    <div class="glass-panel p-0 rounded-2xl overflow-hidden group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]">
+                        <div class="relative h-48 w-full overflow-hidden shrink-0">
+                            <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?q=80&w=2071&auto=format&fit=crop" alt="Industry and Logistics" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-6 right-6 flex items-center gap-4">
+                                <div class="w-12 h-12 shrink-0 rounded-xl bg-dark/80 backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                                    <i data-lucide="factory" class="w-6 h-6 text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-serif text-white leading-tight drop-shadow-md" data-i18n="eco2-t">2. The Economic Engine: <br>Industry & Logistics</h3>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-6 flex-grow bg-dark/40">
+                            <p class="text-sm font-medium text-white mb-4" data-i18n="eco2-sub">The Industrial Park & Community Logistics</p>
+                            <div class="space-y-3">
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-accent" data-i18n="eco-conn">The Connection:</strong> <span data-i18n="eco2-c">The industrial park acts as the economic anchor, attracting multinational corporations and generating mass employment. The integrated logistics network not only serves the heavy supply chain needs of these factories but also supports the daily distribution needs of the community market and retail sectors.</span></p>
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-white font-medium" data-i18n="eco-inv">The Investor Value:</strong> <span data-i18n="eco2-v">Attracting top-tier industrial tenants guarantees long-term land leases and utility contracts. The presence of these companies creates the fundamental demographic demand for everything else in the township.</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Component 3 -->
+                    <div class="glass-panel p-0 rounded-2xl overflow-hidden group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]">
+                        <div class="relative h-48 w-full overflow-hidden shrink-0">
+                            <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=2070&auto=format&fit=crop" alt="Residential Solutions" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-6 right-6 flex items-center gap-4">
+                                <div class="w-12 h-12 shrink-0 rounded-xl bg-dark/80 backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                                    <i data-lucide="users" class="w-6 h-6 text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-serif text-white leading-tight drop-shadow-md" data-i18n="eco3-t">3. The Talent Magnet: <br>Tiered Residential Solutions</h3>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-6 flex-grow bg-dark/40">
+                            <p class="text-sm font-medium text-white mb-4" data-i18n="eco3-sub">Affordable Housing (Workers) & Commercial Housing (Expats/Managers)</p>
+                            <div class="space-y-3">
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-accent" data-i18n="eco-conn">The Connection:</strong> <span data-i18n="eco3-c">A major pain point for industrial tenants globally is labor retention and housing. By providing high-quality, tiered housing directly adjacent to the workspace, we solve this problem for our clients. Factory workers have safe, affordable communities, while foreign experts and local executives have access to premium commercial housing.</span></p>
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-white font-medium" data-i18n="eco-inv">The Investor Value:</strong> <span data-i18n="eco3-v">Housing acts as a powerful "stickiness" factor. Industrial tenants are far less likely to relocate if their entire workforce is deeply rooted in the surrounding township. This guarantees high occupancy rates for our residential properties while securing long-term industrial leases.</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Component 4 -->
+                    <div class="glass-panel p-0 rounded-2xl overflow-hidden group flex flex-col border border-white/5 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]">
+                        <div class="relative h-48 w-full overflow-hidden shrink-0">
+                            <img src="https://images.unsplash.com/photo-1519999482648-25049ddd37b1?q=80&w=2126&auto=format&fit=crop" alt="Retail and Community" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-6 right-6 flex items-center gap-4">
+                                <div class="w-12 h-12 shrink-0 rounded-xl bg-dark/80 backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
+                                    <i data-lucide="shopping-bag" class="w-6 h-6 text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-serif text-white leading-tight drop-shadow-md" data-i18n="eco4-t">4. The Community Catalyst: <br>Active Placemaking & Retail</h3>
+                            </div>
+                        </div>
+                        <div class="p-8 pt-6 flex-grow bg-dark/40">
+                            <p class="text-sm font-medium text-white mb-4" data-i18n="eco4-sub">Shopping Mall & Community Market</p>
+                            <div class="space-y-3">
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-accent" data-i18n="eco-conn">The Connection:</strong> <span data-i18n="eco4-c">This is where the "Play" aspect comes to life. The thousands of workers, managers, and their families living in our housing require goods, services, and entertainment. The community market serves daily essential needs, while the shopping mall provides premium retail, dining, and communal spaces for health and vitality.</span></p>
+                                <p class="text-sm text-gray-400 font-light leading-relaxed"><strong class="text-white font-medium" data-i18n="eco-inv">The Investor Value:</strong> <span data-i18n="eco4-v">This captures the economic output of the township, keeping consumer spending within the ecosystem. It creates a highly lucrative commercial real estate portfolio driven by a captive, built-in audience.</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flywheel Effect -->
+                <div class="relative glass-panel p-0 rounded-2xl overflow-hidden border-accent/20 group">
+                    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2070&auto=format&fit=crop" alt="Smart City Flywheel" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-all duration-700 group-hover:scale-105 mix-blend-luminosity">
+                    <div class="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/80 to-dark/60"></div>
+                    
+                    <div class="relative z-10 p-10 md:p-12">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 text-accent"></i>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-serif text-white drop-shadow-md" data-i18n="fly-title">The Flywheel Effect (Why it works)</h3>
+                        </div>
+                        <p class="text-gray-200 font-light mb-10 text-lg" data-i18n="fly-desc">When these parts operate together, they create a powerful flywheel of growth:</p>
+                        
+                        <!-- Visual Flywheel Diagram (Desktop Only) -->
+                        <div class="relative w-full max-w-4xl mx-auto h-[550px] hidden lg:block mb-16 mt-8">
+                            <!-- Center Hub -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full border border-white/10 bg-dark/90 backdrop-blur-md flex flex-col items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.2)] z-20 group/hub hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 rounded-full border-4 border-accent/30 border-t-accent animate-spin group-hover/hub:border-t-white transition-colors duration-500"></div>
+                                <i data-lucide="refresh-cw" class="w-10 h-10 text-accent mb-3"></i>
+                                <span class="text-white font-serif text-2xl font-bold text-center leading-tight" data-i18n="fly-hub">Ecosystem <br> Flywheel</span>
+                            </div>
+
+                            <!-- Orbiting Track -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] rounded-full border-2 border-dashed border-accent/20 z-0 animate-[spin_40s_linear_infinite]"></div>
+
+                            <!-- Node 1: Top -->
+                            <div class="absolute top-[0%] left-1/2 transform -translate-x-1/2 w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:-translate-y-2 transition-transform duration-300">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">1</div>
+                                <i data-lucide="settings" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n1-t">Infrastructure</h4>
+                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n1-d">Attracts high-value tenants.</p>
+                            </div>
+
+                            <!-- Node 2: Top Right -->
+                            <div class="absolute top-[32%] right-[5%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-x-2 transition-transform duration-300">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">2</div>
+                                <i data-lucide="factory" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n2-t">Tenants</h4>
+                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n2-d">Bring thousands of workers.</p>
+                            </div>
+
+                            <!-- Node 3: Bottom Right -->
+                            <div class="absolute bottom-[5%] right-[15%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-y-2 hover:translate-x-2 transition-transform duration-300">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">3</div>
+                                <i data-lucide="users" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n3-t">Housing</h4>
+                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n3-d">Creates a populated community.</p>
+                            </div>
+
+                            <!-- Node 4: Bottom Left -->
+                            <div class="absolute bottom-[5%] left-[15%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-y-2 hover:-translate-x-2 transition-transform duration-300">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">4</div>
+                                <i data-lucide="shopping-bag" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n4-t">Retail & Services</h4>
+                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n4-d">Drives success of markets.</p>
+                            </div>
+
+                            <!-- Node 5: Top Left -->
+                            <div class="absolute top-[32%] left-[5%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:-translate-x-2 transition-transform duration-300">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">5</div>
+                                <i data-lucide="leaf" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n5-t">Quality of Life</h4>
+                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n5-d">Attracts future businesses.</p>
+                            </div>
+                        </div>
+
+                        <!-- Supporting List (Visible on Mobile/Tablet, acts as caption on Desktop) -->
+                        <ol class="space-y-4 mb-8 text-base text-gray-300 font-light list-decimal list-inside pl-2 md:pl-4 marker:text-accent">
+                            <li data-i18n="fly-l1">World-class infrastructure attracts high-value industrial tenants.</li>
+                            <li data-i18n="fly-l2">Industrial tenants bring thousands of workers and managers.</li>
+                            <li data-i18n="fly-l3">Workers and managers require residential housing, creating a thriving, populated community.</li>
+                            <li data-i18n="fly-l4">This population demands retail and services, driving the success of the shopping mall and community markets.</li>
+                            <li data-i18n="fly-l5">A high quality of life makes the industrial park even more attractive to future businesses, and the cycle continues to grow in value.</li>
+                        </ol>
+                        <p class="text-sm md:text-base text-gray-300 font-light leading-relaxed border-t border-white/10 pt-6" data-i18n="fly-outro">
+                            Backed by our Strategic Partnerships with local governments and communities, this integrated approach aligns directly with national objectives, ensuring smooth regulatory pathways, shared mutual growth, and a highly resilient investment profile.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div class="glass-panel p-10 bg-accent/5 border-accent/30 inline-block text-left w-full max-w-3xl mx-auto" id="contact">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-8">
                     <div>
@@ -1002,6 +1209,47 @@
                 "part3-t": "Complete Legal Transparency",
                 "part3-d": "Fully cleared land with transparent, unencumbered legal status ensuring absolute peace of mind for your investment.",
 
+                "eco-title": "The THINH MINH Ecosystem: <br><span class=\"italic text-accent\">A Self-Sustaining Urban Economy</span>",
+                "eco-desc": "Our \"Live, Work, and Play\" philosophy is not just an urban design concept; it is a strategic business model. By moving beyond isolated industrial parks to fully integrated townships, we create a closed-loop ecosystem. This model generates multiple, overlapping revenue streams, ensures high tenant retention, and creates a highly defensible market position.<br><br>Here is how the components of our ecosystem interconnect to drive mutual success:",
+                "eco-conn": "The Connection:",
+                "eco-inv": "The Investor Value:",
+                "eco1-t": "1. The Foundational Backbone: <br>Utilities & Infrastructure",
+                "eco1-sub": "Electricity & Clean Water Supply Infrastructure",
+                "eco1-c": "Reliable power and clean water are the lifeblood of any industrial operation. By owning and operating this infrastructure, we guarantee operational continuity for our industrial tenants, which is a massive competitive advantage.",
+                "eco1-v": "This provides stable, recurring, and long-term utility revenue while completely de-risking the broader development for both us and our tenants. Furthermore, our alignment with global sustainability standards (UN SDGs) means this infrastructure is designed to be future-proof and resource-efficient.",
+                "eco2-t": "2. The Economic Engine: <br>Industry & Logistics",
+                "eco2-sub": "The Industrial Park & Community Logistics",
+                "eco2-c": "The industrial park acts as the economic anchor, attracting multinational corporations and generating mass employment. The integrated logistics network not only serves the heavy supply chain needs of these factories but also supports the daily distribution needs of the community market and retail sectors.",
+                "eco2-v": "Attracting top-tier industrial tenants guarantees long-term land leases and utility contracts. The presence of these companies creates the fundamental demographic demand for everything else in the township.",
+                "eco3-t": "3. The Talent Magnet: <br>Tiered Residential Solutions",
+                "eco3-sub": "Affordable Housing (Workers) & Commercial Housing (Expats/Managers)",
+                "eco3-c": "A major pain point for industrial tenants globally is labor retention and housing. By providing high-quality, tiered housing directly adjacent to the workspace, we solve this problem for our clients. Factory workers have safe, affordable communities, while foreign experts and local executives have access to premium commercial housing.",
+                "eco3-v": "Housing acts as a powerful \"stickiness\" factor. Industrial tenants are far less likely to relocate if their entire workforce is deeply rooted in the surrounding township. This guarantees high occupancy rates for our residential properties while securing long-term industrial leases.",
+                "eco4-t": "4. The Community Catalyst: <br>Active Placemaking & Retail",
+                "eco4-sub": "Shopping Mall & Community Market",
+                "eco4-c": "This is where the \"Play\" aspect comes to life. The thousands of workers, managers, and their families living in our housing require goods, services, and entertainment. The community market serves daily essential needs, while the shopping mall provides premium retail, dining, and communal spaces for health and vitality.",
+                "eco4-v": "This captures the economic output of the township, keeping consumer spending within the ecosystem. It creates a highly lucrative commercial real estate portfolio driven by a captive, built-in audience.",
+                "fly-title": "The Flywheel Effect (Why it works)",
+                "fly-desc": "When these parts operate together, they create a powerful flywheel of growth:",
+                "fly-l1": "World-class infrastructure attracts high-value industrial tenants.",
+                "fly-l2": "Industrial tenants bring thousands of workers and managers.",
+                "fly-l3": "Workers and managers require residential housing, creating a thriving, populated community.",
+                "fly-l4": "This population demands retail and services, driving the success of the shopping mall and community markets.",
+                "fly-l5": "A high quality of life makes the industrial park even more attractive to future businesses, and the cycle continues to grow in value.",
+                "fly-outro": "Backed by our Strategic Partnerships with local governments and communities, this integrated approach aligns directly with national objectives, ensuring smooth regulatory pathways, shared mutual growth, and a highly resilient investment profile.",
+
+                "fly-hub": "Ecosystem <br> Flywheel",
+                "fly-n1-t": "Infrastructure",
+                "fly-n1-d": "Attracts high-value tenants.",
+                "fly-n2-t": "Tenants",
+                "fly-n2-d": "Bring thousands of workers.",
+                "fly-n3-t": "Housing",
+                "fly-n3-d": "Creates a populated community.",
+                "fly-n4-t": "Retail & Services",
+                "fly-n4-d": "Drives success of markets.",
+                "fly-n5-t": "Quality of Life",
+                "fly-n5-d": "Attracts future businesses.",
+
                 "con-title": "Initiate a Conversation",
                 "con-desc": "Contact our dedicated investment team to schedule a site visit or request a customized proposal.",
                 
@@ -1147,11 +1395,238 @@
                 "part3-t": "完全な法的透明性",
                 "part3-d": "透明で担保のない法的地位を備えた完全にクリアな土地により、投資に対する絶対的な安心を保証します。",
 
+                "eco-title": "THINH MINH エコシステム： <br><span class=\"italic text-accent\">自立型都市経済</span>",
+                "eco-desc": "私たちの「住む、働く、遊ぶ」という哲学は、単なる都市デザインの概念ではなく、戦略的なビジネスモデルです。孤立した工業団地から完全に統合されたタウンシップへと移行することで、閉ループのエコシステムを構築します。このモデルは、複数の重複する収益源を生み出し、テナントの高い定着率を確保し、非常に強力な市場ポジションを生み出します。<br><br>当社のエコシステムの各要素がどのように相互接続し、相互の成功を促進するかを以下に示します。",
+                "eco-conn": "つながり：",
+                "eco-inv": "投資家の価値：",
+                "eco1-t": "1. 基礎となるバックボーン： <br>ユーティリティとインフラ",
+                "eco1-sub": "電力およびクリーンウォーター供給インフラ",
+                "eco1-c": "信頼性の高い電力とクリーンな水は、あらゆる産業活動の生命線です。このインフラを所有・運営することで、産業テナントの事業継続性を保証し、これは大きな競争上の優位性となります。",
+                "eco1-v": "これにより、安定的で経常的な長期のユーティリティ収益が得られると同時に、私たちとテナントの双方にとってより広範な開発のリスクが完全に排除されます。さらに、グローバルな持続可能性基準（UN SDGs）との整合性により、このインフラは将来にわたってリソース効率が高くなるように設計されています。",
+                "eco2-t": "2. 経済の原動力： <br>産業と物流",
+                "eco2-sub": "工業団地とコミュニティの物流",
+                "eco2-c": "工業団地は経済のアンカーとして機能し、多国籍企業を惹きつけ、大量の雇用を創出します。統合された物流ネットワークは、これらの工場の重いサプライチェーンのニーズに応えるだけでなく、コミュニティ市場や小売部門の日常的な流通のニーズもサポートします。",
+                "eco2-v": "一流の産業テナントを誘致することで、長期の土地リースやユーティリティ契約が保証されます。これらの企業の存在は、タウンシップ内の他のすべてのものに対する基本的な人口動態の需要を生み出します。",
+                "eco3-t": "3. 人材の磁石： <br>階層化された住宅ソリューション",
+                "eco3-sub": "手頃な価格の住宅（労働者向け）と商業住宅（駐在員/管理者向け）",
+                "eco3-c": "世界中の産業テナントにとって大きな悩みの種は、労働力の確保と住宅です。ワークスペースのすぐ隣に高品質で階層化された住宅を提供することで、クライアントのこの問題を解決します。工場労働者は安全で手頃な価格のコミュニティを持ち、外国人専門家や地元の幹部は高級な商業住宅を利用できます。",
+                "eco3-v": "住宅は強力な「粘着性」の要因として機能します。従業員全体が周辺のタウンシップに深く根付いている場合、産業テナントが移転する可能性ははるかに低くなります。これにより、住宅物件の高い稼働率が保証され、同時に長期的な産業リースが確保されます。",
+                "eco4-t": "4. コミュニティの触媒： <br>アクティブなプレイスメイキングと小売",
+                "eco4-sub": "ショッピングモールとコミュニティ市場",
+                "eco4-c": "ここで「遊ぶ」という側面が活きてきます。私たちの住宅に住む何千人もの労働者、管理者、そしてその家族は、商品、サービス、娯楽を必要としています。コミュニティ市場は日常の不可欠なニーズに応え、ショッピングモールは健康と活力のための高級な小売、ダイニング、共有スペースを提供します。",
+                "eco4-v": "これによりタウンシップの経済的生産物を獲得し、消費支出をエコシステム内に留めることができます。魅了された組み込みのオーディエンスによって推進される、非常に収益性の高い商業用不動産ポートフォリオを生み出します。",
+                "fly-title": "フライホイール効果（機能する理由）",
+                "fly-desc": "これらの要素が連携して機能すると、強力な成長のフライホイール（はずみ車）が生み出されます：",
+                "fly-l1": "世界クラスのインフラは、価値の高い産業テナントを引き付けます。",
+                "fly-l2": "産業テナントは、何千人もの労働者と管理者をもたらします。",
+                "fly-l3": "労働者と管理者は住宅を必要とし、繁栄し人口の多いコミュニティを生み出します。",
+                "fly-l4": "この人口は小売やサービスを要求し、ショッピングモールやコミュニティ市場の成功を後押しします。",
+                "fly-l5": "高い生活の質は、工業団地を将来の企業にとってさらに魅力的なものにし、サイクルの価値は成長し続けます。",
+                "fly-outro": "地方自治体やコミュニティとの戦略的パートナーシップに支えられ、この統合的なアプローチは国家の目標と直接合致し、円滑な規制プロセス、相互の成長の共有、そして非常に回復力のある投資プロファイルを保証します。",
+
+                "fly-hub": "エコシステム <br> フライホイール",
+                "fly-n1-t": "インフラ",
+                "fly-n1-d": "優良テナントを誘致",
+                "fly-n2-t": "テナント",
+                "fly-n2-d": "数千人の雇用を創出",
+                "fly-n3-t": "住宅",
+                "fly-n3-d": "活気あるコミュニティを形成",
+                "fly-n4-t": "小売・サービス",
+                "fly-n4-d": "商業施設の成功を促進",
+                "fly-n5-t": "生活の質",
+                "fly-n5-d": "将来の企業を惹きつける",
+
                 "con-title": "ご相談はこちら",
                 "con-desc": "サイト訪問のスケジュール設定やカスタマイズされた提案のご依頼については、専任の投資チームにお問い合わせください。",
                 
                 "footer-copy": "&copy; 2026 Thinh Minh 工業団地。Da Hop Win-Win Partnershipによる開発。",
                 "footer-priv": "プライバシーポリシー"
+            },
+            vn: {
+                "nav-hub": "Công nghiệp Sinh thái",
+                "nav-infra": "Hạ tầng",
+                "nav-esg": "Hệ sinh thái ESG",
+                "nav-sec": "Lĩnh vực",
+                "nav-log": "Logistics",
+                "nav-ben": "Ưu đãi",
+                "nav-part": "Đối tác",
+                
+                "hero-loc": "Tỉnh Phú Thọ, Việt Nam",
+                "hero-title": "Trung tâm <br>Công nghiệp Sinh thái <br><span class=\"italic text-accent text-glow\">Thế hệ mới</span>",
+                "hero-sub": "Được thiết kế cho sản xuất công nghệ cao, tuân thủ các tiêu chuẩn ESG nghiêm ngặt và có vị trí hoàn hảo để đảm bảo chuỗi cung ứng toàn cầu của bạn.",
+                
+                "stat-1": "Hecta Quy mô",
+                "stat-2": "Nghìn tỷ VNĐ Đầu tư",
+                "stat-3": "Năm Cho thuê",
+                "stat-4": "Sẵn sàng",
+
+                "map-pre": "Quy hoạch Tổng thể",
+                "map-title": "Bản đồ Tổng quan Dự án",
+                "map-desc": "Khám phá bố cục tích hợp 429,5 ha với các khu công nghiệp chuyên dụng, cơ sở hạ tầng tiện ích đồng bộ và các hành lang xanh mát.",
+                "map-stat": "429,5 Hecta",
+                "map-sub": "Bố trí Sinh thái - Công nghiệp Toàn diện",
+                "map-link": "Xem Toàn cảnh",
+
+                "exec-pre": "Tóm tắt Nhanh",
+                "exec-title": "Tổng Quan",
+                "exec1-t": "Vị trí Chiến lược",
+                "exec1-d": "Tọa lạc tại cửa ngõ phía Tây Hà Nội, kết nối trực tiếp với Cao tốc Hòa Lạc - Hòa Bình, chỉ cách Khu Công nghệ cao Hòa Lạc 22 km và trung tâm Hà Nội 45 km.",
+                "exec2-t": "Ưu đãi Chi phí",
+                "exec2-d": "Cung cấp các đặc quyền tài chính mạnh mẽ, bao gồm miễn tiền thuê đất lên đến 15 năm, giảm thuế thu nhập doanh nghiệp và giảm 15-30% giá thuê đất cho các nhà đầu tư tiên phong.",
+                "exec3-t": "Hiện đại & Bền vững",
+                "exec3-d": "Được thiết kế là Khu công nghiệp Sinh thái chuẩn ESG, trang bị quản lý kỹ thuật số/AI thông minh và tích hợp hệ thống điện mặt trời.",
+                "exec4-t": "Giải pháp Tùy chỉnh",
+                "exec4-d": "Chủ đầu tư cung cấp cơ sở hạ tầng kỹ thuật tùy chỉnh (Nhà xưởng xây theo yêu cầu - BTS) và các phân khu chuyên biệt dành riêng cho nhà đầu tư Hàn Quốc, Nhật Bản và Trung Quốc.",
+
+                "tech-tag": "Thiết kế để Ổn định",
+                "tech-title": "Độ tin cậy Vận hành Tuyệt đối",
+                "spec-title": "Thông số Hạ tầng Kỹ thuật",
+                "spec-desc": "Các hệ thống đồng bộ, mạnh mẽ được thiết kế để đảm bảo sự ổn định tuyệt đối cho sản xuất công nghệ cao.",
+                
+                "spec1-t": "Đường Nội bộ",
+                "spec1-d": "Trục chính: Rộng 54-64m (4 làn xe) <br> Trục nhánh: Rộng 28-36m (4 làn xe)",
+                "spec2-t": "Cấp điện",
+                "spec2-d": "Trạm biến áp 110 kV tới mạng lưới 22 kV. Công suất 126 MVA (có thể mở rộng thêm 103 MVA). Tích hợp hệ thống điện mặt trời.",
+                "spec3-t": "Cấp nước sạch",
+                "spec3-d": "15.000 m³/ngày đêm (có thể mở rộng lên 20.000-30.000 m³). Đạt chuẩn WHO.",
+                "spec4-t": "Xử lý Nước thải",
+                "spec4-d": "12.000 m³/ngày đêm (có thể mở rộng lên 20.000 m³).",
+                "spec5-t": "Thoát nước & Điều hòa",
+                "spec5-d": "21,89 ha kênh mương và hồ điều hòa. Hệ thống trạm bơm tiêu thoát nước thông minh.",
+                "spec6-t": "Viễn thông",
+                "spec6-d": "Tiêu chuẩn quốc tế. Quản lý vận hành kỹ thuật số bằng công nghệ AI.",
+                "spec7-t": "PCCC & An ninh",
+                "spec7-d": "Hệ thống PCCC đạt chuẩn quốc gia (24/7). Hệ thống an ninh và camera giám sát thông minh (24/7).",
+
+                "esg-pre": "Tương lai Bền vững",
+                "esg-title": "Hệ sinh thái Xanh <br><span class=\"italic text-accent\">Chuẩn ESG</span>",
+                "esg-desc": "Thịnh Minh không chỉ là một khu công nghiệp, mà còn là một hệ sinh thái bền vững phù hợp với các cam kết ESG (Môi trường, Xã hội và Quản trị) khắt khe của các tập đoàn toàn cầu, đặc biệt từ Nhật Bản.",
+                "esg1-t": "Nhà ở Công nhân Tích hợp",
+                "esg1-d": "23 ha dành riêng cho nhà ở và tiện ích chất lượng cao cho công nhân, đảm bảo lực lượng lao động ổn định và có tỷ lệ gắn bó cao.",
+                "esg2-t": "Hành lang Xanh",
+                "esg2-d": "Cảnh quan rộng lớn và các sáng kiến bù đắp carbon được thiết kế xuyên suốt quy hoạch tổng thể để tạo ra một môi trường làm việc trong lành.",
+                "esg-img": "Hài hòa giữa Công nghiệp & Thiên nhiên",
+
+                "sec-pre": "Trọng tâm Ngành nghề",
+                "sec-title": "Hướng tới các Ngành Tiên tiến",
+                "sec-desc": "KCN Thịnh Minh được thiết kế chiến lược để thu hút các ngành công nghiệp giá trị cao, định hướng đổi mới. Chúng tôi cung cấp cơ sở hạ tầng vững chắc, môi trường sạch và tiện ích ổn định cần thiết cho các hệ sinh thái sản xuất khắt khe nhất thế giới.",
+                
+                "sec1-t": "Điện tử Tiên tiến",
+                "sec1-d": "Lắp ráp thiết bị thông minh, điện tử tiêu dùng và sản xuất bo mạch chuyên dụng đòi hỏi sự ổn định nguồn điện tuyệt đối và môi trường sạch.",
+                "sec2-t": "Cơ khí Chính xác",
+                "sec2-d": "Gia công CNC dung sai cao, linh kiện hàng không vũ trụ và luyện kim tiên tiến được hỗ trợ bởi các biện pháp kiểm soát độ rung nghiêm ngặt.",
+                "sec3-t": "Hỗ trợ Bán dẫn",
+                "sec3-d": "Các phân khu chuyên dụng được thiết kế cho OSAT (Lắp ráp và Kiểm tra Bán dẫn Thuê ngoài), đóng gói linh kiện và kiểm tra vi mạch tích hợp.",
+                "sec4-t": "Lắp ráp Ô tô",
+                "sec4-d": "Linh kiện xe điện (EV), sản xuất pin và các giải pháp di chuyển thông minh kết nối trực tiếp với chuỗi cung ứng khu vực của Việt Nam.",
+                "sec5-t": "Công nghệ Sinh học",
+                "sec5-d": "Phòng thí nghiệm R&D, sản xuất dược phẩm và lắp ráp thiết bị y tế chính xác đòi hỏi sự sẵn sàng của phòng sạch đạt chứng nhận ISO nghiêm ngặt.",
+                "sec6-t": "Tự động hóa & AI",
+                "sec6-d": "Sản xuất robot, cảm biến IoT và tích hợp phần cứng nhà máy thông minh thế hệ mới cho kỷ nguyên công nghiệp 4.0.",
+
+                "log-pre": "Kết nối Chiến lược",
+                "log-title": "Bản đồ Mạng lưới Logistics",
+                "log-desc": "<strong class=\"text-white font-medium\">Điểm nhấn Bản đồ:</strong> Tỉnh Phú Thọ, Hà Nội, KCN Thịnh Minh, Cụm Công nghiệp Thịnh Minh, cùng Khu Dịch vụ Công nghiệp và Nhà ở Công nhân.",
+                "log-tag": "Mạng lưới Logistics Khu vực",
+                "log-sub": "Tiếp cận Liền mạch Thị trường Toàn cầu",
+                "log-link": "Xem Toàn cảnh",
+                "log-d1": "KCN Thịnh Minh có vị trí chiến lược kết nối trực tiếp với Cao tốc Hòa Lạc - Hòa Bình, liền kề cửa ngõ phía Tây Hà Nội. Dự án hưởng lợi trực tiếp từ các dự án nâng cấp hạ tầng theo quy hoạch bao gồm mở rộng cao tốc lên sáu làn xe, Tuyến Metro số 5 (Văn Cao - Hòa Lạc) và Vành đai 5 Hà Nội, tạo điều kiện thuận lợi cho việc di chuyển hàng hóa đến các tỉnh và vùng kinh tế trọng điểm Bắc Bộ.",
+                "log-d2": "Giáp ranh Hà Nội, gần Khu Công nghệ cao Hòa Lạc - nơi tập trung của các nhà sản xuất lớn toàn cầu, KCN Thịnh Minh là điểm đến lý tưởng cho các ngành công nghiệp công nghệ cao và doanh nghiệp chuỗi cung ứng.",
+                "dist-title": "Khoảng cách tới các Điểm Trọng yếu",
+                
+                "dist1": "Hà Nội", "dist2": "Phú Thọ", "dist3": "Khu CNC Hòa Lạc", "dist4": "Đại học Quốc gia", "dist5": "Vành đai 5", "dist6": "Đường Hồ Chí Minh", "dist7": "Cao tốc Hòa Bình-HN", "dist8": "Tuyến Metro số 5", "dist9": "Sân bay Nội Bài", "dist10": "Cảng Hải Phòng",
+
+                "log2-pre": "Logistics & Kết nối",
+                "log2-title": "Đảm bảo <br><span class=\"italic text-gray-400\">Chuỗi Cung ứng Toàn cầu</span>",
+                "log2-desc": "Nằm tại cửa ngõ phía Tây chiến lược của Hà Nội, KCN Thịnh Minh mang đến những lợi thế logistics vô song, đóng vai trò là một mắt xích quan trọng trong hành lang kinh tế miền Bắc. Vị trí hoàn hảo cho các công ty đang thực hiện chiến lược đa dạng hóa \"Trung Quốc +1\".",
+                "log2-tag": "Giao thông Tối ưu",
+                "log2-sub": "Kết nối Trực tiếp Cao tốc",
+
+                "adv-pre": "KCN THỊNH MINH",
+                "adv-title": "04 Lợi thế Nổi bật",
+                "adv-desc": "Sản xuất công nghệ cao đòi hỏi sự ổn định tuyệt đối và không có thời gian chết. Cơ sở hạ tầng của chúng tôi được thiết kế với khả năng dự phòng, mở rộng và tuân thủ ESG.",
+                "adv1-t": "20 Năm Kinh nghiệm",
+                "adv1-d": "Với 20 năm chuyên môn trong việc kiến tạo các dự án công nghiệp, chúng tôi không chỉ cung cấp đất đai; chúng tôi mang đến một bề dày thành tích. Chuyên môn sâu sắc của chúng tôi đảm bảo rằng mọi khía cạnh của khu công nghiệp đều được hậu thuẫn bởi thực tiễn tốt nhất và cam kết vì thành công lâu dài của đối tác.",
+                "adv2-t": "Vị trí Chiến lược",
+                "adv2-d": "Nằm ở vị trí hoàn hảo trong quỹ đạo kinh tế thủ đô, dự án cung cấp lợi thế cạnh tranh về logistics và kết nối. Nhà đầu tư được hưởng lợi từ việc tiếp cận ngay lập tức với nguồn lao động khổng lồ của Hà Nội và sự hội nhập liền mạch vào các huyết mạch giao thông chính của khu vực.",
+                "adv3-t": "100% Phát triển Mới",
+                "adv3-d": "Được xây dựng cho Tương lai của Công nghiệp. Trải nghiệm một \"khởi đầu mới\" được thiết kế cho hiệu suất hiện đại. KCN nổi bật với 100% cơ sở hạ tầng hiện đại, mới được đưa vào sử dụng, đáp ứng các tiêu chuẩn ESG toàn cầu và hỗ trợ các công nghệ nhà máy thông minh tiên tiến.",
+                "adv4-t": "Minh bạch Pháp lý",
+                "adv4-d": "Nền tảng của Niềm tin và Tốc độ. Loại bỏ rủi ro gia nhập với một khung pháp lý vững chắc. Chúng tôi ưu tiên tuân thủ đầy đủ và minh bạch tuyệt đối trong mọi thủ tục. Tình trạng pháp lý \"sạch\" này mang lại sự an tâm và tạo điều kiện thuận lợi cho việc triển khai dự án nhanh chóng.",
+
+                "par-title": "Thiết kế vì Sự Bền vững",
+                "par-desc": "Hệ sinh thái Tuân thủ 100% ESG",
+
+                "fin-title": "Lợi thế <br><span class=\"italic text-accent\">Tài chính Độc quyền</span>",
+                "fin1-t": "Thời hạn Sử dụng Đất Kéo dài",
+                "fin1-d": "Thời hạn thuê 50 năm đảm bảo sự ổn định hoạt động lâu dài cho các khoản đầu tư vốn lớn.",
+                "fin2-t": "Ưu đãi Thuế cho FDI",
+                "fin2-d": "Miễn và giảm Thuế Thu nhập Doanh nghiệp (CIT) với tính cạnh tranh cao được thiết kế riêng cho các dự án FDI công nghệ cao.",
+                "fin3-t": "Miễn Tiền Thuê & Giảm giá",
+                "fin3-d": "Miễn tiền thuê đất từ 10 đến 15 năm, cộng với mức chiết khấu thuê 15-30% cho các nhà đầu tư tiên phong.",
+
+                "jap-title": "Hỗ trợ \"Japan Desk\"",
+                "jap-desc": "Chúng tôi cung cấp một cấu trúc hỗ trợ tùy chỉnh được thiết kế để loại bỏ rào cản hành chính và đẩy nhanh thời gian đi vào hoạt động tại Việt Nam.",
+                "jap1-d": "<strong class=\"text-white font-medium\">Phân khu Chuyên biệt:</strong> Các khu vực được quy hoạch tùy chỉnh theo sở thích hoạt động và văn hóa của các doanh nghiệp Nhật Bản.",
+                "jap2-d": "<strong class=\"text-white font-medium\">Xây dựng Theo Yêu cầu (BTS):</strong> Cơ sở hạ tầng và xây dựng nhà máy theo thông số kỹ thuật chính xác của nhà đầu tư.",
+                "jap3-d": "<strong class=\"text-white font-medium\">Dịch vụ 1 Cửa:</strong> Xử lý toàn diện việc cấp phép đầu tư, đăng ký Doanh nghiệp Chế xuất (EPE) và các thủ tục pháp lý.",
+                "jap4-d": "<strong class=\"text-white font-medium\">Cung ứng Lao động:</strong> Kênh tuyển dụng tích hợp thông qua quan hệ đối tác với các trường đại học, cao đẳng nghề địa phương.",
+
+                "part-pre": "Tại sao Chọn Chúng tôi?",
+                "part-title": "Hợp tác với Đơn vị Tiên phong",
+                "part1-t": "Thành tích Nổi bật",
+                "part1-d": "Dạ Hợp mang đến gần 20 năm kinh nghiệm thành công, vững mạnh về tài chính trong việc phát triển các hệ sinh thái công nghiệp - đô thị.",
+                "part2-t": "Tốc độ Triển khai",
+                "part2-d": "Khởi công xây dựng vào Quý 1/2026, sẵn sàng Xây dựng theo yêu cầu (BTS) ngay lập tức khi nhà đầu tư cần.",
+                "part3-t": "Minh bạch Pháp lý Tuyệt đối",
+                "part3-d": "Đất sạch hoàn toàn với tình trạng pháp lý minh bạch, không vướng mắc, đảm bảo sự an tâm tuyệt đối cho khoản đầu tư của bạn.",
+
+                "eco-title": "Hệ sinh thái THỊNH MINH: <br><span class=\"italic text-accent\">Nền Kinh tế Đô thị Tự vận hành</span>",
+                "eco-desc": "Triết lý \"Sống, Làm việc và Giải trí\" của chúng tôi không chỉ là một khái niệm thiết kế đô thị; nó là một mô hình kinh doanh chiến lược. Bằng cách vượt ra ngoài các khu công nghiệp biệt lập để tiến tới các khu đô thị tích hợp hoàn toàn, chúng tôi tạo ra một hệ sinh thái khép kín. Mô hình này tạo ra nhiều nguồn doanh thu đan xen, đảm bảo tỷ lệ giữ chân khách thuê cao và tạo ra một vị thế thị trường phòng thủ vững chắc.<br><br>Dưới đây là cách các thành phần trong hệ sinh thái của chúng tôi liên kết với nhau để thúc đẩy thành công chung:",
+                "eco-conn": "Sự Kết nối:",
+                "eco-inv": "Giá trị Đầu tư:",
+                "eco1-t": "1. Nền tảng Cốt lõi: <br>Tiện ích & Cơ sở Hạ tầng",
+                "eco1-sub": "Hạ tầng Cung cấp Điện & Nước Sạch",
+                "eco1-c": "Nguồn điện ổn định và nước sạch là mạch máu của bất kỳ hoạt động công nghiệp nào. Bằng cách sở hữu và vận hành cơ sở hạ tầng này, chúng tôi đảm bảo tính liên tục trong hoạt động cho các khách thuê công nghiệp, tạo ra một lợi thế cạnh tranh khổng lồ.",
+                "eco1-v": "Hệ thống này cung cấp nguồn doanh thu tiện ích ổn định, định kỳ và dài hạn, đồng thời loại bỏ rủi ro cho quá trình phát triển của cả chúng tôi và khách thuê. Hơn nữa, việc tuân thủ các tiêu chuẩn bền vững toàn cầu (UN SDGs) giúp hệ thống hạ tầng sẵn sàng cho tương lai và tối ưu hóa tài nguyên.",
+                "eco2-t": "2. Động cơ Kinh tế: <br>Công nghiệp & Logistics",
+                "eco2-sub": "Khu Công nghiệp & Logistics Cộng đồng",
+                "eco2-c": "Khu công nghiệp đóng vai trò như một mỏ neo kinh tế, thu hút các tập đoàn đa quốc gia và tạo ra lượng lớn việc làm. Mạng lưới logistics tích hợp không chỉ phục vụ chuỗi cung ứng hạng nặng của các nhà máy mà còn hỗ trợ nhu cầu phân phối hàng ngày của khu chợ cộng đồng và ngành bán lẻ.",
+                "eco2-v": "Thu hút các khách thuê công nghiệp hàng đầu đảm bảo hợp đồng thuê đất và dịch vụ dài hạn. Sự hiện diện của các công ty này tạo ra nhu cầu nhân khẩu học cơ bản cho mọi dịch vụ khác trong khu đô thị.",
+                "eco3-t": "3. Thỏi nam châm Thu hút Nhân tài: <br>Giải pháp Nhà ở Phân cấp",
+                "eco3-sub": "Nhà ở Xã hội (Công nhân) & Nhà ở Thương mại (Chuyên gia/Quản lý)",
+                "eco3-c": "Nỗi đau lớn nhất của các nhà đầu tư công nghiệp trên toàn cầu là việc giữ chân người lao động và vấn đề nhà ở. Bằng cách cung cấp nhà ở phân cấp, chất lượng cao ngay liền kề nơi làm việc, chúng tôi giải quyết bài toán này cho khách hàng. Công nhân nhà máy có được cộng đồng an toàn, giá cả phải chăng, trong khi chuyên gia nước ngoài và quản lý có quyền tiếp cận nhà ở thương mại cao cấp.",
+                "eco3-v": "Nhà ở đóng vai trò như một yếu tố \"kết dính\" mạnh mẽ. Khách thuê công nghiệp sẽ rất ít có khả năng di dời nếu toàn bộ lực lượng lao động của họ đã gắn bó sâu sắc với khu đô thị xung quanh. Điều này đảm bảo tỷ lệ lấp đầy cao cho các bất động sản dân cư của chúng tôi, đồng thời củng cố các hợp đồng thuê công nghiệp dài hạn.",
+                "eco4-t": "4. Chất xúc tác Cộng đồng: <br>Kiến tạo Không gian Sống & Bán lẻ",
+                "eco4-sub": "Trung tâm Thương mại & Chợ Cộng đồng",
+                "eco4-c": "Đây là nơi yếu tố \"Giải trí\" (Play) được hiện thực hóa. Hàng ngàn công nhân, quản lý và gia đình của họ sống trong các khu nhà của chúng tôi có nhu cầu về hàng hóa, dịch vụ và giải trí. Chợ cộng đồng phục vụ nhu cầu thiết yếu hàng ngày, trong khi trung tâm thương mại cung cấp không gian bán lẻ, ẩm thực và sinh hoạt cộng đồng cao cấp.",
+                "eco4-v": "Hệ thống này thu trọn sản lượng kinh tế của khu đô thị, giữ dòng tiền tiêu dùng luân chuyển bên trong hệ sinh thái. Nó tạo ra một danh mục bất động sản thương mại sinh lời cao được thúc đẩy bởi một lượng khách hàng nội bộ sẵn có.",
+                "fly-title": "Hiệu ứng Bánh đà Phát triển",
+                "fly-desc": "Khi các phần này hoạt động cùng nhau, chúng tạo ra một \"bánh đà\" tăng trưởng mạnh mẽ:",
+                "fly-l1": "Cơ sở hạ tầng đẳng cấp thế giới thu hút các khách thuê công nghiệp giá trị cao.",
+                "fly-l2": "Khách thuê công nghiệp mang đến hàng ngàn công nhân và nhà quản lý.",
+                "fly-l3": "Công nhân và quản lý yêu cầu nhà ở dân cư, tạo ra một cộng đồng đông đúc, nhộn nhịp.",
+                "fly-l4": "Cộng đồng này tạo ra nhu cầu bán lẻ và dịch vụ, thúc đẩy sự thành công của trung tâm thương mại và khu chợ.",
+                "fly-l5": "Chất lượng cuộc sống cao làm cho khu công nghiệp trở nên hấp dẫn hơn với các doanh nghiệp trong tương lai, và chu kỳ tiếp tục gia tăng giá trị.",
+                "fly-outro": "Được hậu thuẫn bởi Quan hệ Đối tác Chiến lược với chính quyền địa phương và cộng đồng, cách tiếp cận tích hợp này hoàn toàn phù hợp với các mục tiêu quốc gia, đảm bảo hành lang pháp lý suôn sẻ, chia sẻ sự phát triển chung và tạo ra một hồ sơ đầu tư có khả năng phục hồi cao.",
+
+                "fly-hub": "Bánh đà <br> Hệ sinh thái",
+                "fly-n1-t": "Hạ tầng Công nghiệp",
+                "fly-n1-d": "Thu hút khách thuê giá trị cao",
+                "fly-n2-t": "Nhà máy sản xuất",
+                "fly-n2-d": "Mang đến hàng ngàn lao động",
+                "fly-n3-t": "Nhà ở",
+                "fly-n3-d": "Tạo ra cộng đồng sầm uất",
+                "fly-n4-t": "Bán lẻ & Dịch vụ",
+                "fly-n4-d": "Thúc đẩy trung tâm thương mại",
+                "fly-n5-t": "Chất lượng sống",
+                "fly-n5-d": "Thu hút doanh nghiệp tương lai",
+
+                "con-title": "Khởi tạo Cuộc trò chuyện",
+                "con-desc": "Liên hệ với nhóm đầu tư chuyên trách của chúng tôi để sắp xếp chuyến thăm thực địa hoặc nhận đề xuất tùy chỉnh.",
+                
+                "footer-copy": "&copy; 2026 Khu Công nghiệp Thịnh Minh. Phát triển bởi Dạ Hợp Win-Win Partnership.",
+                "footer-priv": "Chính sách Bảo mật"
             }
         };
 
@@ -1165,21 +1640,20 @@
             });
 
             // Update UI styling for flags
-            const btnEn = document.getElementById('btn-en');
-            const btnJa = document.getElementById('btn-ja');
-            
-            if (lang === 'en') {
-                btnEn.classList.remove('opacity-40', 'border-transparent');
-                btnEn.classList.add('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
-                
-                btnJa.classList.add('opacity-40', 'border-transparent');
-                btnJa.classList.remove('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
-            } else {
-                btnJa.classList.remove('opacity-40', 'border-transparent');
-                btnJa.classList.add('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
-                
-                btnEn.classList.add('opacity-40', 'border-transparent');
-                btnEn.classList.remove('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
+            const buttons = {
+                'en': document.getElementById('btn-en'),
+                'ja': document.getElementById('btn-ja'),
+                'vn': document.getElementById('btn-vn')
+            };
+
+            for (const key in buttons) {
+                if (key === lang) {
+                    buttons[key].classList.remove('opacity-40', 'border-transparent');
+                    buttons[key].classList.add('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
+                } else {
+                    buttons[key].classList.add('opacity-40', 'border-transparent');
+                    buttons[key].classList.remove('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
+                }
             }
             
             // Set document language attribute
