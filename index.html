@@ -174,6 +174,25 @@
                         <img src="https://flagcdn.com/w40/vn.png" alt="Vietnamese" class="w-full h-full object-cover">
                     </button>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none ml-2 flex items-center justify-center">
+                    <i data-lucide="menu" id="menu-icon-open" class="w-7 h-7"></i>
+                    <i data-lucide="x" id="menu-icon-close" class="w-7 h-7 hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-dark/95 backdrop-blur-xl border-b border-white/10 hidden flex-col opacity-0 transition-opacity duration-300 shadow-2xl">
+            <div class="flex flex-col px-6 py-6 space-y-4">
+                <a href="#executive-specs" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-hub">Eco-Industrial Hub</a>
+                <a href="#infrastructure" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-infra">Infrastructure</a>
+                <a href="#esg-ecosystem" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-esg">ESG-Ecosystem</a>
+                <a href="#overview" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-sec">Sectors</a>
+                <a href="#location" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-log">Logistics</a>
+                <a href="#benefits" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-ben">Benefits</a>
+                <a href="#partnership" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link pb-1" data-i18n="nav-part">Partnership</a>
             </div>
         </div>
     </nav>
@@ -956,60 +975,62 @@
                         </div>
                         <p class="text-gray-200 font-light mb-10 text-lg" data-i18n="fly-desc">When these parts operate together, they create a powerful flywheel of growth:</p>
                         
-                        <!-- Visual Flywheel Diagram (Desktop Only) -->
-                        <div class="relative w-full max-w-4xl mx-auto h-[550px] hidden lg:block mb-16 mt-8">
-                            <!-- Center Hub -->
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full border border-white/10 bg-dark/90 backdrop-blur-md flex flex-col items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.2)] z-20 group/hub hover:scale-105 transition-transform duration-500">
-                                <div class="absolute inset-0 rounded-full border-4 border-accent/30 border-t-accent animate-spin group-hover/hub:border-t-white transition-colors duration-500"></div>
-                                <i data-lucide="refresh-cw" class="w-10 h-10 text-accent mb-3"></i>
-                                <span class="text-white font-serif text-2xl font-bold text-center leading-tight" data-i18n="fly-hub">Ecosystem <br> Flywheel</span>
-                            </div>
+                        <!-- Visual Flywheel Diagram (Responsive) -->
+                        <div class="relative w-full max-w-4xl mx-auto h-[320px] sm:h-[450px] lg:h-[550px] block mb-10 lg:mb-16 mt-4 lg:mt-8 overflow-visible">
+                            <div class="absolute inset-0 transform scale-[0.55] sm:scale-75 lg:scale-100 origin-center">
+                                <!-- Center Hub -->
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full border border-white/10 bg-dark/90 backdrop-blur-md flex flex-col items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.2)] z-20 group/hub hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute inset-0 rounded-full border-4 border-accent/30 border-t-accent animate-spin group-hover/hub:border-t-white transition-colors duration-500"></div>
+                                    <i data-lucide="refresh-cw" class="w-10 h-10 text-accent mb-3"></i>
+                                    <span class="text-white font-serif text-2xl font-bold text-center leading-tight" data-i18n="fly-hub">Ecosystem <br> Flywheel</span>
+                                </div>
 
-                            <!-- Orbiting Track -->
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] rounded-full border-2 border-dashed border-accent/20 z-0 animate-[spin_40s_linear_infinite]"></div>
+                                <!-- Orbiting Track -->
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] rounded-full border-2 border-dashed border-accent/20 z-0 animate-[spin_40s_linear_infinite]"></div>
 
-                            <!-- Node 1: Top -->
-                            <div class="absolute top-[0%] left-1/2 transform -translate-x-1/2 w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:-translate-y-2 transition-transform duration-300">
-                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">1</div>
-                                <i data-lucide="settings" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
-                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n1-t">Infrastructure</h4>
-                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n1-d">Attracts high-value tenants.</p>
-                            </div>
+                                <!-- Node 1: Top -->
+                                <div class="absolute top-[0%] left-1/2 transform -translate-x-1/2 w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:-translate-y-2 transition-transform duration-300">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">1</div>
+                                    <i data-lucide="settings" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                    <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n1-t">Infrastructure</h4>
+                                    <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n1-d">Attracts high-value tenants.</p>
+                                </div>
 
-                            <!-- Node 2: Top Right -->
-                            <div class="absolute top-[32%] right-[5%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-x-2 transition-transform duration-300">
-                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">2</div>
-                                <i data-lucide="factory" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
-                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n2-t">Tenants</h4>
-                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n2-d">Bring thousands of workers.</p>
-                            </div>
+                                <!-- Node 2: Top Right -->
+                                <div class="absolute top-[32%] right-[5%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-x-2 transition-transform duration-300">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">2</div>
+                                    <i data-lucide="factory" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                    <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n2-t">Tenants</h4>
+                                    <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n2-d">Bring thousands of workers.</p>
+                                </div>
 
-                            <!-- Node 3: Bottom Right -->
-                            <div class="absolute bottom-[5%] right-[15%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-y-2 hover:translate-x-2 transition-transform duration-300">
-                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">3</div>
-                                <i data-lucide="users" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
-                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n3-t">Housing</h4>
-                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n3-d">Creates a populated community.</p>
-                            </div>
+                                <!-- Node 3: Bottom Right -->
+                                <div class="absolute bottom-[5%] right-[15%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-y-2 hover:translate-x-2 transition-transform duration-300">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">3</div>
+                                    <i data-lucide="users" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                    <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n3-t">Housing</h4>
+                                    <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n3-d">Creates a populated community.</p>
+                                </div>
 
-                            <!-- Node 4: Bottom Left -->
-                            <div class="absolute bottom-[5%] left-[15%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-y-2 hover:-translate-x-2 transition-transform duration-300">
-                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">4</div>
-                                <i data-lucide="shopping-bag" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
-                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n4-t">Retail & Services</h4>
-                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n4-d">Drives success of markets.</p>
-                            </div>
+                                <!-- Node 4: Bottom Left -->
+                                <div class="absolute bottom-[5%] left-[15%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:translate-y-2 hover:-translate-x-2 transition-transform duration-300">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">4</div>
+                                    <i data-lucide="shopping-bag" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                    <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n4-t">Retail & Services</h4>
+                                    <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n4-d">Drives success of markets.</p>
+                                </div>
 
-                            <!-- Node 5: Top Left -->
-                            <div class="absolute top-[32%] left-[5%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:-translate-x-2 transition-transform duration-300">
-                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">5</div>
-                                <i data-lucide="leaf" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
-                                <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n5-t">Quality of Life</h4>
-                                <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n5-d">Attracts future businesses.</p>
+                                <!-- Node 5: Top Left -->
+                                <div class="absolute top-[32%] left-[5%] transform w-48 glass-panel p-5 text-center z-10 rounded-2xl hover:-translate-x-2 transition-transform duration-300">
+                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-dark font-bold text-sm flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.6)]">5</div>
+                                    <i data-lucide="leaf" class="w-6 h-6 text-accent mx-auto mb-3 mt-1"></i>
+                                    <h4 class="text-white text-sm font-bold mb-2" data-i18n="fly-n5-t">Quality of Life</h4>
+                                    <p class="text-xs text-gray-400 leading-snug" data-i18n="fly-n5-d">Attracts future businesses.</p>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Supporting List (Visible on Mobile/Tablet, acts as caption on Desktop) -->
+                        <!-- Supporting List (Acts as caption) -->
                         <ol class="space-y-4 mb-8 text-base text-gray-300 font-light list-decimal list-inside pl-2 md:pl-4 marker:text-accent">
                             <li data-i18n="fly-l1">World-class infrastructure attracts high-value industrial tenants.</li>
                             <li data-i18n="fly-l2">Industrial tenants bring thousands of workers and managers.</li>
@@ -1019,6 +1040,118 @@
                         </ol>
                         <p class="text-sm md:text-base text-gray-300 font-light leading-relaxed border-t border-white/10 pt-6" data-i18n="fly-outro">
                             Backed by our Strategic Partnerships with local governments and communities, this integrated approach aligns directly with national objectives, ensuring smooth regulatory pathways, shared mutual growth, and a highly resilient investment profile.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- NEW: MEIKO Case Study Section -->
+                <div class="mt-24 pt-16 border-t border-white/10 reveal text-left">
+                    <div class="text-center mb-12">
+                        <h4 class="text-accent uppercase tracking-widest text-xs font-semibold mb-3" data-i18n="cs-pre">Case Study</h4>
+                        <h2 class="font-serif text-3xl md:text-5xl text-white mb-6" data-i18n="cs-title">MEIKO Electronics & The Integrated <br><span class="italic text-accent">Township Advantage</span></h2>
+                        <p class="text-gray-400 font-light max-w-4xl mx-auto leading-relaxed text-lg" data-i18n="cs-sub">
+                            How Our "Live, Work, and Play" Ecosystem Drives Value for Global High-Tech Manufacturers
+                        </p>
+                    </div>
+
+                    <!-- Intro Images -->
+                    <div class="grid md:grid-cols-2 gap-8 mb-12">
+                        <div class="glass-panel p-3 rounded-2xl group overflow-hidden border border-white/5 hover:border-accent/30 transition-all duration-500">
+                            <div class="relative h-64 md:h-80 w-full overflow-hidden rounded-xl bg-dark/50">
+                                <img src="https://c.dhcn.vn/dnn/baophutho/news/2607/204d1233339t11000l1-204d1233338t1102.webp?r=10" alt="Motojima Katsuhide" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <p class="text-center text-accent text-sm font-medium mt-4 mb-2 tracking-wide" data-i18n="cs-ceo">Motojima Katsuhide – CEO MEIKO HOA BINH</p>
+                        </div>
+                        <div class="glass-panel p-3 rounded-2xl group overflow-hidden border border-white/5 hover:border-accent/30 transition-all duration-500">
+                            <div class="relative h-64 md:h-80 w-full overflow-hidden rounded-xl bg-dark/50">
+                                <img src="https://c.dhcn.vn/dnn/baophutho/news/2607/204d1233350t11000l1-204d1233348t1108.webp?r=14" alt="MEIKO HOA BINH FACTORY" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <p class="text-center text-accent text-sm font-medium mt-4 mb-2 tracking-wide" data-i18n="cs-fac">MEIKO HOA BINH FACTORY</p>
+                        </div>
+                    </div>
+
+                    <!-- Sections 1 & 2 -->
+                    <div class="glass-panel p-8 md:p-10 rounded-2xl mb-12 space-y-10 border border-white/5">
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-serif text-white mb-4" data-i18n="cs-1-t">1. Executive Summary</h3>
+                            <p class="text-gray-400 font-light leading-relaxed text-base md:text-lg" data-i18n="cs-1-d">
+                                MEIKO Electronics Co., Ltd., a leading Japanese manufacturer of Printed Circuit Boards (PCBs), has selected our industrial park in Hoa Binh as a critical hub for its global expansion. By plugging into our integrated urban ecosystem, MEIKO dramatically de-risks its supply chain, secures its labor force, and ensures operational continuity for its highly sensitive AI technology manufacturing.
+                            </p>
+                        </div>
+
+                        <div class="w-full h-px bg-white/10"></div>
+
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-serif text-white mb-4" data-i18n="cs-2-t">2. The Tenant Profile & Investment Scale</h3>
+                            <p class="text-gray-400 font-light leading-relaxed mb-6 text-base md:text-lg" data-i18n="cs-2-d">
+                                MEIKO is rapidly scaling its operations in Vietnam to meet the surging global demand for AI equipment. Their commitment to the Hoa Binh site is massive and multi-phased:
+                            </p>
+                            <ul class="space-y-4 text-gray-400 font-light leading-relaxed list-disc pl-5 marker:text-accent text-base md:text-lg">
+                                <li data-i18n="cs-2-l1"><strong class="text-white">Hoa Binh Plant #1:</strong> A state-of-the-art facility focused on Advanced HDI PCBs, covering a site area of approximately 93,000 square meters. This facility represents an investment of approximately 50 billion yen. Recent ground-level updates confirm this phase commands a $200 million USD capital injection and will employ up to 3,000 workers.</li>
+                                <li data-i18n="cs-2-l2"><strong class="text-white">Hoa Binh Plant #2 (Joint Venture):</strong> To further capitalize on AI server demand in Southeast Asia, MEIKO established a Joint Venture with ACCL in November 2025. This new high-layer PCB facility will add another 60,000 square meters of floor area, with production scheduled to begin sequentially from 2027.</li>
+                            </ul>
+
+                            <!-- Investment Scale Images (3-grid) -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                                <div class="rounded-xl overflow-hidden border border-white/10 h-48 md:h-56 bg-dark/50">
+                                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdY73dMujRHw3k1nLwLB_-NtKTGrX4MKRKpU9o9r0BJ0eVFYvq7srsw3P6k4YKlpMCcKFDOkWGbV7gcIa_9gJmBRvWFhI1H-QmXJZBZW-JaE2lZesRCwWk6DgTtdaf5KTYVGy4n9Q?key=iGuZSYGehxNM9kNECswEheGd" class="w-full h-full object-contain hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-white/10 h-48 md:h-56 bg-dark/50">
+                                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfFfyV-zYL41R8Lr_BL_V-bQUSwBccVVo4UIz0XGDvjZJPPoFL7q-QOJ6aoTFSC8hn90CWxqnlKrbVaKSKxZW84egwW2SaJ1Aj5UOM3xGl3-mUf_ysO6utchF96o6dll1ORA_n53Q?key=iGuZSYGehxNM9kNECswEheGd" class="w-full h-full object-contain hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-white/10 h-48 md:h-56 bg-dark/50">
+                                    <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdw82cwzX6pEDQcMxgVdh4JPCFcQs3yj3XE3SoSb_B_KnNRDiLiIj4ffvFP90ZCtCvZRcFk3rsz5K5wnIeBk7vn543NqOh53YcWKI14UrbrYnc9nJckIdyU8u8ov7nSG57jmEoCeg?key=iGuZSYGehxNM9kNECswEheGd" class="w-full h-full object-contain hover:scale-105 transition-transform duration-500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3 & 4 -->
+                    <div class="glass-panel p-8 md:p-10 rounded-2xl mb-12 border border-white/5">
+                        <h3 class="text-2xl md:text-3xl font-serif text-white mb-4" data-i18n="cs-3-t">3. The Ecosystem in Action: Solving Complex Operational Challenges</h3>
+                        <p class="text-gray-400 font-light leading-relaxed mb-8 text-base md:text-lg" data-i18n="cs-3-d">
+                            For a high-tech manufacturer like MEIKO, an empty plot of land is not enough. Here is how our specific ecosystem components actively support their multi-billion-yen investment:
+                        </p>
+                        
+                        <!-- Ecosystem Image -->
+                        <div class="w-full rounded-xl overflow-hidden border border-white/10 mb-10 bg-dark/50">
+                            <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXc3ntvebzBGJQTclymAKvfJ6lS04e6kB2eF_OUranPtXinsn93GD-XIATp9kPHmSPqaN7tA-jQoNqN9_7JD_xKRdxdU52Q8k09a4chRa2ENYjXKJV9h2DX9tsIGhD8UpOBpaRLK?key=iGuZSYGehxNM9kNECswEheGd" class="w-full h-auto max-h-[500px] object-contain hover:scale-105 transition-transform duration-700">
+                        </div>
+
+                        <ul class="space-y-6 text-gray-400 font-light leading-relaxed text-base md:text-lg">
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="zap" class="w-6 h-6 text-accent shrink-0 mt-1"></i>
+                                <p data-i18n="cs-3-l1"><strong class="text-white font-medium">Electricity & Clean Water Supply Infrastructure:</strong> The manufacturing of Advanced HDI and High-Layer PCBs for AI Servers requires immense, uninterrupted power and pristine water. In its official financial briefing, MEIKO explicitly cited "leveraging advantages such as electricity supply" as a primary driver for establishing the state-of-the-art factory in Hoa Binh. Our foundational utility infrastructure is the direct catalyst for securing this tenant.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="home" class="w-6 h-6 text-accent shrink-0 mt-1"></i>
+                                <p data-i18n="cs-3-l2"><strong class="text-white font-medium">Affordable Housing for Workers:</strong> MEIKO’s Plant #1 alone requires an immediate workforce of 3,000 people. Our integrated affordable housing solves the most critical bottleneck in modern manufacturing: labor acquisition and retention. By offering safe, walkable residential neighborhoods, MEIKO can guarantee a stable, localized workforce for its mass production lines.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="building" class="w-6 h-6 text-accent shrink-0 mt-1"></i>
+                                <p data-i18n="cs-3-l3"><strong class="text-white font-medium">Commercial Housing for Expats & Managers:</strong> The deployment of advanced manufacturing technologies, such as mSAP HDI, requires heavy oversight from foreign experts and senior Japanese executives. Our commercial housing provides the premium living standards necessary to attract and retain top-tier international talent in Hoa Binh.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="shopping-cart" class="w-6 h-6 text-accent shrink-0 mt-1"></i>
+                                <p data-i18n="cs-3-l4"><strong class="text-white font-medium">Shopping Mall, Community Market & Placemaking:</strong> A workforce of over 3,000 (plus their families) constitutes a massive micro-economy. The shopping mall and community markets capture this demographic, providing the "Play" and "Live" aspects of our philosophy. This promotes the health, vitality, and well-being of MEIKO's employees, leading to higher productivity and lower turnover.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i data-lucide="handshake" class="w-6 h-6 text-accent shrink-0 mt-1"></i>
+                                <p data-i18n="cs-3-l5"><strong class="text-white font-medium">Strategic Partnerships:</strong> By aligning with the government's strategic objectives, this integrated township facilitates seamless execution. Once fully operational, MEIKO's facility is projected to contribute up to 4% of Hoa Binh province's total annual budget revenue by 2030, reinforcing the tri-sector synergy between the developer, the tenant, and the state.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass-panel p-8 md:p-10 rounded-2xl bg-gradient-to-br from-accent/20 to-transparent border border-accent/30 shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+                        <div class="flex items-center gap-4 mb-6">
+                            <i data-lucide="trending-up" class="w-8 h-8 text-accent"></i>
+                            <h3 class="text-2xl md:text-3xl font-serif text-white drop-shadow-md" data-i18n="cs-4-t">4. The Investor Takeaway: The Flywheel Effect</h3>
+                        </div>
+                        <p class="text-gray-200 font-light leading-relaxed mb-6 text-base md:text-lg" data-i18n="cs-4-d1">
+                            The MEIKO case study perfectly illustrates the financial defensibility of our ecosystem. We are not just leasing 93,000 square meters of dirt; we are providing the essential power, housing the 3,000 workers, and capturing the retail spend of that localized population.
+                        </p>
+                        <p class="text-gray-200 font-light leading-relaxed text-base md:text-lg border-t border-accent/20 pt-6" data-i18n="cs-4-d2">
+                            By delivering a holistic "Live, Work, and Play" environment, we ensure that blue-chip tenants like MEIKO remain anchored in our township for decades to come, generating highly predictable, multi-layered revenue streams for our investors.
                         </p>
                     </div>
                 </div>
@@ -1250,6 +1383,28 @@
                 "fly-n5-t": "Quality of Life",
                 "fly-n5-d": "Attracts future businesses.",
 
+                "cs-pre": "Case Study",
+                "cs-title": "MEIKO Electronics & The Integrated <br><span class=\"italic text-accent\">Township Advantage</span>",
+                "cs-sub": "How Our \"Live, Work, and Play\" Ecosystem Drives Value for Global High-Tech Manufacturers",
+                "cs-ceo": "Motojima Katsuhide – CEO MEIKO HOA BINH",
+                "cs-fac": "MEIKO HOA BINH FACTORY",
+                "cs-1-t": "1. Executive Summary",
+                "cs-1-d": "MEIKO Electronics Co., Ltd., a leading Japanese manufacturer of Printed Circuit Boards (PCBs), has selected our industrial park in Hoa Binh as a critical hub for its global expansion. By plugging into our integrated urban ecosystem, MEIKO dramatically de-risks its supply chain, secures its labor force, and ensures operational continuity for its highly sensitive AI technology manufacturing.",
+                "cs-2-t": "2. The Tenant Profile & Investment Scale",
+                "cs-2-d": "MEIKO is rapidly scaling its operations in Vietnam to meet the surging global demand for AI equipment. Their commitment to the Hoa Binh site is massive and multi-phased:",
+                "cs-2-l1": "<strong class=\"text-white\">Hoa Binh Plant #1:</strong> A state-of-the-art facility focused on Advanced HDI PCBs, covering a site area of approximately 93,000 square meters. This facility represents an investment of approximately 50 billion yen. Recent ground-level updates confirm this phase commands a $200 million USD capital injection and will employ up to 3,000 workers.",
+                "cs-2-l2": "<strong class=\"text-white\">Hoa Binh Plant #2 (Joint Venture):</strong> To further capitalize on AI server demand in Southeast Asia, MEIKO established a Joint Venture with ACCL in November 2025. This new high-layer PCB facility will add another 60,000 square meters of floor area, with production scheduled to begin sequentially from 2027.",
+                "cs-3-t": "3. The Ecosystem in Action: Solving Complex Operational Challenges",
+                "cs-3-d": "For a high-tech manufacturer like MEIKO, an empty plot of land is not enough. Here is how our specific ecosystem components actively support their multi-billion-yen investment:",
+                "cs-3-l1": "<strong class=\"text-white\">Electricity & Clean Water Supply Infrastructure:</strong> The manufacturing of Advanced HDI and High-Layer PCBs for AI Servers requires immense, uninterrupted power and pristine water. In its official financial briefing, MEIKO explicitly cited \"leveraging advantages such as electricity supply\" as a primary driver for establishing the state-of-the-art factory in Hoa Binh. Our foundational utility infrastructure is the direct catalyst for securing this tenant.",
+                "cs-3-l2": "<strong class=\"text-white\">Affordable Housing for Workers:</strong> MEIKO’s Plant #1 alone requires an immediate workforce of 3,000 people. Our integrated affordable housing solves the most critical bottleneck in modern manufacturing: labor acquisition and retention. By offering safe, walkable residential neighborhoods, MEIKO can guarantee a stable, localized workforce for its mass production lines.",
+                "cs-3-l3": "<strong class=\"text-white\">Commercial Housing for Expats & Managers:</strong> The deployment of advanced manufacturing technologies, such as mSAP HDI, requires heavy oversight from foreign experts and senior Japanese executives. Our commercial housing provides the premium living standards necessary to attract and retain top-tier international talent in Hoa Binh.",
+                "cs-3-l4": "<strong class=\"text-white\">Shopping Mall, Community Market & Placemaking:</strong> A workforce of over 3,000 (plus their families) constitutes a massive micro-economy. The shopping mall and community markets capture this demographic, providing the \"Play\" and \"Live\" aspects of our philosophy. This promotes the health, vitality, and well-being of MEIKO's employees, leading to higher productivity and lower turnover.",
+                "cs-3-l5": "<strong class=\"text-white\">Strategic Partnerships:</strong> By aligning with the government's strategic objectives, this integrated township facilitates seamless execution. Once fully operational, MEIKO's facility is projected to contribute up to 4% of Hoa Binh province's total annual budget revenue by 2030, reinforcing the tri-sector synergy between the developer, the tenant, and the state.",
+                "cs-4-t": "4. The Investor Takeaway: The Flywheel Effect",
+                "cs-4-d1": "The MEIKO case study perfectly illustrates the financial defensibility of our ecosystem. We are not just leasing 93,000 square meters of dirt; we are providing the essential power, housing the 3,000 workers, and capturing the retail spend of that localized population.",
+                "cs-4-d2": "By delivering a holistic \"Live, Work, and Play\" environment, we ensure that blue-chip tenants like MEIKO remain anchored in our township for decades to come, generating highly predictable, multi-layered revenue streams for our investors.",
+
                 "con-title": "Initiate a Conversation",
                 "con-desc": "Contact our dedicated investment team to schedule a site visit or request a customized proposal.",
                 
@@ -1435,6 +1590,28 @@
                 "fly-n4-d": "商業施設の成功を促進",
                 "fly-n5-t": "生活の質",
                 "fly-n5-d": "将来の企業を惹きつける",
+
+                "cs-pre": "ケーススタディ",
+                "cs-title": "メイコーと統合型 <br><span class=\"italic text-accent\">タウンシップの優位性</span>",
+                "cs-sub": "当社の「住む、働く、遊ぶ」エコシステムが、グローバルなハイテクメーカーにどのように価値をもたらすか",
+                "cs-ceo": "Motojima Katsuhide – MEIKO HOA BINH CEO",
+                "cs-fac": "MEIKO HOA BINH 工場",
+                "cs-1-t": "1. エグゼクティブ・サマリー",
+                "cs-1-d": "プリント基板（PCB）の日本の大手メーカーである株式会社メイコーは、グローバル展開の重要な拠点としてホアビンの当工業団地を選定しました。統合された都市エコシステムに参入することで、メイコーはサプライチェーンのリスクを劇的に軽減し、労働力を確保し、非常に機密性の高いAI技術製造の事業継続性を保証します。",
+                "cs-2-t": "2. テナントのプロフィールと投資規模",
+                "cs-2-d": "メイコーは、急増するAI機器の世界的な需要を満たすため、ベトナムでの事業を急速に拡大しています。ホアビンのサイトに対する彼らのコミットメントは大規模かつ多段階にわたります：",
+                "cs-2-l1": "<strong class=\"text-white\">ホアビン第1工場：</strong> 約93,000平方メートルの敷地面積を誇り、最先端のHDI基板に焦点を当てた最新鋭の施設。この施設は約500億円の投資を表しています。最近の現地情報によると、このフェーズには2億米ドルの資本注入があり、最大3,000人の労働者を雇用する予定です。",
+                "cs-2-l2": "<strong class=\"text-white\">ホアビン第2工場（合弁会社）：</strong> 東南アジアにおけるAIサーバーの需要をさらに取り込むため、メイコーは2025年11月にACCLと合弁会社を設立しました。この新しい多層基板施設はさらに60,000平方メートルの延床面積を追加し、2027年から順次生産を開始する予定です。",
+                "cs-3-t": "3. 稼働するエコシステム：複雑な運用課題の解決",
+                "cs-3-d": "メイコーのようなハイテクメーカーにとって、ただの空き地では不十分です。私たちの特定のエコシステムコンポーネントが、彼らの数十億円規模の投資をどのように積極的にサポートしているかをご紹介します：",
+                "cs-3-l1": "<strong class=\"text-white\">電力およびクリーンウォーター供給インフラ：</strong> AIサーバー向けの高度なHDIおよび多層PCBの製造には、膨大で途切れない電力と清浄な水が必要です。メイコーは公式の決算説明会で、ホアビンに最先端の工場を設立する主な要因として「電力供給などの利点を活用する」と明言しています。当社の基盤となるユーティリティインフラは、このテナントを確保するための直接的な触媒です。",
+                "cs-3-l2": "<strong class=\"text-white\">労働者向けの手頃な価格の住宅：</strong> メイコーの第1工場だけでも、即座に3,000人の労働力が必要です。私たちの統合された手頃な価格の住宅は、現代の製造業における最も重大なボトルネックである労働力の獲得と定着を解決します。安全で歩きやすい住宅街を提供することで、メイコーは大量生産ラインのための安定的で地域に根ざした労働力を保証できます。",
+                "cs-3-l3": "<strong class=\"text-white\">駐在員および管理者向けの商業住宅：</strong> mSAP HDIなどの高度な製造技術の導入には、外国人専門家や日本人の上級幹部による厳格な監督が必要です。私たちの商業住宅は、ホアビンにトップクラスの国際的な人材を引き付け、維持するために必要なプレミアムな生活水準を提供します。",
+                "cs-3-l4": "<strong class=\"text-white\">ショッピングモール、コミュニティ市場、プレイスメイキング：</strong> 3,000人以上の労働力（およびその家族）は、巨大なマイクロエコノミーを構成します。ショッピングモールやコミュニティ市場はこの層を取り込み、私たちの哲学の「遊ぶ」「住む」側面を提供します。これにより、メイコーの従業員の健康、活力、幸福が促進され、生産性の向上と離職率の低下につながります。",
+                "cs-3-l5": "<strong class=\"text-white\">戦略的パートナーシップ：</strong> 政府の戦略的目標と連携することで、この統合型タウンシップはシームレスな実行を促進します。完全に稼働すると、メイコーの施設は2030年までにホアビン省の年間総予算収入の最大4%に貢献すると予測されており、開発者、テナント、州の間の3部門の相乗効果が強化されます。",
+                "cs-4-t": "4. 投資家へのポイント：フライホイール効果",
+                "cs-4-d1": "メイコーのケーススタディは、当社のエコシステムの財政的な防御力を完璧に示しています。私たちは単に93,000平方メートルの土地をリースしているわけではありません。不可欠な電力を供給し、3,000人の労働者を収容し、その局所的な人口の小売支出を取り込んでいるのです。",
+                "cs-4-d2": "総合的な「住む、働く、遊ぶ」環境を提供することで、メイコーのような優良テナントが今後数十年にわたって当社のタウンシップに定着し、投資家に非常に予測可能で多層的な収益源をもたらすことを保証します。",
 
                 "con-title": "ご相談はこちら",
                 "con-desc": "サイト訪問のスケジュール設定やカスタマイズされた提案のご依頼については、専任の投資チームにお問い合わせください。",
@@ -1622,6 +1799,28 @@
                 "fly-n5-t": "Chất lượng sống",
                 "fly-n5-d": "Thu hút doanh nghiệp tương lai",
 
+                "cs-pre": "Nghiên cứu Tình huống",
+                "cs-title": "Điện tử MEIKO & Lợi thế <br><span class=\"italic text-accent\">Khu đô thị Tích hợp</span>",
+                "cs-sub": "Hệ sinh thái \"Sống, Làm việc và Giải trí\" của chúng tôi mang lại giá trị cho các nhà sản xuất công nghệ cao toàn cầu như thế nào",
+                "cs-ceo": "Ông Motojima Katsuhide – Tổng Giám đốc MEIKO HÒA BÌNH",
+                "cs-fac": "NHÀ MÁY MEIKO HÒA BÌNH",
+                "cs-1-t": "1. Tóm tắt Chung",
+                "cs-1-d": "MEIKO Electronics Co., Ltd., nhà sản xuất Bảng mạch in (PCB) hàng đầu Nhật Bản, đã chọn khu công nghiệp của chúng tôi tại Hòa Bình làm trung tâm trọng yếu cho quá trình mở rộng toàn cầu. Bằng cách kết nối vào hệ sinh thái đô thị tích hợp của chúng tôi, MEIKO giảm thiểu đáng kể rủi ro chuỗi cung ứng, đảm bảo lực lượng lao động và duy trì tính liên tục trong hoạt động sản xuất công nghệ AI cực kỳ nhạy cảm của mình.",
+                "cs-2-t": "2. Hồ sơ Khách thuê & Quy mô Đầu tư",
+                "cs-2-d": "MEIKO đang nhanh chóng mở rộng quy mô hoạt động tại Việt Nam để đáp ứng nhu cầu toàn cầu đang tăng vọt đối với thiết bị AI. Cam kết của họ đối với cơ sở tại Hòa Bình là rất lớn và được chia thành nhiều giai đoạn:",
+                "cs-2-l1": "<strong class=\"text-white\">Nhà máy Hòa Bình #1:</strong> Một cơ sở hiện đại tập trung vào PCB HDI tiên tiến, bao phủ diện tích khoảng 93.000 mét vuông. Cơ sở này đại diện cho khoản đầu tư khoảng 50 tỷ yên. Các cập nhật thực tế gần đây xác nhận giai đoạn này có vốn đầu tư 200 triệu USD và sẽ tuyển dụng tới 3.000 công nhân.",
+                "cs-2-l2": "<strong class=\"text-white\">Nhà máy Hòa Bình #2 (Liên doanh):</strong> Để tiếp tục tận dụng nhu cầu máy chủ AI ở Đông Nam Á, MEIKO đã thành lập Liên doanh với ACCL vào tháng 11 năm 2025. Cơ sở PCB nhiều lớp mới này sẽ bổ sung thêm 60.000 mét vuông diện tích sàn, với kế hoạch sản xuất tuần tự từ năm 2027.",
+                "cs-3-t": "3. Hệ sinh thái trong Thực tiễn: Giải quyết các Thách thức Vận hành Phức tạp",
+                "cs-3-d": "Đối với một nhà sản xuất công nghệ cao như MEIKO, một bãi đất trống là không đủ. Dưới đây là cách các thành phần hệ sinh thái cụ thể của chúng tôi tích cực hỗ trợ khoản đầu tư hàng chục tỷ yên của họ:",
+                "cs-3-l1": "<strong class=\"text-white\">Hạ tầng Cung cấp Điện & Nước sạch:</strong> Việc sản xuất PCB HDI tiên tiến và PCB nhiều lớp cho Máy chủ AI đòi hỏi nguồn điện khổng lồ, không bị gián đoạn và nguồn nước tinh khiết. Trong báo cáo tài chính chính thức của mình, MEIKO đã trích dẫn rõ ràng \"tận dụng các lợi thế như nguồn cung cấp điện\" là động lực chính để thành lập nhà máy hiện đại tại Hòa Bình. Hạ tầng tiện ích nền tảng của chúng tôi là chất xúc tác trực tiếp để đảm bảo khách thuê này.",
+                "cs-3-l2": "<strong class=\"text-white\">Nhà ở Giá cả Phải chăng cho Công nhân:</strong> Chỉ riêng Nhà máy #1 của MEIKO đã cần lực lượng lao động ngay lập tức là 3.000 người. Nhà ở giá cả phải chăng tích hợp của chúng tôi giải quyết nút thắt quan trọng nhất trong sản xuất hiện đại: thu hút và giữ chân lao động. Bằng cách cung cấp các khu dân cư an toàn, có thể đi bộ, MEIKO có thể đảm bảo một lực lượng lao động ổn định, tại chỗ cho các dây chuyền sản xuất hàng loạt của mình.",
+                "cs-3-l3": "<strong class=\"text-white\">Nhà ở Thương mại cho Chuyên gia & Quản lý:</strong> Việc triển khai các công nghệ sản xuất tiên tiến, chẳng hạn như mSAP HDI, đòi hỏi sự giám sát chặt chẽ từ các chuyên gia nước ngoài và các giám đốc điều hành cấp cao của Nhật Bản. Nhà ở thương mại của chúng tôi cung cấp mức sống cao cấp cần thiết để thu hút và giữ chân nhân tài quốc tế hàng đầu tại Hòa Bình.",
+                "cs-3-l4": "<strong class=\"text-white\">Trung tâm Thương mại, Chợ Cộng đồng & Kiến tạo Không gian:</strong> Lực lượng lao động hơn 3.000 người (cộng với gia đình họ) tạo thành một nền kinh tế vi mô khổng lồ. Trung tâm mua sắm và chợ cộng đồng thu hút nhóm nhân khẩu học này, mang lại khía cạnh \"Giải trí\" và \"Sống\" trong triết lý của chúng tôi. Điều này thúc đẩy sức khỏe, sức sống và sự an lạc của nhân viên MEIKO, dẫn đến năng suất cao hơn và tỷ lệ nghỉ việc thấp hơn.",
+                "cs-3-l5": "<strong class=\"text-white\">Quan hệ Đối tác Chiến lược:</strong> Bằng cách phù hợp với các mục tiêu chiến lược của chính phủ, khu đô thị tích hợp này tạo điều kiện thực thi liền mạch. Sau khi đi vào hoạt động hoàn toàn, cơ sở của MEIKO dự kiến sẽ đóng góp tới 4% tổng thu ngân sách hàng năm của tỉnh Hòa Bình vào năm 2030, củng cố sức mạnh tổng hợp ba bên giữa chủ đầu tư, khách thuê và nhà nước.",
+                "cs-4-t": "4. Giá trị cho Nhà đầu tư: Hiệu ứng Bánh đà",
+                "cs-4-d1": "Nghiên cứu tình huống của MEIKO minh họa hoàn hảo khả năng phòng thủ tài chính của hệ sinh thái chúng tôi. Chúng tôi không chỉ cho thuê 93.000 mét vuông đất; chúng tôi đang cung cấp nguồn điện thiết yếu, cung cấp nhà ở cho 3.000 công nhân và nắm bắt chi tiêu bán lẻ của lượng dân cư tập trung đó.",
+                "cs-4-d2": "Bằng cách mang đến một môi trường \"Sống, Làm việc và Giải trí\" toàn diện, chúng tôi đảm bảo rằng các khách thuê blue-chip như MEIKO vẫn gắn bó với khu đô thị của chúng tôi trong nhiều thập kỷ tới, tạo ra các dòng doanh thu đa tầng, có thể dự đoán được cho các nhà đầu tư.",
+
                 "con-title": "Khởi tạo Cuộc trò chuyện",
                 "con-desc": "Liên hệ với nhóm đầu tư chuyên trách của chúng tôi để sắp xếp chuyến thăm thực địa hoặc nhận đề xuất tùy chỉnh.",
                 
@@ -1688,6 +1887,43 @@
                 navbar.classList.remove('shadow-lg', 'shadow-black/50');
                 navbar.style.backgroundColor = 'rgba(5, 5, 5, 0.8)';
             }
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        let isMenuOpen = false;
+
+        const toggleMenu = () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0');
+                    mobileMenu.classList.add('opacity-100');
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('opacity-100');
+                mobileMenu.classList.add('opacity-0');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
+        };
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) toggleMenu();
+            });
         });
     </script>
 </body>
