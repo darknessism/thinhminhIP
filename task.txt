@@ -1,0 +1,60 @@
+Bạn là một senior full-stack developer. Hãy nâng cấp project hiện tại theo các yêu cầu sau:
+
+1. Chuyển toàn bộ phần lưu trữ dữ liệu từ file JSON sang SQLite
+- Không dùng JSON làm database nữa
+- Thiết kế database SQLite rõ ràng, chuyên nghiệp, dễ mở rộng
+- Tạo các bảng phù hợp với dữ liệu hiện tại
+- Viết migration hoặc script khởi tạo database
+- Refactor toàn bộ phần đọc/ghi dữ liệu để dùng SQLite
+- Đảm bảo code tách riêng layer database, service, controller nếu phù hợp
+- Giữ logic cũ hoạt động ổn định sau khi chuyển đổi
+
+2. Làm trang admin để quản lý dữ liệu
+- Tạo admin panel riêng để CRUD dữ liệu
+- Có thể xem danh sách, thêm, sửa, xóa
+- Có tìm kiếm, lọc, phân trang nếu hợp lý
+- Giao diện quản trị rõ ràng, dễ dùng, chuyên nghiệp
+
+3. Bắt buộc có trang đăng nhập cho admin
+- Có authentication cho admin
+- Chỉ người đăng nhập mới truy cập được trang quản trị
+- Có logout
+- Bảo vệ route admin
+- Mật khẩu cần được hash đúng chuẩn, không lưu plain text
+- Nếu chưa có bảng user/admin thì tạo luôn trong SQLite
+
+4. Giao diện
+- Dùng Bootstrap với style SB Admin
+- Giao diện hiện đại, clean, chuyên nghiệp
+- Responsive tốt
+- Dashboard admin nhìn giống hệ thống quản trị thực tế
+
+5. Yêu cầu kỹ thuật
+- Giữ cấu trúc project sạch sẽ, dễ maintain
+- Code rõ ràng, có comment ở những phần quan trọng
+- Ưu tiên best practice
+- Nếu cần thêm package thì liệt kê rõ package cần cài
+- Không viết sơ sài, hãy triển khai theo hướng production-ready ở mức cơ bản
+
+6. Kết quả tôi muốn nhận
+- Danh sách file cần thêm/sửa
+- Code đầy đủ cho từng file
+- Hướng dẫn cài đặt và chạy project
+- Hướng dẫn khởi tạo SQLite database
+- Tài khoản admin mẫu để đăng nhập
+- Nếu có chỗ nào phải sửa theo structure hiện tại của project thì nêu rõ
+
+Hãy trả lời theo format:
+1. Tổng quan thay đổi
+2. Cấu trúc thư mục sau khi nâng cấp
+3. Danh sách package cần cài
+4. Code đầy đủ từng file
+5. Hướng dẫn chạy
+6. Ghi chú quan trọng
+
+Lưu ý:
+- Không dùng JSON để lưu dữ liệu nữa
+- Phải dùng SQLite
+- Phải có admin login
+- Phải có admin dashboard giao diện Bootstrap SB Admin hiện đại
+- Viết đầy đủ, không chỉ mô tả
