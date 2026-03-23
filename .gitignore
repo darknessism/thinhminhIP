@@ -1,8 +1,4 @@
 node_modules/
-*.db
-*.db-wal
-*.db-shm
 .env
 .env.*
 !.env.example
-server/data/
