@@ -116,8 +116,8 @@ function App() {
 
   useEffect(() => {
     // Fetch the uploaded SVG file
-    const svgUrl = window.location.origin !== 'null' ? `${window.location.origin}/layout-vector.svg` : '/layout-vector.svg';
-
+    //const svgUrl = window.location.origin !== 'null' ? `${window.location.origin}/layout-vector.svg` : '/layout-vector.svg';
+    const svgUrl = 'layout-vector.svg';
     fetch(svgUrl)
       .then(res => {
         if (!res.ok) throw new Error("Failed to load layout-vector.svg. Ensure the file is available.");
