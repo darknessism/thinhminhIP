@@ -79,6 +79,48 @@ const normalizeColor = (colorStr) => {
   return ctx.fillStyle.toLowerCase();
 };
 
+const renderLotLabels = (svgEl, lotsData) => {
+  if (!svgEl || !lotsData || Object.keys(lotsData).length === 0) return;
+
+  svgEl.querySelectorAll('text[data-lot-label]').forEach(el => el.remove());
+
+  const groups = svgEl.querySelectorAll('g[id]');
+  groups.forEach(group => {
+    const groupId = group.getAttribute('id');
+    const lot = lotsData[groupId];
+    if (!lot || !lot.name) return;
+
+    try {
+      const bbox = group.getBBox();
+      if (bbox.width <= 0 || bbox.height <= 0) return;
+
+      const fontSize = Math.max(9, Math.min(14, Math.floor(Math.min(bbox.width, bbox.height) * 0.14)));
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', bbox.x + bbox.width / 2);
+      text.setAttribute('y', bbox.y + bbox.height / 2);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('fill', '#ffffff');
+      // text.setAttribute('stroke', '#000000');
+      // text.setAttribute('stroke-width', '0.5');
+      text.setAttribute('opacity', '0.9');
+      text.setAttribute('font-family', 'Inter, sans-serif');
+      text.setAttribute('font-size', `5px`);
+      text.setAttribute('font-weight', '500');
+      text.setAttribute('pointer-events', 'none');
+      text.setAttribute('data-lot-label', groupId);
+      text.setAttribute('transform', `rotate(-15, ${bbox.x + bbox.width / 2}, ${bbox.y + bbox.height / 2})`);
+      const displayName = lot.name.replace(/Lot\s*/gi, '');
+      text.textContent = displayName.length > 18 ? `${displayName.slice(0, 15)}...` : displayName;
+
+      svgEl.appendChild(text);
+    } catch (err) {
+      // Some groups may have invalid geometries for getBBox in some browsers; ignore these.
+      console.warn('Cannot place label for group:', groupId, err);
+    }
+  });
+};
+
 function App() {
   const [rawSvg, setRawSvg] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -206,6 +248,13 @@ function App() {
       setLegend(legendItems);
     }
   }, [rawSvg]);
+
+  useEffect(() => {
+    if (!rawSvg || !svgContainerRef.current) return;
+    const svgEl = svgContainerRef.current.querySelector('svg');
+    if (!svgEl) return;
+    renderLotLabels(svgEl, lotsData);
+  }, [rawSvg, lotsData]);
 
   // Look up lot data from API using SVG group ID
   const generateLotData = (target, hex) => {
@@ -404,6 +453,13 @@ function App() {
     // Header
     React.createElement('header', { className: "h-16 border-b border-gray-800 bg-black flex items-center justify-between px-6 z-20 shadow-sm shadow-emerald-900/10" },
       React.createElement('div', { className: "flex items-center gap-3" },
+        React.createElement('button', {
+          onClick: () => window.location.href = '/',
+          className: "p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors",
+          title: "Back to Home"
+        },
+          React.createElement(ArrowLeft, { className: "w-5 h-5 text-emerald-500" })
+        ),
         React.createElement('div', { className: "p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20" },
           React.createElement(Leaf, { className: "w-5 h-5 text-emerald-500" })
         ),
