@@ -13,7 +13,8 @@
       "Bash(rm -f package.json)",
       "Bash(PORT=3001 timeout 5 node server.js)",
       "Bash(PORT=3001 timeout 5 node server/server.js)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }
