@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find d:/mashicode/thinhminhIP -type f \\\\\\(-name *.sql -o -name schema* -o -name migrations* \\\\\\))",
+      "Bash(xargs grep:*)",
+      "Bash(node server/db/seed.js)",
+      "Bash(git stash:*)",
+      "Bash(node -e \":*)",
+      "Bash(ls server/*.js)",
+      "Bash(curl -s http://localhost:3000/layout.html)",
+      "Bash(curl -s http://localhost:3001/layout.html)"
+    ]
+  }
+}
