@@ -130,7 +130,11 @@
             background-clip: padding-box;
         }
         .modal-scroll::-webkit-scrollbar-thumb:hover { background-color: #10b981; }
+
+        /* i18n flag buttons */
+        .lang-active { border-color: #10B981 !important; opacity: 1 !important; box-shadow: 0 0 8px rgba(16,185,129,0.5); }
     </style>
+    <script src="/i18n.js"></script>
 </head>
 <body>
     <div id="root"></div>
@@ -173,7 +177,159 @@
             { id: 'D', name: 'Small Scale Enterprise', desc: '<2 HA', color: '#E60099' }
         ].map(c => ({ ...c, rgb: hexToRgb(c.color) }));
 
-        const COLOR_TOLERANCE = 85; 
+        const COLOR_TOLERANCE = 85;
+
+        // --- Layout page translations ---
+        const LAYOUT_TRANSLATIONS = {
+            en: {
+                "hdr-title": "Eco-Industrial Park", "hdr-status": "Interactive Map Active", "hdr-back": "Back to Home",
+                "sb-title": "Eco-Zoning", "sb-sub": "INTERACTIVE MASTER PLAN",
+                "sb-eco": "Dynamic Ecosystem",
+                "sb-eco-desc": "A next-generation industrial hub focused on zero-emission logistics, renewable energy, and enterprise-grade utility management.",
+                "sb-grid": "Renewable Grid", "sb-grid-d": "Integrated 50MW solar rooftop network with smart battery storage and 22kV substations.",
+                "sb-air": "Air Quality Control", "sb-air-d": "IoT sensors monitor PM2.5 and emissions in real-time across all manufacturing zones.",
+                "sb-water": "Circular Water System", "sb-water-d": "Class A wastewater recovery, automated treatment, and rainwater harvesting networks.",
+                "sb-conn": "Smart Connectivity", "sb-conn-d": "Dedicated 5G industrial slicing and Tier 3 data center fiber optic access.",
+                "sb-legend": "Zoning Legend",
+                "sb-legend-desc": "Click a category below to highlight specific land lots. The map will isolate the selected scale of enterprise.",
+                "sb-show-all": "Show All Lots",
+                "sb-tip": "Click on any lot to view details. Use the legend above to filter by zoning scale.",
+                "cat-A": "Very Large Scale Enterprise", "cat-B": "Large Scale Enterprise", "cat-C": "Medium Scale Enterprise", "cat-D": "Small Scale Enterprise",
+                "load-msg": "Loading Map Layout...", "load-title": "Eco-Industrial Park", "load-desc": "Loading the master plan layout...",
+                "lot-area": "LOT AREA", "lot-scale": "ZONING SCALE", "lot-status": "STATUS", "lot-coverage": "COVERAGE",
+                "lot-fin": "FINANCIAL ESTIMATES", "lot-rent": "Unit Rent Price", "lot-total": "Total Est. Contract",
+                "lot-infra": "INFRASTRUCTURE", "lot-infra-1": "Ready-to-use", "lot-infra-2": "High-Tech Grid", "lot-infra-3": "Industrial Water",
+                "lot-spec": "TECHNICAL SPECIFICATIONS", "lot-use": "Permitted Use", "lot-height": "Max Building Height",
+                "lot-early": "EARLY BIRD BENEFITS",
+                "lot-fin-title": "Financial Incentives & Cost Reductions",
+                "lot-fin-1t": "Lower Initial Rental Rates:", "lot-fin-1d": "Reduced land or factory rent for the first 1–3 years, locked below market rate.",
+                "lot-fin-2t": "Rent-Free Periods (Fit-out):", "lot-fin-2d": "Rent holidays during construction or equipment installation (3 to 12 months).",
+                "lot-fin-3t": "Reduced Security Deposit:", "lot-fin-3d": "Negotiable or lower security deposits for the first tenants.",
+                "lot-custom-title": "Customization & Facility Benefits",
+                "lot-bts-t": "Build-to-Suit (BTS):", "lot-bts-d": "Influence architectural design and tech specs before construction finishes.",
+                "lot-prime-t": "Choice of Prime Location:", "lot-prime-d": "Secure high-visibility corner plots or locations near main infrastructure.",
+                "lot-cta": "Request Leasing Info",
+                "river-title": "Đà River (Sông Đà)", "river-sub": "Overview & Economic Significance",
+                "river-s1": "Overview",
+                "river-s1-d": "The Đà River, also known as the Bờ River or Đà Giang, is the largest tributary of the Red River — the main river flowing through the northern region of Vietnam. Flowing over 910 km from China through Lai Châu, Điện Biên, Sơn La, and Hòa Bình, it is celebrated for its emerald waters, towering limestone cliffs, and rich biodiversity. The river plays an essential role in hydropower production, irrigation, and local livelihoods, especially for ethnic groups like the Thái and Mường people.",
+                "river-s2": "Key Role in the Economic Development of Hòa Bình City",
+                "river-s2-intro": "The Đà River is the very foundation of Hòa Bình City's identity and economic engine.",
+                "river-hb1-t": "Hydropower & Energy Revenue",
+                "river-hb1-d": "The Hòa Bình Dam, located on the Đà River, held the title of the largest hydroelectric dam in Vietnam from 1994 to 2012, with a generating capacity of 1,920 MW. Each year approximately 10 billion kWh of electricity is generated by the dam, providing around half of the government revenue of Hòa Bình Province.",
+                "river-hb2-t": "Industrialization Symbol",
+                "river-hb2-d": "Vietnam's Prime Minister described hydropower projects on the Đà River as a symbol of national industrialisation and modernisation. The dam helped catalyze industrial growth around the city, including industrial parks such as Bờ Trái — located on the left bank of the Đà River in the heart of Hòa Bình City, benefiting from the abundant water supply and reliable electricity system of the Sông Đà Hydropower Plant.",
+                "river-hb3-t": "Tourism & Ecosystem Services",
+                "river-hb3-d": "The vast Hòa Bình Reservoir formed by the dam has become a major eco-tourism attraction, drawing visitors to its scenic lake islands and cave systems, diversifying the local economy beyond energy production.",
+                "river-s3": "Key Role in the Economic Development of Hà Nội City",
+                "river-s3-intro": "Though Hà Nội lies about 76–80 km downstream, the Đà River's influence on the capital is profound and multi-dimensional.",
+                "river-hn1-t": "Electricity Supply",
+                "river-hn1-d": "At times in the past, the Hòa Bình Dam created up to one-third of Vietnam's total electricity on its own — powering industries, households, and infrastructure across Hà Nội and the broader northern region.",
+                "river-hn2-t": "Flood Control & Urban Safety",
+                "river-hn2-d": "Because the Đà River provides approximately 55% of the Red River's flow, regulating it is crucial to prevent major flooding in Vietnam's capital and beyond. Since the dam's completion, it has controlled dozens of major floods, protecting Hà Nội and the Red River Delta.",
+                "river-hn3-t": "Water Supply & Navigation",
+                "river-hn3-d": "As a multipurpose project, the Hòa Bình Dam's tasks include flood control, power generation, drought prevention, and ensuring navigation of the waterways — all of which directly support Hà Nội's trade, agriculture, and urban water supply.",
+                "river-close": "Close Overview",
+                "wwtp-title": "Wastewater Treatment Plant",
+                "wwtp-sub": "A leading, state-of-the-art, specialized facility for a high-tech industrial park.",
+                "wwtp-close": "Close Details",
+                "dismiss": "Dismiss"
+            },
+            ja: {
+                "hdr-title": "エコ産業パーク", "hdr-status": "インタラクティブマップ", "hdr-back": "ホームへ戻る",
+                "sb-title": "エコゾーニング", "sb-sub": "インタラクティブマスタープラン",
+                "sb-eco": "ダイナミックエコシステム",
+                "sb-eco-desc": "ゼロエミッション物流、再生可能エネルギー、エンタープライズグレードのユーティリティ管理に焦点を当てた次世代産業ハブ。",
+                "sb-grid": "再生可能エネルギーグリッド", "sb-grid-d": "スマートバッテリーストレージと22kV変電所を備えた統合50MW太陽光発電ネットワーク。",
+                "sb-air": "大気質管理", "sb-air-d": "IoTセンサーが全製造ゾーンでPM2.5と排出をリアルタイム監視。",
+                "sb-water": "循環型水システム", "sb-water-d": "クラスA排水回収、自動処理、雨水収集ネットワーク。",
+                "sb-conn": "スマート接続", "sb-conn-d": "専用5G産業スライシングとTier 3データセンター光ファイバーアクセス。",
+                "sb-legend": "ゾーニング凡例",
+                "sb-legend-desc": "以下のカテゴリをクリックして特定の区画をハイライト表示します。",
+                "sb-show-all": "全区画を表示",
+                "sb-tip": "区画をクリックして詳細を表示。上の凡例でゾーニング規模別にフィルター。",
+                "cat-A": "超大規模企業", "cat-B": "大規模企業", "cat-C": "中規模企業", "cat-D": "小規模企業",
+                "load-msg": "マップレイアウトを読み込み中...", "load-title": "エコ産業パーク", "load-desc": "マスタープランレイアウトを読み込み中...",
+                "lot-area": "区画面積", "lot-scale": "ゾーニング規模", "lot-status": "ステータス", "lot-coverage": "建ぺい率",
+                "lot-fin": "財務見積もり", "lot-rent": "単価賃料", "lot-total": "総見積契約額",
+                "lot-infra": "インフラストラクチャー", "lot-infra-1": "即入居可能", "lot-infra-2": "ハイテクグリッド", "lot-infra-3": "工業用水",
+                "lot-spec": "技術仕様", "lot-use": "許可用途", "lot-height": "最大建物高さ",
+                "lot-early": "アーリーバード特典",
+                "lot-fin-title": "財務インセンティブとコスト削減",
+                "lot-fin-1t": "初期賃料の引き下げ:", "lot-fin-1d": "最初の1〜3年間、市場価格以下に固定された土地・工場賃料の削減。",
+                "lot-fin-2t": "レントフリー期間:", "lot-fin-2d": "建設・設備設置期間中の賃料免除（3〜12ヶ月）。",
+                "lot-fin-3t": "敷金の減額:", "lot-fin-3d": "初期テナント向けの交渉可能な敷金設定。",
+                "lot-custom-title": "カスタマイズと施設特典",
+                "lot-bts-t": "ビルド・トゥ・スーツ（BTS）:", "lot-bts-d": "建設完了前に建築デザインと技術仕様に影響を与えられます。",
+                "lot-prime-t": "優良立地の選択:", "lot-prime-d": "メインインフラ近くの角地や高視認性区画を確保。",
+                "lot-cta": "リース情報を請求",
+                "river-title": "ダー川（ソンダー）", "river-sub": "概要と経済的意義",
+                "river-s1": "概要",
+                "river-s1-d": "ダー川は紅河最大の支流であり、中国からライチャウ、ディエンビエン、ソンラ、ホアビンを経て910km以上流れます。エメラルドグリーンの水と石灰岩の崖で知られ、水力発電、灌漑、地域の生活に不可欠な役割を果たしています。",
+                "river-s2": "ホアビン市の経済発展における重要な役割",
+                "river-s2-intro": "ダー川はホアビン市のアイデンティティと経済エンジンの基盤です。",
+                "river-hb1-t": "水力発電と収入", "river-hb1-d": "ホアビンダムは1994年から2012年までベトナム最大の水力発電ダムで、発電容量1,920MW。年間約100億kWhの電力を発電し、ホアビン省の政府収入の約半分を提供。",
+                "river-hb2-t": "工業化の象徴", "river-hb2-d": "ベトナム首相はダー川の水力発電を国家工業化・近代化の象徴と表現。ダムはボートライ産業団地を含む都市周辺の産業成長を促進。",
+                "river-hb3-t": "観光とエコシステムサービス", "river-hb3-d": "ダムによって形成された広大なホアビン貯水池は、景勝地の湖島や洞窟で訪問者を引き付ける主要なエコツーリズム観光地。",
+                "river-s3": "ハノイ市の経済発展における重要な役割",
+                "river-s3-intro": "ハノイは約76〜80km下流にありますが、ダー川の首都への影響は深遠かつ多面的です。",
+                "river-hn1-t": "電力供給", "river-hn1-d": "過去にはホアビンダムだけでベトナムの総電力の最大3分の1を生産し、ハノイと北部地域全体に電力を供給。",
+                "river-hn2-t": "洪水制御と都市安全", "river-hn2-d": "ダー川は紅河の流量の約55%を供給。ダム完成以来、数十の大洪水を制御し、ハノイと紅河デルタを保護。",
+                "river-hn3-t": "水道と航行", "river-hn3-d": "多目的プロジェクトとして、洪水制御、発電、干ばつ防止、航路確保 — すべてがハノイの貿易、農業、都市用水を支援。",
+                "river-close": "閉じる",
+                "wwtp-title": "排水処理プラント",
+                "wwtp-sub": "ハイテク産業団地向けの最先端専門施設。",
+                "wwtp-close": "詳細を閉じる",
+                "dismiss": "閉じる"
+            },
+            vn: {
+                "hdr-title": "Khu Công nghiệp Sinh thái", "hdr-status": "Bản đồ Tương tác", "hdr-back": "Về Trang chủ",
+                "sb-title": "Phân vùng Sinh thái", "sb-sub": "QUY HOẠCH TỔNG THỂ TƯƠNG TÁC",
+                "sb-eco": "Hệ sinh thái Động",
+                "sb-eco-desc": "Trung tâm công nghiệp thế hệ mới tập trung vào logistics không phát thải, năng lượng tái tạo và quản lý tiện ích cấp doanh nghiệp.",
+                "sb-grid": "Lưới Năng lượng Tái tạo", "sb-grid-d": "Mạng lưới 50MW điện mặt trời tích hợp với lưu trữ pin thông minh và trạm biến áp 22kV.",
+                "sb-air": "Kiểm soát Chất lượng Không khí", "sb-air-d": "Cảm biến IoT giám sát PM2.5 và khí thải theo thời gian thực trên tất cả các khu sản xuất.",
+                "sb-water": "Hệ thống Nước Tuần hoàn", "sb-water-d": "Thu hồi nước thải loại A, xử lý tự động và mạng lưới thu gom nước mưa.",
+                "sb-conn": "Kết nối Thông minh", "sb-conn-d": "Mạng 5G công nghiệp chuyên dụng và truy cập cáp quang trung tâm dữ liệu Tier 3.",
+                "sb-legend": "Chú giải Phân vùng",
+                "sb-legend-desc": "Nhấp vào danh mục bên dưới để làm nổi bật các lô đất cụ thể. Bản đồ sẽ lọc theo quy mô doanh nghiệp đã chọn.",
+                "sb-show-all": "Hiển thị Tất cả",
+                "sb-tip": "Nhấp vào bất kỳ lô đất nào để xem chi tiết. Sử dụng chú giải ở trên để lọc theo quy mô phân vùng.",
+                "cat-A": "Doanh nghiệp Siêu lớn", "cat-B": "Doanh nghiệp Lớn", "cat-C": "Doanh nghiệp Vừa", "cat-D": "Doanh nghiệp Nhỏ",
+                "load-msg": "Đang tải Bản đồ...", "load-title": "Khu Công nghiệp Sinh thái", "load-desc": "Đang tải quy hoạch tổng thể...",
+                "lot-area": "DIỆN TÍCH", "lot-scale": "QUY MÔ PHÂN VÙNG", "lot-status": "TRẠNG THÁI", "lot-coverage": "MẬT ĐỘ XÂY DỰNG",
+                "lot-fin": "ƯỚC TÍNH TÀI CHÍNH", "lot-rent": "Đơn giá Thuê", "lot-total": "Tổng Giá trị Hợp đồng",
+                "lot-infra": "HẠ TẦNG", "lot-infra-1": "Sẵn sàng sử dụng", "lot-infra-2": "Lưới Công nghệ cao", "lot-infra-3": "Nước Công nghiệp",
+                "lot-spec": "THÔNG SỐ KỸ THUẬT", "lot-use": "Mục đích Sử dụng", "lot-height": "Chiều cao Tối đa",
+                "lot-early": "ƯU ĐÃI SỚM",
+                "lot-fin-title": "Ưu đãi Tài chính & Giảm Chi phí",
+                "lot-fin-1t": "Giá thuê Ban đầu Thấp hơn:", "lot-fin-1d": "Giảm giá thuê đất hoặc nhà xưởng trong 1-3 năm đầu, cố định dưới giá thị trường.",
+                "lot-fin-2t": "Thời gian Miễn phí Thuê:", "lot-fin-2d": "Miễn thuê trong quá trình xây dựng hoặc lắp đặt thiết bị (3 đến 12 tháng).",
+                "lot-fin-3t": "Giảm Tiền đặt cọc:", "lot-fin-3d": "Tiền đặt cọc có thể thương lượng hoặc thấp hơn cho khách thuê đầu tiên.",
+                "lot-custom-title": "Tùy chỉnh & Lợi ích Cơ sở",
+                "lot-bts-t": "Xây dựng Theo yêu cầu (BTS):", "lot-bts-d": "Tác động đến thiết kế kiến trúc và thông số kỹ thuật trước khi hoàn thành xây dựng.",
+                "lot-prime-t": "Lựa chọn Vị trí Đắc địa:", "lot-prime-d": "Đảm bảo lô góc hoặc vị trí gần hạ tầng chính với tầm nhìn tốt.",
+                "lot-cta": "Yêu cầu Thông tin Thuê",
+                "river-title": "Sông Đà", "river-sub": "Tổng quan & Ý nghĩa Kinh tế",
+                "river-s1": "Tổng quan",
+                "river-s1-d": "Sông Đà là phụ lưu lớn nhất của sông Hồng, chảy hơn 910 km từ Trung Quốc qua Lai Châu, Điện Biên, Sơn La và Hòa Bình. Sông nổi tiếng với dòng nước xanh ngọc, vách đá vôi và đa dạng sinh học phong phú. Sông đóng vai trò thiết yếu trong sản xuất thủy điện, tưới tiêu và đời sống địa phương.",
+                "river-s2": "Vai trò Quan trọng trong Phát triển Kinh tế TP Hòa Bình",
+                "river-s2-intro": "Sông Đà là nền tảng của bản sắc và động lực kinh tế thành phố Hòa Bình.",
+                "river-hb1-t": "Thủy điện & Doanh thu Năng lượng", "river-hb1-d": "Đập Hòa Bình trên sông Đà từng là đập thủy điện lớn nhất Việt Nam (1994-2012), công suất 1.920 MW. Hàng năm phát khoảng 10 tỷ kWh điện, cung cấp khoảng một nửa thu ngân sách tỉnh Hòa Bình.",
+                "river-hb2-t": "Biểu tượng Công nghiệp hóa", "river-hb2-d": "Thủ tướng Việt Nam mô tả các dự án thủy điện trên sông Đà là biểu tượng của công nghiệp hóa, hiện đại hóa. Đập thúc đẩy phát triển công nghiệp quanh thành phố, bao gồm KCN Bờ Trái sông Đà.",
+                "river-hb3-t": "Du lịch & Dịch vụ Hệ sinh thái", "river-hb3-d": "Hồ Hòa Bình rộng lớn do đập tạo thành đã trở thành điểm du lịch sinh thái lớn, thu hút du khách với đảo hồ và hang động.",
+                "river-s3": "Vai trò Quan trọng trong Phát triển Kinh tế TP Hà Nội",
+                "river-s3-intro": "Hà Nội cách khoảng 76-80 km về hạ lưu nhưng ảnh hưởng của sông Đà với thủ đô là sâu rộng và đa chiều.",
+                "river-hn1-t": "Cung cấp Điện", "river-hn1-d": "Trước đây, đập Hòa Bình từng sản xuất tới 1/3 tổng sản lượng điện Việt Nam — cung cấp cho công nghiệp, hộ gia đình và hạ tầng Hà Nội.",
+                "river-hn2-t": "Kiểm soát Lũ lụt & An toàn Đô thị", "river-hn2-d": "Sông Đà cung cấp khoảng 55% lưu lượng sông Hồng. Từ khi hoàn thành, đập đã kiểm soát hàng chục trận lũ lớn, bảo vệ Hà Nội và đồng bằng sông Hồng.",
+                "river-hn3-t": "Cấp nước & Giao thông Thủy", "river-hn3-d": "Dự án đa mục đích bao gồm kiểm soát lũ, phát điện, chống hạn và đảm bảo giao thông thủy — tất cả hỗ trợ trực tiếp thương mại, nông nghiệp và cấp nước đô thị Hà Nội.",
+                "river-close": "Đóng Tổng quan",
+                "wwtp-title": "Nhà máy Xử lý Nước thải",
+                "wwtp-sub": "Cơ sở chuyên dụng, hiện đại hàng đầu cho khu công nghiệp công nghệ cao.",
+                "wwtp-close": "Đóng Chi tiết",
+                "dismiss": "Đóng"
+            }
+        };
+        I18n.init(LAYOUT_TRANSLATIONS);
 
         const App = () => {
             const [svgContent, setSvgContent] = useState(null);
@@ -182,8 +338,13 @@
             const [selectedRiver, setSelectedRiver] = useState(false);
             const [selectedWWTP, setSelectedWWTP] = useState(false);
             const [loading, setLoading] = useState(true);
+            const [lang, setLang] = useState(I18n.getLang());
             const [error, setError] = useState(null);
             const [lotsData, setLotsData] = useState({});
+
+            // i18n helper
+            const t = (key) => I18n.t(key);
+            useEffect(() => I18n.onChange(setLang), []);
 
             // Pan and Zoom State
             const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
@@ -520,21 +681,30 @@
                     {/* --- Header --- */}
                     <header className="h-14 border-b border-gray-800 bg-black flex items-center justify-between px-6 z-20 shadow-sm shadow-emerald-900/10 shrink-0">
                         <div className="flex items-center gap-3">
-                            <button
-                                onClick={() => window.location.href = '/'}
-                                className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
-                                title="Back to Home"
-                            >
+                            <button onClick={() => window.location.href = '/'} className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors" title={t('hdr-back')}>
                                 <i className="ph ph-arrow-left text-lg text-emerald-500"></i>
                             </button>
                             <div className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
                                 <i className="ph ph-leaf text-lg text-emerald-500"></i>
                             </div>
-                            <h1 className="font-semibold text-white tracking-wide text-lg leading-tight">Eco-Industrial Park</h1>
+                            <h1 className="font-semibold text-white tracking-wide text-lg leading-tight">{t('hdr-title')}</h1>
                         </div>
-                        <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
-                            <i className="ph ph-navigation-arrow text-emerald-500"></i>
-                            <span>Interactive Map Active</span>
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
+                                <i className="ph ph-navigation-arrow text-emerald-500"></i>
+                                <span>{t('hdr-status')}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 pl-3 border-l border-white/20">
+                                <button onClick={() => I18n.setLanguage('en')} id="btn-en" className="w-6 h-6 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110">
+                                    <img src="https://flagcdn.com/w40/gb.png" alt="EN" className="w-full h-full object-cover" />
+                                </button>
+                                <button onClick={() => I18n.setLanguage('ja')} id="btn-ja" className="w-6 h-6 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110">
+                                    <img src="https://flagcdn.com/w40/jp.png" alt="JA" className="w-full h-full object-cover" />
+                                </button>
+                                <button onClick={() => I18n.setLanguage('vn')} id="btn-vn" className="w-6 h-6 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110">
+                                    <img src="https://flagcdn.com/w40/vn.png" alt="VN" className="w-full h-full object-cover" />
+                                </button>
+                            </div>
                         </div>
                     </header>
 
@@ -553,7 +723,7 @@
                         {loading && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-600 z-20 bg-white/50 backdrop-blur-sm">
                                 <i className="ph ph-spinner-gap animate-spin text-4xl text-eco-500 mb-4"></i>
-                                <p className="font-medium">Loading Map Layout...</p>
+                                <p className="font-medium">{t('load-msg')}</p>
                             </div>
                         )}
                         
@@ -561,7 +731,7 @@
                             <div className="absolute inset-0 flex flex-col items-center justify-center text-red-500 z-20 bg-white/80 backdrop-blur-sm">
                                 <i className="ph ph-warning-circle text-5xl mb-4"></i>
                                 <p className="mb-4 font-medium">{error}</p>
-                                <button onClick={() => setError(null)} className="px-5 py-2 bg-slate-100 border border-slate-300 rounded-lg hover:bg-slate-200 text-slate-800 font-medium">Dismiss</button>
+                                <button onClick={() => setError(null)} className="px-5 py-2 bg-slate-100 border border-slate-300 rounded-lg hover:bg-slate-200 text-slate-800 font-medium">{t('dismiss')}</button>
                             </div>
                         )}
 
@@ -571,9 +741,9 @@
                                     <div className="w-20 h-20 bg-eco-500/10 text-eco-600 rounded-full flex items-center justify-center mb-6">
                                         <i className="ph ph-map-trifold text-4xl"></i>
                                     </div>
-                                    <h2 className="text-2xl font-bold text-slate-800 mb-2">Eco-Industrial Park</h2>
+                                    <h2 className="text-2xl font-bold text-slate-800 mb-2">{t('load-title')}</h2>
                                     <p className="text-sm text-slate-500 mb-8 leading-relaxed">
-                                        Loading the master plan layout...
+                                        {t('load-desc')}
                                     </p>
                                 </div>
                             </div>
@@ -616,8 +786,8 @@
                                     <i className="ph ph-leaf text-3xl"></i>
                                 </div>
                                 <div>
-                                    <h1 className="text-2xl font-bold tracking-tight">Eco-Zoning</h1>
-                                    <p className="text-sm text-slate-400 font-medium mt-0.5">INTERACTIVE MASTER PLAN</p>
+                                    <h1 className="text-2xl font-bold tracking-tight">{t('sb-title')}</h1>
+                                    <p className="text-sm text-slate-400 font-medium mt-0.5">{t('sb-sub')}</p>
                                 </div>
                             </div>
                         </div>
@@ -627,42 +797,42 @@
                             {/* --- NEW: Dynamic Ecosystem Section --- */}
                             <div className="mb-8">
                                 <h2 className="text-base font-semibold text-eco-400 uppercase tracking-wider mb-2.5 flex items-center gap-2">
-                                    <i className="ph ph-planet text-lg"></i> Dynamic Ecosystem
+                                    <i className="ph ph-planet text-lg"></i> {t('sb-eco')}
                                 </h2>
                                 <p className="text-sm text-slate-300 leading-relaxed mb-5">
-                                    A next-generation industrial hub focused on zero-emission logistics, renewable energy, and enterprise-grade utility management.
+                                    {t('sb-eco-desc')}
                                 </p>
                                 
                                 <div className="space-y-4">
                                     <div className="flex gap-3 items-start bg-slate-800/30 p-3.5 rounded-xl border border-slate-700/30">
                                         <div className="mt-0.5 text-amber-400 bg-amber-400/10 p-2 rounded-md"><i className="ph-fill ph-solar-panel text-xl"></i></div>
                                         <div>
-                                            <h4 className="text-sm font-semibold text-white mb-1">Renewable Grid</h4>
-                                            <p className="text-xs text-slate-400 leading-relaxed">Integrated 50MW solar rooftop network with smart battery storage and 22kV substations.</p>
+                                            <h4 className="text-sm font-semibold text-white mb-1">{t('sb-grid')}</h4>
+                                            <p className="text-xs text-slate-400 leading-relaxed">{t('sb-grid-d')}</p>
                                         </div>
                                     </div>
                                     
                                     <div className="flex gap-3 items-start bg-slate-800/30 p-3.5 rounded-xl border border-slate-700/30">
                                         <div className="mt-0.5 text-blue-400 bg-blue-400/10 p-2 rounded-md"><i className="ph-fill ph-wind text-xl"></i></div>
                                         <div>
-                                            <h4 className="text-sm font-semibold text-white mb-1">Air Quality Control</h4>
-                                            <p className="text-xs text-slate-400 leading-relaxed">IoT sensors monitor PM2.5 and emissions in real-time across all manufacturing zones.</p>
+                                            <h4 className="text-sm font-semibold text-white mb-1">{t('sb-air')}</h4>
+                                            <p className="text-xs text-slate-400 leading-relaxed">{t('sb-air-d')}</p>
                                         </div>
                                     </div>
                                     
                                     <div className="flex gap-3 items-start bg-slate-800/30 p-3.5 rounded-xl border border-slate-700/30">
                                         <div className="mt-0.5 text-cyan-400 bg-cyan-400/10 p-2 rounded-md"><i className="ph-fill ph-drop text-xl"></i></div>
                                         <div>
-                                            <h4 className="text-sm font-semibold text-white mb-1">Circular Water System</h4>
-                                            <p className="text-xs text-slate-400 leading-relaxed">Class A wastewater recovery, automated treatment, and rainwater harvesting networks.</p>
+                                            <h4 className="text-sm font-semibold text-white mb-1">{t('sb-water')}</h4>
+                                            <p className="text-xs text-slate-400 leading-relaxed">{t('sb-water-d')}</p>
                                         </div>
                                     </div>
                                     
                                     <div className="flex gap-3 items-start bg-slate-800/30 p-3.5 rounded-xl border border-slate-700/30">
                                         <div className="mt-0.5 text-purple-400 bg-purple-400/10 p-2 rounded-md"><i className="ph-fill ph-wifi-high text-xl"></i></div>
                                         <div>
-                                            <h4 className="text-sm font-semibold text-white mb-1">Smart Connectivity</h4>
-                                            <p className="text-xs text-slate-400 leading-relaxed">Dedicated 5G industrial slicing and Tier 3 data center fiber optic access.</p>
+                                            <h4 className="text-sm font-semibold text-white mb-1">{t('sb-conn')}</h4>
+                                            <p className="text-xs text-slate-400 leading-relaxed">{t('sb-conn-d')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -672,11 +842,11 @@
                             {/* -------------------------------------- */}
 
                             <h2 className="text-base font-semibold text-slate-300 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                <i className="ph ph-map-trifold text-lg"></i> Zoning Legend
+                                <i className="ph ph-map-trifold text-lg"></i> {t('sb-legend')}
                             </h2>
-                            
+
                             <p className="text-sm text-slate-400 mb-6 leading-relaxed">
-                                Click a category below to highlight specific land lots. The map will isolate the selected scale of enterprise.
+                                {t('sb-legend-desc')}
                             </p>
 
                             <div className="space-y-4">
@@ -699,9 +869,9 @@
                                                 ></div>
                                                 <div className="flex-1">
                                                     <h3 className={`text-base font-semibold transition-colors duration-300 ${isActive ? 'text-eco-400' : 'text-slate-200 group-hover:text-white'}`}>
-                                                        {cat.name}
+                                                        {t('cat-' + cat.id)}
                                                     </h3>
-                                                    <span className="text-sm text-slate-400 mt-0.5 block">Scale: {cat.desc}</span>
+                                                    <span className="text-sm text-slate-400 mt-0.5 block">{cat.desc}</span>
                                                 </div>
                                                 {isActive && (
                                                     <i className="ph ph-check-circle text-eco-500 text-2xl"></i>
@@ -718,14 +888,14 @@
                                     className="mt-6 w-full py-3 bg-slate-700 hover:bg-slate-600 text-base font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
                                 >
                                     <i className="ph ph-arrows-out-line-horizontal text-lg"></i>
-                                    Show All Lots
+                                    {t('sb-show-all')}
                                 </button>
                             )}
                         </div>
-                        
+
                         <div className="p-5 border-t border-slate-700/50 text-center">
                             <p className="text-sm text-slate-500">
-                                Click on any lot to view details. Use the legend above to filter by zoning scale.
+                                {t('sb-tip')}
                             </p>
                         </div>
                     </div>
@@ -749,7 +919,7 @@
                                             <h3 className="text-2xl font-bold text-slate-800 tracking-tight">Lot {selectedLot.code}</h3>
                                             <p className="text-slate-500 font-medium text-sm flex items-center gap-1">
                                                 <span className="w-2 h-2 rounded-full inline-block" style={{ backgroundColor: selectedLot.category.color }}></span>
-                                                {selectedLot.category.name}
+                                                {t('cat-' + selectedLot.category.id)}
                                             </p>
                                         </div>
                                     </div>
@@ -775,56 +945,56 @@
                                     <div className="w-full space-y-6">
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="bg-white border border-slate-100 p-4 rounded-lg shadow-sm">
-                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-ruler"></i> LOT AREA</p>
+                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-ruler"></i> {t('lot-area')}</p>
                                                 <p className="text-2xl font-bold text-slate-800">{selectedLot.area} HA</p>
                                             </div>
                                             <div className="bg-white border border-slate-100 p-4 rounded-lg shadow-sm">
-                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-chart-bar"></i> ZONING SCALE</p>
+                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-chart-bar"></i> {t('lot-scale')}</p>
                                                 <p className="text-base font-bold text-slate-800">{selectedLot.category.desc}</p>
                                             </div>
                                             <div className="bg-white border border-slate-100 p-4 rounded-lg shadow-sm">
-                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-flag"></i> STATUS</p>
+                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-flag"></i> {t('lot-status')}</p>
                                                 <p className={`text-base font-bold ${selectedLot.status === 'Available' ? 'text-eco-600' : 'text-amber-600'}`}>{selectedLot.status}</p>
                                             </div>
                                             <div className="bg-white border border-slate-100 p-4 rounded-lg shadow-sm">
-                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-percent"></i> COVERAGE</p>
+                                                <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1.5"><i className="ph ph-percent"></i> {t('lot-coverage')}</p>
                                                 <p className="text-base font-bold text-slate-800">{selectedLot.coverage}</p>
                                             </div>
                                         </div>
                                         
                                         <div>
-                                            <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-2.5 flex items-center gap-1.5"><i className="ph ph-currency-dollar"></i> FINANCIAL ESTIMATES</p>
+                                            <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-2.5 flex items-center gap-1.5"><i className="ph ph-currency-dollar"></i> {t('lot-fin')}</p>
                                             <div className="bg-eco-50 border border-eco-200/60 rounded-xl p-4 shadow-sm">
                                                 <div className="flex justify-between items-end mb-2 border-b border-eco-200/50 pb-3">
-                                                    <span className="text-base font-medium text-slate-600">Unit Rent Price</span>
+                                                    <span className="text-base font-medium text-slate-600">{t('lot-rent')}</span>
                                                     <span className="text-lg font-bold text-slate-800">${selectedLot.pricePerM2} <span className="text-sm text-slate-500 font-normal">/ m²</span></span>
                                                 </div>
                                                 <div className="flex justify-between items-end pt-3">
-                                                    <span className="text-base font-medium text-slate-600">Total Est. Contract</span>
+                                                    <span className="text-base font-medium text-slate-600">{t('lot-total')}</span>
                                                     <span className="text-2xl font-black text-eco-600">${selectedLot.totalPrice.toLocaleString()}</span>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-2.5 flex items-center gap-1.5"><i className="ph ph-plugs"></i> INFRASTRUCTURE</p>
+                                            <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-2.5 flex items-center gap-1.5"><i className="ph ph-plugs"></i> {t('lot-infra')}</p>
                                             <div className="flex flex-wrap gap-2.5">
-                                                <span className="px-3 py-1.5 bg-white border border-slate-200 rounded-md text-sm font-semibold text-slate-700 flex items-center gap-1.5 shadow-sm"><i className="ph-fill ph-check-circle text-eco-500 text-base"></i> Ready-to-use</span>
-                                                <span className="px-3 py-1.5 bg-white border border-slate-200 rounded-md text-sm font-semibold text-slate-700 flex items-center gap-1.5 shadow-sm"><i className="ph-fill ph-lightning text-amber-500 text-base"></i> High-Tech Grid</span>
-                                                <span className="px-3 py-1.5 bg-white border border-slate-200 rounded-md text-sm font-semibold text-slate-700 flex items-center gap-1.5 shadow-sm"><i className="ph-fill ph-drop text-blue-500 text-base"></i> Industrial Water</span>
+                                                <span className="px-3 py-1.5 bg-white border border-slate-200 rounded-md text-sm font-semibold text-slate-700 flex items-center gap-1.5 shadow-sm"><i className="ph-fill ph-check-circle text-eco-500 text-base"></i> {t('lot-infra-1')}</span>
+                                                <span className="px-3 py-1.5 bg-white border border-slate-200 rounded-md text-sm font-semibold text-slate-700 flex items-center gap-1.5 shadow-sm"><i className="ph-fill ph-lightning text-amber-500 text-base"></i> {t('lot-infra-2')}</span>
+                                                <span className="px-3 py-1.5 bg-white border border-slate-200 rounded-md text-sm font-semibold text-slate-700 flex items-center gap-1.5 shadow-sm"><i className="ph-fill ph-drop text-blue-500 text-base"></i> {t('lot-infra-3')}</span>
                                             </div>
                                         </div>
 
                                         {/* NEW: Technical Specifications */}
                                         <div>
-                                            <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-2.5 flex items-center gap-1.5"><i className="ph ph-blueprint"></i> TECHNICAL SPECIFICATIONS</p>
+                                            <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-2.5 flex items-center gap-1.5"><i className="ph ph-blueprint"></i> {t('lot-spec')}</p>
                                             <div className="grid grid-cols-2 gap-3">
                                                 <div className="bg-slate-50 border border-slate-200/60 p-3 rounded-lg shadow-sm">
-                                                    <p className="text-xs font-semibold text-slate-500 mb-1">Permitted Use</p>
+                                                    <p className="text-xs font-semibold text-slate-500 mb-1">{t('lot-use')}</p>
                                                     <p className="text-sm font-bold text-slate-800 leading-tight">{selectedLot.useType}</p>
                                                 </div>
                                                 <div className="bg-slate-50 border border-slate-200/60 p-3 rounded-lg shadow-sm">
-                                                    <p className="text-xs font-semibold text-slate-500 mb-1">Max Building Height</p>
+                                                    <p className="text-xs font-semibold text-slate-500 mb-1">{t('lot-height')}</p>
                                                     <p className="text-sm font-bold text-slate-800 leading-tight">{selectedLot.height}</p>
                                                 </div>
                                             </div>
@@ -835,25 +1005,25 @@
                                             <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                                                 <i className="ph-fill ph-star text-8xl text-eco-600"></i>
                                             </div>
-                                            <p className="text-xs text-eco-600 uppercase font-black tracking-wider mb-4 flex items-center gap-1.5 relative z-10"><i className="ph-fill ph-star text-base"></i> EARLY BIRD BENEFITS</p>
+                                            <p className="text-xs text-eco-600 uppercase font-black tracking-wider mb-4 flex items-center gap-1.5 relative z-10"><i className="ph-fill ph-star text-base"></i> {t('lot-early')}</p>
                                             
                                             <div className="space-y-5 relative z-10">
                                                 <div>
-                                                    <h5 className="text-sm font-bold text-slate-800 mb-2.5 flex items-center gap-1.5"><i className="ph-fill ph-piggy-bank text-eco-500 text-base"></i> Financial Incentives & Cost Reductions</h5>
+                                                    <h5 className="text-sm font-bold text-slate-800 mb-2.5 flex items-center gap-1.5"><i className="ph-fill ph-piggy-bank text-eco-500 text-base"></i> {t('lot-fin-title')}</h5>
                                                     <ul className="space-y-2.5 text-sm text-slate-600">
-                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">Lower Initial Rental Rates:</strong> Reduced land or factory rent for the first 1–3 years, locked below market rate.</span></li>
-                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">Rent-Free Periods (Fit-out):</strong> Rent holidays during construction or equipment installation (3 to 12 months).</span></li>
-                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">Reduced Security Deposit:</strong> Negotiable or lower security deposits for the first tenants.</span></li>
+                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">{t('lot-fin-1t')}</strong> {t('lot-fin-1d')}</span></li>
+                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">{t('lot-fin-2t')}</strong> {t('lot-fin-2d')}</span></li>
+                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">{t('lot-fin-3t')}</strong> {t('lot-fin-3d')}</span></li>
                                                     </ul>
                                                 </div>
                                                 
                                                 <div className="h-px bg-eco-200/60 w-full"></div>
 
                                                 <div>
-                                                    <h5 className="text-sm font-bold text-slate-800 mb-2.5 flex items-center gap-1.5"><i className="ph-fill ph-buildings text-eco-500 text-base"></i> Customization & Facility Benefits</h5>
+                                                    <h5 className="text-sm font-bold text-slate-800 mb-2.5 flex items-center gap-1.5"><i className="ph-fill ph-buildings text-eco-500 text-base"></i> {t('lot-custom-title')}</h5>
                                                     <ul className="space-y-2.5 text-sm text-slate-600">
-                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">Build-to-Suit (BTS):</strong> Influence architectural design and tech specs before construction finishes.</span></li>
-                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">Choice of Prime Location:</strong> Secure high-visibility corner plots or locations near main infrastructure.</span></li>
+                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">{t('lot-bts-t')}</strong> {t('lot-bts-d')}</span></li>
+                                                        <li className="flex items-start gap-2"><i className="ph-fill ph-check-circle text-eco-500 mt-0.5 shrink-0"></i> <span><strong className="text-slate-800 font-semibold">{t('lot-prime-t')}</strong> {t('lot-prime-d')}</span></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -866,7 +1036,7 @@
                                 <div className="bg-slate-50 p-4 border-t border-slate-100 flex justify-end shrink-0">
                                     <button className="px-6 py-2.5 bg-eco-600 hover:bg-eco-500 text-white font-semibold rounded-xl shadow-md shadow-eco-500/20 transition-all flex items-center gap-2 text-base">
                                         <i className="ph ph-paper-plane-tilt"></i>
-                                        Request Leasing Info
+                                        {t('lot-cta')}
                                     </button>
                                 </div>
                             </div>
@@ -889,9 +1059,9 @@
                                             <i className="ph ph-waves text-2xl"></i>
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-bold text-slate-800 tracking-tight">Đà River (Sông Đà)</h3>
+                                            <h3 className="text-2xl font-bold text-slate-800 tracking-tight">{t('river-title')}</h3>
                                             <p className="text-blue-600 font-medium text-sm flex items-center gap-1">
-                                                Overview & Economic Significance
+                                                {t('river-sub')}
                                             </p>
                                         </div>
                                     </div>
@@ -978,7 +1148,7 @@
                                 {/* Footer Action */}
                                 <div className="bg-slate-50 p-4 border-t border-slate-100 flex justify-end shrink-0">
                                     <button onClick={() => setSelectedRiver(false)} className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md shadow-blue-500/20 transition-all text-sm">
-                                        Close Overview
+                                        {t('river-close')}
                                     </button>
                                 </div>
                             </div>
@@ -1001,9 +1171,9 @@
                                             <i className="ph ph-drop-half-bottom text-2xl"></i>
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-bold text-slate-800 tracking-tight">Wastewater Treatment Plant</h3>
+                                            <h3 className="text-2xl font-bold text-slate-800 tracking-tight">{t('wwtp-title')}</h3>
                                             <p className="text-teal-600 font-medium text-sm flex items-center gap-1">
-                                                A leading, state-of-the-art, specialized facility for a high-tech industrial park.
+                                                {t('wwtp-sub')}
                                             </p>
                                         </div>
                                     </div>
@@ -1149,7 +1319,7 @@
                                 {/* Footer Action */}
                                 <div className="bg-slate-50 p-4 border-t border-slate-100 flex justify-end shrink-0">
                                     <button onClick={() => setSelectedWWTP(false)} className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl shadow-md shadow-teal-500/20 transition-all text-sm">
-                                        Close Details
+                                        {t('wwtp-close')}
                                     </button>
                                 </div>
                             </div>

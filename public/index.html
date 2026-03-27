@@ -142,7 +142,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .lang-active {
+            border-color: #10B981 !important;
+            opacity: 1 !important;
+            box-shadow: 0 0 10px rgba(16,185,129,0.5);
+        }
     </style>
+    <script src="/i18n.js"></script>
 </head>
 <body class="antialiased selection:bg-accent selection:text-white relative">
 
@@ -160,7 +166,7 @@
             <div class="hidden md:flex items-center space-x-8 text-sm tracking-wide font-bold text-gray-300">
                 <a href="#executive-specs" class="hover:text-accent transition-colors" data-i18n="nav-hub">Eco-Industrial Hub</a>
                 <a href="./layout.html" class="hover:text-accent transition-colors" data-i18n="nav-infra">Layout</a>
-                <a href="./meiko.html" class="hover:text-accent transition-colors">Case Study</a>
+                <a href="./meiko.html" class="hover:text-accent transition-colors" data-i18n="nav-cs">Case Study</a>
                 <a href="#esg-ecosystem" class="hover:text-accent transition-colors" data-i18n="nav-esg">ESG-Ecosystem</a>
                 <a href="#overview" class="hover:text-accent transition-colors" data-i18n="nav-sec">Sectors</a>
                 <a href="#location" class="hover:text-accent transition-colors" data-i18n="nav-log">Logistics</a>
@@ -170,13 +176,13 @@
             <div class="flex items-center gap-4">
                 <!-- Language Switcher Flags -->
                 <div class="flex items-center gap-2 pl-4 border-l border-white/20">
-                    <button onclick="setLanguage('en')" id="btn-en" class="w-7 h-7 rounded-full overflow-hidden border-2 border-accent transition-all hover:scale-110 focus:outline-none lang-btn shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+                    <button onclick="I18n.setLanguage('en')" id="btn-en" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
                         <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-full h-full object-cover">
                     </button>
-                    <button onclick="setLanguage('ja')" id="btn-ja" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
+                    <button onclick="I18n.setLanguage('ja')" id="btn-ja" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
                         <img src="https://flagcdn.com/w40/jp.png" alt="Japanese" class="w-full h-full object-cover">
                     </button>
-                    <button onclick="setLanguage('vn')" id="btn-vn" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
+                    <button onclick="I18n.setLanguage('vn')" id="btn-vn" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
                         <img src="https://flagcdn.com/w40/vn.png" alt="Vietnamese" class="w-full h-full object-cover">
                     </button>
                 </div>
@@ -194,7 +200,7 @@
             <div class="flex flex-col px-6 py-6 space-y-4">
                 <a href="#executive-specs" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-hub">Eco-Industrial Hub</a>
                 <a href="./layout.html" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-infra">Layout</a>
-                <a href="./meiko.html" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3">Case Study</a>
+                <a href="./meiko.html" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-cs">Case Study</a>
                 <a href="#esg-ecosystem" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-esg">ESG-Ecosystem</a>
                 <a href="#overview" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-sec">Sectors</a>
                 <a href="#location" class="text-lg font-serif text-white hover:text-accent transition-colors mobile-link border-b border-white/5 pb-3" data-i18n="nav-log">Logistics</a>
@@ -1210,6 +1216,7 @@
                 "nav-log": "Logistics",
                 "nav-ben": "Benefits",
                 "nav-part": "Partnership",
+                "nav-cs": "Case Study",
                 
                 "hero-loc": "Phu Tho Province, Vietnam",
                 "hero-title": "A Next-Generation <br><span class=\"italic text-accent text-glow\">Eco-Industrial Hub</span>",
@@ -1418,6 +1425,7 @@
                 "nav-log": "物流・アクセス",
                 "nav-ben": "インセンティブ",
                 "nav-part": "パートナーシップ",
+                "nav-cs": "ケーススタディ",
                 
                 "hero-loc": "ベトナム・フート省",
                 "hero-title": "次世代の <br><span class=\"italic text-accent text-glow\">エコ産業ハブ</span>",
@@ -1626,6 +1634,7 @@
                 "nav-log": "Logistics",
                 "nav-ben": "Ưu đãi",
                 "nav-part": "Đối tác",
+                "nav-cs": "Nghiên cứu Điển hình",
                 
                 "hero-loc": "Tỉnh Phú Thọ, Việt Nam",
                 "hero-title": "Trung tâm <br>Công nghiệp Sinh thái <br><span class=\"italic text-accent text-glow\">Thế hệ mới</span>",
@@ -1828,35 +1837,8 @@
             }
         };
 
-        function setLanguage(lang) {
-            // Update all translated elements
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
-            });
-
-            // Update UI styling for flags
-            const buttons = {
-                'en': document.getElementById('btn-en'),
-                'ja': document.getElementById('btn-ja'),
-                'vn': document.getElementById('btn-vn')
-            };
-
-            for (const key in buttons) {
-                if (key === lang) {
-                    buttons[key].classList.remove('opacity-40', 'border-transparent');
-                    buttons[key].classList.add('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
-                } else {
-                    buttons[key].classList.add('opacity-40', 'border-transparent');
-                    buttons[key].classList.remove('border-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.5)]');
-                }
-            }
-            
-            // Set document language attribute
-            document.documentElement.lang = lang;
-        }
+        // Initialize shared i18n with this page's translations
+        I18n.init(translations);
 
         // Scroll Reveal Animation Logic
         const revealElements = document.querySelectorAll('.reveal');
