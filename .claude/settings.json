@@ -8,7 +8,26 @@
       "Bash(node -e \":*)",
       "Bash(ls server/*.js)",
       "Bash(curl -s http://localhost:3000/layout.html)",
-      "Bash(curl -s http://localhost:3001/layout.html)"
+      "Bash(curl -s http://localhost:3001/layout.html)",
+      "Bash(find /d/mashicode/thinhminhIP -type f -name test* -o -name *test* -o -name *spec*)",
+      "Read(//d/mashicode/thinhminhIP/BEGIN {lot=\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"} /cls-7/ {getline; if \\(match\\($0, />\\([A-Z]-[0-9]+\\)</,a\\)\\) lot=a[1]} /cls-6/ {getline; if \\(match\\($0, />\\([0-9,]+\\)</**)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:3000/api/lots)",
+      "Bash(node -e \"const d=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\);const lots=JSON.parse\\(d\\);console.log\\(''''Total:'''',lots.length\\);const c28=lots.find\\(l=>l.lotId===''''C-28''''\\);const c53=lots.find\\(l=>l.lotId===''''C-53''''\\);console.log\\(''''C-28:'''',c28?.zoning,c28?.area\\);console.log\\(''''C-53:'''',c53?.zoning,c53?.area\\);\")",
+      "Bash(node -e \"const lots=require\\(''./tmp_check.json''\\);console.log\\(''Total:'',lots.length\\);const c28=lots.find\\(l=>l.lotId===''C-28''\\);const c53=lots.find\\(l=>l.lotId===''C-53''\\);console.log\\(''C-28:'',c28.zoning,c28.area\\);console.log\\(''C-53:'',c53.zoning,c53.area\\);\")",
+      "Bash(node -e \"const lots=require\\(''./tmp_check.json''\\);console.log\\(''Total:'',lots.length\\);const c28=lots.find\\(l=>l.lotId===''C-28''\\);const c53=lots.find\\(l=>l.lotId===''C-53''\\);const d01=lots.find\\(l=>l.lotId===''D-01''\\);const a01=lots.find\\(l=>l.lotId===''A-01''\\);console.log\\(''C-28:'',c28.zoning,c28.area+''ha''\\);console.log\\(''C-53:'',c53.zoning,c53.area+''ha''\\);console.log\\(''D-01:'',d01.zoning,d01.area+''ha''\\);console.log\\(''A-01:'',a01.zoning,a01.area+''ha''\\);\")",
+      "Bash(node -e \"const lots=require\\(''./tmp_check.json''\\);const c28=lots.find\\(l=>l.lotId===''C-28''\\);const c53=lots.find\\(l=>l.lotId===''C-53''\\);console.log\\(''C-28:'',c28.zoning,c28.area+''ha''\\);console.log\\(''C-53:'',c53.zoning,c53.area+''ha''\\);\")",
+      "Bash(taskkill //F //IM \"node.exe\")",
+      "Bash(rm -f d:/mashicode/thinhminhIP/server/data/thinhminh.db d:/mashicode/thinhminhIP/server/data/thinhminh.db-shm d:/mashicode/thinhminhIP/server/data/thinhminh.db-wal)",
+      "Bash(tasklist)",
+      "Bash(del /F \"d:\\\\mashicode\\\\thinhminhIP\\\\server\\\\data\\\\thinhminh.db\")",
+      "Bash(powershell -Command \"Remove-Item -Force ''d:\\\\mashicode\\\\thinhminhIP\\\\server\\\\data\\\\thinhminh.db''\")",
+      "Bash(powershell -Command \"Get-Process | Where-Object { $_.Path -like ''*node*'' } | Format-Table Id,ProcessName,Path\")",
+      "Bash(powershell -Command \"Get-Process | Where-Object { $_.ProcessName -match ''node|claude'' } | Format-Table Id,ProcessName\")",
+      "Bash(node -e \"const lots=require\\(''./tmp_check.json''\\);const c28=lots.find\\(l=>l.lotId===''C-28''\\);const c53=lots.find\\(l=>l.lotId===''C-53''\\);console.log\\(''C-28:'',c28.zoning,c28.zoneSizeRange,c28.area+''ha''\\);console.log\\(''C-53:'',c53.zoning,c53.zoneSizeRange,c53.area+''ha''\\);console.log\\(''Total lots:'',lots.length\\);\")"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
     ]
   }
 }

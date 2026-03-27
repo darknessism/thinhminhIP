@@ -236,22 +236,35 @@
                 const shapes = svgRef.current.querySelectorAll('path, polygon, rect, circle, ellipse, polyline');
                 const attachedListeners = [];
                 
-                // --- Pre-calculate text bounding boxes for massive performance boost ---
+                // --- Pre-calculate text positions from transform attributes ---
                 const svgNode = svgRef.current.querySelector('svg');
                 let svgBBox = { width: 10000, height: 10000 };
                 try { svgBBox = svgNode.getBBox(); } catch(e) {}
 
-                const textNodes = Array.from(svgNode.querySelectorAll('text, tspan'));
+                // Helper: parse translate(X Y) from transform attribute
+                const parseTranslate = (el) => {
+                    const tf = el.getAttribute('transform') || '';
+                    const m = tf.match(/translate\(\s*([\d.]+)\s+([\d.]+)\s*\)/);
+                    return m ? { x: parseFloat(m[1]), y: parseFloat(m[2]) } : null;
+                };
+
+                // Build general text position data (for WWTP/river detection)
+                const textNodes = Array.from(svgNode.querySelectorAll('text'));
                 const textData = textNodes.map(t => {
-                    try {
-                        const tBBox = t.getBBox();
-                        return {
-                            text: t.textContent.trim(),
-                            lowerText: t.textContent.trim().toLowerCase(),
-                            cx: tBBox.x + tBBox.width / 2,
-                            cy: tBBox.y + tBBox.height / 2
-                        };
-                    } catch(e) { return null; }
+                    const pos = parseTranslate(t);
+                    if (!pos) return null;
+                    return {
+                        text: t.textContent.trim(),
+                        lowerText: t.textContent.trim().toLowerCase(),
+                        cx: pos.x, cy: pos.y
+                    };
+                }).filter(Boolean);
+
+                // Build lot code index: cls-7 = lot code, cls-6 = area
+                const lotCodeTexts = Array.from(svgNode.querySelectorAll('text.cls-7')).map(t => {
+                    const pos = parseTranslate(t);
+                    if (!pos) return null;
+                    return { code: t.textContent.trim(), x: pos.x, y: pos.y };
                 }).filter(Boolean);
                 // -----------------------------------------------------------------------
 
@@ -386,29 +399,30 @@
                             
                             e.stopPropagation();
 
-                            let lotCode = "TBD";
-                            let lotArea = "0.00";
-
-                            // Use the pre-calculated overlapping texts
-                            const foundTexts = overlappingTexts.map(t => t.text).filter(Boolean);
-
-                            foundTexts.forEach(t => {
-                                // Try to guess which text is the code (C-14) and which is area (2.5)
-                                if (/[A-Z]/i.test(t) && t.includes('-')) lotCode = t;
-                                else if (!isNaN(parseFloat(t))) lotArea = t;
-                            });
-                            
-                            // Fallback mapping if regex fails but two texts exist
-                            if (foundTexts.length === 2 && lotCode === "TBD") {
-                                lotCode = foundTexts[0];
-                                lotArea = foundTexts[1];
+                            // Find lot code text (cls-7) whose translate position is inside this shape's bbox
+                            const pad = 15;
+                            const shapeCx = bbox.x + bbox.width / 2;
+                            const shapeCy = bbox.y + bbox.height / 2;
+                            let lotCode = null;
+                            let minDist = Infinity;
+                            for (const lt of lotCodeTexts) {
+                                // Text translate position must be inside (or near) shape bbox
+                                if (lt.x >= bbox.x - pad && lt.x <= bbox.x + bbox.width + pad &&
+                                    lt.y >= bbox.y - pad && lt.y <= bbox.y + bbox.height + pad) {
+                                    const dist = Math.sqrt((lt.x - shapeCx) ** 2 + (lt.y - shapeCy) ** 2);
+                                    if (dist < minDist) {
+                                        minDist = dist;
+                                        lotCode = lt.code;
+                                    }
+                                }
                             }
+                            if (!lotCode) return; // No lot code found — not a valid lot
 
                             // Look up lot data from API
                             const lotInfo = lotsData[lotCode];
 
                             // Math & Pricing Logic (use API data if available)
-                            const areaNum = lotInfo ? parseFloat(lotInfo.area) : (parseFloat(lotArea) || (Math.random() * 4 + 1));
+                            const areaNum = lotInfo ? parseFloat(lotInfo.area) : 0;
                             const pricePerM2 = lotInfo ? lotInfo.price : 120;
                             const totalAreaM2 = areaNum * 10000;
                             const totalPrice = totalAreaM2 * pricePerM2;
@@ -427,8 +441,8 @@
                             const catObj = CATEGORIES.find(c => c.id === matchedCategoryId);
 
                             setSelectedLot({
-                                code: lotCode !== "TBD" ? lotCode : "Lot " + Math.floor(Math.random()*900 + 100),
-                                area: lotInfo ? lotInfo.area : (lotArea !== "0.00" ? lotArea : areaNum.toFixed(2)),
+                                code: lotCode,
+                                area: lotInfo ? lotInfo.area : areaNum.toFixed(2),
                                 category: catObj,
                                 pricePerM2,
                                 totalPrice,

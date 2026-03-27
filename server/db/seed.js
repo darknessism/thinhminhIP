@@ -18,24 +18,45 @@ async function seed() {
   let lotCount = 0;
   for (const lot of lotsJson) {
     const existing = db.get('SELECT id FROM lots WHERE lot_id = @lot_id', { lot_id: lot.lotId });
-    if (existing) continue;
-    db.run(`
-      INSERT INTO lots (svg_group_id, lot_id, name, status, zoning, zone_size_range, area, coverage, price, use_type, height)
-      VALUES (@svg_group_id, @lot_id, @name, @status, @zoning, @zone_size_range, @area, @coverage, @price, @use_type, @height)
-    `, {
-      svg_group_id: lot.svgGroupId,
-      lot_id: lot.lotId,
-      name: lot.name,
-      status: lot.status,
-      zoning: lot.zoning || null,
-      zone_size_range: lot.zoneSizeRange || null,
-      area: lot.area || null,
-      coverage: lot.coverage || null,
-      price: lot.price || null,
-      use_type: lot.use || null,
-      height: lot.height || null,
-    });
-    lotCount++;
+    if (existing) {
+      db.run(`
+        UPDATE lots SET svg_group_id=@svg_group_id, name=@name, status=@status, zoning=@zoning,
+        zone_size_range=@zone_size_range, area=@area, coverage=@coverage, price=@price,
+        use_type=@use_type, height=@height, updated_at=CURRENT_TIMESTAMP
+        WHERE lot_id=@lot_id
+      `, {
+        svg_group_id: lot.svgGroupId,
+        lot_id: lot.lotId,
+        name: lot.name,
+        status: lot.status,
+        zoning: lot.zoning || null,
+        zone_size_range: lot.zoneSizeRange || null,
+        area: lot.area || null,
+        coverage: lot.coverage || null,
+        price: lot.price || null,
+        use_type: lot.use || null,
+        height: lot.height || null,
+      });
+      lotCount++;
+    } else {
+      db.run(`
+        INSERT INTO lots (svg_group_id, lot_id, name, status, zoning, zone_size_range, area, coverage, price, use_type, height)
+        VALUES (@svg_group_id, @lot_id, @name, @status, @zoning, @zone_size_range, @area, @coverage, @price, @use_type, @height)
+      `, {
+        svg_group_id: lot.svgGroupId,
+        lot_id: lot.lotId,
+        name: lot.name,
+        status: lot.status,
+        zoning: lot.zoning || null,
+        zone_size_range: lot.zoneSizeRange || null,
+        area: lot.area || null,
+        coverage: lot.coverage || null,
+        price: lot.price || null,
+        use_type: lot.use || null,
+        height: lot.height || null,
+      });
+      lotCount++;
+    }
   }
   console.log(`Seeded ${lotCount} lots into database.`);
 
