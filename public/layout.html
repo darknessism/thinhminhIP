@@ -560,8 +560,11 @@
                 // -----------------------------------------------------------------------
 
                 shapes.forEach(shape => {
+                    // Skip border/outline-only elements (cls-16, cls-17, cls-18 have fill:none, stroke only)
+                    if (shape.classList.contains('cls-17') || shape.classList.contains('cls-16') || shape.classList.contains('cls-18')) return;
+
                     const bbox = shape.getBBox();
-                    
+
                     // Skip shapes that are clearly massive background wrappers (e.g., > 95% of SVG area)
                     // CHANGED to && instead of || so extremely tall but narrow shapes (like the river) are not ignored
                     if (bbox.width > svgBBox.width * 0.95 && bbox.height > svgBBox.height * 0.95) return;
