@@ -139,6 +139,7 @@
 
         .gradient-text {
             background: linear-gradient(to right, #ffffff, #10B981);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -158,40 +159,42 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/5 bg-dark/80 transition-all duration-300 py-4" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div class="flex items-center gap-3">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-4">
+            <div class="flex items-center gap-3 justify-center">
                 <i data-lucide="leaf" class="text-accent w-6 h-6"></i>
                 <span class="font-serif text-xl tracking-wider text-white">THINH MINH <span class="text-accent italic">IP</span></span>
             </div>
-            <div class="hidden md:flex items-center space-x-8 text-sm tracking-wide font-bold text-gray-300">
-                <a href="#executive-specs" class="hover:text-accent transition-colors" data-i18n="nav-hub">Eco-Industrial Hub</a>
-                <a href="./layout.html" class="hover:text-accent transition-colors" data-i18n="nav-infra">Layout</a>
-                <a href="./meiko.html" class="hover:text-accent transition-colors" data-i18n="nav-cs">Case Study</a>
-                <a href="#esg-ecosystem" class="hover:text-accent transition-colors" data-i18n="nav-esg">ESG-Ecosystem</a>
-                <a href="#overview" class="hover:text-accent transition-colors" data-i18n="nav-sec">Sectors</a>
-                <a href="#location" class="hover:text-accent transition-colors" data-i18n="nav-log">Logistics</a>
-                <a href="#benefits" class="hover:text-accent transition-colors" data-i18n="nav-ben">Benefits</a>
-                <a href="#partnership" class="hover:text-accent transition-colors" data-i18n="nav-part">Partnership</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <!-- Language Switcher Flags -->
-                <div class="flex items-center gap-2 pl-4 border-l border-white/20">
-                    <button onclick="I18n.setLanguage('en')" id="btn-en" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
-                        <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-full h-full object-cover">
-                    </button>
-                    <button onclick="I18n.setLanguage('ja')" id="btn-ja" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
-                        <img src="https://flagcdn.com/w40/jp.png" alt="Japanese" class="w-full h-full object-cover">
-                    </button>
-                    <button onclick="I18n.setLanguage('vn')" id="btn-vn" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
-                        <img src="https://flagcdn.com/w40/vn.png" alt="Vietnamese" class="w-full h-full object-cover">
+            <div class="w-full flex flex-col md:flex-row items-center justify-center gap-4">
+                <div class="hidden md:flex items-center justify-center space-x-8 text-sm tracking-wide font-bold text-gray-300">
+                    <a href="#executive-specs" class="hover:text-accent transition-colors" data-i18n="nav-hub">Eco-Industrial Hub</a>
+                    <a href="./layout.html" class="hover:text-accent transition-colors" data-i18n="nav-infra">Layout</a>
+                    <a href="./meiko.html" class="hover:text-accent transition-colors" data-i18n="nav-cs">Case Study</a>
+                    <a href="#esg-ecosystem" class="hover:text-accent transition-colors" data-i18n="nav-esg">ESG-Ecosystem</a>
+                    <a href="#overview" class="hover:text-accent transition-colors" data-i18n="nav-sec">Sectors</a>
+                    <a href="#location" class="hover:text-accent transition-colors" data-i18n="nav-log">Logistics</a>
+                    <a href="#benefits" class="hover:text-accent transition-colors" data-i18n="nav-ben">Benefits</a>
+                    <a href="#partnership" class="hover:text-accent transition-colors" data-i18n="nav-part">Partnership</a>
+                </div>
+                <div class="flex items-center gap-4 justify-center w-full md:w-auto">
+                    <!-- Language Switcher Flags -->
+                    <div class="flex items-center gap-2 pl-4 border-l border-white/20">
+                        <button onclick="I18n.setLanguage('en')" id="btn-en" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-full h-full object-cover">
+                        </button>
+                        <button onclick="I18n.setLanguage('ja')" id="btn-ja" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
+                            <img src="https://flagcdn.com/w40/jp.png" alt="Japanese" class="w-full h-full object-cover">
+                        </button>
+                        <button onclick="I18n.setLanguage('vn')" id="btn-vn" class="w-7 h-7 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110 focus:outline-none lang-btn">
+                            <img src="https://flagcdn.com/w40/vn.png" alt="Vietnamese" class="w-full h-full object-cover">
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none ml-2 flex items-center justify-center">
+                        <i data-lucide="menu" id="menu-icon-open" class="w-7 h-7"></i>
+                        <i data-lucide="x" id="menu-icon-close" class="w-7 h-7 hidden"></i>
                     </button>
                 </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none ml-2 flex items-center justify-center">
-                    <i data-lucide="menu" id="menu-icon-open" class="w-7 h-7"></i>
-                    <i data-lucide="x" id="menu-icon-close" class="w-7 h-7 hidden"></i>
-                </button>
             </div>
         </div>
 
@@ -271,7 +274,7 @@
                 </div>
                 
                 <div class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass-panel group cursor-pointer hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500 border border-white/10">
-                    <img src="https://dahop.vn/wp-content/uploads/2025/11/anh-1-1-scaled-1200x800.jpg?q=80&w=2074&auto=format&fit=crop" alt="Master Plan Map Overview" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-700">
+                    <img src=".\images\quyhoach.jpg?q=80&w=2074&auto=format&fit=crop" alt="Master Plan Map Overview" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-700">
                     
                     <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent"></div>
                     
@@ -582,8 +585,8 @@
                     <p class="text-gray-400 font-light max-w-2xl mx-auto" data-i18n="log-desc"><strong class="text-white font-medium">Map Highlights:</strong> Phu Tho Province, Ha Noi, Thinh Minh Industrial Park, Thinh Minh Industrial Cluster, and Worker Housing and Industrial Services.</p>
                 </div>
                 
-                <div class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass-panel group cursor-pointer hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500 border border-white/10 mb-12">
-                    <img src="https://dahop.vn/wp-content/uploads/2026/03/Anh-Map-xa-Thinh-Minh.jpg?q=80&w=2072&auto=format&fit=crop" alt="Logistics Network Map Overview" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-700">
+                <div onclick="openGallery()" class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass-panel group cursor-pointer hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500 border border-white/10 mb-12">
+                    <img src=".\images\locationmap1.jpg?q=80&w=2072&auto=format&fit=crop" alt="Logistics Network Map Overview" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-700">
                     
                     <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent"></div>
                     
@@ -1199,10 +1202,215 @@
         </div>
     </footer>
 
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" class="fixed inset-0 z-[60] bg-black/95 hidden flex-row transition-opacity opacity-0 duration-300">
+        
+        <!-- Main Viewer Area -->
+        <div class="flex-1 h-full flex flex-col items-center justify-center p-4 sm:p-6 relative min-w-0 overflow-hidden">
+            <!-- Close Button -->
+            <button onclick="closeGallery()" class="absolute top-6 right-6 z-50 text-white hover:text-accent p-2 bg-black/50 rounded-full transition-colors">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            
+            <!-- Dark Frame -->
+            <div class="flex-1 relative w-full h-full max-w-6xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden">
+                <!-- Zoom Container -->
+                <div class="absolute inset-0 p-2 flex items-center justify-center cursor-grab" id="gallery-container">
+                    <img id="gallery-image" src="" class="w-full h-full object-contain transition-transform duration-200 pointer-events-none" alt="Gallery Image">
+                </div>
+
+                <!-- Controls -->
+                <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-4 bg-black/70 p-3 rounded-full backdrop-blur-md border border-white/10">
+                    <button onclick="prevImage()" class="text-white hover:text-accent p-2 transition-colors">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <button onclick="zoomOut()" class="text-white hover:text-accent p-2 transition-colors">
+                        <i data-lucide="zoom-out" class="w-6 h-6"></i>
+                    </button>
+                    <button onclick="resetZoom()" class="text-white hover:text-accent p-2 transition-colors font-bold text-sm">
+                        100%
+                    </button>
+                    <button onclick="zoomIn()" class="text-white hover:text-accent p-2 transition-colors">
+                        <i data-lucide="zoom-in" class="w-6 h-6"></i>
+                    </button>
+                    <button onclick="nextImage()" class="text-white hover:text-accent p-2 transition-colors">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thumbnails Strip -->
+        <div class="w-28 sm:w-36 h-full bg-[#050505] border-l border-white/10 flex flex-col items-center justify-start gap-4 py-6 px-4 shrink-0 overflow-y-auto" id="gallery-thumbnails">
+            <!-- Thumbnails injected via JS -->
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
         // Initialize Icons
         lucide.createIcons();
+
+        // -------------------------
+        // Gallery Logic
+        // -------------------------
+        const galleryImages = [
+            './images/locationmap1.jpg',
+            './images/locationmap2.jpg'
+        ];
+        let currentImageIndex = 0;
+        let currentZoom = 1;
+        let panX = 0, panY = 0;
+        let isDraggingImg = false;
+        let startX, startY;
+        
+        const galleryModal = document.getElementById('gallery-modal');
+        const galleryImage = document.getElementById('gallery-image');
+        const galleryContainer = document.getElementById('gallery-container');
+        const galleryThumbnails = document.getElementById('gallery-thumbnails');
+
+        function openGallery() {
+            currentImageIndex = 0;
+            renderThumbnails();
+            updateGalleryImage();
+            galleryModal.classList.remove('hidden');
+            galleryModal.classList.add('flex');
+            setTimeout(() => {
+                galleryModal.classList.remove('opacity-0');
+                galleryModal.classList.add('opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeGallery() {
+            galleryModal.classList.remove('opacity-100');
+            galleryModal.classList.add('opacity-0');
+            setTimeout(() => {
+                galleryModal.classList.add('hidden');
+                galleryModal.classList.remove('flex');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        function renderThumbnails() {
+            galleryThumbnails.innerHTML = '';
+            galleryImages.forEach((src, index) => {
+                const btn = document.createElement('button');
+                btn.onclick = () => {
+                    currentImageIndex = index;
+                    updateGalleryImage();
+                };
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'w-full h-full object-cover pointer-events-none';
+                btn.appendChild(img);
+                galleryThumbnails.appendChild(btn);
+            });
+        }
+
+        function updateGalleryImage() {
+            galleryImage.src = galleryImages[currentImageIndex];
+            resetZoom();
+            
+            Array.from(galleryThumbnails.children).forEach((btn, index) => {
+                if (index === currentImageIndex) {
+                    btn.className = 'w-full h-16 sm:h-24 rounded-lg overflow-hidden border-2 transition-all duration-300 border-accent opacity-100 scale-105 shadow-[0_0_15px_rgba(16,185,129,0.4)] shrink-0';
+                } else {
+                    btn.className = 'w-full h-16 sm:h-24 rounded-lg overflow-hidden border-2 transition-all duration-300 border-transparent opacity-50 hover:opacity-80 shrink-0';
+                }
+            });
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateGalleryImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateGalleryImage();
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom + 0.5, 5);
+            applyTransform();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom - 0.5, 0.5);
+            if (currentZoom <= 1) {
+                panX = 0;
+                panY = 0;
+            }
+            applyTransform();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            panX = 0;
+            panY = 0;
+            applyTransform();
+        }
+
+        function applyTransform() {
+            galleryImage.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+        }
+
+        galleryContainer.addEventListener('mousedown', (e) => {
+            if (currentZoom > 1) {
+                isDraggingImg = true;
+                startX = e.clientX - panX;
+                startY = e.clientY - panY;
+                galleryContainer.style.cursor = 'grabbing';
+                galleryImage.style.transition = 'none';
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDraggingImg) return;
+            panX = e.clientX - startX;
+            panY = e.clientY - startY;
+            applyTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDraggingImg) {
+                isDraggingImg = false;
+                galleryContainer.style.cursor = 'grab';
+                galleryImage.style.transition = 'transform 0.2s';
+            }
+        });
+
+        galleryContainer.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (e.deltaY < 0) zoomIn();
+            else zoomOut();
+        }, { passive: false });
+
+        galleryContainer.addEventListener('touchstart', (e) => {
+            if (currentZoom > 1 && e.touches.length === 1) {
+                isDraggingImg = true;
+                startX = e.touches[0].clientX - panX;
+                startY = e.touches[0].clientY - panY;
+                galleryImage.style.transition = 'none';
+            }
+        });
+
+        galleryContainer.addEventListener('touchmove', (e) => {
+            if (!isDraggingImg || e.touches.length !== 1) return;
+            e.preventDefault();
+            panX = e.touches[0].clientX - startX;
+            panY = e.touches[0].clientY - startY;
+            applyTransform();
+        }, { passive: false });
+
+        galleryContainer.addEventListener('touchend', () => {
+            if (isDraggingImg) {
+                isDraggingImg = false;
+                galleryImage.style.transition = 'transform 0.2s';
+            }
+        });
 
         // -------------------------
         // Language Translation Logic
