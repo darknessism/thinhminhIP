@@ -596,18 +596,13 @@
                     const combinedText = overlappingTexts.map(t => t.lowerText).join(' ');
 
                     // --- Wastewater Treatment Plant (WWTP) Detection Logic ---
-                    // Detect either by text overlap OR by the distinct dark green color of its lot
+                    // Detect by the distinct dark green color of its lot
                     const isDarkGreen = shapeColor && shapeColor.g > 80 && shapeColor.r < 75 && shapeColor.b < 75;
-                    const isWWTP = isDarkGreen || combinedText.includes('waste') || combinedText.includes('treatment') || combinedText.includes('wwtp');
+                    const isWWTP = isDarkGreen;
 
                     if (isWWTP) {
                         shape.classList.add('lot-interactive');
                         
-                        // Force a visual tint if transparent so hover glow works and it becomes clickable
-                        if (!shapeColor || fill === 'none' || fill === 'transparent') {
-                            shape.style.fill = 'rgba(20, 184, 166, 0.2)'; 
-                        }
-
                         const clickHandler = (e) => {
                             const dx = Math.abs(e.clientX - clickStartPos.current.x);
                             const dy = Math.abs(e.clientY - clickStartPos.current.y);
