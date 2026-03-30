@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="m-title">Quyết Định Chiến Lược Của MEIKO</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        background: '#030712', /* Deepest cool black */
+                        surface: '#0B0F19',
+                        surfaceElevated: '#111827',
+                        meikoBlue: '#0B66C2',
+                        meikoBlueLight: '#4793E8',
+                        meikoBlueGlow: 'rgba(71, 147, 232, 0.5)',
+                        meikoGreen: '#00E676', /* Brighter, futuristic eco-green */
+                        meikoGreenDark: '#0A7340',
+                        meikoGreenGlow: 'rgba(0, 230, 118, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; background-color: #030712; }
+        body { background-color: #030712; color: #ffffff; overflow-x: hidden; }
+        
+        /* Futuristic Grid Background */
+        .tech-grid {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 230, 118, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(71, 147, 232, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.7) 0%, rgba(11, 15, 25, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 230, 118, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 230, 118, 0.1);
+        }
+
+        .glass-card-blue:hover {
+            border-color: rgba(71, 147, 232, 0.4);
+            box-shadow: 0 10px 40px rgba(71, 147, 232, 0.15);
+        }
+
+        /* Gradient Texts */
+        .text-gradient-eco {
+            background: linear-gradient(135deg, #00E676, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-tech {
+            background: linear-gradient(135deg, #4793E8, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #030712; border-left: 1px solid rgba(255,255,255,0.05); }
+        ::-webkit-scrollbar-thumb { background: #00E676; border-radius: 8px; border: 2px solid #030712; }
+        ::-webkit-scrollbar-thumb:hover { background: #4ade80; }
+
+        /* Typography tweaks for modern look */
+        p { line-height: 1.8; letter-spacing: 0.01em; }
+        
+        /* Glowing Orbs */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+    <style>
+        .lang-active { border-color: #10B981 !important; opacity: 1 !important; box-shadow: 0 0 8px rgba(16,185,129,0.5); }
+    </style>
+    <script src="/i18n.js"></script>
+</head>
+<body class="font-sans antialiased selection:bg-meikoGreen selection:text-black">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#030712]/95 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:items-center py-3 md:py-4">
+                
+                <!-- Top Row: Logo & Mobile Menu Button -->
+                <div class="flex justify-between items-center w-full md:justify-center relative">
+                    <!-- Back + Logo -->
+                    <div class="flex items-center gap-3 flex-shrink-0">
+                        <a href="/" class="p-2 bg-meikoGreen/10 rounded-lg border border-meikoGreen/20 hover:bg-meikoGreen/20 transition-colors" title="Back to Home">
+                            <i data-lucide="arrow-left" class="w-5 h-5 text-meikoGreen"></i>
+                        </a>
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-meikoBlue/20 to-meikoGreen/20 border border-white/10 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-meikoGreen opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                            <i data-lucide="cpu" class="w-5 h-5 text-meikoGreen"></i>
+                        </div>
+                        <span class="font-serif font-bold text-2xl tracking-tight text-white">MEIKO in HOA BINH</span>
+                    </div>
+                    
+                    <!-- Language Switcher + Mobile Menu Button -->
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-2.5 ml-4 pl-4 border-l border-white/20">
+                            <button onclick="I18n.setLanguage('en')" id="btn-en" class="w-6 h-6 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110">
+                                <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-full h-full object-cover">
+                            </button>
+                            <button onclick="I18n.setLanguage('ja')" id="btn-ja" class="w-6 h-6 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110">
+                                <img src="https://flagcdn.com/w40/jp.png" alt="JA" class="w-full h-full object-cover">
+                            </button>
+                            <button onclick="I18n.setLanguage('vn')" id="btn-vn" class="w-6 h-6 rounded-full overflow-hidden border-2 border-transparent opacity-40 hover:opacity-100 transition-all hover:scale-110">
+                                <img src="https://flagcdn.com/w40/vn.png" alt="VN" class="w-full h-full object-cover">
+                            </button>
+                        </div>
+                        <div class="md:hidden flex items-center">
+                            <button id="mobile-menu-btn" class="text-white hover:text-meikoGreen focus:outline-none transition-colors p-2">
+                                <i data-lucide="menu" class="w-6 h-6"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Expanded Navigation - Desktop Centered -->
+                <div class="hidden md:flex space-x-6 lg:space-x-10 mt-5 mb-1">
+                    <a href="#overview" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-context">Bối cảnh</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                    <a href="#challenge" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-challenge">Thách thức</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                    <a href="#comparison" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-strategy">Chiến lược</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                    <a href="#advantages" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-advantages">Lợi thế</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                    <a href="#technology" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-tech">Công nghệ</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                    <a href="#logistics" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-logistics">Logistics</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                    <a href="#strategy" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-playbook">Playbook</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                    <a href="#hr" class="text-xs font-bold text-white hover:text-meikoGreen transition uppercase tracking-widest relative group">
+                        <span data-i18n="m-nav-hr">Nhân lực</span>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-meikoGreen group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#030712]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl absolute w-full left-0 top-full">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="#overview" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-context">Bối cảnh</a>
+                <a href="#challenge" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-challenge">Thách thức</a>
+                <a href="#comparison" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-strategy">Chiến lược</a>
+                <a href="#advantages" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-advantages">Lợi thế</a>
+                <a href="#technology" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-tech">Công nghệ</a>
+                <a href="#logistics" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-logistics">Logistics</a>
+                <a href="#strategy" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-playbook">Playbook</a>
+                <a href="#hr" class="mobile-link text-sm font-bold text-white hover:text-meikoGreen hover:bg-white/5 px-4 py-3 rounded-xl transition-all uppercase tracking-wider" data-i18n="m-nav-hr">Nhân lực</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-40 pb-24 lg:pt-52 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <!-- Hero background remains slightly dark to let text be readable -->
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-20 mix-blend-luminosity"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#030712]/80 to-[#030712]"></div>
+            <div class="absolute inset-0 tech-grid"></div>
+            
+            <!-- Glow Orbs -->
+            <div class="glow-orb w-[800px] h-[600px] bg-meikoBlue top-[-200px] left-[-200px]"></div>
+            <div class="glow-orb w-[600px] h-[500px] bg-meikoGreen bottom-[-100px] right-[-100px]"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/20 text-xs font-medium text-white mb-8 uppercase tracking-widest backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    <span class="w-2 h-2 rounded-full bg-meikoGreen shadow-[0_0_10px_#00E676] animate-pulse"></span>
+                    <span data-i18n="m-hero-badge">Case Study Phát Triển Bền Vững & Công Nghệ Cao</span>
+                </div>
+
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight mb-8" data-i18n="m-hero-title">
+                    Quyết Định Chiến Lược Của Tập Đoàn <br class="hidden md:block" />
+                    <span class="text-gradient-eco border-b-2 border-meikoGreen pb-2 inline-block mt-2">MEIKO Electronics</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-white/90 mb-12 max-w-2xl font-light leading-relaxed" data-i18n="m-hero-subtitle">
+                    Giới thiệu chuyên sâu về sự dịch chuyển chuỗi cung ứng High-Tech và giải pháp phát triển sinh thái hoàn hảo tại Khu Công Nghiệp Bờ Trái Sông Đà và các Khu Công Nghiệp của Dạ Hợp Hòa Bình.
+                </p>
+
+                <!-- Key Stats Bento -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl">
+                    <div class="glass-card rounded-2xl p-6 relative overflow-hidden group border-white/20 hover:border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-meikoBlueLight to-transparent"></div>
+                        <i data-lucide="circle-dollar-sign" class="w-6 h-6 text-meikoBlueLight mb-4 group-hover:scale-110 transition-transform"></i>
+                        <div class="text-white/80 text-xs uppercase tracking-widest mb-1 font-semibold" data-i18n="m-stat-invest-label">Tổng mức đầu tư</div>
+                        <div class="font-serif text-3xl font-bold text-white">500<span class="text-lg text-white/60 font-sans ml-1" data-i18n="m-stat-invest-unit">Tr USD</span></div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 relative overflow-hidden group border-white/20 hover:border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-meikoGreen to-transparent"></div>
+                        <i data-lucide="map" class="w-6 h-6 text-meikoGreen mb-4 group-hover:scale-110 transition-transform"></i>
+                        <div class="text-white/80 text-xs uppercase tracking-widest mb-1 font-semibold" data-i18n="m-stat-scale-label">Quy mô dự án</div>
+                        <div class="font-serif text-3xl font-bold text-white">9.3<span class="text-lg text-white/60 font-sans ml-1" data-i18n="m-stat-scale-unit">Hecta</span></div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 relative overflow-hidden group col-span-2 md:col-span-1 border-white/20 hover:border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-transparent"></div>
+                        <i data-lucide="users" class="w-6 h-6 text-purple-400 mb-4 group-hover:scale-110 transition-transform"></i>
+                        <div class="text-white/80 text-xs uppercase tracking-widest mb-1 font-semibold" data-i18n="m-stat-jobs-label">Việc làm trực tiếp</div>
+                        <div class="font-serif text-3xl font-bold text-white">3,000<span class="text-lg text-white/60 font-sans ml-1" data-i18n="m-stat-jobs-unit">Nhân sự</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. Tổng Quan -->
+    <section id="overview" class="py-24 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="text-meikoBlueLight font-mono text-sm tracking-widest uppercase font-bold" data-i18n="m-s1-label">01 / Bối Cảnh Đầu Tư</span>
+                <div class="h-px bg-white/20 flex-grow"></div>
+            </div>
+            
+            <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight mb-16 text-white max-w-4xl" data-i18n="m-s1-heading">Bước Chuyển Mình Của Chuỗi Cung Ứng Toàn Cầu</h2>
+            
+            <div class="grid lg:grid-cols-12 gap-8">
+                <!-- Text blocks intercut with imagery -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <div class="glass-card p-8 rounded-3xl">
+                        <p class="text-white text-lg m-0 font-light" data-i18n="m-s1-p1">Trong bối cảnh tái cấu trúc chuỗi cung ứng công nghệ cao toàn cầu, Việt Nam đã nhanh chóng nổi lên như một điểm đến chiến lược cho các tập đoàn đa quốc gia nhằm đa dạng hóa rủi ro và giảm sự phụ thuộc vào các công xưởng truyền thống. Sự chuyển dịch này không chỉ đơn thuần là việc di dời các dây chuyền lắp ráp giá trị thấp, mà ngày càng tập trung vào các công đoạn cốt lõi và phức tạp nhất của hệ sinh thái điện tử, tiêu biểu là ngành công nghiệp sản xuất Bảng mạch in (Printed Circuit Board - PCB). Là "xương sống" của mọi thiết bị điện tử hiện đại, từ điện thoại thông minh, máy chủ AI (trí tuệ nhân tạo), đến các hệ thống điện tử trên ô tô, sản xuất PCB đòi hỏi các tiêu chuẩn kỹ thuật, năng lượng và môi trường khắt khe bậc nhất.</p>
+                    </div>
+
+                    <!-- Break 1: Global network image -->
+                    <div class="h-64 rounded-3xl overflow-hidden relative group border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200" alt="Global network" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                        <div class="absolute inset-x-0 bottom-0 bg-black/70 backdrop-blur-md flex items-end p-4">
+                            <span class="text-sm font-medium text-meikoBlueLight font-serif italic" data-i18n="m-s1-img1-caption">Định hình lại không gian công nghiệp và chuỗi cung ứng toàn cầu</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-64 h-64 bg-meikoBlue/10 blur-[80px] rounded-full"></div>
+                        <p class="text-white text-lg relative z-10 m-0 font-light" data-i18n="m-s1-p2">Tuy nhiên, từ góc độ phân tích không gian công nghiệp, quyết định chọn Hòa Bình của MEIKO là một nước đi chiến lược đầy bất ngờ. Trong lịch sử thu hút Đầu tư Trực tiếp Nước ngoài (FDI) từ Nhật Bản vào miền Bắc Việt Nam, các tập đoàn lớn thường có xu hướng tập trung vào các "hệ sinh thái khép kín" do chính các nhà phát triển hạ tầng Nhật Bản kiến tạo, tiêu biểu nhất là chuỗi các Khu công nghiệp Thăng Long (TLIP 1, 2, 3) do Tập đoàn SUMITOMO làm chủ đầu tư tại Hà Nội, Hưng Yên và Vĩnh Phúc. Bản thân MEIKO cũng đã có sự hiện diện lâu năm tại KCN Thạch Thất - Quốc Oai và KCN Thăng Long (Hà Nội).</p>
+                    </div>
+
+                    <!-- Break 2: Corporate ecosystem image -->
+                    <div class="h-64 rounded-3xl overflow-hidden relative group border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" alt="Corporate Ecosystem" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                        <div class="absolute inset-x-0 bottom-0 bg-black/70 backdrop-blur-md flex items-end p-4">
+                            <span class="text-sm font-medium text-white font-serif italic" data-i18n="m-s1-img2-caption">Hệ sinh thái công nghiệp truyền thống đang đối mặt với giới hạn tiện ích và tài nguyên</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl">
+                        <p class="text-white text-lg m-0 font-light" data-i18n="m-s1-p3">Báo cáo nghiên cứu này sẽ đi sâu giải phẫu các lớp lang chiến lược đằng sau quyết định "bỏ qua" các KCN của SUMITOMO để chọn KCN Bờ Trái Sông Đà của MEIKO. Trọng tâm của phân tích sẽ làm rõ mức độ phụ thuộc mang tính sống còn của ngành sản xuất PCB vào hai yếu tố Điện và Nước; phân tích lợi thế tuyệt đối của vị trí địa lý KCN Bờ Trái Sông Đà trong mối tương quan với Thủy điện Hòa Bình và Sân bay Quốc tế Nội Bài; mô tả chuyên sâu quy trình sử dụng nước và công nghệ xử lý nước thải tinh vi của MEIKO; đồng thời rút ra những bài học chiến lược sâu sắc cho các doanh nghiệp High-Tech (công nghệ cao) khác đang tìm kiếm bến đỗ tại thị trường Đông Nam Á.</p>
+                    </div>
+
+                    <!-- Break 3: Tech future image -->
+                    <div class="h-64 rounded-3xl overflow-hidden relative group border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?auto=format&fit=crop&q=80&w=1200" alt="Tech Future" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                        <div class="absolute inset-x-0 bottom-0 bg-black/70 backdrop-blur-md flex items-end p-4">
+                            <span class="text-sm font-medium text-meikoGreen font-serif italic" data-i18n="m-s1-img3-caption">Sự chuyển dịch tất yếu phục vụ hạ tầng máy chủ AI và vi mạch mật độ cao</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Highlight Box & Right side Image -->
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    <div class="glass-card p-8 rounded-3xl border border-meikoGreen/50 bg-meikoGreen/5 relative overflow-hidden h-full flex flex-col justify-center">
+                        <div class="absolute top-[-50px] right-[-50px] w-32 h-32 bg-meikoGreen/20 blur-2xl rounded-full"></div>
+                        <i data-lucide="target" class="w-10 h-10 text-meikoGreen mb-6 shadow-glow"></i>
+                        <p class="text-white text-lg font-medium leading-relaxed m-0 relative z-10" data-i18n="m-s1-highlight">
+                            Một minh chứng rõ nét cho xu hướng này là quyết định đầu tư mang tính bước ngoặt của Tập đoàn Điện tử MEIKO (Nhật Bản) vào Khu Công Nghiệp (KCN) Bờ Trái Sông Đà, tọa lạc tại thành phố Hòa Bình, Việt Nam. Là một trong những nhà cung cấp PCB hàng đầu thế giới cho các đối tác chiến lược như Apple và Samsung, MEIKO đã cam kết rót 200 triệu USD cho giai đoạn 1 để xây dựng nhà máy sản xuất vi mạch điện tử trên diện tích 9,2 đến 9,3 hecta, với dự kiến nâng tổng mức đầu tư lên 500 triệu USD khi hoàn thành nhà máy thứ hai. Dự án này dự kiến sẽ tạo ra 3.000 việc làm trực tiếp và đóng góp khoảng 200 tỷ VNĐ mỗi năm vào ngân sách địa phương từ năm 2030. Trọng tâm sản xuất của nhà máy là các dòng PCB đa lớp từ trung đến cao cấp và PCB kết nối mật độ cao (HDI) phục vụ cho máy chủ AI và thiết bị ngoại vi.
+                        </p>
+                    </div>
+                    <div class="h-80 rounded-3xl overflow-hidden relative group border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Tech Manufacturing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                        <div class="absolute bottom-6 left-6">
+                            <span class="text-sm font-bold text-black bg-meikoGreen px-4 py-2 rounded-full shadow-[0_0_15px_rgba(0,230,118,0.5)]" data-i18n="m-s1-img4-caption">Phân xưởng vi mạch công nghệ cao</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Bài Toán Tài Nguyên -->
+    <section id="challenge" class="py-24 relative z-10 border-t border-white/5 bg-[#050810]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center text-center mb-16">
+                <span class="text-meikoBlueLight font-mono text-sm tracking-widest uppercase mb-4 block font-bold" data-i18n="m-s2-label">02 / Bài Toán Năng Lượng & Môi Trường</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white max-w-4xl mb-6" data-i18n="m-s2-heading">Bản Chất Khắt Khe Của Ngành Sản Xuất PCB</h2>
+                <p class="text-white text-lg max-w-3xl font-light" data-i18n="m-s2-intro">Để hiểu được lý do căn bản định hình quyết định chọn địa điểm của MEIKO, cần phải tiến hành mổ xẻ các đặc tính kỹ thuật cốt lõi của quy trình sản xuất PCB. Khác với hoạt động lắp ráp linh kiện cơ học thuần túy, việc chế tạo ra những tấm nền PCB đa lớp, mật độ cao (HDI) hay các chất nền gói bán dẫn (Semiconductor Package Substrates) là một chuỗi các phản ứng nhiệt động lực học, quang khắc và điện hóa học cực kỳ phức tạp. Quy trình sản xuất một tấm PCB tiêu chuẩn có thể trải qua tới 33 công đoạn riêng biệt. Toàn bộ chuỗi quy trình này bị ràng buộc bởi sự phụ thuộc tuyệt đối vào nguồn cung cấp điện năng cường độ cao và nguồn nước siêu sạch với khối lượng khổng lồ.</p>
+            </div>
+
+            <!-- Subsection 2.1: Điện -->
+            <div class="mb-20">
+                <div class="glass-card p-8 rounded-[2rem] border-meikoBlue/40 shadow-[0_0_20px_rgba(71,147,232,0.1)]">
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <div class="lg:w-1/3">
+                            <div class="w-14 h-14 rounded-2xl bg-meikoBlue/20 border border-meikoBlue/50 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(71,147,232,0.3)]">
+                                <i data-lucide="zap" class="w-7 h-7 text-meikoBlueLight"></i>
+                            </div>
+                            <h3 class="font-serif text-2xl font-bold text-white mb-4" data-i18n="m-s2-elec-title">Phụ Thuộc Điện Năng Cường Độ Cao</h3>
+                            <p class="text-white/90 mb-6 font-light" data-i18n="m-s2-elec-intro">Ngành công nghiệp vi mạch không thể tồn tại nếu thiếu sự ổn định tuyệt đối của hệ thống điện. Đối với MEIKO, điện năng không chỉ dùng để thắp sáng hay vận hành động cơ cơ bản, mà là yếu tố quyết định chất lượng (yield rate) của từng lô hàng trị giá hàng triệu USD. Sự phụ thuộc này được thể hiện qua ba khía cạnh kỹ thuật chuyên sâu:</p>
+                            
+                            <div class="p-6 rounded-2xl bg-[#030712] border border-white/20 relative overflow-hidden mb-6 shadow-lg">
+                                <div class="absolute left-0 top-0 w-1 h-full bg-meikoBlueLight"></div>
+                                <div class="text-xs text-white/70 uppercase tracking-widest mb-1 font-bold" data-i18n="m-s2-elec-data-label">Dữ liệu môi trường 2024</div>
+                                <div class="font-serif text-4xl text-white font-bold mb-2">680 <span class="text-lg text-meikoBlueLight font-sans">GWh</span></div>
+                                <p class="text-sm text-white/90 m-0 font-light" data-i18n="m-s2-elec-data-desc">Tổng lượng điện năng tiêu thụ toàn hệ thống, đòi hỏi điểm đến đầu tư phải miễn nhiễm với rủi ro sụt áp hay cắt điện luân phiên.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Electrical Grid with Photo Integration -->
+                        <div class="lg:w-2/3 grid md:grid-cols-2 gap-6">
+                            
+                            <!-- Box 1 -->
+                            <div class="bg-white/[0.02] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-2xl transition overflow-hidden flex flex-col group hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                                <div class="h-40 w-full relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=600" alt="Clean Room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100" />
+                                </div>
+                                <div class="p-6 pt-4 flex-grow bg-white/[0.03]">
+                                    <h4 class="text-white font-bold flex items-center gap-2 mb-3"><span class="text-meikoBlueLight">01.</span> <span data-i18n="m-s2-elec-box1-title">Môi Trường Phòng Sạch</span></h4>
+                                    <p class="text-white/90 text-sm m-0 font-light" data-i18n="m-s2-elec-box1-desc">Duy trì môi trường phòng sạch (Clean Room) và cân bằng nhiệt ẩm. Các công đoạn như chuyển ảnh lớp trong, phủ mặt nạ hàn và lắp ráp linh kiện vi mô đòi hỏi phải được thực hiện trong môi trường phòng sạch đạt tiêu chuẩn. Việc vận hành hệ thống điều hòa không khí, thông gió (HVAC) công suất lớn chạy liên tục 24/7/365 tiêu tốn lượng điện khổng lồ.</p>
+                                </div>
+                            </div>
+
+                            <!-- Box 2 -->
+                            <div class="bg-white/[0.02] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-2xl transition overflow-hidden flex flex-col group hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                                <div class="h-40 w-full relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=600" alt="CNC Machinery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100" />
+                                </div>
+                                <div class="p-6 pt-4 flex-grow bg-white/[0.03]">
+                                    <h4 class="text-white font-bold flex items-center gap-2 mb-3"><span class="text-meikoBlueLight">02.</span> <span data-i18n="m-s2-elec-box2-title">Chu Trình Cơ Nhiệt Học</span></h4>
+                                    <p class="text-white/90 text-sm m-0 font-light" data-i18n="m-s2-elec-box2-desc">Điện năng duy trì các chu trình cơ nhiệt học và quang học. Quá trình sản xuất PCB bao gồm khoan cơ học bằng máy CNC siêu tốc, khoan laser cho các vi lỗ, và ép nhiệt lớp dưới áp suất cực cao. Tất cả các cỗ máy này đều yêu cầu công suất tiêu thụ điện tĩnh rất lớn.</p>
+                                </div>
+                            </div>
+
+                            <!-- Box 3 (Spans 2 cols) -->
+                            <div class="bg-white/[0.02] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-2xl transition overflow-hidden flex flex-col group md:col-span-2 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                                <div class="h-40 w-full relative overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1509390221805-d1c887a72a00?auto=format&fit=crop&q=80&w=1000" alt="Electrical flow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100" />
+                                </div>
+                                <div class="p-6 pt-4 flex-grow bg-white/[0.03]">
+                                    <h4 class="text-white font-bold flex items-center gap-2 mb-3"><span class="text-meikoBlueLight">03.</span> <span data-i18n="m-s2-elec-box3-title">Dòng Điện Điện Hóa</span></h4>
+                                    <p class="text-white/90 text-sm m-0 font-light" data-i18n="m-s2-elec-box3-desc">Cung cấp dòng điện trực tiếp (DC) cho các bể mạ điện hóa. Mạ điện là công đoạn cốt lõi để tạo ra các đường mạch dẫn điện. Các bước như mạ đồng xuyên lỗ, mạ hoa văn, và xử lý bề mặt ENIG đều dựa vào dòng điện để điện phân. Mật độ dòng điện áp dụng trong các bể mạ này rất cao và phải hoàn toàn ổn định.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subsection 2.2: Nước -->
+                <div id="water">
+                    <div class="glass-card p-8 rounded-[2rem] border-meikoGreen/40 relative overflow-hidden shadow-[0_0_20px_rgba(0,230,118,0.1)]">
+                        <div class="absolute right-0 bottom-0 w-96 h-96 bg-meikoGreen/10 blur-[100px] rounded-full"></div>
+                        <div class="flex flex-col lg:flex-row-reverse gap-12 relative z-10">
+                            <div class="lg:w-1/3">
+                                <div class="w-14 h-14 rounded-2xl bg-meikoGreen/20 border border-meikoGreen/50 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(0,230,118,0.3)]">
+                                    <i data-lucide="droplets" class="w-7 h-7 text-meikoGreen"></i>
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-white mb-4" data-i18n="m-s2-water-title">"Máu" Của Các Quy Trình Ướt</h3>
+                                <p class="text-white/90 mb-6 font-light" data-i18n="m-s2-water-intro">Nếu điện là hệ thần kinh, thì nước chính là hệ tuần hoàn của một nhà máy PCB. Ngành công nghiệp này được xếp vào nhóm tiêu thụ nước thâm dụng bậc nhất thế giới. Dữ liệu cho thấy, quy trình sản xuất PCB truyền thống tiêu thụ trung bình 1,5 mét khối (m3) nước sạch cho mỗi mét vuông (m2) bảng mạch được sản xuất.</p>
+                                
+                                <div class="p-6 rounded-2xl bg-[#030712] border border-white/20 relative overflow-hidden mb-6 shadow-lg">
+                                    <div class="absolute right-0 top-0 w-1 h-full bg-meikoGreen"></div>
+                                    <div class="text-xs text-white/70 uppercase tracking-widest mb-1 font-bold" data-i18n="m-s2-water-data-label">Sử dụng nước 2024</div>
+                                    <div class="font-serif text-4xl text-white font-bold mb-2">10.74M <span class="text-lg text-meikoGreen font-sans">m³</span></div>
+                                    <p class="text-sm text-white/90 m-0 font-light" data-i18n="m-s2-water-data-desc">Tổng lượng nước sử dụng của toàn hệ thống MEIKO toàn cầu. Nước tham gia vào mọi ngóc ngách của quá trình gia công hóa chất (Wet Processes).</p>
+                                </div>
+
+                                <div class="bg-meikoGreen/10 border border-meikoGreen/30 p-4 rounded-xl mb-6 shadow-[0_0_10px_rgba(0,230,118,0.1)]">
+                                    <p class="text-sm text-white font-medium m-0 leading-relaxed" data-i18n="m-s2-water-warning">Chính vì sự phụ thuộc sống còn này, MEIKO luôn đánh giá rủi ro tài nguyên nước (Water Risk Assessment) tại mỗi địa điểm. Bất kỳ một đứt gãy nào trong nguồn cung cấp, đều sẽ ngay lập tức vô hiệu hóa dự án trị giá hàng trăm triệu USD.</p>
+                                </div>
+
+                                <!-- Ambient pure water image -->
+                                <div class="h-40 rounded-2xl overflow-hidden mt-2 relative border-2 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                                    <img src="https://plus.unsplash.com/premium_photo-1683288081743-5161d099f16e?auto=format&fit=crop&q=80&w=1200" alt="Pure water" class="w-full h-full object-cover opacity-100">
+                                </div>
+                            </div>
+                            
+                            <!-- Water Process Cards with Image Integration -->
+                            <div class="lg:w-2/3 flex flex-col gap-6">
+                                
+                                <!-- Box 1 -->
+                                <div class="bg-white/[0.03] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-2xl transition overflow-hidden flex flex-col sm:flex-row items-stretch group hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                                    <div class="sm:w-1/3 h-48 sm:h-auto relative overflow-hidden">
+                                        <img src="https://images.unsplash.com/photo-1584036533827-45bce166ad94?auto=format&fit=crop&q=80&w=600" alt="Chemical cleaning" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100" />
+                                    </div>
+                                    <div class="sm:w-2/3 p-6 flex flex-col justify-center">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-white/10 p-2 rounded-lg"><i data-lucide="sparkles" class="w-5 h-5 text-white"></i></div>
+                                            <h4 class="text-white font-bold m-0 text-lg" data-i18n="m-s2-water-box1-title">Làm sạch và khử cặn</h4>
+                                        </div>
+                                        <p class="text-white/90 text-sm m-0 font-light" data-i18n="m-s2-water-box1-desc">Trước khi ép màng nhạy sáng hoặc mạ, bề mặt đồng phải được làm sạch hoàn toàn bằng dung dịch axit kết hợp chà nhám vật lý. Cặn nhựa dính trong các lỗ khoan phải được tẩy sạch bằng hóa chất.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Box 2 -->
+                                <div class="bg-white/[0.03] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-2xl transition overflow-hidden flex flex-col sm:flex-row items-stretch group hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                                    <div class="sm:w-1/3 h-48 sm:h-auto relative overflow-hidden">
+                                        <img src="https://images.unsplash.com/photo-1764504985766-14ea5760a6fa?auto=format&fit=crop&q=80&w=600" alt="Etching chemicals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100" />
+                                    </div>
+                                    <div class="sm:w-2/3 p-6 flex flex-col justify-center">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-white/10 p-2 rounded-lg"><i data-lucide="flask-conical" class="w-5 h-5 text-white"></i></div>
+                                            <h4 class="text-white font-bold m-0 text-lg" data-i18n="m-s2-water-box2-title">Ăn mòn và bóc tách</h4>
+                                        </div>
+                                        <p class="text-white/90 text-sm m-0 font-light" data-i18n="m-s2-water-box2-desc">Quá trình loại bỏ lớp đồng không mong muốn để tạo hình đường mạch (Etching) và quá trình bóc tách màng cản quang (Stripping) sử dụng một lượng lớn hóa chất gốc axit và kiềm.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Box 3 -->
+                                <div class="bg-white/[0.03] border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-2xl transition overflow-hidden flex flex-col sm:flex-row items-stretch group hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                                    <div class="sm:w-1/3 h-48 sm:h-auto relative overflow-hidden">
+                                        <img src="https://plus.unsplash.com/premium_photo-1664298647969-193b5ebe5524?auto=format&fit=crop&q=80&w=600" alt="Rinsing process" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100" />
+                                    </div>
+                                    <div class="sm:w-2/3 p-6 flex flex-col justify-center">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-meikoGreen/20 border border-meikoGreen/40 p-2 rounded-lg"><i data-lucide="waves" class="w-5 h-5 text-meikoGreen"></i></div>
+                                            <h4 class="text-white font-bold m-0 text-lg" data-i18n="m-s2-water-box3-title">Quy trình xả rửa (Rinsing)</h4>
+                                        </div>
+                                        <p class="text-white/90 text-sm m-0 font-light" data-i18n="m-s2-water-box3-desc">Sự tinh khiết của nước rửa là tối quan trọng. Nước máy thông thường chứa khoáng chất sẽ kết tủa, gây đoản mạch vi mô. Do đó, MEIKO bắt buộc phải sử dụng hệ thống tinh lọc nước RO hoặc nước DI (Khử ion) với độ dẫn điện cực thấp.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- 3. Giải Pháp / So Sánh -->
+    <section id="comparison" class="py-24 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="text-meikoBlueLight font-mono text-sm tracking-widest uppercase font-bold" data-i18n="m-s3-label">03 / Phân tích chiến lược</span>
+                <div class="h-px bg-white/20 flex-grow"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 mb-16">
+                <!-- Split intro paragraphs with an image -->
+                <div class="flex flex-col gap-6">
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mb-2" data-i18n="m-s3-heading">Rút Lui Khỏi Hệ Sinh Thái SUMITOMO</h2>
+                    <p class="text-lg text-white font-light leading-relaxed m-0" data-i18n="m-s3-p1">Hiểu được tính chất tiêu hao tài nguyên khổng lồ của ngành PCB, chúng ta có cơ sở vững chắc để phân tích tại sao MEIKO không chọn mở rộng đầu tư vào các Khu công nghiệp Thăng Long do Tập đoàn SUMITOMO Nhật Bản phát triển (TLIP 1, 2, 3), mà lại chọn KCN Bờ Trái Sông Đà do một công ty tư nhân Việt Nam là Công ty Cổ phần Thương mại Dạ Hợp (Da Hop JSC) làm chủ đầu tư.</p>
+                    
+                    <div class="h-56 rounded-3xl overflow-hidden relative group shadow-[0_0_20px_rgba(255,255,255,0.2)] border-2 border-white/30 group-hover:border-white/50 transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" alt="Industrial dense area" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-x-0 bottom-0 bg-black/70 backdrop-blur-md p-4">
+                            <span class="text-sm text-white font-serif italic" data-i18n="m-s3-img1-caption">Áp lực tiện ích tại các KCN bão hòa</span>
+                        </div>
+                    </div>
+
+                    <p class="text-lg text-white font-light leading-relaxed m-0" data-i18n="m-s3-p2">SUMITOMO là một trong những tập đoàn thương mại lớn nhất Nhật Bản, và chuỗi KCN Thăng Long của họ tại Hà Nội, Hưng Yên và Vĩnh Phúc từ lâu đã được xem là "khuôn vàng thước ngọc" cho dòng vốn FDI Nhật Bản tại Việt Nam. Các KCN này cung cấp hạ tầng đồng bộ, dịch vụ hỗ trợ pháp lý trọn gói và quan trọng nhất là tạo ra một cộng đồng doanh nghiệp Nhật Bản gắn kết (mô hình Keiretsu). Tuy nhiên, đối với một "đại dự án" quy mô 500 triệu USD mang tính chất tiêu thụ năng lượng và phát thải đặc thù như của MEIKO, các lợi thế truyền thống này lại bộc lộ những lực cản đáng kể.</p>
+                </div>
+
+                <div class="flex flex-col justify-center">
+                    <div class="glass-card-blue p-8 rounded-3xl border-meikoBlue/40 bg-meikoBlue/10 relative overflow-hidden shadow-[0_0_20px_rgba(71,147,232,0.15)]">
+                        <div class="absolute right-0 top-0 w-48 h-48 bg-meikoBlue/20 blur-[60px] rounded-full"></div>
+                        <h3 class="font-serif text-2xl font-bold text-meikoBlueLight mb-4 relative z-10" data-i18n="m-s3-barrier-title">Rào Cản Hệ Sinh Thái Tiện Ích Dùng Chung</h3>
+                        
+                        <!-- Added image as requested -->
+                        <div class="h-48 w-full rounded-2xl overflow-hidden mb-6 relative group border-2 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all duration-500 z-10 hover:shadow-[0_0_25px_rgba(255,255,255,0.4)]">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800" alt="Shared Infrastructure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute inset-x-0 bottom-0 bg-black/70 p-3 backdrop-blur-sm">
+                                <span class="text-xs text-meikoBlueLight font-bold uppercase tracking-wider" data-i18n="m-s3-img2-caption">Hạ tầng dùng chung bão hòa</span>
+                            </div>
+                        </div>
+
+                        <p class="text-white relative z-10 mb-4 font-light" data-i18n="m-s3-barrier-p1">Vượt lên trên bài toán chi phí tài chính, rào cản lớn nhất của các KCN SUMITOMO đối với MEIKO nằm ở cấu trúc tiện ích dùng chung. Một KCN như Thăng Long I hiện là nơi trú chân của hơn 100 công ty đa dạng các ngành nghề. Khi tỷ lệ lấp đầy cao, tổng dung lượng điện và công suất trạm cấp nước/xử lý nước thải của toàn khu đã được tính toán và phân bổ cố định.</p>
+                        <p class="text-white relative z-10 mb-4 font-light" data-i18n="m-s3-barrier-p2">Việc chèn thêm một nhà máy mega-factory trị giá 500 triệu USD chuyên sản xuất PCB—với nhu cầu điện lưới tạo các xung tải lớn liên tục và lượng nước thải chứa nồng độ kim loại nặng cực cao—vào một mạng lưới đã ổn định là vô cùng rủi ro. Các trạm xử lý nước thải tập trung của các KCN đa ngành thường gặp khó khăn nghiêm trọng trong việc xử lý hóa chất phức tạp của PCB.</p>
+                        <div class="bg-black/60 p-4 rounded-xl border border-white/20 relative z-10 shadow-lg">
+                            <p class="text-sm text-white m-0 font-light italic" data-i18n="m-s3-barrier-quote">MEIKO đã chỉ ra rằng nhu cầu mở rộng chuỗi cung ứng ASEAN của các khách hàng "dự kiến sẽ vượt quá năng lực sản xuất của các nhà máy Việt Nam và Thăng Long hiện tại". Để đáp ứng bước nhảy vọt về năng lực, MEIKO cần một không gian không bị ràng buộc bởi các "hàng xóm" dùng chung hạ tầng. Tại KCN Bờ Trái Sông Đà, MEIKO đóng vai trò là "khách thuê mỏ neo" (Anchor Tenant).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-serif text-2xl font-bold text-white mb-4" data-i18n="m-s3-cost-title">Bài Toán Chi Phí Đất Công Nghiệp (Cost Arbitrage)</h3>
+                <p class="text-white/90 mb-8 max-w-4xl font-light" data-i18n="m-s3-cost-desc">Lý do thực dụng đầu tiên và trực tiếp nhất là sự chênh lệch khổng lồ về giá thuê đất và chi phí vận hành. Các KCN Thăng Long, nằm ở vị trí lõi của Vùng kinh tế trọng điểm Bắc Bộ, đã thiết lập mặt bằng giá thuê thuộc phân khúc cao cấp (Tier-1). Ngược lại, Hòa Bình, một tỉnh miền núi đang vươn lên thành vệ tinh công nghiệp (Tier-2), cung cấp một biên độ chênh lệch chi phí (cost arbitrage) vô cùng hấp dẫn.</p>
+            </div>
+
+            <!-- Modern Table -->
+            <div class="glass-card rounded-3xl overflow-hidden mb-8 border border-white/20 shadow-[0_0_20px_rgba(11,102,194,0.2)]">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr class="bg-white/10 border-b border-white/20">
+                                <th class="p-6 font-bold text-white text-sm uppercase tracking-wider w-1/4" data-i18n="m-s3-table-h1">Tiêu Chí So Sánh</th>
+                                <th class="p-6 font-bold text-white text-sm uppercase tracking-wider w-3/8 border-l border-white/20" data-i18n="m-s3-table-h2">KCN Thăng Long II (Hưng Yên)</th>
+                                <th class="p-6 font-bold text-meikoGreen text-sm uppercase tracking-wider w-3/8 border-l border-white/20 bg-meikoGreen/10" data-i18n="m-s3-table-h3">KCN Bờ Trái Sông Đà (Hòa Bình)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/10 text-white text-sm">
+                            <tr class="hover:bg-white/[0.05]">
+                                <td class="p-6 font-bold text-white" data-i18n="m-s3-table-r1c1">Nhà phát triển hạ tầng</td>
+                                <td class="p-6 border-l border-white/10 font-light" data-i18n="m-s3-table-r1c2">SUMITOMO Corporation (Nhật Bản)</td>
+                                <td class="p-6 border-l border-white/10 font-bold text-white bg-meikoGreen/5" data-i18n="m-s3-table-r1c3">Công ty Cổ phần Thương mại Dạ Hợp (Việt Nam)</td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.05]">
+                                <td class="p-6 font-bold text-white" data-i18n="m-s3-table-r2c1">Giá thuê đất</td>
+                                <td class="p-6 border-l border-white/10 font-light" data-i18n="m-s3-table-r2c2">Khoảng 160 - 162 USD / m²</td>
+                                <td class="p-6 border-l border-white/10 font-extrabold text-meikoGreen bg-meikoGreen/5 text-lg" data-i18n="m-s3-table-r2c3">Khoảng 55 USD / m²</td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.05]">
+                                <td class="p-6 font-bold text-white" data-i18n="m-s3-table-r3c1">Tỷ lệ lấp đầy</td>
+                                <td class="p-6 border-l border-white/10 font-light" data-i18n="m-s3-table-r3c2">67% (Quỹ đất lớn khan hiếm)</td>
+                                <td class="p-6 border-l border-white/10 bg-meikoGreen/5 font-bold" data-i18n="m-s3-table-r3c3">80% (Sẵn sàng các lô liền kề 9,2ha)</td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.05]">
+                                <td class="p-6 font-bold text-white" data-i18n="m-s3-table-r4c1">Phí quản lý và hạ tầng</td>
+                                <td class="p-6 border-l border-white/10 font-light" data-i18n="m-s3-table-r4c2">1,2 USD / m² / năm</td>
+                                <td class="p-6 border-l border-white/10 font-bold text-meikoBlueLight bg-meikoGreen/5" data-i18n="m-s3-table-r4c3">0,3 USD / m² / năm</td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.05]">
+                                <td class="p-6 font-bold text-white" data-i18n="m-s3-table-r5c1">Phí xử lý nước thải</td>
+                                <td class="p-6 border-l border-white/10 font-light" data-i18n="m-s3-table-r5c2">Mặt bằng giá cao cấp</td>
+                                <td class="p-6 border-l border-white/10 font-bold text-meikoBlueLight bg-meikoGreen/5" data-i18n="m-s3-table-r5c3">0,3 USD / m³</td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.05]">
+                                <td class="p-6 font-bold text-white" data-i18n="m-s3-table-r6c1">Tính linh hoạt hạ tầng</td>
+                                <td class="p-6 border-l border-white/10 font-light" data-i18n="m-s3-table-r6c2">Quy chuẩn hóa cao</td>
+                                <td class="p-6 border-l border-white/10 text-white bg-meikoGreen/5 font-bold italic" data-i18n="m-s3-table-r6c3">Hạ tầng chuyên biệt (Bespoke)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl border-l-4 border-l-meikoBlueLight max-w-5xl mx-auto shadow-lg">
+                <p class="text-white m-0 font-light text-lg" data-i18n="m-s3-table-summary">Thông qua bảng so sánh, có thể thấy giá thuê đất tại KCN Bờ Trái Sông Đà (55 USD/m²) chỉ bằng khoảng một phần ba (1/3) so với KCN Thăng Long II (160 USD/m²). Đối với nhu cầu thuê 9,2 đến 9,3 ha (93.000 m²) của MEIKO , việc chọn Hòa Bình giúp tập đoàn tiết kiệm ngay lập tức gần 10 triệu USD chi phí sử dụng đất. Chưa dừng lại ở đó, mức phí quản lý hạ tầng hàng năm thấp hơn gấp 4 lần kéo dài trong suốt vòng đời dự án 50 năm mang lại lợi ích tài chính tích lũy khổng lồ.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Ưu Thế Hòa Bình -->
+    <section id="advantages" class="py-24 relative z-10 border-t border-white/5 bg-[#050810]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center text-center mb-20">
+                <span class="text-meikoGreen font-mono text-sm tracking-widest uppercase mb-4 block font-bold" data-i18n="m-s4-label">04 / Lợi Thế Tuyệt Đối</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white max-w-4xl mb-6" data-i18n="m-s4-heading">Lời Giải Cho Bài Toán Cốt Lõi Tại Hòa Bình</h2>
+                <p class="text-white text-lg max-w-3xl font-light" data-i18n="m-s4-intro">Khác biệt hoàn toàn với các KCN ở vùng đồng bằng Bắc Bộ, KCN Bờ Trái Sông Đà sở hữu những lợi thế địa kinh tế độc nhất vô nhị liên quan trực tiếp đến nguồn nước mặt và năng lượng thủy điện, giải quyết trọn vẹn "cơn khát" tài nguyên của MEIKO.</p>
+            </div>
+
+            <!-- Block 4.1 -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-24">
+                <div class="relative h-[500px] rounded-3xl overflow-hidden glass-card p-3 border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1560279966-2d681f3d4dfc?auto=format&fit=crop&q=80&w=1200" alt="Hydro Dam" class="w-full h-full object-cover rounded-2xl opacity-100">
+                    <div class="absolute bottom-8 left-8 right-8 bg-black/80 backdrop-blur-md p-5 rounded-xl border border-white/30 shadow-lg">
+                        <p class="text-sm text-white font-serif italic m-0" data-i18n="m-s4-img1-caption">Lợi thế liền kề Thủy điện Hòa Bình (1.900 MW) triệt tiêu tổn thất truyền tải lưới điện, đồng thời trực tiếp phục vụ cam kết giảm phát thải Scope 2 toàn cầu.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-serif text-3xl font-bold text-white mb-6" data-i18n="m-s4-elec-title">Lợi Thế Điện Năng: Cận Kề Thủy Điện Hòa Bình Và Chiến Lược ESG</h3>
+                    <div class="space-y-6">
+                        <p class="text-white font-light text-lg" data-i18n="m-s4-elec-p1">Ưu thế mang tính quyết định của KCN Bờ Trái Sông Đà chính là việc nó nằm dưới chân Nhà máy Thủy điện Hòa Bình. Với công suất lắp đặt lên tới 1.900 MW, đây là một trong những cơ sở phát điện lớn và ổn định nhất khu vực Đông Nam Á.</p>
+                        
+                        <!-- Added image 1 in Part 4 -->
+                        <div class="h-48 rounded-2xl overflow-hidden mb-6 border-2 border-white/30 shadow-[0_0_20px_rgba(71,147,232,0.3)] relative group hover:border-white/50 hover:shadow-[0_0_30px_rgba(71,147,232,0.5)] transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800" alt="Renewable Grid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute bottom-4 left-4 bg-black/70 px-3 py-1 rounded backdrop-blur-sm border border-white/20">
+                                <span class="text-xs text-meikoBlueLight font-mono uppercase tracking-widest font-bold" data-i18n="m-s4-elec-img-caption">Hạ Tầng Lưới Điện 22KV Độc Lập</span>
+                            </div>
+                        </div>
+
+                        <p class="text-white font-light text-lg" data-i18n="m-s4-elec-p2">Khoảng cách từ trung tâm thành phố Hòa Bình đến KCN chỉ 1,7 km, đồng nghĩa với việc KCN nằm sát vách nguồn phát điện. Việc nằm ngay tại "đầu nguồn" truyền tải giúp nhà máy MEIKO gần như triệt tiêu rủi ro sụt áp, chập chờn hay mất điện.</p>
+                        
+                        <div class="glass-card border-meikoBlueLight/50 bg-meikoBlueLight/10 p-6 rounded-2xl relative overflow-hidden shadow-[0_0_15px_rgba(71,147,232,0.2)]">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-meikoBlueLight/30 blur-2xl rounded-full"></div>
+                            <div class="flex items-center gap-3 mb-3 relative z-10">
+                                <i data-lucide="zap" class="w-6 h-6 text-meikoBlueLight"></i>
+                                <span class="text-meikoBlueLight font-bold font-serif text-xl" data-i18n="m-s4-elec-insight-title">Insight: Năng lượng xanh & Scope 2</span>
+                            </div>
+                            <p class="text-white text-sm relative z-10 font-light" data-i18n="m-s4-elec-insight-desc">Sự gần gũi với Thủy điện Hòa Bình không chỉ mang ý nghĩa bảo đảm an ninh năng lượng vật lý, mà nó đóng vai trò tối quan trọng trong chiến lược Môi trường, Xã hội và Quản trị (ESG) toàn cầu của MEIKO, đáp ứng các tiêu chuẩn xanh từ các khách hàng lớn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 4.2 -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="font-serif text-3xl font-bold text-white mb-6" data-i18n="m-s4-water-title">Hạ Tầng Nước Sạch Và Trạm Xử Lý Nước Thải Độc Lập</h3>
+                    <div class="space-y-6">
+                        <p class="text-white font-light text-lg" data-i18n="m-s4-water-p1">Bên cạnh nguồn điện, dòng Sông Đà chính là nguồn cung cấp nước ngọt dồi dào, giải quyết triệt để rủi ro thiếu hụt nước sạch. KCN Bờ Trái Sông Đà được tích hợp trực tiếp một Nhà máy nước sạch Sông Đà do chính chủ đầu tư Dạ Hợp quản lý.</p>
+                        
+                        <!-- Added image 2 in Part 4 -->
+                        <div class="h-48 rounded-2xl overflow-hidden mb-6 border-2 border-white/30 shadow-[0_0_20px_rgba(0,230,118,0.2)] relative group hover:border-white/50 hover:shadow-[0_0_30px_rgba(0,230,118,0.4)] transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1612982228462-180baddf0d41?auto=format&fit=crop&q=80&w=800" alt="Tech fluid processing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute bottom-4 left-4 bg-black/70 px-3 py-1 rounded backdrop-blur-sm border border-white/20">
+                                <span class="text-xs text-meikoGreen font-mono uppercase tracking-widest font-bold" data-i18n="m-s4-water-img-caption">Làm chủ số phận sinh thái</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card border-meikoGreen/50 bg-meikoGreen/10 p-6 rounded-2xl relative overflow-hidden shadow-[0_0_15px_rgba(0,230,118,0.2)]">
+                            <div class="absolute bottom-0 left-0 w-24 h-24 bg-meikoGreen/30 blur-2xl rounded-full"></div>
+                            <div class="flex items-center gap-3 mb-3 relative z-10">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-meikoGreen"></i>
+                                <span class="text-meikoGreen font-bold font-serif text-xl" data-i18n="m-s4-water-insight-title">Insight: Rào chắn rủi ro pháp lý</span>
+                            </div>
+                            <p class="text-white text-sm relative z-10 font-light" data-i18n="m-s4-water-insight-desc">Việc sở hữu một trạm xử lý nước thải Stand-alone là một chiến thắng chiến lược. Với hệ thống độc lập 3.000 m3/ngày đêm, MEIKO hoàn toàn làm chủ số phận pháp lý của mình, thiết kế hệ thống màng lọc chuyên biệt 100% cho hóa chất của họ.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 relative h-[500px] rounded-3xl overflow-hidden glass-card p-3 border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1526599256864-6bedb9d7dfb5?auto=format&fit=crop&q=80&w=1200" alt="Water Treatment" class="w-full h-full object-cover rounded-2xl opacity-100">
+                    <div class="absolute bottom-8 left-8 right-8 bg-black/80 backdrop-blur-md p-5 rounded-xl border border-white/30 shadow-lg">
+                        <p class="text-sm text-white font-serif italic m-0" data-i18n="m-s4-water-img2-caption">Đặc quyền sở hữu Trạm xử lý nước thải Stand-alone giúp MEIKO thiết lập rào chắn pháp lý an toàn, tự chủ làm sạch luồng hóa chất PCB cực kỳ phức tạp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Công Nghệ Lõi -->
+    <section id="technology" class="py-24 relative z-10 border-t border-white/5">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-meikoGreen/10 blur-[150px] rounded-full"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="text-meikoGreen font-mono text-sm tracking-widest uppercase font-bold" data-i18n="m-s5-label">05 / Deep Dive Công Nghệ</span>
+                <div class="h-px bg-white/20 flex-grow"></div>
+            </div>
+
+            <div class="mb-16 max-w-4xl">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight mb-6 text-white" data-i18n="m-s5-heading">Chu Trình Tuần Hoàn Nước Và Công Nghệ Xử Lý Nước Thải</h2>
+                <p class="text-lg text-white font-light leading-relaxed" data-i18n="m-s5-intro">Việc sử dụng và xử lý nước trong một nhà máy PCB trị giá 500 triệu USD không phải là một quá trình cấp thoát nước thông thường, mà là một hệ thống kỹ thuật hóa lý học tinh vi.</p>
+            </div>
+
+            <div class="mb-20">
+                <h3 class="font-serif text-2xl font-bold text-white mb-6" data-i18n="m-s5-classify-title">Hệ Thống Phân Loại & Xử Lý Hóa Lý Tinh Vi</h3>
+                
+                <div class="glass-card p-8 rounded-[2rem] mb-8 border-white/20 shadow-xl">
+                    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <p class="text-white mb-6 font-light text-lg" data-i18n="m-s5-classify-p1">Nước ngọt phải đi qua một trạm tiền xử lý khổng lồ của MEIKO để loại bỏ hoàn toàn các khoáng chất, đạt đến trạng thái nước khử ion (DI) và nước thẩm thấu ngược (RO water). Để tối ưu hóa, MEIKO áp dụng nguyên lý tái sử dụng dòng nước tập trung RO với tỷ lệ thu hồi lên đến 60%.</p>
+                        </div>
+                        <div class="h-full min-h-[250px] rounded-2xl overflow-hidden relative border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] group hover:border-white/50 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500">
+                            <img src="https://plus.unsplash.com/premium_photo-1682144525955-5ed70b8ebb91?auto=format&fit=crop&q=80&w=800" alt="High Tech Filtration" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute bottom-4 right-4 bg-meikoGreen/80 border border-white/50 px-4 py-2 rounded-full text-xs text-black font-mono backdrop-blur-md font-bold shadow-[0_0_15px_rgba(0,230,118,0.5)]" data-i18n="m-s5-filter-badge">Hệ thống lọc vật lý</div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white/[0.05] border-2 border-white/30 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col group shadow-[0_0_15px_rgba(255,255,255,0.15)] hover:border-white/50 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+                            <div class="h-40 w-full relative overflow-hidden">
+                                <img src="https://plus.unsplash.com/premium_photo-1672088819552-ee76117a769a?auto=format&fit=crop&q=80&w=400" alt="Copper Powder" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-100">
+                            </div>
+                            <div class="p-6 pt-4 flex-grow bg-white/[0.02]">
+                                <div class="text-meikoGreen font-bold mb-2 flex items-center gap-2"><span class="w-6 h-6 rounded bg-meikoGreen/30 text-meikoGreen flex items-center justify-center text-xs border border-meikoGreen/50">1</span> <span data-i18n="m-s5-waste1-title">Chứa bột đồng</span></div>
+                                <p class="text-sm text-white/90 m-0 font-light" data-i18n="m-s5-waste1-desc">Nước xả xám chứa nhiều mạt đồng từ quá trình chà nhám vật lý.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/[0.05] border-2 border-white/30 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col group shadow-[0_0_15px_rgba(255,255,255,0.15)] hover:border-white/50 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+                            <div class="h-40 w-full relative overflow-hidden">
+                                <img src="https://plus.unsplash.com/premium_photo-1681426676206-0f2c02b48aff?auto=format&fit=crop&q=80&w=400" alt="Chemicals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-100">
+                            </div>
+                            <div class="p-6 pt-4 flex-grow bg-white/[0.02]">
+                                <div class="text-meikoBlueLight font-bold mb-2 flex items-center gap-2"><span class="w-6 h-6 rounded bg-meikoBlueLight/30 text-meikoBlueLight flex items-center justify-center text-xs border border-meikoBlueLight/50">2</span> <span data-i18n="m-s5-waste2-title">Axit/kiềm đậm đặc</span></div>
+                                <p class="text-sm text-white/90 m-0 font-light" data-i18n="m-s5-waste2-desc">Dịch thải từ các bể mạ đồng, niken, bạc, vàng, thiếc/chì.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/[0.05] border-2 border-white/30 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col group shadow-[0_0_15px_rgba(255,255,255,0.15)] hover:border-white/50 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+                            <div class="h-40 w-full relative overflow-hidden">
+                                <img src="https://plus.unsplash.com/premium_photo-1673892648230-b5a66f82438a?auto=format&fit=crop&q=80&w=400" alt="Organic Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-100">
+                            </div>
+                            <div class="p-6 pt-4 flex-grow bg-white/[0.02]">
+                                <div class="text-purple-400 font-bold mb-2 flex items-center gap-2"><span class="w-6 h-6 rounded bg-purple-400/30 text-purple-400 flex items-center justify-center text-xs border border-purple-400/50">3</span> <span data-i18n="m-s5-waste3-title">Hữu cơ COD cao</span></div>
+                                <p class="text-sm text-white/90 m-0 font-light" data-i18n="m-s5-waste3-desc">Sinh ra từ tẩy mực, rửa trôi màng quang hóa và phủ mặt nạ hàn.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-5 bg-black/60 rounded-xl border border-white/20 shadow-lg">
+                            <div class="mt-1"><i data-lucide="filter" class="w-6 h-6 text-meikoGreen"></i></div>
+                            <div><strong class="text-white text-lg" data-i18n="m-s5-membrane-title">Lọc Màng (Membrane Filtration):</strong> <span class="text-white/90 font-light block mt-1" data-i18n="m-s5-membrane-desc">Khe lọc nhỏ tới 0,1 micron, đảm bảo toàn bộ chất ô nhiễm bị giữ lại ở dạng bùn rắn.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-serif text-3xl font-bold text-white mb-8 text-center" data-i18n="m-s5-circular-title">Kinh Tế Tuần Hoàn (Circular Economy)</h3>
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="glass-card rounded-[2rem] overflow-hidden group flex flex-col border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                        <div class="h-48 w-full relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1613031595732-3725a58bd309?auto=format&fit=crop&q=80&w=600" alt="Copper recovery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                        </div>
+                        <div class="p-6 pt-5 flex-grow bg-[#0B0F19]">
+                            <h4 class="font-serif text-xl font-bold text-white mb-3" data-i18n="m-s5-circ1-title">Thu hồi Đồng</h4>
+                            <p class="text-sm text-white/90 text-left m-0 font-light" data-i18n="m-s5-circ1-desc">Sử dụng công nghệ điện phân và lắng gạn để tách chiết mạt đồng đạt độ tinh khiết 97%.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-[2rem] overflow-hidden group flex flex-col border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                        <div class="h-48 w-full relative overflow-hidden">
+                            <img src="https://plus.unsplash.com/premium_photo-1671430217698-a616e0c155ae?auto=format&fit=crop&q=80&w=600" alt="Precious metals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                        </div>
+                        <div class="p-6 pt-5 flex-grow bg-[#0B0F19]">
+                            <h4 class="font-serif text-xl font-bold text-white mb-3" data-i18n="m-s5-circ2-title">Thu hồi Kim loại quý</h4>
+                            <p class="text-sm text-white/90 text-left m-0 font-light" data-i18n="m-s5-circ2-desc">Công nghệ nhựa Chelating thu hồi tới hơn 99% lượng Palladium trôi dạt.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-[2rem] overflow-hidden group flex flex-col border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                        <div class="h-48 w-full relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600" alt="Black hole tech" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                        </div>
+                        <div class="p-6 pt-5 flex-grow bg-[#0B0F19]">
+                            <h4 class="font-serif text-xl font-bold text-white mb-3" data-i18n="m-s5-circ3-title">Hệ thống "Black Hole"</h4>
+                            <p class="text-sm text-white/90 text-left m-0 font-light" data-i18n="m-s5-circ3-desc">Thay đổi công nghệ lõi để loại bỏ hoàn toàn Formaldehyde và Cyanide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Logistics -->
+    <section id="logistics" class="py-24 relative z-10 border-t border-white/5 bg-[#050810]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="text-meikoBlueLight font-mono text-sm tracking-widest uppercase font-bold" data-i18n="m-s6-label">06 / Mạch Máu Logistics</span>
+                <div class="h-px bg-white/20 flex-grow"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mb-6" data-i18n="m-s6-heading">Kết Nối Sân Bay Quốc Tế Nội Bài</h2>
+                    <p class="text-lg text-white font-light leading-relaxed mb-6" data-i18n="m-s6-p1">Sự xuất hiện của tuyến đường cao tốc Hòa Lạc - Hòa Bình rút ngắn thời gian di chuyển từ KCN Bờ Trái Sông Đà đến nhà ga hàng hóa Sân bay Nội Bài xuống chỉ còn khoảng dưới 90 phút.</p>
+                    
+                    <div class="h-56 rounded-2xl overflow-hidden mb-6 border-2 border-white/30 relative group shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:border-white/50 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&q=80&w=800" alt="Aviation Cargo" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                    </div>
+
+                    <div class="glass-card border-l-4 border-l-meikoBlueLight p-6 rounded-2xl mb-8 shadow-lg">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="plane" class="w-6 h-6 text-meikoBlueLight"></i>
+                            <strong class="text-white text-lg" data-i18n="m-s6-insight-title">Insight: Hệ số Giá trị - Trọng lượng</strong>
+                        </div>
+                        <p class="text-base text-white font-light m-0" data-i18n="m-s6-insight-desc">HDI và bán dẫn mang giá trị cực lớn nhưng kích thước siêu nhẹ, yêu cầu tính định thời (Just-In-Time) khắt khe trong 24-48 giờ toàn cầu.</p>
+                    </div>
+
+                    <div class="h-56 rounded-2xl overflow-hidden mb-6 border-2 border-white/30 relative group shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:border-white/50 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-500">
+                        <img src="https://plus.unsplash.com/premium_photo-1664302184751-68cab2aaf689?auto=format&fit=crop&q=80&w=800" alt="Highway Logistics" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+                
+                <div class="flex justify-center lg:justify-end">
+                    <div class="glass-card p-10 rounded-3xl w-full max-w-md relative overflow-hidden border border-white/20 shadow-[0_0_30px_rgba(71,147,232,0.1)]">
+                        <div class="absolute inset-0 bg-gradient-to-br from-meikoBlue/10 to-transparent"></div>
+                        <h4 class="font-serif text-2xl font-bold text-white mb-8 relative z-10" data-i18n="m-s6-route-title">Lộ Trình Chiến Lược</h4>
+                        <div class="relative border-l-2 border-dashed border-white/30 ml-6 space-y-12 pb-4 z-10">
+                            <div class="relative pl-8"><span class="absolute w-4 h-4 rounded-full bg-meikoGreen -left-[9px] top-1 shadow-[0_0_10px_#00E676]"></span><h5 class="font-bold text-white text-lg" data-i18n="m-s6-route1">KCN Bờ Trái Sông Đà</h5></div>
+                            <div class="relative pl-8"><span class="absolute w-4 h-4 rounded-full bg-meikoBlueLight -left-[9px] top-1 shadow-[0_0_10px_#4793E8]"></span><h5 class="font-bold text-white text-lg" data-i18n="m-s6-route2">Sân Bay Nội Bài (< 90p)</h5></div>
+                            <div class="relative pl-8"><span class="absolute w-4 h-4 rounded-full bg-purple-400 -left-[9px] top-1 shadow-[0_0_10px_#A78BFA]"></span><h5 class="font-bold text-white text-lg" data-i18n="m-s6-route3">Samsung Bắc Ninh (108km)</h5></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Bài Học Chiến Lược -->
+    <section id="strategy" class="py-24 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-meikoGreen font-mono text-sm tracking-widest uppercase mb-4 block font-bold" data-i18n="m-s7-label">07 / Playbook</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mb-6" data-i18n="m-s7-heading">Bài Học Của Các Tập Đoàn Nhật Bản</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="glass-card rounded-[2rem] relative overflow-hidden group flex flex-col border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                    <div class="h-56 w-full relative overflow-hidden border-b border-white/20">
+                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=600" alt="Tier 2 cities" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 pt-6 flex-grow relative bg-[#0B0F19]"><h3 class="font-serif text-2xl font-bold text-white mb-4" data-i18n="m-s7-card1-title">Khai Thác Vùng Ven (Tier-2)</h3><p class="text-white font-light text-base" data-i18n="m-s7-card1-desc">Sự chênh lệch giá đất từ 160 USD xuống 55 USD giải phóng Capex khổng lồ cho R&D.</p></div>
+                </div>
+                <div class="glass-card rounded-[2rem] relative overflow-hidden group flex flex-col border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                    <div class="h-56 w-full relative overflow-hidden border-b border-white/20">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=600" alt="ESG" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 pt-6 flex-grow relative bg-[#0B0F19]"><h3 class="font-serif text-2xl font-bold text-white mb-4" data-i18n="m-s7-card2-title">ESG Là Mệnh Lệnh Sinh Tồn</h3><p class="text-white font-light text-base" data-i18n="m-s7-card2-desc">Chọn vị trí gần thủy điện để giải quyết triệt để bài toán phát thải Scope 2.</p></div>
+                </div>
+                <div class="glass-card rounded-[2rem] relative overflow-hidden group flex flex-col border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                    <div class="h-56 w-full relative overflow-hidden border-b border-white/20">
+                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?auto=format&fit=crop&q=80&w=600" alt="Bespoke Infra" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 pt-6 flex-grow relative bg-[#0B0F19]"><h3 class="font-serif text-2xl font-bold text-white mb-4" data-i18n="m-s7-card3-title">Hạ Tầng Tùy Biến (Bespoke)</h3><p class="text-white font-light text-base" data-i18n="m-s7-card3-desc">Sử dụng vị thế Anchor Tenant để đàm phán Trạm xử lý nước thải độc lập.</p></div>
+                </div>
+                <div class="glass-card rounded-[2rem] relative overflow-hidden group flex flex-col border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                    <div class="h-56 w-full relative overflow-hidden border-b border-white/20">
+                        <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&q=80&w=600" alt="Circular Economy" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 pt-6 flex-grow relative bg-[#0B0F19]"><h3 class="font-serif text-2xl font-bold text-white mb-4" data-i18n="m-s7-card4-title">Kinh Tế Tuần Hoàn Sinh Lời</h3><p class="text-white font-light text-base" data-i18n="m-s7-card4-desc">Biến bùn thải đồng và kim loại quý Palladium thành nguồn lợi nhuận thứ cấp.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Nhân Lực -->
+    <section id="hr" class="py-24 relative z-10 border-t border-white/5 bg-[#050810]">
+        <!-- Orbs background for depth -->
+        <div class="absolute right-0 top-1/4 w-[600px] h-[600px] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-center gap-4 mb-12">
+                <span class="text-purple-400 font-mono text-sm tracking-widest uppercase font-bold" data-i18n="m-s8-label">08 / Nguồn Nhân Lực</span>
+                <div class="h-px bg-white/20 flex-grow"></div>
+            </div>
+
+            <div class="text-center mb-16 max-w-4xl mx-auto">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight" data-i18n="m-s8-heading">Lợi Thế Nguồn Nhân Lực Cho Sản Xuất Công Nghệ Cao Tại Cửa Ngõ Hà Nội - Phú Thọ</h2>
+                <p class="text-lg text-white font-light leading-relaxed" data-i18n="m-s8-intro">Sự kiện sáp nhập hành chính (theo Nghị quyết số 202/2025/QH15) gộp 3 tỉnh Phú Thọ, Vĩnh Phúc và Hòa Bình thành lập tỉnh Phú Thọ mới đã tái định hình hoàn toàn bản đồ nhân lực công nghiệp phía Bắc. Khu vực Hòa Bình hiện tại không chỉ giữ được lợi thế tiếp giáp Thủ đô mà còn được cộng hưởng trực tiếp từ hệ sinh thái công nghiệp quy mô lớn của siêu tỉnh mới.</p>
+            </div>
+
+            <!-- Point 1: Lợi thế chiến lược -->
+            <div class="mb-24">
+                <h3 class="font-serif text-2xl font-bold text-white mb-8 border-l-4 border-purple-400 pl-4" data-i18n="m-s8-pt1-title">1. Lợi thế chiến lược của vị trí giáp ranh Hà Nội</h3>
+                <p class="text-white mb-8 font-light text-lg" data-i18n="m-s8-pt1-intro">Việc đặt nhà máy công nghệ cao tại cửa ngõ phía Tây/Tây Nam Hà Nội (khu vực Hòa Bình) mang lại "lợi thế kép" về mặt không gian và chi phí:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass-card p-8 rounded-3xl border border-white/20 hover:border-purple-400/50 hover:shadow-[0_0_20px_rgba(167,139,250,0.2)] transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-purple-400/20 flex items-center justify-center mb-6">
+                            <i data-lucide="wallet" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <h4 class="text-white font-bold mb-3 text-lg" data-i18n="m-s8-pt1-card1-title">Tối ưu chi phí vận hành & sinh hoạt</h4>
+                        <p class="text-white/80 font-light text-sm leading-relaxed" data-i18n="m-s8-pt1-card1-desc">So với các thủ phủ công nghiệp đã bão hòa và đắt đỏ như Bắc Ninh hay Thái Nguyên, khu vực này có chi phí quỹ đất và chi phí sinh hoạt thiết yếu hợp lý hơn hẳn. Điều này giúp tối ưu quỹ lương mà vẫn đảm bảo mức sống tốt cho người lao động.</p>
+                    </div>
+                    
+                    <div class="glass-card p-8 rounded-3xl border border-white/20 hover:border-meikoBlueLight/50 hover:shadow-[0_0_20px_rgba(71,147,232,0.2)] transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-meikoBlueLight/20 flex items-center justify-center mb-6">
+                            <i data-lucide="network" class="w-6 h-6 text-meikoBlueLight"></i>
+                        </div>
+                        <h4 class="text-white font-bold mb-3 text-lg" data-i18n="m-s8-pt1-card2-title">Tiếp cận "vùng lõi" tri thức</h4>
+                        <p class="text-white/80 font-light text-sm leading-relaxed" data-i18n="m-s8-pt1-card2-desc">Nằm sát vách Hà Nội, các dự án dễ dàng kết nối với mạng lưới hạ tầng giao thông nâng cấp. Khoảng cách này lý tưởng để các chuyên gia cấp cao di chuyển làm việc hàng ngày mà không chịu áp lực tắc nghẽn nội đô.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl border border-white/20 hover:border-meikoGreen/50 hover:shadow-[0_0_20px_rgba(0,230,118,0.2)] transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-meikoGreen/20 flex items-center justify-center mb-6">
+                            <i data-lucide="home" class="w-6 h-6 text-meikoGreen"></i>
+                        </div>
+                        <h4 class="text-white font-bold mb-3 text-lg" data-i18n="m-s8-pt1-card3-title">Hệ sinh thái tiện ích nội khu</h4>
+                        <p class="text-white/80 font-light text-sm leading-relaxed" data-i18n="m-s8-pt1-card3-desc">Sự tham gia của các đơn vị phát triển hạ tầng địa phương trong việc kiến tạo đô thị vệ tinh, nhà ở xã hội tạo ra môi trường an cư bền vững, giữ chân người lao động lâu dài ngay cạnh khu công nghiệp.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point 2: Cơ cấu nguồn nhân lực -->
+            <div class="mb-24">
+                <h3 class="font-serif text-2xl font-bold text-white mb-8 border-l-4 border-meikoBlueLight pl-4" data-i18n="m-s8-pt2-title">2. Cơ cấu nguồn nhân lực công nghệ cao và Kênh tuyển dụng</h3>
+                <p class="text-white mb-8 font-light text-lg" data-i18n="m-s8-pt2-intro">Một dây chuyền sản xuất công nghệ cao đòi hỏi cấu trúc nhân sự đa tầng. Vị trí chiến lược này cho phép tiếp cận chính xác từng tệp ứng viên:</p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- R&D -->
+                    <div class="glass-card rounded-[2rem] overflow-hidden group border-2 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:border-white/50 transition-all duration-500 flex flex-col">
+                        <div class="h-48 w-full relative overflow-hidden border-b border-white/20">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" alt="R&D Engineers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-meikoBlueLight border border-meikoBlueLight/30">10% - 15%</div>
+                        </div>
+                        <div class="p-6 bg-[#0B0F19] flex-grow">
+                            <h4 class="font-bold text-white mb-2 text-lg" data-i18n="m-s8-pt2-card1-title">Nhân sự Cấp cao & R&D</h4>
+                            <p class="text-sm text-meikoBlueLight mb-4 font-medium" data-i18n="m-s8-pt2-card1-role">Kỹ sư thiết kế, tự động hóa, vật liệu, quản lý QA/QC.</p>
+                            <p class="text-sm text-white/80 font-light leading-relaxed" data-i18n="m-s8-pt2-card1-source"><strong>Nguồn tuyển:</strong> Lực lượng tinh hoa từ các đại học hàng đầu Hà Nội (Bách Khoa, ĐHQG, PTIT) hoặc luân chuyển chuyên gia nước ngoài, cấp cao từ khu vực Vĩnh Phúc thuận tiện về mặt hành chính.</p>
+                        </div>
+                    </div>
+
+                    <!-- Middle Management -->
+                    <div class="glass-card rounded-[2rem] overflow-hidden group border-2 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:border-white/50 transition-all duration-500 flex flex-col">
+                        <div class="h-48 w-full relative overflow-hidden border-b border-white/20">
+                            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=600" alt="Technicians" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-purple-400 border border-purple-400/30">20% - 30%</div>
+                        </div>
+                        <div class="p-6 bg-[#0B0F19] flex-grow">
+                            <h4 class="font-bold text-white mb-2 text-lg" data-i18n="m-s8-pt2-card2-title">Quản lý cấp trung & Kỹ thuật</h4>
+                            <p class="text-sm text-purple-400 mb-4 font-medium" data-i18n="m-s8-pt2-card2-role">Quản lý phân xưởng, kỹ sư bảo trì, lập trình viên CNC/Robot.</p>
+                            <p class="text-sm text-white/80 font-light leading-relaxed" data-i18n="m-s8-pt2-card2-source"><strong>Nguồn tuyển:</strong> Trường cao đẳng nghề, trung cấp trên địa bàn Phú Thọ mới (đặc biệt lực lượng từ Vĩnh Phúc cũ đã quen tác phong công nghiệp) và cụm giáo dục quanh Sơn Tây, Xuân Mai.</p>
+                        </div>
+                    </div>
+
+                    <!-- Workers -->
+                    <div class="glass-card rounded-[2rem] overflow-hidden group border-2 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:border-white/50 transition-all duration-500 flex flex-col">
+                        <div class="h-48 w-full relative overflow-hidden border-b border-white/20">
+                            <img src="https://plus.unsplash.com/premium_photo-1682145126971-2d96b90811ac?auto=format&fit=crop&q=80&w=600" alt="Assembly line workers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-meikoGreen border border-meikoGreen/30">55% - 70%</div>
+                        </div>
+                        <div class="p-6 bg-[#0B0F19] flex-grow">
+                            <h4 class="font-bold text-white mb-2 text-lg" data-i18n="m-s8-pt2-card3-title">Công nhân thao tác & Lắp ráp</h4>
+                            <p class="text-sm text-meikoGreen mb-4 font-medium" data-i18n="m-s8-pt2-card3-role">Lao động trực tiếp đứng máy, làm việc trong phòng sạch.</p>
+                            <p class="text-sm text-white/80 font-light leading-relaxed" data-i18n="m-s8-pt2-card3-source"><strong>Nguồn tuyển:</strong> Tuyển trực tiếp tại các huyện thuộc Hòa Bình, Phú Thọ. Lực lượng ưu tiên sự gắn bó gần nhà, giúp giảm thiểu rủi ro đứt gãy dây chuyền (turnover rate).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point 3: Khả năng đáp ứng quy mô dân số -->
+            <div>
+                <h3 class="font-serif text-2xl font-bold text-white mb-8 border-l-4 border-meikoGreen pl-4" data-i18n="m-s8-pt3-title">3. Khả năng đáp ứng từ quy mô dân số khổng lồ</h3>
+                <div class="glass-card p-2 rounded-[2.5rem] border-2 border-white/20 shadow-[0_0_30px_rgba(0,230,118,0.1)] relative overflow-hidden">
+                    <div class="absolute left-0 bottom-0 w-64 h-64 bg-meikoGreen/10 blur-[80px] rounded-full pointer-events-none"></div>
+                    
+                    <div class="grid lg:grid-cols-2 gap-0 items-stretch">
+                        <div class="p-8 lg:p-12 relative z-10 flex flex-col justify-center">
+                            <p class="text-white text-lg font-light mb-8" data-i18n="m-s8-pt3-intro">Bức tranh nhân khẩu học hiện tại tạo thành một phễu lọc nhân sự hoàn hảo, đáp ứng từ số lượng đến chất lượng cho các đại dự án:</p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex gap-4">
+                                    <div class="mt-1 flex-shrink-0"><i data-lucide="building-2" class="w-6 h-6 text-meikoBlueLight"></i></div>
+                                    <div>
+                                        <h5 class="text-white font-bold text-lg" data-i18n="m-s8-pt3-hanoi-title">Hà Nội (gần 8,5 - 9 triệu dân)</h5>
+                                        <p class="text-white/80 font-light text-sm mt-1" data-i18n="m-s8-pt3-hanoi-desc">Đóng vai trò là trung tâm cung cấp chất xám và dịch vụ phụ trợ. Hàng chục ngàn sinh viên khối ngành kỹ thuật, công nghệ tốt nghiệp mỗi năm dư sức lấp đầy các vị trí R&D, chuỗi cung ứng.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="mt-1 flex-shrink-0"><i data-lucide="users-2" class="w-6 h-6 text-meikoGreen"></i></div>
+                                    <div>
+                                        <h5 class="text-white font-bold text-lg" data-i18n="m-s8-pt3-phutho-title">Tỉnh Phú Thọ mới (hơn 4 triệu dân)</h5>
+                                        <p class="text-white/80 font-light text-sm mt-1" data-i18n="m-s8-pt3-phutho-desc">Đứng thứ 11 cả nước về quy mô dân số, tỉnh mới cung cấp một bể lao động phổ thông và kỹ thuật viên cực kỳ dồi dào.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                                <p class="text-white text-sm font-medium m-0 leading-relaxed italic">
+                                    <span data-i18n="m-s8-pt3-quote">"Sự kết hợp này mang tính bổ trợ tuyệt vời: Nền tảng công nghiệp, điện tử lâu đời từ Vĩnh Phúc cung cấp nguồn lao động đã qua đào tạo; trong khi quy mô dân số từ Hòa Bình và Phú Thọ đảm bảo nguồn cung công nhân dồi dào. Người lao động làm việc nội tỉnh để gần gũi gia đình, giúp duy trì lực lượng cốt lõi vô cùng ổn định."</span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="h-full min-h-[400px] w-full rounded-[2rem] overflow-hidden relative border-2 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.15)] group hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:border-white/50 transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&q=80&w=1200" alt="Modern demographics" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100">
+                            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-6 pt-12">
+                                <span class="text-white font-serif italic text-sm" data-i18n="m-s8-img-caption">Hệ sinh thái nguồn nhân lực kết hợp hoàn hảo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 9. Kết Luận (Updated numbering) -->
+    <section class="py-24 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-12 rounded-[3rem] relative overflow-hidden border-2 border-meikoGreen/40 shadow-[0_0_80px_rgba(0,230,118,0.15)]">
+                <div class="absolute top-[-100px] left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 bg-meikoGreen/20 blur-[100px] rounded-full pointer-events-none"></div>
+                <div class="grid lg:grid-cols-2 gap-16 text-left items-center">
+                    <div>
+                        <span class="text-meikoGreen font-mono text-sm font-bold uppercase mb-6 block relative z-10" data-i18n="m-s9-label">09 / Tóm Lược Kết Luận</span>
+                        <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-8 relative z-10" data-i18n="m-s9-heading">Blueprint Cho Tương Lai FDI</h2>
+                        <p class="text-lg text-white font-light leading-relaxed mb-6 relative z-10" data-i18n="m-s9-p1">Thương vụ rót vốn 500 triệu USD của MEIKO Electronics vào Khu Công Nghiệp Bờ Trái Sông Đà là một quyết định hoàn hảo của nghệ thuật định vị không gian địa kinh tế học và công nghệ chế tạo tiên tiến. Quyết định rời bỏ các trung tâm công nghiệp dày đặc ở Đồng bằng Sông Hồng để kiến tạo một cứ điểm mới tại vùng đất Hòa Bình giáp Hà Nội hoàn toàn là một sự đầu tư chính xác.</p>
+                    </div>
+                    <div class="flex flex-col gap-6">
+                        <div class="h-64 rounded-3xl overflow-hidden border-2 border-white/30 shadow-[0_0_30px_rgba(255,255,255,0.2)] group hover:border-white/50 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="Tech Future" class="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <p class="text-lg text-white font-light leading-relaxed m-0 relative z-10" data-i18n="m-s9-p2">Bằng cách tận dụng triệt để sức mạnh Thủy điện Hòa Bình để giải mã bài toán năng lượng xanh ESG, kết hợp với các ưu đãi chi phí đất đai vượt trội và hạ tầng chuyên biệt, MEIKO đã kiến tạo được một cỗ máy sản xuất bền vững. Đây chắc chắn là mô hình chuẩn mực (blueprint) cho dòng vốn FDI công nghệ cao thế hệ mới tại Việt Nam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#02040A] py-12 border-t border-white/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-white/5 border border-white/20 flex items-center justify-center text-white shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                    <i data-lucide="cpu" class="w-4 h-4"></i>
+                </div>
+                <span class="font-serif font-bold text-lg tracking-tight text-white">MEIKO IN HOA BINH</span>
+            </div>
+            <div class="text-sm text-white/60 text-center md:text-right font-light">
+                <p data-i18n="m-footer-copy">&copy; 2026 Thịnh Minh IP - Da Hop JSC. Báo cáo case study chuyên sâu.</p>
+                <p class="mt-1" data-i18n="m-footer-addr">Khu Công Nghiệp Bờ Trái Sông Đà, Thành phố Hòa Bình.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Icons & Mobile Menu Logic -->
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu toggle logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Toggle icon between menu and x
+                const iconElement = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    iconElement.setAttribute('data-lucide', 'menu');
+                } else {
+                    iconElement.setAttribute('data-lucide', 'x');
+                }
+                lucide.createIcons(); // Re-initialize icons
+            });
+
+            // Close menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const iconElement = mobileMenuBtn.querySelector('i');
+                    iconElement.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                });
+            });
+        }
+    </script>
+
+    <script>
+    // --- Meiko page translations ---
+    window.PAGE_TRANSLATIONS = {
+        en: {
+            'm-footer-addr': 'Song Da Left Bank Industrial Park, Hoa Binh City.',
+            'm-footer-copy': '© 2026 Thinh Minh IP - Da Hop JSC. In-depth case study report.',
+            'm-hero-badge': 'Case Study Sustainable Development & High Technology',
+            'm-hero-subtitle': 'In-depth introduction to High-Tech supply chain shifts and perfect ecological development solutions at Song Da Left Bank Industrial Park and Da Hop Hoa Binh Industrial Parks.',
+            'm-hero-title': 'The Strategic Decision of<br class="hidden md:block" /><span class="text-gradient-eco border-b-2 border-meikoGreen pb-2 inline-block mt-2">MEIKO Electronics</span>',
+            'm-nav-advantages': 'Advantage',
+            'm-nav-challenge': 'Challenge',
+            'm-nav-context': 'Background',
+            'm-nav-hr': 'Human resources',
+            'm-nav-logistics': 'Logistics',
+            'm-nav-playbook': 'Playbook',
+            'm-nav-strategy': 'Strategy',
+            'm-nav-tech': 'Technology',
+            'm-s1-heading': 'The Transformation of the Global Supply Chain',
+            'm-s1-img1-caption': 'Reshaping the industrial space and global supply chain',
+            'm-s1-highlight': 'A clear demonstration of this trend is the landmark investment decision of MEIKO Electronics Group (Japan) in Song Da Left Bank Industrial Park, located in Hoa Binh city, Vietnam. As one of the world\'s leading PCB suppliers to strategic partners such as Apple and Samsung, MEIKO has committed to investing 200 million USD for phase 1 to build an electronic circuit manufacturing factory on an area of ​​9.2 to 9.3 hectares, with the expectation of increasing the total investment to 500 million USD when completing the second factory. This project is expected to create 3,000 direct jobs and contribute about 200 billion VND per year to the local budget from 2030. The factory\'s production focus is on mid-to-high-end multilayer PCB lines and high-density interconnect (HDI) PCBs serving AI servers and peripheral devices.',
+            'm-s1-img2-caption': 'Traditional industrial ecosystems are facing utility and resource limits',
+            'm-s1-img3-caption': 'The inevitable shift serves AI server infrastructure and high-density microchips',
+            'm-s1-img4-caption': 'High-tech chip workshop',
+            'm-s1-label': '01 / Investment Context',
+            'm-s1-p1': 'In the context of restructuring the global high-tech supply chain, Vietnam has quickly emerged as a strategic destination for multinational corporations to diversify risks and reduce dependence on traditional factories. This shift is not simply the relocation of low-value assembly lines, but increasingly focuses on the core and most complex stages of the electronics ecosystem, typically the Printed Circuit Board (PCB) manufacturing industry. As the "backbone" of all modern electronic devices, from smartphones, AI (artificial intelligence) servers, to automotive electronic systems, PCB manufacturing requires the most rigorous technical, energy and environmental standards.',
+            'm-s1-p2': 'However, from the perspective of industrial space analysis, MEIKO\'s decision to choose Hoa Binh is a surprising strategic move. In the history of attracting Foreign Direct Investment (FDI) from Japan to Northern Vietnam, large corporations often tend to focus on "closed ecosystems" created by Japanese infrastructure developers, most notably the chain of Thang Long Industrial Parks (TLIP 1, 2, 3) invested by SUMITOMO Group in Hanoi, Hung Yen and Vinh Phuc. MEIKO itself has also had a long-standing presence in Thach That - Quoc Oai Industrial Park and Thang Long Industrial Park (Hanoi).',
+            'm-s1-p3': 'This research report will delve into the strategic layers behind SUMITOMO\'s decision to "skip" SUMITOMO\'s industrial parks to choose MEIKO\'s Song Da Left Bank Industrial Park. The focus of the analysis will be to clarify the vital dependence of the PCB manufacturing industry on two factors: Electricity and Water; Analyze the absolute advantage of the geographical location of Song Da Left Bank Industrial Park in relation to Hoa Binh Hydropower Plant and Noi Bai International Airport; In-depth description of MEIKO\'s water usage process and sophisticated wastewater treatment technology; At the same time, draw profound strategic lessons for other High-Tech (high-tech) businesses looking for a place to land in the Southeast Asian market.',
+            'm-s2-elec-box1-desc': 'Maintain clean room environment and heat-humidity balance. Steps such as internal layer image transfer, solder mask coating and micro-component assembly require to be performed in a standard clean room environment. Operating a high-capacity air conditioning and ventilation system (HVAC) that runs continuously 24/7/365 consumes huge amounts of electricity.',
+            'm-s2-elec-box1-title': 'Clean Room Environment',
+            'm-s2-elec-box2-desc': 'Electricity maintains the thermomechanical and optical cycles. The PCB manufacturing process includes mechanical drilling using a high-speed CNC machine, laser drilling for micro-holes, and layer heat pressing under extremely high pressure. All of these machines require very large static electricity consumption.',
+            'm-s2-elec-box3-desc': 'Provides direct current (DC) to electroplating tanks. Electroplating is the core step to create electrically conductive circuits. Steps such as through-hole copper plating, pattern plating, and ENIG surface treatment all rely on electric current for electrolysis. The current density applied in these plating baths is very high and must be completely stable.',
+            'm-s2-elec-box2-title': 'Thermomechanical Cycle',
+            'm-s2-elec-box3-title': 'Electrochemical Current',
+            'm-s2-elec-data-desc': 'The total amount of power consumed by the entire system requires the investment destination to be immune to the risk of voltage drops or rotating power cuts.',
+            'm-s2-elec-data-label': 'Environmental data 2024',
+            'm-s2-elec-intro': 'The IC industry cannot exist without absolute stability of the power system. For MEIKO, electricity is not only used for lighting or basic engine operation, but is the factor that determines the quality (yield rate) of each shipment worth millions of dollars. This dependence is demonstrated through three in-depth technical aspects:',
+            'm-s2-elec-title': 'High Intensity Power Dependence',
+            'm-s2-heading': 'The Rigid Nature of the PCB Manufacturing Industry',
+            'm-s2-intro': 'To understand the rationale that shaped MEIKO\'s location decision, it is necessary to dissect the core technical characteristics of the PCB manufacturing process. Different from purely mechanical component assembly, manufacturing high-density, multi-layer PCB panels (HDI) or semiconductor package substrates (Semiconductor Package Substrates) is an extremely complex series of thermodynamic, photolithographic and electrochemical reactions. The manufacturing process of a standard PCB can go through up to 33 separate stages. This entire process chain is bound by absolute dependence on high-intensity electricity supplies and huge volumes of ultra-pure water.',
+            'm-s2-label': '02 / Energy & Environment Problem',
+            'm-s2-water-box1-desc': 'Before pressing the light-sensitive film or plating, the copper surface must be thoroughly cleaned with an acid solution combined with physical sanding. Plastic residue stuck in drilled holes must be cleaned with chemicals.',
+            'm-s2-water-box1-title': 'Cleans and descales',
+            'm-s2-water-box2-desc': 'The process of removing unwanted copper for contouring (Etching) and removing the radiopaque film (Stripping) uses large amounts of acid and alkaline chemicals.',
+            'm-s2-water-box2-title': 'Corrosion and peeling',
+            'm-s2-water-box3-desc': 'The purity of the wash water is paramount. Ordinary tap water contains minerals that will precipitate, causing microscopic short circuits. Therefore, MEIKO is required to use RO water purification systems or DI (Deionized) water with extremely low conductivity.',
+            'm-s2-water-box3-title': 'Rinsing process',
+            'm-s2-water-data-desc': 'Total water usage of the entire global MEIKO system. Water participates in every corner of the chemical processing process (Wet Processes).',
+            'm-s2-water-data-label': 'Water use 2024',
+            'm-s2-water-intro': 'If electricity is the nervous system, then water is the circulatory system of a PCB factory. This industry is classified as one of the world\'s most water-intensive consumers. Data shows that the traditional PCB manufacturing process consumes an average of 1.5 cubic meters (m3) of clean water for every square meter (m2) of circuit boards produced.',
+            'm-s2-water-title': 'The "Blood" of Wet Processes',
+            'm-s2-water-warning': 'Because of this vital dependence, MEIKO always evaluates water resource risks (Water Risk Assessment) at each location. Any break in the supply will immediately disable a project worth hundreds of millions of dollars.',
+            'm-s3-barrier-p1': 'Beyond the financial cost problem, the biggest barrier of SUMITOMO Industrial Parks for MEIKO lies in the shared utility structure. An industrial park like Thang Long I is currently home to more than 100 companies in diverse industries. When the occupancy rate is high, the total electricity capacity and water supply/wastewater treatment station capacity of the entire area have been calculated and fixedly allocated.',
+            'm-s3-barrier-p2': 'Adding a $500 million mega-factory specializing in PCB manufacturing—with grid power demands creating continuous large load spikes and wastewater containing extremely high concentrations of heavy metals—into an already established grid is extremely risky. Centralized wastewater treatment stations of multi-industry industrial parks often encounter serious difficulties in treating complex chemicals of PCBs.',
+            'm-s3-barrier-quote': 'MEIKO pointed out that customers\' need to expand ASEAN supply chains "is expected to exceed the production capacity of current Vietnamese and Thang Long factories". To accommodate the leap in capacity, MEIKO needed a space that was not constrained by "neighbors" sharing the same infrastructure. At Song Da Left Bank Industrial Park, MEIKO plays the role of "Anchor Tenant".',
+            'm-s3-barrier-title': 'Barriers to Shared Utility Ecosystems',
+            'm-s3-cost-desc': 'The first and most direct pragmatic reason is the huge difference in land rental prices and operating costs. Thang Long Industrial Parks, located in the core location of the Northern Key Economic Region, has established a rental price level in the high-end segment (Tier-1). In contrast, Hoa Binh, a mountainous province that is rising to become an industrial satellite (Tier-2), offers an extremely attractive cost arbitrage margin.',
+            'm-s3-heading': 'Withdrawing from the SUMITOMO Ecosystem',
+            'm-s3-cost-title': 'Cost Arbitrage (Cost Arbitrage)',
+            'm-s3-img1-caption': 'Utility pressure in saturated industrial parks',
+            'm-s3-img2-caption': 'Shared infrastructure is saturated',
+            'm-s3-p1': 'Understanding the huge resource consumption nature of the PCB industry, we have a solid basis to analyze why MEIKO did not choose to expand investment in Thang Long Industrial Parks developed by Japan\'s SUMITOMO Group (TLIP 1, 2, 3), but chose Song Da Left Bank Industrial Park invested by a Vietnamese private company, Da Hop Trading Joint Stock Company (Da Hop JSC).',
+            'm-s3-label': '03 / Strategic analysis',
+            'm-s3-p2': 'SUMITOMO is one of Japan\'s largest trading corporations, and its Thang Long Industrial Park chain in Hanoi, Hung Yen and Vinh Phuc has long been considered the "golden rule" for Japanese FDI capital flows in Vietnam. These industrial parks provide synchronous infrastructure, comprehensive legal support services and most importantly, create a cohesive Japanese business community (Keiretsu model). However, for a $500 million "mega project" with specific energy consumption and emissions characteristics like MEIKO\'s, these traditional advantages reveal significant resistance.',
+            'm-s3-table-h1': 'Comparison Criteria',
+            'm-s3-table-h2': 'Thang Long II Industrial Park (Hung Yen)',
+            'm-s3-table-h3': 'Song Da Left Bank Industrial Park (Hoa Binh)',
+            'm-s3-table-r1c1': 'Infrastructure developer',
+            'm-s3-table-r1c2': 'SUMITOMO Corporation (Japan)',
+            'm-s3-table-r1c3': 'Da Hop Trading Joint Stock Company (Vietnam)',
+            'm-s3-table-r2c1': 'Land rental price',
+            'm-s3-table-r2c2': 'About 160 - 162 USD/m²',
+            'm-s3-table-r2c3': 'About 55 USD/m²',
+            'm-s3-table-r3c2': '67% (Large land fund is scarce)',
+            'm-s3-table-r3c1': 'Fill rate',
+            'm-s3-table-r4c1': 'Management and infrastructure fees',
+            'm-s3-table-r3c3': '80% (Ready for adjacent plots of 9.2 hectares)',
+            'm-s3-table-r4c2': '1.2 USD/m²/year',
+            'm-s3-table-r4c3': '0.3 USD/m²/year',
+            'm-s3-table-r5c1': 'Wastewater treatment fee',
+            'm-s3-table-r5c2': 'High-end price premises',
+            'm-s3-table-r6c1': 'Infrastructure flexibility',
+            'm-s3-table-r5c3': '0.3 USD/m³',
+            'm-s3-table-r6c3': 'Bespoke infrastructure',
+            'm-s3-table-r6c2': 'High standardization',
+            'm-s3-table-summary': 'Through the comparison table, it can be seen that the land rental price at Bo Left Song Da Industrial Park (55 USD/m²) is only about one-third (1/3) compared to Thang Long II Industrial Park (160 USD/m²). For MEIKO\'s need to rent 9.2 to 9.3 hectares (93,000 m²), choosing Hoa Binh helps the group immediately save nearly 10 million USD in land use costs. Not only that, the annual infrastructure management fee is four times lower throughout the 50-year project life cycle, bringing huge cumulative financial benefits.',
+            'm-s4-elec-img-caption': 'Independent 22KV Power Grid Infrastructure',
+            'm-s4-elec-insight-title': 'Insight: Green Energy & Scope 2',
+            'm-s4-elec-insight-desc': 'Proximity to Hoa Binh Hydropower Plant not only means ensuring physical energy security, but it plays a paramount role in MEIKO\'s global Environmental, Social and Governance (ESG) strategy, meeting green standards from major customers.',
+            'm-s4-elec-p2': 'The distance from Hoa Binh city center to the Industrial Park is only 1.7 km, which means that the Industrial Park is located close to the power source. Being located right at the "source" of transmission helps the MEIKO factory almost eliminate the risk of voltage drops, flickering or power outages.',
+            'm-s4-elec-p1': 'The decisive advantage of Song Da Left Bank Industrial Park is that it is located at the foot of Hoa Binh Hydroelectric Plant. With an installed capacity of up to 1,900 MW, this is one of the largest and most stable power generation facilities in Southeast Asia.',
+            'm-s4-elec-title': 'Electricity Advantage: Close to Hoa Binh Hydropower and ESG Strategy',
+            'm-s4-heading': 'Solution to the Core Problem in Hoa Binh',
+            'm-s4-img1-caption': 'Adjacent advantages of Hoa Binh Hydropower Plant (1,900 MW) eliminate grid transmission losses, while directly serving the global Scope 2 emission reduction commitment.',
+            'm-s4-intro': 'Completely different from industrial parks in the Northern Delta, Song Da Left Bank Industrial Park possesses unique geo-economic advantages directly related to surface water resources and hydroelectric energy, completely solving MEIKO\'s "thirst" for resources.',
+            'm-s4-label': '04 / Absolute Advantage',
+            'm-s4-water-img-caption': 'Master your ecological destiny',
+            'm-s4-water-insight-desc': 'Owning a Stand-alone wastewater treatment station is a strategic victory. With an independent system of 3,000 m3/day and night, MEIKO is in complete control of its legal destiny, designing a 100% specialized membrane filtration system for its chemicals.',
+            'm-s4-water-img2-caption': 'The privilege of owning the Stand-alone Wastewater Treatment Station helps MEIKO establish a safe legal barrier and autonomously clean the extremely complex PCB chemical stream.',
+            'm-s4-water-insight-title': 'Insight: Legal risk barriers',
+            'm-s4-water-p1': 'Besides the power source, the Da River is an abundant source of fresh water, completely solving the risk of clean water shortage. Song Da Left Bank Industrial Park is directly integrated with a Song Da clean water plant managed by investor Da Hop.',
+            'm-s4-water-title': 'Clean Water Infrastructure and Independent Wastewater Treatment Station',
+            'm-s5-circ1-desc': 'Using electrolysis and decantation technology to extract copper filings to achieve 97% purity.',
+            'm-s5-circ1-title': 'Copper recovery',
+            'm-s5-circ2-desc': 'Chelating resin technology recovers more than 99% of drift Palladium.',
+            'm-s5-circ3-desc': 'Change core technology to completely remove Formaldehyde and Cyanide.',
+            'm-s5-circ2-title': 'Precious Metal Recovery',
+            'm-s5-circ3-title': '"Black Hole" System',
+            'm-s5-circular-title': 'Circular Economy',
+            'm-s5-classify-title': 'Sophisticated Physical and Chemical Classification & Processing System',
+            'm-s5-classify-p1': 'Fresh water must pass through a giant MEIKO pre-treatment station to completely remove minerals, reaching the state of deionized water (DI) and reverse osmosis water (RO water). To optimize, MEIKO applies the principle of reusing concentrated RO water with a recovery rate of up to 60%.',
+            'm-s5-heading': 'Water Cycle and Wastewater Treatment Technology',
+            'm-s5-filter-badge': 'Physical filtration system',
+            'm-s5-label': '05 / Deep Dive Technology',
+            'm-s5-intro': 'The use and treatment of water in a $500 million PCB factory is not an ordinary water supply and drainage process, but a sophisticated physical and chemical engineering system.',
+            'm-s5-membrane-desc': 'The filter slot is as small as 0.1 micron, ensuring all pollutants are retained in solid sludge form.',
+            'm-s5-membrane-title': 'Membrane Filtration:',
+            'm-s5-waste1-desc': 'Gray rinse water contains many copper filings from the physical sanding process.',
+            'm-s5-waste1-title': 'Contains copper powder',
+            'm-s5-waste2-title': 'Concentrated acid/alkali',
+            'm-s5-waste2-desc': 'Wastewater from copper, nickel, silver, gold, tin/lead plating tanks.',
+            'm-s5-waste3-desc': 'Produced from ink removal, photochemical washout and solder mask coating.',
+            'm-s5-waste3-title': 'High COD organic',
+            'm-s6-heading': 'Connecting to Noi Bai International Airport',
+            'm-s6-insight-desc': 'HDI and semiconductors have great value but are super light in size, requiring strict timing (Just-In-Time) within 24-48 hours globally.',
+            'm-s6-insight-title': 'Insight: Value - Weight Factor',
+            'm-s6-label': '06 / Vascular Logistics',
+            'm-s6-route-title': 'Strategic Roadmap',
+            'm-s6-p1': 'The appearance of the Hoa Lac - Hoa Binh expressway shortens the travel time from Song Da Left Bank Industrial Park to Noi Bai Airport cargo terminal to just under 90 minutes.',
+            'm-s6-route1': 'Song Da Left Bank Industrial Park',
+            'm-s6-route2': 'Noi Bai Airport (< 90 minutes)',
+            'm-s6-route3': 'Samsung Bac Ninh (108km)',
+            'm-s7-card1-desc': 'The difference in land prices from $160 to $55 frees up huge Capex for R&D.',
+            'm-s7-card1-title': 'Peripheral Mining (Tier-2)',
+            'm-s7-card2-desc': 'Choose a location near hydroelectric power to completely solve the Scope 2 emissions problem.',
+            'm-s7-card3-desc': 'Use the Anchor Tenant position to negotiate an independent wastewater treatment plant.',
+            'm-s7-card2-title': 'ESG Is a Survival Imperative',
+            'm-s7-card3-title': 'Bespoke Infrastructure',
+            'm-s7-card4-desc': 'Turn copper sludge and precious metal Palladium into a secondary source of profit.',
+            'm-s7-card4-title': 'Profitable Circular Economy',
+            'm-s7-heading': 'Lessons of Japanese Corporations',
+            'm-s8-heading': 'Advantages of Human Resources for High-Tech Production at the Gateway of Hanoi - Phu Tho',
+            'm-s7-label': '07 / Playbook',
+            'm-s8-img-caption': 'Human resource ecosystem perfectly combined',
+            'm-s8-intro': 'The administrative merger event (according to Resolution No. 202/2025/QH15) combining 3 provinces of Phu Tho, Vinh Phuc and Hoa Binh to form a new Phu Tho province has completely reshaped the map of industrial human resources in the North. The current Hoa Binh area not only retains the advantage of being adjacent to the Capital but also benefits directly from the large-scale industrial ecosystem of the new super province.',
+            'm-s8-label': '08 / Human Resources',
+            'm-s8-pt1-card1-desc': 'Compared to saturated and expensive industrial capitals like Bac Ninh or Thai Nguyen, this area has much more reasonable land fund costs and essential living costs. This helps optimize the salary budget while still ensuring a good standard of living for workers.',
+            'm-s8-pt1-card1-title': 'Optimize operating & living costs',
+            'm-s8-pt1-card2-desc': 'Located close to Hanoi, the projects easily connect to the upgraded transportation infrastructure network. This distance is ideal for senior professionals to travel to work every day without the pressure of inner-city congestion.',
+            'm-s8-pt1-card3-desc': 'The participation of local infrastructure development units in creating satellite urban areas and social housing creates a sustainable living environment and retains long-term workers right next to the industrial park.',
+            'm-s8-pt1-card2-title': 'Accessing the "core area" of knowledge',
+            'm-s8-pt1-card3-title': 'Internal utility ecosystem',
+            'm-s8-pt1-intro': 'Locating the high-tech factory at the western/southwestern gateway of Hanoi (Hoa Binh area) brings "dual advantages" in terms of space and cost:',
+            'm-s8-pt2-card1-role': 'Design engineer, automation, materials, QA/QC manager.',
+            'm-s8-pt1-title': '1. Strategic advantage of location adjacent to Hanoi',
+            'm-s8-pt2-card1-title': 'Senior Personnel & R&D',
+            'm-s8-pt2-card1-source': '<strong>Recruitment source:',
+            'm-s8-pt2-card2-source': '<strong>Recruitment source:',
+            'm-s8-pt2-card2-role': 'Workshop manager, maintenance engineer, CNC/Robot programmer.',
+            'm-s8-pt2-card3-role': 'Direct workers standing machines, working in clean rooms.',
+            'm-s8-pt2-card2-title': 'Middle Management & Engineering',
+            'm-s8-pt2-card3-source': '<strong>Recruitment source:',
+            'm-s8-pt2-card3-title': 'Operation & Assembly workers',
+            'm-s8-pt2-title': '2. High-tech human resource structure and recruitment channel',
+            'm-s8-pt2-intro': 'A high-tech production line requires a multi-layer personnel structure. This strategic location allows precise access to each candidate file:',
+            'm-s8-pt3-hanoi-title': 'Hanoi (nearly 8.5 - 9 million people)',
+            'm-s8-pt3-hanoi-desc': 'Acts as a center providing intelligence and ancillary services. Tens of thousands of engineering and technology students graduate each year to fill R&D and supply chain positions.',
+            'm-s8-pt3-phutho-desc': 'Ranked 11th in the country in terms of population size, the new province provides an extremely abundant pool of unskilled workers and technicians.',
+            'm-s8-pt3-intro': 'The current demographic picture creates a perfect human resource filter funnel, meeting from quantity to quality for large projects:',
+            'm-s8-pt3-phutho-title': 'New Phu Tho province (more than 4 million people)',
+            'm-s8-pt3-quote': '"This combination is wonderfully complementary: The long-standing industrial and electronics foundation from Vinh Phuc provides a trained labor source; while the population size from Hoa Binh and Phu Tho ensures an abundant supply of workers. Workers work within the province to be close to their families, helping to maintain an extremely stable core force."',
+            'm-s9-heading': 'Blueprint for the Future of FDI',
+            'm-s8-pt3-title': '3. Response capacity from huge population size',
+            'm-s9-label': '09 / Summary of Conclusions',
+            'm-s9-p1': 'MEIKO Electronics\' $500 million capital injection into Song Da Left Bank Industrial Park is a perfect decision of the art of geo-economic spatial positioning and advanced manufacturing technology. The decision to leave the dense industrial centers in the Red River Delta to create a new base in Hoa Binh land bordering Hanoi is absolutely a correct investment.',
+            'm-stat-invest-label': 'Total investment',
+            'm-s9-p2': 'By fully leveraging the power of Hoa Binh Hydropower to decode the ESG green energy problem, combined with outstanding land cost incentives and specialized infrastructure, MEIKO has created a sustainable production machine. This is definitely the standard model (blueprint) for new generation high-tech FDI capital flows in Vietnam.',
+            'm-stat-jobs-label': 'Direct employment',
+            'm-stat-invest-unit': 'Tr USD',
+            'm-stat-jobs-unit': 'Human resources',
+            'm-stat-scale-label': 'Project scale',
+            'm-stat-scale-unit': 'Hectares',
+            'm-title': 'MEIKO\'s Strategic Decisions'
+        },
+        ja: {
+            'm-footer-addr': 'ホアビン市ソンダー左岸工業団地。',
+            'm-footer-copy': '© 2026 ティンミン IP - Da Hop JSC。詳細なケーススタディ レポート。',
+            'm-hero-badge': 'ケーススタディ 持続可能な開発とハイテク',
+            'm-hero-subtitle': 'ソンダー左岸工業団地とダホップホアビン工業団地におけるハイテクサプライチェーンの変化と完璧な環境開発ソリューションについて詳しく紹介します。',
+            'm-hero-title': 'MEIKOグループの<br class="hidden md:block" /><span class="text-gradient-eco border-b-2 border-meikoGreen pb-2 inline-block mt-2">戦略的決定</span>',
+            'm-nav-advantages': 'アドバンテージ',
+            'm-nav-challenge': 'チャレンジ',
+            'm-nav-context': '背景',
+            'm-nav-hr': '人事',
+            'm-nav-logistics': 'ロジスティクス',
+            'm-nav-playbook': 'プレイブック',
+            'm-nav-strategy': '戦略',
+            'm-nav-tech': 'テクノロジー',
+            'm-s1-heading': 'グローバルサプライチェーンの変革',
+            'm-s1-img1-caption': '産業空間とグローバルサプライチェーンの再構築',
+            'm-s1-highlight': 'この傾向を明確に示しているのが、ベトナムのホアビン市にあるソンダー左岸工業団地に対するMEIKO Electronics Group (日本)の画期的な投資決定です。 AppleやSamsungなどの戦略的パートナーへの世界有数のPCBサプライヤーの1つであるMEIKOは、9.2～9.3ヘクタールの敷地に電子回路製造工場を建設する第1段階に2億ドルを投資することを約束しており、第2工場の完成時には総投資額が5億ドルに増加する見込みです。このプロジェクトは、3,000人の直接雇用を創出し、2030年から年間約2,000億ドンを地方予算に貢献すると見込まれている。この工場の生産は、ミッドエンドからハイエンドの多層PCBラインと、AIサーバーや周辺機器にサービスを提供する高密度相互接続(HDI)PCBに重点を置いている。',
+            'm-s1-img2-caption': '従来の産業エコシステムはユーティリティとリソースの限界に直面しています',
+            'm-s1-img3-caption': '避けられない変化は、AI サーバー インフラストラクチャと高密度マイクロチップに貢献します',
+            'm-s1-img4-caption': 'ハイテクチップ工房',
+            'm-s1-label': '01 / 投資の背景',
+            'm-s1-p1': '世界的なハイテクサプライチェーンの再構築の文脈において、ベトナムは、多国籍企業にとってリスクを分散し、伝統的な工場への依存を減らすための戦略的目的地として急速に浮上しています。この変化は、単に低価値の組立ラインの移転ではなく、エレクトロニクス エコシステムの中核となる最も複雑な段階、通常はプリント基板 (PCB) 製造業界にますます焦点が当てられています。スマートフォン、AI (人工知能) サーバーから自動車電子システムに至るまで、現代のあらゆる電子機器の「バックボーン」として、PCB の製造には最も厳格な技術、エネルギー、環境基準が必要です。',
+            'm-s1-p2': 'しかし、産業空間分析の観点から見ると、MEIKO がホアビンを選択したことは驚くべき戦略的措置です。日本からベトナム北部への海外直接投資（FDI）誘致の歴史の中で、大企業はしばしば日本のインフラ開発業者が作った「閉じたエコシステム」、特に住友グループがハノイ、フンイエン、ビンフックに投資した一連のタンロン工業団地（TLIP 1、2、3）に注目する傾向があった。 MEIKO 自体も、タック タート - クオック オアイ工業団地およびタンロン工業団地 (ハノイ) で長年存在感を示しています。',
+            'm-s1-p3': 'この調査報告書は、住友の工業団地を「スキップ」してMEIKOのソンダー左岸工業団地を選択するという住友の決定の背後にある戦略的層を掘り下げるものである。分析の焦点は、PCB 製造産業が次の 2 つの要素に大きく依存していることを明らかにすることです。ホアビン水力発電所およびノイバイ国際空港との関連で、ソンダ左岸工業団地の地理的位置の絶対的な利点を分析します。 MEIKOの水利用プロセスと高度な排水処理技術を詳しく解説。同時に、東南アジア市場への進出先を探している他のハイテク（ハイテク）企業に向けた深い戦略的教訓を引き出す。',
+            'm-s2-elec-box1-desc': 'クリーンルーム環境と熱湿度バランスを維持します。内層イメージ転写、ソルダーマスクコーティング、マイクロコンポーネントの組み立てなどのステップは、標準的なクリーンルーム環境で実行する必要があります。大容量の空調換気システム (HVAC) を 24 時間 365 日継続的に稼働させると、大量の電力が消費されます。',
+            'm-s2-elec-box1-title': 'クリーンルーム環境',
+            'm-s2-elec-box2-desc': '電気は熱機械サイクルと光学サイクルを維持します。 PCB の製造プロセスには、高速 CNC マシンを使用した機械的穴あけ、微細穴用のレーザー穴あけ、超高圧での層熱プレスが含まれます。これらの機械はすべて、非常に大きな静電気を消費します。',
+            'm-s2-elec-box3-desc': '電気めっきタンクに直流 (DC) を供給します。電気めっきは、導電性回路を作成するための中心的なステップです。スルーホール銅めっき、パターンめっき、ENIG表面処理などの工程は、いずれも電流による電気分解を必要とします。これらのめっき浴に適用される電流密度は非常に高く、完全に安定している必要があります。',
+            'm-s2-elec-box2-title': '熱機械サイクル',
+            'm-s2-elec-box3-title': '電気化学電流',
+            'm-s2-elec-data-desc': 'システム全体で消費される電力の総量を考えると、投資先は電圧低下や輪番停電のリスクを免れる必要があります。',
+            'm-s2-elec-data-label': '2024年の環境データ',
+            'm-s2-elec-intro': 'IC 産業は、電力システムの絶対的な安定性がなければ存在できません。 MEIKO にとって、電気は照明やエンジンの基本動作に使用されるだけでなく、数百万ドル相当の出荷品の品質 (歩留まり) を決定する要素です。この依存関係は、次の 3 つの詳細な技術的側面を通じて実証されます。',
+            'm-s2-elec-title': '高強度の電力依存性',
+            'm-s2-heading': 'PCB製造業界の厳格な性質',
+            'm-s2-intro': 'MEIKO の立地決定の根拠を理解するには、PCB 製造プロセスの中核となる技術的特徴を詳しく分析する必要があります。純粋に機械的なコンポーネントの組み立てとは異なり、高密度の多層 PCB パネル (HDI) または半導体パッケージ基板 (半導体パッケージ基板) の製造は、非常に複雑な一連の熱力学、フォトリソグラフィー、および電気化学反応です。標準的な PCB の製造プロセスは、最大 33 の個別の段階を経ることがあります。このプロセスチェーン全体は、高強度の電力供給と大量の超純水への絶対的な依存によって束縛されています。',
+            'm-s2-label': '02 / エネルギー・環境問題',
+            'm-s2-water-box1-desc': '感光性フィルムまたはメッキをプレスする前に、銅の表面を酸性溶液と物理的な研磨を組み合わせて徹底的に洗浄する必要があります。ドリルで開けた穴に詰まったプラスチックの残留物は、化学薬品で掃除する必要があります。',
+            'm-s2-water-box1-title': '洗浄とスケール除去',
+            'm-s2-water-box2-desc': '輪郭形成のために不要な銅を除去する (エッチング) および放射線不透過性フィルムを除去する (ストリッピング) プロセスでは、大量の酸およびアルカリ性の化学薬品が使用されます。',
+            'm-s2-water-box2-title': '腐食・剥離',
+            'm-s2-water-box3-desc': '洗浄水の純度は最も重要です。通常の水道水にはミネラルが含まれており、沈殿して微細な短絡を引き起こします。したがって、MEIKO では、RO 浄水システムまたは導電率が極めて低い DI (脱イオン) 水の使用が求められます。',
+            'm-s2-water-box3-title': 'すすぎ工程',
+            'm-s2-water-data-desc': 'グローバルMEIKOシステム全体の水使用量の合計。水は化学処理プロセス (ウェットプロセス) の隅々に関与しています。',
+            'm-s2-water-data-label': '2024 年の水使用量',
+            'm-s2-water-intro': '電気が神経系であれば、水は PCB 工場の循環系です。この業界は、世界で最も水を大量に消費する業界の 1 つとして分類されています。データによると、従来の PCB 製造プロセスでは、製造される回路基板 1 平方メートル (m2) ごとに平均 1.5 立方メートル (m3) のきれいな水が消費されます。',
+            'm-s2-water-title': 'ウェットプロセスの「血液」',
+            'm-s2-water-warning': 'この重要な依存関係から、MEIKO では常に各拠点の水資源リスクを評価（水リスク評価）しています。供給が途切れると、数億ドル相当のプロジェクトは即座に無効になります。',
+            'm-s3-barrier-p1': '財務コストの問題を超えて、MEIKO にとって住友工業団地の最大の障壁は、共用施設の構造にあります。タンロン I のような工業団地には、現在、さまざまな業界の 100 社以上の企業が拠点を置いています。稼働率が高い場合には、エリア全体の総電力容量と上下水処理場容量を算出し、固定的に割り当てます。',
+            'm-s3-barrier-quote': 'MEIKOは、ASEANのサプライチェーン拡大に対する顧客のニーズは「現在のベトナム工場とタンロン工場の生産能力を超えることが予想される」と指摘した。容量の飛躍的な増加に対応するために、MEIKO は同じインフラストラクチャを共有する「隣人」に制約されないスペースを必要としていました。 MEIKOは松大左岸工業団地において「アンカーテナント」の役割を果たしています。',
+            'm-s3-barrier-p2': 'PCB 製造に特化した 5 億ドル規模の巨大工場を、すでに確立されている送電網に追加することは、送電網の電力需要により継続的な大負荷スパイクと非常に高濃度の重金属を含む廃水が発生するため、非常に危険です。多業種の工業団地の集中廃水処理ステーションでは、PCB の複雑な化学物質を処理する際に深刻な困難に直面することがよくあります。',
+            'm-s3-barrier-title': '共有ユーティリティエコシステムへの障壁',
+            'm-s3-cost-desc': 'まず最も直接的な現実的な理由は、土地の賃貸価格と運営コストに大きな差があることです。タンロン工業団地は北部主要経済地域の中核に位置し、高級セグメント（Tier-1）の賃貸価格レベルを確立しています。対照的に、ホアビン省は産業衛星（Tier-2）として台頭しつつある山岳地帯であり、非常に魅力的なコスト裁定マージンを提供している。',
+            'm-s3-heading': '住友エコシステムからの撤退',
+            'm-s3-cost-title': 'コストアービトラージ (コストアービトラージ)',
+            'm-s3-img2-caption': '共有インフラストラクチャは飽和状態にある',
+            'm-s3-img1-caption': '飽和した工業団地における電力会社の圧力',
+            'm-s3-p1': 'PCB業界の膨大な資源消費の性質を理解しているため、MEIKOがなぜ日本の住友グループ（TLIP 1、2、3）が開発したタンロン工業団地への投資拡大を選択せず​​、ベトナムの民間企業であるDa Hop Trading Joint Stock Company（Da Hop JSC）が投資したソンダー左岸工業団地を選択したのかを分析するための確かな根拠が得られました。',
+            'm-s3-label': '03 / 戦略分析',
+            'm-s3-table-h1': '比較基準',
+            'm-s3-p2': '住友商事は日本最大の商社のひとつで、ハノイ、フンイエン、ビンフックにある同社のタンロン工業団地チェーンは、ベトナムにおける日本のFDI資本の流れの「黄金律」と長年考えられてきた。これらの工業団地は、同期インフラ、包括的な法的サポート サービスを提供し、そして最も重要なことに、結束力のある日本のビジネス コミュニティ (系列モデル) を構築します。しかし、MEIKO のような特定のエネルギー消費量と排出特性を備えた 5 億ドルの「メガプロジェクト」の場合、これらの従来の利点は大きな抵抗を示します。',
+            'm-s3-table-h3': 'ソンダー左岸工業団地（ホアビン）',
+            'm-s3-table-h2': 'タンロン II 工業団地 (フンイエン)',
+            'm-s3-table-r1c2': '住友商事株式会社（日本）',
+            'm-s3-table-r1c1': 'インフラ開発者',
+            'm-s3-table-r1c3': 'Da Hop Trading Joint Stock Company (ベトナム)',
+            'm-s3-table-r2c1': '土地賃貸料',
+            'm-s3-table-r2c3': '約55ドル/㎡',
+            'm-s3-table-r2c2': '約160～162ドル/㎡',
+            'm-s3-table-r3c2': '67% (大規模な土地資金が不足)',
+            'm-s3-table-r3c1': '充填率',
+            'm-s3-table-r3c3': '80% (隣接する9.2ヘクタールの区画に準備完了)',
+            'm-s3-table-r4c1': '管理費とインフラストラクチャ費',
+            'm-s3-table-r4c3': '0.3 米ドル/平方メートル/年',
+            'm-s3-table-r4c2': '1.2 米ドル/平方メートル/年',
+            'm-s3-table-r5c1': '排水処理料金',
+            'm-s3-table-r5c2': 'ハイエンド価格の前提',
+            'm-s3-table-r5c3': '0.3 米ドル/m3',
+            'm-s3-table-r6c1': 'インフラストラクチャの柔軟性',
+            'm-s3-table-r6c2': '高度な標準化',
+            'm-s3-table-r6c3': 'オーダーメイドのインフラストラクチャ',
+            'm-s4-elec-img-caption': '独立した 22KV 電力網インフラストラクチャ',
+            'm-s3-table-summary': '比較表から、ボーレフトソンダー工業団地の土地賃貸料（55ドル/㎡）はタンロンⅡ工業団地（160ドル/㎡）に比べて約3分の1に過ぎないことが分かります。 MEIKO は 9.2 ～ 9.3 ヘクタール (93,000 平方メートル) を借りる必要があるため、ホアビンを選択することでグループは土地使用コストを 1,000 万ドル近く節約できます。それだけでなく、年間のインフラストラクチャ管理料金が 50 年のプロジェクト ライフサイクル全体で 4 分の 1 に削減され、累積的に多大な経済的メリットがもたらされます。',
+            'm-s4-elec-insight-title': '洞察: グリーン エネルギーとスコープ 2',
+            'm-s4-elec-insight-desc': 'ホアビン水力発電所に近いということは、物理的なエネルギー安全保障を確保することを意味するだけでなく、MEIKO の世界的な環境、社会、ガバナンス (ESG) 戦略において最も重要な役割を果たし、主要顧客のグリーン基準を満たしています。',
+            'm-s4-elec-p2': 'ホアビン市内中心部から工業団地までの距離はわずか 1.7 km であり、工業団地は電力源の近くに位置しています。 MEIKO 工場は、伝送の「ソース」に直接配置されているため、電圧降下、ちらつき、停電のリスクをほぼ排除できます。',
+            'm-s4-elec-p1': 'ソンダー左岸工業団地の決定的な利点は、ホアビン水力発電所の麓に位置していることです。最大 1,900 MW の設備容量を誇るこれは、東南アジアで最大かつ最も安定した発電施設の 1 つです。',
+            'm-s4-elec-title': '電力の利点: ホアビン水力発電と ESG 戦略に近い',
+            'm-s4-heading': 'ホアビンの中核問題の解決策',
+            'm-s4-img1-caption': 'ホアビン水力発電所 (1,900 MW) の隣接する利点により、送電網の損失が排除され、同時に世界規模のスコープ 2 排出削減公約に直接貢献します。',
+            'm-s4-intro': '北部デルタ地帯の工業団地とは全く異なり、ソンダー左岸工業団地は、地表水資源と水力発電に直接関連する独特の地経学的利点を有しており、MEIKO の資源に対する「渇望」を完全に解決します。',
+            'm-s4-label': '04 / 絶対的な優位性',
+            'm-s4-water-img-caption': '環境に優しい運命をマスターする',
+            'm-s4-water-img2-caption': '独立型廃水処理ステーションを所有する特権により、MEIKO は安全な法的障壁を確立し、非常に複雑な PCB 化学物質の流れを自律的に洗浄することができます。',
+            'm-s4-water-insight-desc': '独立型の廃水処理ステーションを所有することは戦略的な勝利です。 MEIKO は、昼夜を問わず 3,000 m3/日の独立したシステムを備え、法的運命を完全に制御し、化学物質用に 100% 特化した膜濾過システムを設計しています。',
+            'm-s4-water-insight-title': '洞察: 法的リスク障壁',
+            'm-s4-water-p1': 'ダ川は電力源以外にも豊富な淡水源であり、上水不足のリスクは完全に解決されています。ソンダー左岸工業団地は、投資家ダホップが管理するソンダー浄水場と直接統合されています。',
+            'm-s4-water-title': 'きれいな水インフラと独立した下水処理場',
+            'm-s5-circ1-desc': '電気分解およびデカンテーション技術を使用して銅のやすりを抽出し、97% の純度を達成します。',
+            'm-s5-circ1-title': '銅の回収',
+            'm-s5-circ2-desc': 'キレート樹脂技術により、ドリフトパラジウムを99%以上回収します。',
+            'm-s5-circ3-desc': 'コア技術を変更し、ホルムアルデヒドとシアン化物を完全に除去します。',
+            'm-s5-circ2-title': '貴金属回収',
+            'm-s5-circular-title': '循環経済',
+            'm-s5-circ3-title': '「ブラックホール」システム',
+            'm-s5-classify-title': '高度な物理的および化学的分類および処理システム',
+            'm-s5-classify-p1': '淡水は、ミネラルを完全に除去するために巨大な MEIKO 前処理ステーションを通過し、脱イオン水 (DI) と逆浸透水 (RO 水) の状態に達する必要があります。最適化するために、MEIKO は濃縮 RO 水を最大 60% の回収率で再利用する原則を適用しています。',
+            'm-s5-heading': '水循環・排水処理技術',
+            'm-s5-filter-badge': '物理濾過システム',
+            'm-s5-label': '05 / ディープダイブテクノロジー',
+            'm-s5-intro': '5 億ドルの PCB 工場における水の使用と処理は、通常の給排水プロセスではなく、高度な物理化学工学システムです。',
+            'm-s5-membrane-desc': 'フィルタースロットは 0.1 ミクロンと小さいため、すべての汚染物質が固体スラッジの形で保持されます。',
+            'm-s5-membrane-title': '膜ろ過:',
+            'm-s5-waste1-desc': '灰色のすすぎ水には、物理​​的な研磨プロセスで発生した銅の削りくずが多く含まれています。',
+            'm-s5-waste1-title': '銅粉が入っている',
+            'm-s5-waste2-title': '濃酸・アルカリ',
+            'm-s5-waste2-desc': '銅、ニッケル、銀、金、錫/鉛メッキ槽からの廃水。',
+            'm-s5-waste3-title': '高COD有機',
+            'm-s5-waste3-desc': 'インク除去、光化学的ウォッシュアウト、ソルダー マスク コーティングによって生成されます。',
+            'm-s6-heading': 'ノイバイ国際空港への接続',
+            'm-s6-insight-desc': 'HDI と半導体は非常に価値がありますが、サイズが非常に軽いため、世界中で 24 ～ 48 時間以内の厳密なタイミング (ジャストインタイム) が必要です。',
+            'm-s6-insight-title': '洞察: 価値 - 重み係数',
+            'm-s6-label': '06 / 血管物流',
+            'm-s6-p1': 'ホアラック～ホアビン高速道路の登場により、ソンダー左岸工業団地からノイバイ空港貨物ターミナルまでの移動時間が90分弱に短縮されます。',
+            'm-s6-route-title': '戦略的ロードマップ',
+            'm-s6-route2': 'ノイバイ空港 (< 90 分)',
+            'm-s6-route1': 'ソンダー左岸工業団地',
+            'm-s6-route3': 'サムスン・バクニン (108km)',
+            'm-s7-card1-desc': '160 ドルから 55 ドルまでの地価の差により、研究開発に莫大な設備投資が可能になります。',
+            'm-s7-card2-desc': 'スコープ 2 の排出問題を完全に解決するには、水力発電に近い場所を選択してください。',
+            'm-s7-card1-title': 'ペリフェラルマイニング (Tier-2)',
+            'm-s7-card3-desc': 'アンカーテナントの立場を利用して、独立した下水処理プラントを交渉します。',
+            'm-s7-card2-title': 'ESGは生き残りの必須事項です',
+            'm-s7-card3-title': 'オーダーメイドのインフラストラクチャ',
+            'm-s7-card4-desc': '銅スラッジと貴金属パラジウムを二次的な利益源に変えます。',
+            'm-s7-card4-title': '収益性の高い循環経済',
+            'm-s7-heading': '日本企業の教訓',
+            'm-s7-label': '07 / プレイブック',
+            'm-s8-heading': 'ハノイの玄関口・フートーにおけるハイテク生産における人材の優位性',
+            'm-s8-img-caption': '人材エコシステムが完璧に結合',
+            'm-s8-intro': 'フート、ビンフック、ホアビンの3省を統合して新しいフート省を形成する行政合併イベント（決議第202/2025/QH15による）により、北部の産業人材の地図が完全に塗り替えられた。現在のホアビン地域は、首都に隣接しているという利点を維持しているだけでなく、新しいスーパー省の大規模な産業エコシステムから直接恩恵を受けています。',
+            'm-s8-label': '08 / 人事',
+            'm-s8-pt1-card1-desc': 'バクニンやタイグエンのような飽和して高価な産業都市と比較して、この地域は土地資金や必要不可欠な生活費がはるかにリーズナブルです。これにより、従業員の良好な生活水準を確保しながら、給与予算を最適化することができます。',
+            'm-s8-pt1-card1-title': '運営コストと生活コストを最適化する',
+            'm-s8-pt1-card2-desc': 'このプロジェクトはハノイに近いため、アップグレードされた交通インフラ ネットワークに簡単に接続できます。この距離は、上級専門家が都心部の渋滞に悩まされることなく毎日通勤するのに理想的な距離です。',
+            'm-s8-pt1-card2-title': '知識の「核心領域」へのアクセス',
+            'm-s8-pt1-card3-desc': '衛星都市エリアや公営住宅の創設に地元のインフラ開発部門が参加することで、持続可能な生活環境が創出され、工業団地のすぐ隣に長期労働者が確保されます。',
+            'm-s8-pt1-card3-title': '内部公益事業エコシステム',
+            'm-s8-pt1-intro': 'ハノイの西/南西の玄関口（ホアビン地区）にハイテク工場を立地することは、スペースとコストの面で「二重の利点」をもたらします。',
+            'm-s8-pt1-title': '1. ハノイに隣接する立地の戦略的優位性',
+            'm-s8-pt2-card1-role': '設計エンジニア、自動化、材料、QA/QC マネージャー。',
+            'm-s8-pt2-card1-title': '上級人材と研究開発',
+            'm-s8-pt2-card1-source': '<strong>採用情報源:',
+            'm-s8-pt2-card2-source': '<strong>採用情報源:',
+            'm-s8-pt2-card2-role': 'ワークショップマネージャー、メンテナンスエンジニア、CNC/ロボットプログラマー。',
+            'm-s8-pt2-card2-title': '中間管理職とエンジニアリング',
+            'm-s8-pt2-card3-role': 'クリーンルーム内で直接作業員が機械に立って作業します。',
+            'm-s8-pt2-card3-source': '<strong>採用情報源:',
+            'm-s8-pt2-card3-title': '操作および組立作業者',
+            'm-s8-pt2-intro': 'ハイテク生産ラインでは多層的な人員構成が必要です。この戦略的な場所により、各候補ファイルに正確にアクセスできます。',
+            'm-s8-pt2-title': '2. ハイテク人材の体制と採用チャネル',
+            'm-s8-pt3-hanoi-title': 'ハノイ (人口約 850 万人から 900 万人)',
+            'm-s8-pt3-hanoi-desc': 'インテリジェンスと付随サービスを提供するセンターとして機能します。毎年何万人ものエンジニアリングおよびテクノロジーの学生が卒業し、研究開発およびサプライチェーンの職に就いています。',
+            'm-s8-pt3-phutho-desc': '人口規模で国内第 11 位に位置するこの新しい州には、非熟練労働者や技術者が非常に豊富に存在します。',
+            'm-s8-pt3-intro': '現在の人口統計の状況により、大規模プロジェクトの量から質まで満たす完璧な人材フィルター ファネルが作成されます。',
+            'm-s8-pt3-phutho-title': '新フート省（人口400万人以上）',
+            'm-s8-pt3-quote': '「この組み合わせは素晴らしく補完的です。ヴィンフックの長年にわたる産業とエレクトロニクスの財団は訓練された労働力源を提供しますが、ホアビンとフートの人口規模は豊富な労働者の供給を保証します。労働者は家族の近くにいるために州内で働き、非常に安定した中核部隊の維持に役立ちます。」',
+            'm-s9-heading': 'FDI の将来の青写真',
+            'm-s8-pt3-title': '3. 巨大な人口規模による対応能力',
+            'm-s9-label': '09 / 結論の要約',
+            'm-s9-p1': 'MEIKO Electronics の松大左岸工業団地への 5 億ドルの資本注入は、地理経済的空間位置決めと高度な製造技術の芸術による完璧な決定です。紅河デルタの密集した産業中心地を離れ、ハノイと国境を接するホアビンの土地に新たな基地を建設するという決定は、間違いなく正しい投資である。',
+            'm-stat-invest-label': '総投資額',
+            'm-s9-p2': 'MEIKO は、ホアビン水力発電の力を最大限に活用して ESG グリーン エネルギー問題を解読し、優れた土地コスト インセンティブと特殊なインフラストラクチャを組み合わせることで、持続可能な生産マシンを構築しました。これは間違いなく、ベトナムにおける新世代のハイテクFDI資本の流れの標準モデル（青写真）です。',
+            'm-stat-jobs-label': '直接雇用',
+            'm-stat-invest-unit': 'トルコドル',
+            'm-stat-jobs-unit': '人事',
+            'm-stat-scale-label': 'プロジェクト規模',
+            'm-stat-scale-unit': 'ヘクタール',
+            'm-title': 'MEIKOの戦略的決断'
+        },
+        vn: {
+            'm-footer-addr': 'Khu Công Nghiệp Bờ Trái Sông Đà, Thành phố Hòa Bình.',
+            'm-footer-copy': '&copy; 2026 Thịnh Minh IP - Da Hop JSC. Báo cáo case study chuyên sâu.',
+            'm-hero-badge': 'Case Study Phát Triển Bền Vững & Công Nghệ Cao',
+            'm-hero-subtitle': 'Giới thiệu chuyên sâu về sự dịch chuyển chuỗi cung ứng High-Tech và giải pháp phát triển sinh thái hoàn hảo tại Khu Công Nghiệp Bờ Trái Sông Đà và các Khu Công Nghiệp của Dạ Hợp Hòa Bình.',
+            'm-hero-title': 'Quyết Định Chiến Lược Của Tập Đoàn <br class="hidden md:block" /><span class="text-gradient-eco border-b-2 border-meikoGreen pb-2 inline-block mt-2">MEIKO Electronics</span>',
+            'm-nav-advantages': 'Lợi thế',
+            'm-nav-challenge': 'Thách thức',
+            'm-nav-context': 'Bối cảnh',
+            'm-nav-hr': 'Nhân lực',
+            'm-nav-logistics': 'Logistics',
+            'm-nav-playbook': 'Playbook',
+            'm-nav-strategy': 'Chiến lược',
+            'm-nav-tech': 'Công nghệ',
+            'm-s1-heading': 'Bước Chuyển Mình Của Chuỗi Cung Ứng Toàn Cầu',
+            'm-s1-highlight': 'Một minh chứng rõ nét cho xu hướng này là quyết định đầu tư mang tính bước ngoặt của Tập đoàn Điện tử MEIKO (Nhật Bản) vào Khu Công Nghiệp (KCN) Bờ Trái Sông Đà, tọa lạc tại thành phố Hòa Bình, Việt Nam. Là một trong những nhà cung cấp PCB hàng đầu thế giới cho các đối tác chiến lược như Apple và Samsung, MEIKO đã cam kết rót 200 triệu USD cho giai đoạn 1 để xây dựng nhà máy sản xuất vi mạch điện tử trên diện tích 9,2 đến 9,3 hecta, với dự kiến nâng tổng mức đầu tư lên 500 triệu USD khi hoàn thành nhà máy thứ hai. Dự án này dự kiến sẽ tạo ra 3.000 việc làm trực tiếp và đóng góp khoảng 200 tỷ VNĐ mỗi năm vào ngân sách địa phương từ năm 2030. Trọng tâm sản xuất của nhà máy là các dòng PCB đa lớp từ trung đến cao cấp và PCB kết nối mật độ cao (HDI) phục vụ cho máy chủ AI và thiết bị ngoại vi.',
+            'm-s1-img1-caption': 'Định hình lại không gian công nghiệp và chuỗi cung ứng toàn cầu',
+            'm-s1-img2-caption': 'Hệ sinh thái công nghiệp truyền thống đang đối mặt với giới hạn tiện ích và tài nguyên',
+            'm-s1-img3-caption': 'Sự chuyển dịch tất yếu phục vụ hạ tầng máy chủ AI và vi mạch mật độ cao',
+            'm-s1-img4-caption': 'Phân xưởng vi mạch công nghệ cao',
+            'm-s1-label': '01 / Bối Cảnh Đầu Tư',
+            'm-s1-p1': 'Trong bối cảnh tái cấu trúc chuỗi cung ứng công nghệ cao toàn cầu, Việt Nam đã nhanh chóng nổi lên như một điểm đến chiến lược cho các tập đoàn đa quốc gia nhằm đa dạng hóa rủi ro và giảm sự phụ thuộc vào các công xưởng truyền thống. Sự chuyển dịch này không chỉ đơn thuần là việc di dời các dây chuyền lắp ráp giá trị thấp, mà ngày càng tập trung vào các công đoạn cốt lõi và phức tạp nhất của hệ sinh thái điện tử, tiêu biểu là ngành công nghiệp sản xuất Bảng mạch in (Printed Circuit Board - PCB). Là "xương sống" của mọi thiết bị điện tử hiện đại, từ điện thoại thông minh, máy chủ AI (trí tuệ nhân tạo), đến các hệ thống điện tử trên ô tô, sản xuất PCB đòi hỏi các tiêu chuẩn kỹ thuật, năng lượng và môi trường khắt khe bậc nhất.',
+            'm-s1-p2': 'Tuy nhiên, từ góc độ phân tích không gian công nghiệp, quyết định chọn Hòa Bình của MEIKO là một nước đi chiến lược đầy bất ngờ. Trong lịch sử thu hút Đầu tư Trực tiếp Nước ngoài (FDI) từ Nhật Bản vào miền Bắc Việt Nam, các tập đoàn lớn thường có xu hướng tập trung vào các "hệ sinh thái khép kín" do chính các nhà phát triển hạ tầng Nhật Bản kiến tạo, tiêu biểu nhất là chuỗi các Khu công nghiệp Thăng Long (TLIP 1, 2, 3) do Tập đoàn SUMITOMO làm chủ đầu tư tại Hà Nội, Hưng Yên và Vĩnh Phúc. Bản thân MEIKO cũng đã có sự hiện diện lâu năm tại KCN Thạch Thất - Quốc Oai và KCN Thăng Long (Hà Nội).',
+            'm-s1-p3': 'Báo cáo nghiên cứu này sẽ đi sâu giải phẫu các lớp lang chiến lược đằng sau quyết định "bỏ qua" các KCN của SUMITOMO để chọn KCN Bờ Trái Sông Đà của MEIKO. Trọng tâm của phân tích sẽ làm rõ mức độ phụ thuộc mang tính sống còn của ngành sản xuất PCB vào hai yếu tố Điện và Nước; phân tích lợi thế tuyệt đối của vị trí địa lý KCN Bờ Trái Sông Đà trong mối tương quan với Thủy điện Hòa Bình và Sân bay Quốc tế Nội Bài; mô tả chuyên sâu quy trình sử dụng nước và công nghệ xử lý nước thải tinh vi của MEIKO; đồng thời rút ra những bài học chiến lược sâu sắc cho các doanh nghiệp High-Tech (công nghệ cao) khác đang tìm kiếm bến đỗ tại thị trường Đông Nam Á.',
+            'm-s2-elec-box1-desc': 'Duy trì môi trường phòng sạch (Clean Room) và cân bằng nhiệt ẩm. Các công đoạn như chuyển ảnh lớp trong, phủ mặt nạ hàn và lắp ráp linh kiện vi mô đòi hỏi phải được thực hiện trong môi trường phòng sạch đạt tiêu chuẩn. Việc vận hành hệ thống điều hòa không khí, thông gió (HVAC) công suất lớn chạy liên tục 24/7/365 tiêu tốn lượng điện khổng lồ.',
+            'm-s2-elec-box1-title': 'Môi Trường Phòng Sạch',
+            'm-s2-elec-box2-desc': 'Điện năng duy trì các chu trình cơ nhiệt học và quang học. Quá trình sản xuất PCB bao gồm khoan cơ học bằng máy CNC siêu tốc, khoan laser cho các vi lỗ, và ép nhiệt lớp dưới áp suất cực cao. Tất cả các cỗ máy này đều yêu cầu công suất tiêu thụ điện tĩnh rất lớn.',
+            'm-s2-elec-box2-title': 'Chu Trình Cơ Nhiệt Học',
+            'm-s2-elec-box3-desc': 'Cung cấp dòng điện trực tiếp (DC) cho các bể mạ điện hóa. Mạ điện là công đoạn cốt lõi để tạo ra các đường mạch dẫn điện. Các bước như mạ đồng xuyên lỗ, mạ hoa văn, và xử lý bề mặt ENIG đều dựa vào dòng điện để điện phân. Mật độ dòng điện áp dụng trong các bể mạ này rất cao và phải hoàn toàn ổn định.',
+            'm-s2-elec-box3-title': 'Dòng Điện Điện Hóa',
+            'm-s2-elec-data-desc': 'Tổng lượng điện năng tiêu thụ toàn hệ thống, đòi hỏi điểm đến đầu tư phải miễn nhiễm với rủi ro sụt áp hay cắt điện luân phiên.',
+            'm-s2-elec-data-label': 'Dữ liệu môi trường 2024',
+            'm-s2-elec-intro': 'Ngành công nghiệp vi mạch không thể tồn tại nếu thiếu sự ổn định tuyệt đối của hệ thống điện. Đối với MEIKO, điện năng không chỉ dùng để thắp sáng hay vận hành động cơ cơ bản, mà là yếu tố quyết định chất lượng (yield rate) của từng lô hàng trị giá hàng triệu USD. Sự phụ thuộc này được thể hiện qua ba khía cạnh kỹ thuật chuyên sâu:',
+            'm-s2-elec-title': 'Phụ Thuộc Điện Năng Cường Độ Cao',
+            'm-s2-heading': 'Bản Chất Khắt Khe Của Ngành Sản Xuất PCB',
+            'm-s2-intro': 'Để hiểu được lý do căn bản định hình quyết định chọn địa điểm của MEIKO, cần phải tiến hành mổ xẻ các đặc tính kỹ thuật cốt lõi của quy trình sản xuất PCB. Khác với hoạt động lắp ráp linh kiện cơ học thuần túy, việc chế tạo ra những tấm nền PCB đa lớp, mật độ cao (HDI) hay các chất nền gói bán dẫn (Semiconductor Package Substrates) là một chuỗi các phản ứng nhiệt động lực học, quang khắc và điện hóa học cực kỳ phức tạp. Quy trình sản xuất một tấm PCB tiêu chuẩn có thể trải qua tới 33 công đoạn riêng biệt. Toàn bộ chuỗi quy trình này bị ràng buộc bởi sự phụ thuộc tuyệt đối vào nguồn cung cấp điện năng cường độ cao và nguồn nước siêu sạch với khối lượng khổng lồ.',
+            'm-s2-label': '02 / Bài Toán Năng Lượng & Môi Trường',
+            'm-s2-water-box1-desc': 'Trước khi ép màng nhạy sáng hoặc mạ, bề mặt đồng phải được làm sạch hoàn toàn bằng dung dịch axit kết hợp chà nhám vật lý. Cặn nhựa dính trong các lỗ khoan phải được tẩy sạch bằng hóa chất.',
+            'm-s2-water-box1-title': 'Làm sạch và khử cặn',
+            'm-s2-water-box2-desc': 'Quá trình loại bỏ lớp đồng không mong muốn để tạo hình đường mạch (Etching) và quá trình bóc tách màng cản quang (Stripping) sử dụng một lượng lớn hóa chất gốc axit và kiềm.',
+            'm-s2-water-box2-title': 'Ăn mòn và bóc tách',
+            'm-s2-water-box3-desc': 'Sự tinh khiết của nước rửa là tối quan trọng. Nước máy thông thường chứa khoáng chất sẽ kết tủa, gây đoản mạch vi mô. Do đó, MEIKO bắt buộc phải sử dụng hệ thống tinh lọc nước RO hoặc nước DI (Khử ion) với độ dẫn điện cực thấp.',
+            'm-s2-water-box3-title': 'Quy trình xả rửa (Rinsing)',
+            'm-s2-water-data-desc': 'Tổng lượng nước sử dụng của toàn hệ thống MEIKO toàn cầu. Nước tham gia vào mọi ngóc ngách của quá trình gia công hóa chất (Wet Processes).',
+            'm-s2-water-data-label': 'Sử dụng nước 2024',
+            'm-s2-water-intro': 'Nếu điện là hệ thần kinh, thì nước chính là hệ tuần hoàn của một nhà máy PCB. Ngành công nghiệp này được xếp vào nhóm tiêu thụ nước thâm dụng bậc nhất thế giới. Dữ liệu cho thấy, quy trình sản xuất PCB truyền thống tiêu thụ trung bình 1,5 mét khối (m3) nước sạch cho mỗi mét vuông (m2) bảng mạch được sản xuất.',
+            'm-s2-water-title': '"Máu" Của Các Quy Trình Ướt',
+            'm-s2-water-warning': 'Chính vì sự phụ thuộc sống còn này, MEIKO luôn đánh giá rủi ro tài nguyên nước (Water Risk Assessment) tại mỗi địa điểm. Bất kỳ một đứt gãy nào trong nguồn cung cấp, đều sẽ ngay lập tức vô hiệu hóa dự án trị giá hàng trăm triệu USD.',
+            'm-s3-barrier-p1': 'Vượt lên trên bài toán chi phí tài chính, rào cản lớn nhất của các KCN SUMITOMO đối với MEIKO nằm ở cấu trúc tiện ích dùng chung. Một KCN như Thăng Long I hiện là nơi trú chân của hơn 100 công ty đa dạng các ngành nghề. Khi tỷ lệ lấp đầy cao, tổng dung lượng điện và công suất trạm cấp nước/xử lý nước thải của toàn khu đã được tính toán và phân bổ cố định.',
+            'm-s3-barrier-p2': 'Việc chèn thêm một nhà máy mega-factory trị giá 500 triệu USD chuyên sản xuất PCB—với nhu cầu điện lưới tạo các xung tải lớn liên tục và lượng nước thải chứa nồng độ kim loại nặng cực cao—vào một mạng lưới đã ổn định là vô cùng rủi ro. Các trạm xử lý nước thải tập trung của các KCN đa ngành thường gặp khó khăn nghiêm trọng trong việc xử lý hóa chất phức tạp của PCB.',
+            'm-s3-barrier-quote': 'MEIKO đã chỉ ra rằng nhu cầu mở rộng chuỗi cung ứng ASEAN của các khách hàng "dự kiến sẽ vượt quá năng lực sản xuất của các nhà máy Việt Nam và Thăng Long hiện tại". Để đáp ứng bước nhảy vọt về năng lực, MEIKO cần một không gian không bị ràng buộc bởi các "hàng xóm" dùng chung hạ tầng. Tại KCN Bờ Trái Sông Đà, MEIKO đóng vai trò là "khách thuê mỏ neo" (Anchor Tenant).',
+            'm-s3-barrier-title': 'Rào Cản Hệ Sinh Thái Tiện Ích Dùng Chung',
+            'm-s3-cost-desc': 'Lý do thực dụng đầu tiên và trực tiếp nhất là sự chênh lệch khổng lồ về giá thuê đất và chi phí vận hành. Các KCN Thăng Long, nằm ở vị trí lõi của Vùng kinh tế trọng điểm Bắc Bộ, đã thiết lập mặt bằng giá thuê thuộc phân khúc cao cấp (Tier-1). Ngược lại, Hòa Bình, một tỉnh miền núi đang vươn lên thành vệ tinh công nghiệp (Tier-2), cung cấp một biên độ chênh lệch chi phí (cost arbitrage) vô cùng hấp dẫn.',
+            'm-s3-cost-title': 'Bài Toán Chi Phí Đất Công Nghiệp (Cost Arbitrage)',
+            'm-s3-heading': 'Rút Lui Khỏi Hệ Sinh Thái SUMITOMO',
+            'm-s3-img1-caption': 'Áp lực tiện ích tại các KCN bão hòa',
+            'm-s3-img2-caption': 'Hạ tầng dùng chung bão hòa',
+            'm-s3-label': '03 / Phân tích chiến lược',
+            'm-s3-p1': 'Hiểu được tính chất tiêu hao tài nguyên khổng lồ của ngành PCB, chúng ta có cơ sở vững chắc để phân tích tại sao MEIKO không chọn mở rộng đầu tư vào các Khu công nghiệp Thăng Long do Tập đoàn SUMITOMO Nhật Bản phát triển (TLIP 1, 2, 3), mà lại chọn KCN Bờ Trái Sông Đà do một công ty tư nhân Việt Nam là Công ty Cổ phần Thương mại Dạ Hợp (Da Hop JSC) làm chủ đầu tư.',
+            'm-s3-p2': 'SUMITOMO là một trong những tập đoàn thương mại lớn nhất Nhật Bản, và chuỗi KCN Thăng Long của họ tại Hà Nội, Hưng Yên và Vĩnh Phúc từ lâu đã được xem là "khuôn vàng thước ngọc" cho dòng vốn FDI Nhật Bản tại Việt Nam. Các KCN này cung cấp hạ tầng đồng bộ, dịch vụ hỗ trợ pháp lý trọn gói và quan trọng nhất là tạo ra một cộng đồng doanh nghiệp Nhật Bản gắn kết (mô hình Keiretsu). Tuy nhiên, đối với một "đại dự án" quy mô 500 triệu USD mang tính chất tiêu thụ năng lượng và phát thải đặc thù như của MEIKO, các lợi thế truyền thống này lại bộc lộ những lực cản đáng kể.',
+            'm-s3-table-h1': 'Tiêu Chí So Sánh',
+            'm-s3-table-h2': 'KCN Thăng Long II (Hưng Yên)',
+            'm-s3-table-h3': 'KCN Bờ Trái Sông Đà (Hòa Bình)',
+            'm-s3-table-r1c1': 'Nhà phát triển hạ tầng',
+            'm-s3-table-r1c2': 'SUMITOMO Corporation (Nhật Bản)',
+            'm-s3-table-r1c3': 'Công ty Cổ phần Thương mại Dạ Hợp (Việt Nam)',
+            'm-s3-table-r2c1': 'Giá thuê đất',
+            'm-s3-table-r2c2': 'Khoảng 160 - 162 USD / m²',
+            'm-s3-table-r2c3': 'Khoảng 55 USD / m²',
+            'm-s3-table-r3c1': 'Tỷ lệ lấp đầy',
+            'm-s3-table-r3c2': '67% (Quỹ đất lớn khan hiếm)',
+            'm-s3-table-r3c3': '80% (Sẵn sàng các lô liền kề 9,2ha)',
+            'm-s3-table-r4c1': 'Phí quản lý và hạ tầng',
+            'm-s3-table-r4c2': '1,2 USD / m² / năm',
+            'm-s3-table-r4c3': '0,3 USD / m² / năm',
+            'm-s3-table-r5c1': 'Phí xử lý nước thải',
+            'm-s3-table-r5c2': 'Mặt bằng giá cao cấp',
+            'm-s3-table-r5c3': '0,3 USD / m³',
+            'm-s3-table-r6c1': 'Tính linh hoạt hạ tầng',
+            'm-s3-table-r6c2': 'Quy chuẩn hóa cao',
+            'm-s3-table-r6c3': 'Hạ tầng chuyên biệt (Bespoke)',
+            'm-s3-table-summary': 'Thông qua bảng so sánh, có thể thấy giá thuê đất tại KCN Bờ Trái Sông Đà (55 USD/m²) chỉ bằng khoảng một phần ba (1/3) so với KCN Thăng Long II (160 USD/m²). Đối với nhu cầu thuê 9,2 đến 9,3 ha (93.000 m²) của MEIKO , việc chọn Hòa Bình giúp tập đoàn tiết kiệm ngay lập tức gần 10 triệu USD chi phí sử dụng đất. Chưa dừng lại ở đó, mức phí quản lý hạ tầng hàng năm thấp hơn gấp 4 lần kéo dài trong suốt vòng đời dự án 50 năm mang lại lợi ích tài chính tích lũy khổng lồ.',
+            'm-s4-elec-img-caption': 'Hạ Tầng Lưới Điện 22KV Độc Lập',
+            'm-s4-elec-insight-desc': 'Sự gần gũi với Thủy điện Hòa Bình không chỉ mang ý nghĩa bảo đảm an ninh năng lượng vật lý, mà nó đóng vai trò tối quan trọng trong chiến lược Môi trường, Xã hội và Quản trị (ESG) toàn cầu của MEIKO, đáp ứng các tiêu chuẩn xanh từ các khách hàng lớn.',
+            'm-s4-elec-insight-title': 'Insight: Năng lượng xanh & Scope 2',
+            'm-s4-elec-p1': 'Ưu thế mang tính quyết định của KCN Bờ Trái Sông Đà chính là việc nó nằm dưới chân Nhà máy Thủy điện Hòa Bình. Với công suất lắp đặt lên tới 1.900 MW, đây là một trong những cơ sở phát điện lớn và ổn định nhất khu vực Đông Nam Á.',
+            'm-s4-elec-p2': 'Khoảng cách từ trung tâm thành phố Hòa Bình đến KCN chỉ 1,7 km, đồng nghĩa với việc KCN nằm sát vách nguồn phát điện. Việc nằm ngay tại "đầu nguồn" truyền tải giúp nhà máy MEIKO gần như triệt tiêu rủi ro sụt áp, chập chờn hay mất điện.',
+            'm-s4-elec-title': 'Lợi Thế Điện Năng: Cận Kề Thủy Điện Hòa Bình Và Chiến Lược ESG',
+            'm-s4-heading': 'Lời Giải Cho Bài Toán Cốt Lõi Tại Hòa Bình',
+            'm-s4-img1-caption': 'Lợi thế liền kề Thủy điện Hòa Bình (1.900 MW) triệt tiêu tổn thất truyền tải lưới điện, đồng thời trực tiếp phục vụ cam kết giảm phát thải Scope 2 toàn cầu.',
+            'm-s4-intro': 'Khác biệt hoàn toàn với các KCN ở vùng đồng bằng Bắc Bộ, KCN Bờ Trái Sông Đà sở hữu những lợi thế địa kinh tế độc nhất vô nhị liên quan trực tiếp đến nguồn nước mặt và năng lượng thủy điện, giải quyết trọn vẹn "cơn khát" tài nguyên của MEIKO.',
+            'm-s4-label': '04 / Lợi Thế Tuyệt Đối',
+            'm-s4-water-img-caption': 'Làm chủ số phận sinh thái',
+            'm-s4-water-img2-caption': 'Đặc quyền sở hữu Trạm xử lý nước thải Stand-alone giúp MEIKO thiết lập rào chắn pháp lý an toàn, tự chủ làm sạch luồng hóa chất PCB cực kỳ phức tạp.',
+            'm-s4-water-insight-desc': 'Việc sở hữu một trạm xử lý nước thải Stand-alone là một chiến thắng chiến lược. Với hệ thống độc lập 3.000 m3/ngày đêm, MEIKO hoàn toàn làm chủ số phận pháp lý của mình, thiết kế hệ thống màng lọc chuyên biệt 100% cho hóa chất của họ.',
+            'm-s4-water-insight-title': 'Insight: Rào chắn rủi ro pháp lý',
+            'm-s4-water-p1': 'Bên cạnh nguồn điện, dòng Sông Đà chính là nguồn cung cấp nước ngọt dồi dào, giải quyết triệt để rủi ro thiếu hụt nước sạch. KCN Bờ Trái Sông Đà được tích hợp trực tiếp một Nhà máy nước sạch Sông Đà do chính chủ đầu tư Dạ Hợp quản lý.',
+            'm-s4-water-title': 'Hạ Tầng Nước Sạch Và Trạm Xử Lý Nước Thải Độc Lập',
+            'm-s5-circ1-desc': 'Sử dụng công nghệ điện phân và lắng gạn để tách chiết mạt đồng đạt độ tinh khiết 97%.',
+            'm-s5-circ1-title': 'Thu hồi Đồng',
+            'm-s5-circ2-desc': 'Công nghệ nhựa Chelating thu hồi tới hơn 99% lượng Palladium trôi dạt.',
+            'm-s5-circ2-title': 'Thu hồi Kim loại quý',
+            'm-s5-circ3-desc': 'Thay đổi công nghệ lõi để loại bỏ hoàn toàn Formaldehyde và Cyanide.',
+            'm-s5-circ3-title': 'Hệ thống "Black Hole"',
+            'm-s5-circular-title': 'Kinh Tế Tuần Hoàn (Circular Economy)',
+            'm-s5-classify-p1': 'Nước ngọt phải đi qua một trạm tiền xử lý khổng lồ của MEIKO để loại bỏ hoàn toàn các khoáng chất, đạt đến trạng thái nước khử ion (DI) và nước thẩm thấu ngược (RO water). Để tối ưu hóa, MEIKO áp dụng nguyên lý tái sử dụng dòng nước tập trung RO với tỷ lệ thu hồi lên đến 60%.',
+            'm-s5-classify-title': 'Hệ Thống Phân Loại & Xử Lý Hóa Lý Tinh Vi',
+            'm-s5-filter-badge': 'Hệ thống lọc vật lý',
+            'm-s5-heading': 'Chu Trình Tuần Hoàn Nước Và Công Nghệ Xử Lý Nước Thải',
+            'm-s5-intro': 'Việc sử dụng và xử lý nước trong một nhà máy PCB trị giá 500 triệu USD không phải là một quá trình cấp thoát nước thông thường, mà là một hệ thống kỹ thuật hóa lý học tinh vi.',
+            'm-s5-label': '05 / Deep Dive Công Nghệ',
+            'm-s5-membrane-desc': 'Khe lọc nhỏ tới 0,1 micron, đảm bảo toàn bộ chất ô nhiễm bị giữ lại ở dạng bùn rắn.',
+            'm-s5-membrane-title': 'Lọc Màng (Membrane Filtration):',
+            'm-s5-waste1-desc': 'Nước xả xám chứa nhiều mạt đồng từ quá trình chà nhám vật lý.',
+            'm-s5-waste1-title': 'Chứa bột đồng',
+            'm-s5-waste2-desc': 'Dịch thải từ các bể mạ đồng, niken, bạc, vàng, thiếc/chì.',
+            'm-s5-waste2-title': 'Axit/kiềm đậm đặc',
+            'm-s5-waste3-desc': 'Sinh ra từ tẩy mực, rửa trôi màng quang hóa và phủ mặt nạ hàn.',
+            'm-s5-waste3-title': 'Hữu cơ COD cao',
+            'm-s6-heading': 'Kết Nối Sân Bay Quốc Tế Nội Bài',
+            'm-s6-insight-desc': 'HDI và bán dẫn mang giá trị cực lớn nhưng kích thước siêu nhẹ, yêu cầu tính định thời (Just-In-Time) khắt khe trong 24-48 giờ toàn cầu.',
+            'm-s6-insight-title': 'Insight: Hệ số Giá trị - Trọng lượng',
+            'm-s6-label': '06 / Mạch Máu Logistics',
+            'm-s6-p1': 'Sự xuất hiện của tuyến đường cao tốc Hòa Lạc - Hòa Bình rút ngắn thời gian di chuyển từ KCN Bờ Trái Sông Đà đến nhà ga hàng hóa Sân bay Nội Bài xuống chỉ còn khoảng dưới 90 phút.',
+            'm-s6-route-title': 'Lộ Trình Chiến Lược',
+            'm-s6-route1': 'KCN Bờ Trái Sông Đà',
+            'm-s6-route2': 'Sân Bay Nội Bài (< 90p)',
+            'm-s6-route3': 'Samsung Bắc Ninh (108km)',
+            'm-s7-card1-desc': 'Sự chênh lệch giá đất từ 160 USD xuống 55 USD giải phóng Capex khổng lồ cho R&D.',
+            'm-s7-card1-title': 'Khai Thác Vùng Ven (Tier-2)',
+            'm-s7-card2-desc': 'Chọn vị trí gần thủy điện để giải quyết triệt để bài toán phát thải Scope 2.',
+            'm-s7-card2-title': 'ESG Là Mệnh Lệnh Sinh Tồn',
+            'm-s7-card3-desc': 'Sử dụng vị thế Anchor Tenant để đàm phán Trạm xử lý nước thải độc lập.',
+            'm-s7-card3-title': 'Hạ Tầng Tùy Biến (Bespoke)',
+            'm-s7-card4-desc': 'Biến bùn thải đồng và kim loại quý Palladium thành nguồn lợi nhuận thứ cấp.',
+            'm-s7-card4-title': 'Kinh Tế Tuần Hoàn Sinh Lời',
+            'm-s7-heading': 'Bài Học Của Các Tập Đoàn Nhật Bản',
+            'm-s7-label': '07 / Playbook',
+            'm-s8-heading': 'Lợi Thế Nguồn Nhân Lực Cho Sản Xuất Công Nghệ Cao Tại Cửa Ngõ Hà Nội - Phú Thọ',
+            'm-s8-img-caption': 'Hệ sinh thái nguồn nhân lực kết hợp hoàn hảo',
+            'm-s8-intro': 'Sự kiện sáp nhập hành chính (theo Nghị quyết số 202/2025/QH15) gộp 3 tỉnh Phú Thọ, Vĩnh Phúc và Hòa Bình thành lập tỉnh Phú Thọ mới đã tái định hình hoàn toàn bản đồ nhân lực công nghiệp phía Bắc. Khu vực Hòa Bình hiện tại không chỉ giữ được lợi thế tiếp giáp Thủ đô mà còn được cộng hưởng trực tiếp từ hệ sinh thái công nghiệp quy mô lớn của siêu tỉnh mới.',
+            'm-s8-label': '08 / Nguồn Nhân Lực',
+            'm-s8-pt1-card1-desc': 'So với các thủ phủ công nghiệp đã bão hòa và đắt đỏ như Bắc Ninh hay Thái Nguyên, khu vực này có chi phí quỹ đất và chi phí sinh hoạt thiết yếu hợp lý hơn hẳn. Điều này giúp tối ưu quỹ lương mà vẫn đảm bảo mức sống tốt cho người lao động.',
+            'm-s8-pt1-card1-title': 'Tối ưu chi phí vận hành & sinh hoạt',
+            'm-s8-pt1-card2-desc': 'Nằm sát vách Hà Nội, các dự án dễ dàng kết nối với mạng lưới hạ tầng giao thông nâng cấp. Khoảng cách này lý tưởng để các chuyên gia cấp cao di chuyển làm việc hàng ngày mà không chịu áp lực tắc nghẽn nội đô.',
+            'm-s8-pt1-card2-title': 'Tiếp cận "vùng lõi" tri thức',
+            'm-s8-pt1-card3-desc': 'Sự tham gia của các đơn vị phát triển hạ tầng địa phương trong việc kiến tạo đô thị vệ tinh, nhà ở xã hội tạo ra môi trường an cư bền vững, giữ chân người lao động lâu dài ngay cạnh khu công nghiệp.',
+            'm-s8-pt1-card3-title': 'Hệ sinh thái tiện ích nội khu',
+            'm-s8-pt1-intro': 'Việc đặt nhà máy công nghệ cao tại cửa ngõ phía Tây/Tây Nam Hà Nội (khu vực Hòa Bình) mang lại "lợi thế kép" về mặt không gian và chi phí:',
+            'm-s8-pt1-title': '1. Lợi thế chiến lược của vị trí giáp ranh Hà Nội',
+            'm-s8-pt2-card1-role': 'Kỹ sư thiết kế, tự động hóa, vật liệu, quản lý QA/QC.',
+            'm-s8-pt2-card1-source': '<strong>Nguồn tuyển:',
+            'm-s8-pt2-card1-title': 'Nhân sự Cấp cao & R&D',
+            'm-s8-pt2-card2-role': 'Quản lý phân xưởng, kỹ sư bảo trì, lập trình viên CNC/Robot.',
+            'm-s8-pt2-card2-source': '<strong>Nguồn tuyển:',
+            'm-s8-pt2-card2-title': 'Quản lý cấp trung & Kỹ thuật',
+            'm-s8-pt2-card3-role': 'Lao động trực tiếp đứng máy, làm việc trong phòng sạch.',
+            'm-s8-pt2-card3-source': '<strong>Nguồn tuyển:',
+            'm-s8-pt2-card3-title': 'Công nhân thao tác & Lắp ráp',
+            'm-s8-pt2-intro': 'Một dây chuyền sản xuất công nghệ cao đòi hỏi cấu trúc nhân sự đa tầng. Vị trí chiến lược này cho phép tiếp cận chính xác từng tệp ứng viên:',
+            'm-s8-pt2-title': '2. Cơ cấu nguồn nhân lực công nghệ cao và Kênh tuyển dụng',
+            'm-s8-pt3-hanoi-desc': 'Đóng vai trò là trung tâm cung cấp chất xám và dịch vụ phụ trợ. Hàng chục ngàn sinh viên khối ngành kỹ thuật, công nghệ tốt nghiệp mỗi năm dư sức lấp đầy các vị trí R&D, chuỗi cung ứng.',
+            'm-s8-pt3-hanoi-title': 'Hà Nội (gần 8,5 - 9 triệu dân)',
+            'm-s8-pt3-intro': 'Bức tranh nhân khẩu học hiện tại tạo thành một phễu lọc nhân sự hoàn hảo, đáp ứng từ số lượng đến chất lượng cho các đại dự án:',
+            'm-s8-pt3-phutho-desc': 'Đứng thứ 11 cả nước về quy mô dân số, tỉnh mới cung cấp một bể lao động phổ thông và kỹ thuật viên cực kỳ dồi dào.',
+            'm-s8-pt3-phutho-title': 'Tỉnh Phú Thọ mới (hơn 4 triệu dân)',
+            'm-s8-pt3-quote': '"Sự kết hợp này mang tính bổ trợ tuyệt vời: Nền tảng công nghiệp, điện tử lâu đời từ Vĩnh Phúc cung cấp nguồn lao động đã qua đào tạo; trong khi quy mô dân số từ Hòa Bình và Phú Thọ đảm bảo nguồn cung công nhân dồi dào. Người lao động làm việc nội tỉnh để gần gũi gia đình, giúp duy trì lực lượng cốt lõi vô cùng ổn định."',
+            'm-s8-pt3-title': '3. Khả năng đáp ứng từ quy mô dân số khổng lồ',
+            'm-s9-heading': 'Blueprint Cho Tương Lai FDI',
+            'm-s9-label': '09 / Tóm Lược Kết Luận',
+            'm-s9-p1': 'Thương vụ rót vốn 500 triệu USD của MEIKO Electronics vào Khu Công Nghiệp Bờ Trái Sông Đà là một quyết định hoàn hảo của nghệ thuật định vị không gian địa kinh tế học và công nghệ chế tạo tiên tiến. Quyết định rời bỏ các trung tâm công nghiệp dày đặc ở Đồng bằng Sông Hồng để kiến tạo một cứ điểm mới tại vùng đất Hòa Bình giáp Hà Nội hoàn toàn là một sự đầu tư chính xác.',
+            'm-s9-p2': 'Bằng cách tận dụng triệt để sức mạnh Thủy điện Hòa Bình để giải mã bài toán năng lượng xanh ESG, kết hợp với các ưu đãi chi phí đất đai vượt trội và hạ tầng chuyên biệt, MEIKO đã kiến tạo được một cỗ máy sản xuất bền vững. Đây chắc chắn là mô hình chuẩn mực (blueprint) cho dòng vốn FDI công nghệ cao thế hệ mới tại Việt Nam.',
+            'm-stat-invest-label': 'Tổng mức đầu tư',
+            'm-stat-invest-unit': 'Tr USD',
+            'm-stat-jobs-label': 'Việc làm trực tiếp',
+            'm-stat-jobs-unit': 'Nhân sự',
+            'm-stat-scale-label': 'Quy mô dự án',
+            'm-stat-scale-unit': 'Hecta',
+            'm-title': 'Quyết Định Chiến Lược Của MEIKO'
+        }
+    };
+    I18n.init(window.PAGE_TRANSLATIONS);
+    </script>
+</body>
+</html>

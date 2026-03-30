@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(node db/seed.js)",
+      "Bash(node -e \":*)",
+      "Bash(mv index.html public/)",
+      "Bash(mv layout.html public/)",
+      "Bash(mv layout-vector.svg public/)",
+      "Bash(mv \"images/layout vector.png\" public/images/)",
+      "Bash(mv images/layout-vector.dxf public/images/)",
+      "Bash(rm -rf images/ layout1.txt)",
+      "Bash(rm -f package.json)",
+      "Bash(PORT=3001 timeout 5 node server.js)",
+      "Bash(PORT=3001 timeout 5 node server/server.js)",
+      "Bash(npm run:*)",
+      "Bash(git checkout:*)"
+    ]
+  }
+}
