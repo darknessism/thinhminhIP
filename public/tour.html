@@ -143,6 +143,7 @@
             height: 35px;
             background-color: white;
             box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            transition: background-color 0.3s;
         }
 
         /* Vòng tròn nhấp nháy */
@@ -156,6 +157,24 @@
             border: 3px solid rgba(255, 255, 255, 0.8);
             animation: radarPulse 1.5s infinite ease-out;
             pointer-events: none;
+            transition: border-color 0.3s;
+        }
+
+        /* --- SỬA: BỔ SUNG TRẠNG THÁI ACTIVE CHO CỘT MỐC --- */
+        .custom-hotspot.active-hotspot {
+            background-color: #16a34a !important; /* Đổi nền ngoài thành xanh */
+            border-color: #16a34a !important; /* Đổi viền thành xanh */
+            z-index: 9999 !important; /* Luôn nổi lên trên cùng */
+        }
+        .custom-hotspot.active-hotspot::after {
+            background-color: white !important; /* Nền trong thành trắng để tạo độ tương phản */
+            color: #16a34a !important; /* Chữ số màu xanh */
+        }
+        .custom-hotspot.active-hotspot::before {
+            background-color: #16a34a !important; /* Cọc cắm đổi màu xanh */
+        }
+        .custom-hotspot.active-hotspot .pulse-ring {
+            border-color: rgba(22, 163, 74, 0.8) !important; /* Sóng radar màu xanh */
         }
 
         @keyframes radarPulse {
@@ -243,8 +262,9 @@
         }
 
         .menu-loc-btn.active {
-            background-color: rgba(34, 197, 94, 0.7) !important;
+            background-color: #166534 !important; /* Sửa: Nền xanh lá cây đậm */
             border-left: 4px solid #facc15 !important;
+            color: #ffffff !important; /* Sửa: Chữ trắng */
         }
 
         .thumb-btn {
@@ -588,28 +608,28 @@
         // --- DỮ LIỆU CÁC HẠNG MỤC TỔNG THỂ ---
         const projectData = [
             { 
-                id: 1, pitch: 5, yaw: 0, title: "KCN Thịnh Minh", image: "https://images.pexels.com/photos/2569842/pexels-photo-2569842.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 1, pitch: 5, yaw: 0, title: "KCN Thịnh Minh", image: "https://images.pexels.com/photos/21968623/pexels-photo-21968623.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Khu công nghiệp trung tâm được quy hoạch theo mô hình Hệ sinh thái Tuần hoàn (Circular Economy). Phát triển song song không gian sản xuất công nghệ cao và bảo vệ nghiêm ngặt đa dạng sinh học.", 
                 specs: {
                     "Tổng diện tích": "500 ha", "Tỷ lệ lấp đầy": "85%", "Chứng chỉ quy hoạch": "LEED Platinum (USGBC)", "Mật độ xây dựng": "< 45%", "Ngành nghề trọng tâm": "Vi mạch, AI, Tự động hóa", "Tỷ lệ Không gian xanh": "30% (Tiêu chuẩn EIP)", "Mục tiêu Net Zero": "Đạt 100% vào năm 2035", "Trung tâm R&D": "Quy mô 15 ha", "Hệ thống quản lý AI": "BMS & SCADA v4.0", "Hạ tầng Viễn thông": "5G dùng riêng (Private 5G)"
                 } 
             },
             { 
-                id: 2, pitch: 8, yaw: 20, title: "Cụm CN Thịnh Minh", image: "https://images.pexels.com/photos/1125278/pexels-photo-1125278.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 2, pitch: 8, yaw: 20, title: "Cụm CN Thịnh Minh", image: "https://images.pexels.com/photos/6060193/pexels-photo-6060193.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Cụm công nghiệp phụ trợ dành riêng cho các doanh nghiệp SMEs toàn cầu. Cung cấp nền tảng logistics và chuỗi cung ứng dùng chung đạt chuẩn quốc tế.", 
                 specs: {
                     "Quy mô diện tích": "120 ha", "Tiêu chuẩn nhà xưởng": "EDGE Advanced", "Tải trọng sàn": "3.5 - 5.0 Tấn/m2", "Chiều cao thông thủy": "Từ 9.5m đến 12.0m", "Cấp điện áp": "Trạm nội khu 110/22kV", "Logistics dùng chung": "Kho thông minh (AS/RS)", "Hệ thống PCCC": "NFPA (Hoa Kỳ)", "Giao thông bốc dỡ": "Đường nội bộ rộng 40m", "Xử lý rác thải": "Phân loại tại nguồn (Zero Waste)", "Tỷ lệ tái chế vật liệu": "Lên tới 85%"
                 } 
             },
             { 
-                id: 3, pitch: -5, yaw: -35, title: "Nhà máy điện", image: "https://images.pexels.com/photos/159397/solar-panel-array-power-sun-electricity-159397.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 3, pitch: -5, yaw: -35, title: "Nhà máy điện", image: "https://images.pexels.com/photos/5462683/pexels-photo-5462683.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Trung tâm năng lượng thông minh kết hợp điện mặt trời mái nhà và hệ thống lưu trữ BESS, cung cấp chứng chỉ năng lượng tái tạo (REC) cho doanh nghiệp.", 
                 specs: {
                     "Công suất thiết kế": "50MWp (Giai đoạn 1)", "Công nghệ Pin": "Monocrystalline PERC", "Lưu trữ năng lượng": "Hệ thống BESS 20MWh", "Hòa lưới điện Quốc gia": "Lưới điện thông minh (Smart Grid)", "Tỷ lệ cung cấp nội khu": "100% xanh cho giờ hành chính", "Giảm phát thải CO2": "Khoảng 65.000 tấn/năm", "Diện tích bao phủ mái": "400.000 m2", "Tín chỉ Carbon": "Cung cấp REC (I-REC)", "Vòng đời hệ thống": "Bảo hành hiệu suất 25 năm", "Điều phối dòng điện": "Tích hợp AI dự báo công suất"
                 } 
             },
             { 
-                id: 4, pitch: -8, yaw: -15, title: "Nhà máy nước", image: "https://images.pexels.com/photos/2444403/pexels-photo-2444403.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 4, pitch: -8, yaw: -15, title: "Nhà máy nước", image: "https://images.pexels.com/photos/6754763/pexels-photo-6754763.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Tổ hợp xử lý và phân phối nước sạch khép kín, ứng dụng công nghệ lọc thẩm thấu ngược, cam kết chất lượng nước phục vụ đa dạng ngành công nghiệp khắt khe.", 
                 specs: {
                     "Công suất cấp nước": "45.000 m3/ngày đêm", "Công nghệ xử lý": "RO & Siêu lọc (Ultrafiltration)", "Nguồn nước thô đầu vào": "Hồ điều hòa sinh thái nội khu", "Tỷ lệ rò rỉ (NRW)": "Kiểm soát dưới < 3%", "Trạm bơm tăng áp": "Điều khiển biến tần (VFD)", "Bể chứa ngầm dự phòng": "Dung tích 20.000 m3", "Quan trắc tự động": "Real-time chất lượng nước", "Công nghệ khử trùng": "Ozone & UV (Không dùng Clo sinh học)", "Áp lực mạng lưới": "Duy trì ổn định 2.5 - 4.0 bar", "Tiêu chuẩn đầu ra": "Vượt QCVN 01-1:2018/BYT"
@@ -620,7 +640,7 @@
                 ]
             },
             { 
-                id: 5, pitch: -12, yaw: 10, title: "NM xử lý nước thải", image: "https://images.pexels.com/photos/3280894/pexels-photo-3280894.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 5, pitch: -12, yaw: 10, title: "NM xử lý nước thải", image: "https://images.pexels.com/photos/12634302/pexels-photo-12634302.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Hệ thống xử lý nước thải trung tâm theo chuẩn kinh tế tuần hoàn, thu hồi nước và chuyển hóa bùn thải thành phân bón hữu cơ.", 
                 specs: {
                     "Công suất xử lý": "30.000 m3/ngày đêm", "Công nghệ cốt lõi": "MBR & Hóa lý bậc cao", "Tỷ lệ tuần hoàn nước": "Tái sử dụng > 40% cho KCN", "Tiêu chuẩn xả thải": "Chuẩn A (QCVN 40:2011/BTNMT)", "Xử lý mùi hôi": "Công nghệ Biofilter nội bộ", "Thu hồi năng lượng": "Hệ thống thu hồi Biogas", "Diện tích trạm xử lý": "5.5 ha (Thiết kế chìm 1 phần)", "Giám sát quan trắc": "Kết nối trực tiếp Sở TNMT", "Quản lý bùn thải": "Ép bùn băng tải, tạo phân bón", "Điện năng tiêu thụ": "Tối ưu hóa nhờ AI (<=0.4 kWh/m3)"
@@ -634,7 +654,7 @@
                 } 
             },
             { 
-                id: 7, pitch: 2, yaw: -45, title: "Khu Nhà ở cao tầng", image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 7, pitch: 2, yaw: -45, title: "Khu Nhà ở cao tầng", image: "https://images.pexels.com/photos/27075286/pexels-photo-27075286.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Khu căn hộ phức hợp áp dụng giải pháp thông gió tự nhiên và thiết kế vi khí hậu, tạo lập cộng đồng cư dân hiện đại và tiết kiệm năng lượng.", 
                 specs: {
                     "Quy mô xây dựng": "6 Block (20-25 tầng)", "Số lượng căn hộ": "2,800 căn hộ (1-3 PN)", "Tiêu chuẩn thiết kế": "BCA Green Mark (Singapore)", "Thiết kế vi khí hậu": "Tối ưu đón gió tự nhiên 85%", "Giải pháp làm mát": "Hệ thống District Cooling", "Quản lý tòa nhà": "Hệ thống AI/BMS thông minh", "Tái sử dụng nước": "Nước xám (Greywater) dùng tưới cây", "Không gian chung": "Vườn treo trên cao (Sky garden)", "Giao thông đứng": "Thang máy tái tạo điện năng", "PCCC Tòa nhà": "Cảnh báo cháy sớm (Smoke Control)"
@@ -648,21 +668,21 @@
                 } 
             },
             { 
-                id: 9, pitch: -15, yaw: -5, title: "Bãi đỗ xe", image: "https://images.pexels.com/photos/1756957/pexels-photo-1756957.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 9, pitch: -15, yaw: -5, title: "Bãi đỗ xe", image: "https://images.pexels.com/photos/9083321/pexels-photo-9083321.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Trung tâm đỗ xe và trạm trung chuyển logistics thông minh, trang bị hạ tầng sạc xe điện cỡ lớn, giảm thiểu ách tắc và khí thải nội khu.", 
                 specs: {
                     "Tổng diện tích bãi": "6.5 ha", "Sức chứa tối đa": "600 Container & Xe tải nặng", "Công nghệ quản lý": "Hệ thống ANPR (Nhận diện biển số)", "Hạ tầng trạm sạc": "50 trụ sạc siêu tốc (350kW) cho EV", "Mái che sinh thái": "Lắp đặt 100% tấm pin năng lượng", "Kiểm soát tải trọng": "Cân điện tử tự động (WIM)", "Bề mặt bãi đỗ": "Bê tông nhựa rỗng giảm ngập", "Chiếu sáng ban đêm": "LED thông minh cảm biến chuyển động", "Phần mềm điều phối": "Cổng thông tin Đặt chỗ tự động", "Tiện ích tài xế": "Khu nghỉ ngơi, phòng tắm, căn tin"
                 } 
             },
             { 
-                id: 10, pitch: -10, yaw: 25, title: "Chợ đầu mối", image: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 10, pitch: -10, yaw: 25, title: "Chợ đầu mối", image: "https://images.pexels.com/photos/27523707/pexels-photo-27523707.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Trung tâm thương mại nông sản quy mô lớn, được vận hành theo tiêu chuẩn chuỗi lạnh (Cold chain) nghiêm ngặt, đảm bảo vệ sinh an toàn thực phẩm.", 
                 specs: {
                     "Quy mô hoạt động": "4.5 ha tổng diện tích", "Số gian hàng chuẩn": "Hơn 500 gian hàng thương mại", "Hệ thống Chuỗi lạnh": "Kho lạnh & Kho mát công suất 10.000 tấn", "Truy xuất nguồn gốc": "Công nghệ Blockchain tích hợp", "Xử lý rác hữu cơ": "Máy ủ phân vi sinh (Compost) tại chỗ", "An toàn thực phẩm": "Phòng LAB kiểm định ISO 17025", "Nhiệt độ kho lạnh": "Điều khiển độc lập từ -25°C đến 10°C", "Hệ thống PCCC": "Chữa cháy màng nước tự động", "Hạ tầng Logistics": "Dock leveler tải trọng lớn", "Sử dụng năng lượng": "Cách nhiệt bằng Panel PIR chống cháy"
                 } 
             },
             { 
-                id: 11, pitch: 0, yaw: -20, title: "TT Thương mại dịch vụ", image: "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 11, pitch: 0, yaw: -20, title: "TT Thương mại dịch vụ", image: "https://images.pexels.com/photos/31994188/pexels-photo-31994188.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Tổ hợp mua sắm, ẩm thực và giải trí đa chức năng. Nơi giao thoa của lối sống hiện đại và kiến trúc không gian mở thân thiện với môi trường.", 
                 specs: {
                     "Tổng diện tích sàn": "65.000 m2 (GBA)", "Tiêu chuẩn bền vững": "LOTUS Gold (VGBC)", "Tối ưu hóa ánh sáng": "Sử dụng Skylight đón sáng tự nhiên", "Không gian thương mại": "Siêu thị, Food Court, Khu mua sắm", "Phòng họp & Hội nghị": "Trung tâm hội nghị sức chứa 1,000 khách", "Hệ thống ĐHKK": "Chiller từ trường hiệu suất cao", "Cảnh quan xanh": "Khu vườn dạo bộ trên mái (Roof garden)", "Thu gom nước mưa": "Tái sử dụng cho hệ thống xả vệ sinh", "Quản lý tòa nhà": "Facility Management theo chuẩn quốc tế", "Cảm biến tiết kiệm": "Cảm biến CO2 điều chỉnh khí tươi tự động"
@@ -683,7 +703,7 @@
                 } 
             },
             { 
-                id: 14, pitch: -18, yaw: 35, title: "Khu An Ninh", image: "https://images.pexels.com/photos/414110/pexels-photo-414110.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                id: 14, pitch: -18, yaw: 35, title: "Khu An Ninh", image: "https://images.pexels.com/photos/10143239/pexels-photo-10143239.jpeg?auto=compress&cs=tinysrgb&w=800", 
                 desc: "Trung tâm chỉ huy An ninh & Điều hành tập trung (SOC). Bộ não kỹ thuật số theo dõi, cảnh báo và phản ứng tự động trước mọi rủi ro tại tổ hợp.", 
                 specs: {
                     "Cấp độ bảo mật": "An ninh lớp 4 (Cấp độ Quốc gia)", "Trung tâm điều hành": "SOC (Security Operations Center) 24/7", "Camera giám sát": "1,500+ Camera tích hợp AI (Nhận diện)", "Hệ thống vành đai": "Cảm biến quang học & Cáp quang báo động", "Tuần tra thông minh": "Sử dụng Drone/Flycam tầm soát từ trên cao", "Kiểm soát ra vào": "Sinh trắc học kết hợp thẻ RFID mã hóa", "Hệ thống phản ứng": "Chống xâm nhập, chống phá hoại tự động", "Mạng viễn thông": "Kênh truyền dẫn quang bảo mật dùng riêng", "Phòng cháy chữa cháy": "Cảnh báo cháy qua Cảm biến khói nhạy sáng", "Thời gian phản hồi": "Lực lượng đặc nhiệm có mặt < 3 phút"
@@ -726,6 +746,13 @@
         function setupCustomTooltip(hotSpotDiv, item) {
             hotSpotDiv.innerHTML = ''; 
             hotSpotDiv.setAttribute('data-label', item.id); 
+            // Gắn ID vào element để JS dễ dàng tìm và highlight
+            hotSpotDiv.setAttribute('data-hs-id', item.id); 
+            
+            // Nếu cột mốc này đang được active, giữ nguyên trạng thái khi re-render
+            if (currentActiveId === item.id) {
+                hotSpotDiv.classList.add('active-hotspot');
+            }
             
             var pulseRing = document.createElement('div');
             pulseRing.classList.add('pulse-ring');
@@ -748,6 +775,10 @@
                 document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll(`.loc-btn[data-id="${item.id}"]`).forEach(b => b.classList.add('active'));
                 
+                // Cập nhật màu xanh cho chính cột mốc này
+                document.querySelectorAll('.custom-hotspot').forEach(hs => hs.classList.remove('active-hotspot'));
+                hotSpotDiv.classList.add('active-hotspot');
+
                 openItemDetail(item);
             };
         }
@@ -779,7 +810,9 @@
                 "sceneFadeDuration": 1500,  
                 "autoLoad": true,           
                 "compass": false,
-                "showControls": false 
+                "showControls": false,
+                "autoRotate": -1.5,                 /* MỚI: Tự động quay với tốc độ 1.5 độ/s (số âm để quay từ phải qua trái) */
+                "autoRotateInactivityDelay": 3000   /* MỚI: Tự động quay lại sau 3 giây không tương tác */
             },
             "scenes": {
                 "mainMap": {
@@ -819,6 +852,7 @@
                     "panorama": item.image,
                     "haov": 140, "vaov": 90, 
                     "minYaw": -60, "maxYaw": 60, "minPitch": -40, "maxPitch": 40,
+                    "autoRotate": -1, /* Thêm hiệu ứng quay cho cả ảnh chi tiết nếu muốn */
                     "hotSpots": []
                 };
 
@@ -993,6 +1027,11 @@
                 const matchingBtns = document.querySelectorAll(`.loc-btn[data-id="${targetId}"]`);
                 matchingBtns.forEach(b => b.classList.add('active'));
 
+                // Highlight Cột mốc trên bản đồ 360 thành màu xanh
+                document.querySelectorAll('.custom-hotspot').forEach(hs => hs.classList.remove('active-hotspot'));
+                const targetHs = document.querySelector(`.custom-hotspot[data-hs-id="${targetId}"]`);
+                if(targetHs) targetHs.classList.add('active-hotspot');
+
                 // KHI BẤM Ở MENU/THUMBNAIL THÌ CHỈ DI CHUYỂN CAMERA (KHÔNG ĐỔI NỀN)
                 // Đảm bảo đang ở scene tổng quan trước khi xoay camera
                 if (viewer.getScene() !== 'mainMap') {
@@ -1039,6 +1078,11 @@
             // Cập nhật Highlight giao diện Menu & Thumbnail
             document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll(`.loc-btn[data-id="${targetItem.id}"]`).forEach(b => b.classList.add('active'));
+
+            // Highlight Cột mốc trên bản đồ thành màu xanh
+            document.querySelectorAll('.custom-hotspot').forEach(hs => hs.classList.remove('active-hotspot'));
+            const targetHs = document.querySelector(`.custom-hotspot[data-hs-id="${targetItem.id}"]`);
+            if(targetHs) targetHs.classList.add('active-hotspot');
 
             // Hành động linh hoạt tùy theo ngữ cảnh (Context-Aware)
             if (viewer.getScene() === 'mainMap') {
