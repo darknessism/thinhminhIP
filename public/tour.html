@@ -183,6 +183,12 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
         }
 
+        @media (max-width: 768px) {
+            .custom-tooltip {
+                width: 240px;
+            }
+        }
+
         .custom-tooltip::after {
             content: '';
             position: absolute;
@@ -259,19 +265,19 @@
     <div id="ui-layer">
         
         <!-- SIDEBAR TRÁI (MENU) -->
-        <div id="sidebar" class="interactive-ui absolute left-0 top-0 h-[calc(100%-145px)] w-64 sidebar-menu text-white flex flex-col shadow-2xl z-20 rounded-br-xl transition-transform duration-300 ease-in-out translate-x-0">
+        <div id="sidebar" class="interactive-ui absolute left-0 top-0 h-[calc(100%-120px)] md:h-[calc(100%-145px)] w-56 md:w-64 sidebar-menu text-white flex flex-col shadow-2xl z-20 rounded-br-xl transition-transform duration-300 ease-in-out translate-x-0">
             
-            <button id="toggle-sidebar-btn" class="absolute top-4 -right-8 w-8 h-10 bg-[#15803d] text-white rounded-r-md flex justify-center items-center shadow-[4px_0_6px_rgba(0,0,0,0.3)] hover:bg-green-600 transition-colors z-30 border-y border-r border-white/20 border-l-0" title="Ẩn/Hiện Menu">
-                <i class="fa-solid fa-chevron-left text-sm transition-transform duration-300" id="toggle-sidebar-icon"></i>
+            <button id="toggle-sidebar-btn" class="absolute top-4 -right-7 md:-right-8 w-7 md:w-8 h-8 md:h-10 bg-[#15803d] text-white rounded-r-md flex justify-center items-center shadow-[4px_0_6px_rgba(0,0,0,0.3)] hover:bg-green-600 transition-colors z-30 border-y border-r border-white/20 border-l-0" title="Ẩn/Hiện Menu">
+                <i class="fa-solid fa-chevron-left text-xs md:text-sm transition-transform duration-300" id="toggle-sidebar-icon"></i>
             </button>
 
-            <div class="py-5 px-4 bg-[#0a0a0a] flex justify-center items-center shrink-0 border-b border-green-900/50">
-                <div class="flex items-center gap-3 justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf text-[#10b981] w-6 h-6">
+            <div class="py-4 md:py-5 px-3 md:px-4 bg-[#0a0a0a] flex justify-center items-center shrink-0 border-b border-green-900/50">
+                <div class="flex items-center gap-2 md:gap-3 justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf text-[#10b981] w-5 h-5 md:w-6 md:h-6">
                         <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
                         <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
                     </svg>
-                    <span class="font-serif text-xl tracking-wider text-white">
+                    <span class="font-serif text-lg md:text-xl tracking-wider text-white">
                         THINH MINH <span class="text-[#10b981] italic">IP</span>
                     </span>
                 </div>
@@ -279,118 +285,118 @@
 
             <div class="flex-1 overflow-y-auto modern-scrollbar pb-4">
                 
-                <div class="menu-header px-4 py-3 font-bold uppercase text-sm mt-2 flex items-center justify-between cursor-pointer select-none hover:bg-green-700/80 transition-colors" id="header-tong-the">
-                    Tổng thể dự án <i class="fa-solid fa-chevron-up text-yellow-400 transition-transform duration-300" id="icon-tong-the"></i>
+                <div class="menu-header px-3 md:px-4 py-2.5 md:py-3 font-bold uppercase text-xs md:text-sm mt-2 flex items-center justify-between cursor-pointer select-none hover:bg-green-700/80 transition-colors" id="header-tong-the">
+                    Tổng thể dự án <i class="fa-solid fa-chevron-up text-yellow-400 transition-transform duration-300 text-[10px] md:text-sm" id="icon-tong-the"></i>
                 </div>
                 
-                <div class="px-3 flex flex-col gap-2 mt-3 mb-2 transition-all duration-300" id="left-menu-container">
+                <div class="px-2 md:px-3 flex flex-col gap-1.5 md:gap-2 mt-2 md:mt-3 mb-2 transition-all duration-300" id="left-menu-container">
                     <!-- Nút sẽ được generate tự động ở Script -->
                 </div>
                 
-                <div class="menu-header px-4 py-3 font-bold uppercase text-sm mt-4 flex items-center justify-between cursor-pointer select-none hover:bg-green-700/80 transition-colors" id="header-san-pham">
-                    Sản phẩm <i class="fa-solid fa-chevron-up text-yellow-400 transition-transform duration-300" id="icon-san-pham"></i>
+                <div class="menu-header px-3 md:px-4 py-2.5 md:py-3 font-bold uppercase text-xs md:text-sm mt-3 md:mt-4 flex items-center justify-between cursor-pointer select-none hover:bg-green-700/80 transition-colors" id="header-san-pham">
+                    Sản phẩm <i class="fa-solid fa-chevron-up text-yellow-400 transition-transform duration-300 text-[10px] md:text-sm" id="icon-san-pham"></i>
                 </div>
                 
-                <div class="px-3 flex flex-col gap-2 mt-3 mb-2 transition-all duration-300" id="content-san-pham">
-                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Đất công nghiệp cho thuê</button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng xây sẵn</button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng xây theo yêu cầu</button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng cao tầng</button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng khu công nghệ cao</button>
-                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Căn hộ cho thuê</button>
+                <div class="px-2 md:px-3 flex flex-col gap-1.5 md:gap-2 mt-2 md:mt-3 mb-2 transition-all duration-300" id="content-san-pham">
+                    <button class="w-full text-left px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Đất công nghiệp cho thuê</button>
+                    <button class="w-full text-left px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng xây sẵn</button>
+                    <button class="w-full text-left px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng xây theo yêu cầu</button>
+                    <button class="w-full text-left px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng cao tầng</button>
+                    <button class="w-full text-left px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng khu công nghệ cao</button>
+                    <button class="w-full text-left px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Căn hộ cho thuê</button>
                 </div>
             </div>
         </div>
 
         <!-- SIDEBAR PHẢI (CHI TIẾT HẠNG MỤC) -->
-        <div id="right-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-145px)] w-[360px] bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-30 rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-y-auto modern-scrollbar flex flex-col border-l border-white/10">
-            <div class="relative w-full h-52 shrink-0 bg-gray-800">
+        <div id="right-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-120px)] md:h-[calc(100%-145px)] w-full sm:w-[360px] bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-30 sm:rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-y-auto modern-scrollbar flex flex-col border-l border-white/10">
+            <div class="relative w-full h-40 md:h-52 shrink-0 bg-gray-800">
                 <img id="rs-img" src="" class="w-full h-full object-cover opacity-90" alt="Detail">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
-                <button id="close-rs-btn" class="absolute top-4 left-4 w-8 h-8 bg-black/60 hover:bg-black border border-white/20 text-white rounded-full flex items-center justify-center transition-colors shadow-lg" title="Đóng & Quay lại">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+                <button id="close-rs-btn" class="absolute top-3 left-3 md:top-4 md:left-4 w-7 h-7 md:w-8 md:h-8 bg-black/60 hover:bg-black border border-white/20 text-white rounded-full flex items-center justify-center transition-colors shadow-lg" title="Đóng & Quay lại">
+                    <i class="fa-solid fa-xmark text-base md:text-lg"></i>
                 </button>
             </div>
             
-            <div class="px-6 pb-6 pt-2 flex-1 flex flex-col text-gray-200">
-                <h3 id="rs-title" class="text-[1.35rem] font-bold text-green-400 mb-3 uppercase leading-tight tracking-wide drop-shadow-md"></h3>
-                <p id="rs-desc" class="text-[13px] text-gray-300 mb-6 leading-relaxed text-justify opacity-90 font-light"></p>
+            <div class="px-5 md:px-6 pb-5 md:pb-6 pt-2 flex-1 flex flex-col text-gray-200">
+                <h3 id="rs-title" class="text-lg md:text-[1.35rem] font-bold text-green-400 mb-2 md:mb-3 uppercase leading-tight tracking-wide drop-shadow-md"></h3>
+                <p id="rs-desc" class="text-[12px] md:text-[13px] text-gray-300 mb-4 md:mb-6 leading-relaxed text-justify opacity-90 font-light"></p>
                 
-                <h4 class="font-bold text-[13px] text-white border-b border-green-500 pb-1.5 mb-4 inline-block self-start tracking-wider uppercase drop-shadow-sm">Thông Số ESG & Kỹ thuật</h4>
+                <h4 class="font-bold text-[12px] md:text-[13px] text-white border-b border-green-500 pb-1 md:pb-1.5 mb-3 md:mb-4 inline-block self-start tracking-wider uppercase drop-shadow-sm">Thông Số ESG & Kỹ thuật</h4>
                 
-                <div id="rs-specs" class="space-y-2.5 text-[12.5px] flex-1 pb-4">
+                <div id="rs-specs" class="space-y-2 md:space-y-2.5 text-[11.5px] md:text-[12.5px] flex-1 pb-4">
                     <!-- Chứa thông số động sinh ra bằng JS -->
                 </div>
             </div>
         </div>
 
         <!-- SIDEBAR LEED (MỚI THÊM) -->
-        <div id="leed-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-145px)] w-[420px] max-w-full bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-40 rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-hidden flex flex-col border-l border-white/10">
+        <div id="leed-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-120px)] md:h-[calc(100%-145px)] w-full sm:w-[420px] max-w-full bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-40 sm:rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-hidden flex flex-col border-l border-white/10">
             <!-- Header -->
-            <div class="flex justify-between items-center px-6 py-4 border-b border-white/10 shrink-0 bg-black/20">
+            <div class="flex justify-between items-center px-4 md:px-6 py-3 md:py-4 border-b border-white/10 shrink-0 bg-black/20">
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-leaf text-green-400"></i>
-                    <h2 class="text-lg font-bold text-white uppercase tracking-wider">Hệ thống chứng chỉ LEED v5</h2>
+                    <i class="fa-solid fa-leaf text-green-400 text-sm md:text-base"></i>
+                    <h2 class="text-base md:text-lg font-bold text-white uppercase tracking-wider">Hệ thống chứng chỉ LEED v5</h2>
                 </div>
-                <button id="close-leed-btn" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors" title="Đóng">
-                    <i class="fa-solid fa-xmark"></i>
+                <button id="close-leed-btn" class="w-7 h-7 md:w-8 md:h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors" title="Đóng">
+                    <i class="fa-solid fa-xmark text-sm md:text-base"></i>
                 </button>
             </div>
             
             <!-- Giới thiệu chung LEED -->
-            <div class="px-6 py-4 bg-black/30 border-b border-white/10 shrink-0">
-                <p class="text-[13px] text-gray-300 leading-relaxed text-justify opacity-90">
+            <div class="px-4 md:px-6 py-3 md:py-4 bg-black/30 border-b border-white/10 shrink-0">
+                <p class="text-[12px] md:text-[13px] text-gray-300 leading-relaxed text-justify opacity-90">
                     <strong class="text-green-400">LEED (Leadership in Energy & Environmental Design)</strong> là hệ thống chứng nhận quốc tế uy tín nhất thế giới về công trình xanh, do <strong class="text-white">Hội đồng Công trình Xanh Hoa Kỳ (USGBC)</strong> phát triển từ năm 1995. LEED đánh giá toàn diện các tiêu chuẩn bền vững từ thiết kế, xây dựng đến vận hành nhằm tối ưu năng lượng, tiết kiệm nước, giảm khí thải và bảo vệ môi trường sống.
                 </p>
             </div>
 
             <!-- Tabs Header -->
             <div class="flex border-b border-white/10 shrink-0 bg-black/40">
-                <button class="leed-tab-btn flex-1 py-3.5 text-[13px] font-bold text-white bg-green-600/30 border-b-2 border-green-500 transition-all" data-target="leed-bdc">LEED v5 BD+C</button>
-                <button class="leed-tab-btn flex-1 py-3.5 text-[13px] font-bold text-gray-400 hover:text-gray-200 border-b-2 border-transparent transition-all" data-target="leed-om">LEED v5 O+M</button>
+                <button class="leed-tab-btn flex-1 py-2.5 md:py-3.5 text-xs md:text-[13px] font-bold text-white bg-green-600/30 border-b-2 border-green-500 transition-all" data-target="leed-bdc">LEED v5 BD+C</button>
+                <button class="leed-tab-btn flex-1 py-2.5 md:py-3.5 text-xs md:text-[13px] font-bold text-gray-400 hover:text-gray-200 border-b-2 border-transparent transition-all" data-target="leed-om">LEED v5 O+M</button>
             </div>
             <!-- Tabs Content -->
-            <div class="p-6 flex-1 overflow-y-auto modern-scrollbar text-gray-300 text-[13px] leading-relaxed">
+            <div class="p-4 md:p-6 flex-1 overflow-y-auto modern-scrollbar text-gray-300 text-[12px] md:text-[13px] leading-relaxed">
                 
                 <!-- NỘI DUNG: BD+C -->
-                <div id="leed-bdc" class="leed-tab-content block space-y-5 animate-fade-in">
+                <div id="leed-bdc" class="leed-tab-content block space-y-4 md:space-y-5 animate-fade-in">
                     <div>
-                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">1. Giới thiệu chi tiết:</h3>
+                        <h3 class="text-white font-bold text-xs md:text-sm mb-1.5 uppercase tracking-wide">1. Giới thiệu chi tiết:</h3>
                         <p class="text-justify">LEED BD+C (Building Design and Construction) là hệ thống đánh giá dành cho các công trình xây dựng mới (New Construction) và các công trình xây dựng phần thô (Core and Shell). Hệ thống này tập trung vào việc thiết lập các nền tảng bền vững ngay từ giai đoạn thiết kế và thi công dự án, đảm bảo tòa nhà được xây dựng với hiệu suất cao nhất về môi trường và năng lượng. Tổng số điểm tối đa mà một dự án có thể đạt được là <strong class="text-green-400">110 điểm</strong>.</p>
                     </div>
                     <div>
-                        <h3 class="text-green-400 font-bold text-sm mb-3 border-b border-white/10 pb-2 uppercase tracking-wide">Các tiêu chí đánh giá (Credit Categories):</h3>
-                        <ul class="space-y-3.5">
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                        <h3 class="text-green-400 font-bold text-xs md:text-sm mb-2.5 md:mb-3 border-b border-white/10 pb-1.5 md:pb-2 uppercase tracking-wide">Các tiêu chí đánh giá (Credit Categories):</h3>
+                        <ul class="space-y-2.5 md:space-y-3.5">
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Integrative Process, Planning and Assessments:</strong> Các đánh giá về khả năng phục hồi khí hậu, tác động đến con người, carbon và quy trình thiết kế tích hợp.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Location and Transportation:</strong> Bảo vệ đất nhạy cảm, phát triển kết nối/mật độ cao, quản lý nhu cầu giao thông và hạ tầng cho xe điện.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Sustainable Sites:</strong> Giảm thiểu xáo trộn khu đất, quản lý nước mưa, không gian ngoài trời, giảm đảo nhiệt và ô nhiễm ánh sáng.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Water Efficiency:</strong> Đo lường, phát hiện rò rỉ và tối ưu hóa hiệu quả sử dụng nước trong và ngoài nhà.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Energy and Atmosphere:</strong> Giảm phát thải carbon, hiệu quả năng lượng, quản lý chất làm lạnh, năng lượng tái tạo và điện khí hóa.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Materials and Resources:</strong> Giảm carbon hàm chứa (embodied carbon), tái sử dụng vật liệu, lựa chọn sản phẩm bền vững và quản lý rác thải xây dựng.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Indoor Environmental Quality:</strong> Quản lý không khí, trải nghiệm của người dùng, không gian linh hoạt và ánh sáng tự nhiên.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Project Priorities:</strong> Các điểm thưởng cho các thiết kế đổi mới, ưu tiên khu vực hoặc có chuyên gia LEED AP.</div>
                             </li>
                         </ul>
@@ -398,44 +404,44 @@
                 </div>
 
                 <!-- NỘI DUNG: O+M -->
-                <div id="leed-om" class="leed-tab-content hidden space-y-5 animate-fade-in">
+                <div id="leed-om" class="leed-tab-content hidden space-y-4 md:space-y-5 animate-fade-in">
                     <div>
-                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">2. Giới thiệu chi tiết:</h3>
+                        <h3 class="text-white font-bold text-xs md:text-sm mb-1.5 uppercase tracking-wide">2. Giới thiệu chi tiết:</h3>
                         <p class="text-justify">LEED O+M (Operations and Maintenance) là hệ thống đánh giá dành cho các tòa nhà hiện hữu (Existing Buildings) đang trong quá trình đi vào hoạt động và bảo trì. Thay vì tập trung vào thiết kế thi công, hệ thống này theo dõi, đo lường và tối ưu hóa hiệu suất vận hành thực tế của tòa nhà theo thời gian, từ việc sử dụng năng lượng, rác thải đến các chính sách quản lý cơ sở vật chất. Giống như BD+C, hệ thống O+M cũng có tổng điểm tối đa là <strong class="text-green-400">110 điểm</strong>.</p>
                     </div>
                     <div>
-                        <h3 class="text-green-400 font-bold text-sm mb-3 border-b border-white/10 pb-2 uppercase tracking-wide">Các tiêu chí đánh giá (Credit Categories):</h3>
-                        <ul class="space-y-3.5">
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                        <h3 class="text-green-400 font-bold text-xs md:text-sm mb-2.5 md:mb-3 border-b border-white/10 pb-1.5 md:pb-2 uppercase tracking-wide">Các tiêu chí đánh giá (Credit Categories):</h3>
+                        <ul class="space-y-2.5 md:space-y-3.5">
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Integrative Process, Planning, and Assessments:</strong> Yêu cầu các chính sách vận hành, kế hoạch bảo trì hiện tại, an toàn lao động và đào tạo.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Location and Transportation:</strong> Hiệu suất giao thông bền vững, quản lý nhu cầu đi lại và xe điện.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Sustainable Sites:</strong> Giảm hiệu ứng đảo nhiệt, giảm thiểu ô nhiễm ánh sáng và va chạm của chim.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Water Efficiency:</strong> Đo lường và đánh giá hiệu suất sử dụng nước nâng cao.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Energy and Atmosphere:</strong> Hiệu suất giảm phát thải khí nhà kính (GHG), quản lý tải trọng đỉnh, quản lý chất làm lạnh và kế hoạch khử carbon.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Materials and Resources:</strong> Hiệu suất giảm thiểu rác thải và các chiến lược quản lý rác thải thực tế.</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Indoor Environmental Quality:</strong> Xác minh hệ thống lọc và thông gió, kiểm tra không khí, làm sạch xanh (green cleaning) và quản lý dịch hại tích hợp (IPM).</div>
                             </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                            <li class="flex items-start gap-2 md:gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1 text-[10px] md:text-[12px]"></i> 
                                 <div><strong class="text-white">Project Priorities:</strong> Tương tự BD+C, đây là điểm cho các chiến lược đổi mới hoặc ưu tiên.</div>
                             </li>
                         </ul>
@@ -445,52 +451,52 @@
         </div>
 
         <!-- SIDEBAR ĐĂNG KÝ THAM QUAN (MỚI THÊM) -->
-        <div id="register-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-145px)] w-[400px] max-w-full bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-40 rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-hidden flex flex-col border-l border-white/10">
+        <div id="register-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-120px)] md:h-[calc(100%-145px)] w-full sm:w-[400px] max-w-full bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-40 sm:rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-hidden flex flex-col border-l border-white/10">
             <!-- Header -->
-            <div class="flex justify-between items-center px-6 py-4 border-b border-white/10 shrink-0 bg-black/20">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
+            <div class="flex justify-between items-center px-4 md:px-6 py-3 md:py-4 border-b border-white/10 shrink-0 bg-black/20">
+                <div class="flex items-center gap-2 md:gap-3">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 text-sm md:text-base">
                         <i class="fa-solid fa-calendar-check"></i>
                     </div>
-                    <h2 class="text-[15px] font-bold text-white uppercase tracking-wider">Đăng Ký Tham Quan</h2>
+                    <h2 class="text-sm md:text-[15px] font-bold text-white uppercase tracking-wider">Đăng Ký Tham Quan</h2>
                 </div>
-                <button id="close-register-btn" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors" title="Đóng">
-                    <i class="fa-solid fa-xmark"></i>
+                <button id="close-register-btn" class="w-7 h-7 md:w-8 md:h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors" title="Đóng">
+                    <i class="fa-solid fa-xmark text-sm md:text-base"></i>
                 </button>
             </div>
             
             <!-- Form Content -->
-            <div class="p-6 flex-1 overflow-y-auto modern-scrollbar">
-                <p class="text-[13px] text-gray-300 mb-6 leading-relaxed text-justify opacity-90">
+            <div class="p-4 md:p-6 flex-1 overflow-y-auto modern-scrollbar">
+                <p class="text-[12px] md:text-[13px] text-gray-300 mb-4 md:mb-6 leading-relaxed text-justify opacity-90">
                     Vui lòng để lại thông tin dưới đây để đăng ký lịch tham quan thực tế Tổ hợp công nghiệp ESG Thịnh Minh. Chuyên viên của chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.
                 </p>
                 
-                <form id="register-form" class="space-y-4">
+                <form id="register-form" class="space-y-3.5 md:space-y-4">
                     <div>
-                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Họ và tên <span class="text-orange-500">*</span></label>
-                        <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="Nhập họ và tên...">
+                        <label class="block text-[11px] md:text-[12px] font-semibold text-gray-400 mb-1 md:mb-1.5 uppercase tracking-wide">Họ và tên <span class="text-orange-500">*</span></label>
+                        <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 md:px-3.5 md:py-2.5 text-[12px] md:text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="Nhập họ và tên...">
                     </div>
                     
-                    <div class="flex gap-4">
+                    <div class="flex gap-3 md:gap-4">
                         <div class="w-1/2">
-                            <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Số điện thoại <span class="text-orange-500">*</span></label>
-                            <input type="tel" required class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="09xx...">
+                            <label class="block text-[11px] md:text-[12px] font-semibold text-gray-400 mb-1 md:mb-1.5 uppercase tracking-wide">Số điện thoại <span class="text-orange-500">*</span></label>
+                            <input type="tel" required class="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 md:px-3.5 md:py-2.5 text-[12px] md:text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="09xx...">
                         </div>
                         <div class="w-1/2">
-                            <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Email <span class="text-orange-500">*</span></label>
-                            <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="email@...">
+                            <label class="block text-[11px] md:text-[12px] font-semibold text-gray-400 mb-1 md:mb-1.5 uppercase tracking-wide">Email <span class="text-orange-500">*</span></label>
+                            <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 md:px-3.5 md:py-2.5 text-[12px] md:text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="email@...">
                         </div>
                     </div>
                     
                     <div>
-                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Công ty / Tổ chức</label>
-                        <input type="text" class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="Tên doanh nghiệp của bạn...">
+                        <label class="block text-[11px] md:text-[12px] font-semibold text-gray-400 mb-1 md:mb-1.5 uppercase tracking-wide">Công ty / Tổ chức</label>
+                        <input type="text" class="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 md:px-3.5 md:py-2.5 text-[12px] md:text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="Tên doanh nghiệp của bạn...">
                     </div>
                     
                     <div>
-                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Sản phẩm quan tâm</label>
+                        <label class="block text-[11px] md:text-[12px] font-semibold text-gray-400 mb-1 md:mb-1.5 uppercase tracking-wide">Sản phẩm quan tâm</label>
                         <div class="relative">
-                            <select class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors appearance-none cursor-pointer">
+                            <select class="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 md:px-3.5 md:py-2.5 text-[12px] md:text-[13px] text-white focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors appearance-none cursor-pointer">
                                 <option value="" class="bg-gray-800">-- Lựa chọn sản phẩm --</option>
                                 <option value="1" class="bg-gray-800">Đất công nghiệp cho thuê</option>
                                 <option value="2" class="bg-gray-800">Nhà xưởng xây sẵn / Xây theo YC</option>
@@ -503,17 +509,17 @@
                     </div>
                     
                     <div>
-                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Ngày dự kiến tham quan</label>
-                        <input type="date" class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors cursor-pointer" style="color-scheme: dark;">
+                        <label class="block text-[11px] md:text-[12px] font-semibold text-gray-400 mb-1 md:mb-1.5 uppercase tracking-wide">Ngày dự kiến tham quan</label>
+                        <input type="date" class="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 md:px-3.5 md:py-2.5 text-[12px] md:text-[13px] text-white focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors cursor-pointer" style="color-scheme: dark;">
                     </div>
                     
                     <div>
-                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Ghi chú thêm</label>
-                        <textarea rows="3" class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors resize-none" placeholder="Bạn có yêu cầu đặc biệt nào không?..."></textarea>
+                        <label class="block text-[11px] md:text-[12px] font-semibold text-gray-400 mb-1 md:mb-1.5 uppercase tracking-wide">Ghi chú thêm</label>
+                        <textarea rows="3" class="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 md:px-3.5 md:py-2.5 text-[12px] md:text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors resize-none" placeholder="Bạn có yêu cầu đặc biệt nào không?..."></textarea>
                     </div>
                     
-                    <div class="pt-4">
-                        <button type="submit" id="submit-register-btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white text-[13px] font-bold py-3.5 rounded-md shadow-lg transition-all flex items-center justify-center gap-2 tracking-wider">
+                    <div class="pt-2 md:pt-4">
+                        <button type="submit" id="submit-register-btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white text-[12px] md:text-[13px] font-bold py-3 md:py-3.5 rounded-md shadow-lg transition-all flex items-center justify-center gap-2 tracking-wider">
                             <i class="fa-solid fa-paper-plane"></i> GỬI YÊU CẦU ĐĂNG KÝ
                         </button>
                     </div>
@@ -523,43 +529,43 @@
 
         <!-- Header Center -->
         <div class="interactive-ui absolute top-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 w-full max-w-3xl pointer-events-none transition-opacity duration-300" id="header-center">
-            <h2 class="text-white font-semibold tracking-widest text-sm drop-shadow-md bg-black px-4 py-1 rounded-md mb-1">VIRTUAL TOUR 360&deg;</h2>
-            <h1 class="text-white text-2xl md:text-4xl font-bold mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center uppercase">TỔ HỢP CÔNG NGHIỆP ESG THỊNH MINH</h1>
+            <h2 class="text-white font-semibold tracking-widest text-[10px] md:text-sm drop-shadow-md bg-black px-3 py-0.5 md:px-4 md:py-1 rounded-md mb-1">VIRTUAL TOUR 360&deg;</h2>
+            <h1 class="text-white text-lg md:text-4xl font-bold mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center uppercase px-2">TỔ HỢP CÔNG NGHIỆP ESG THỊNH MINH</h1>
             
-            <div class="mt-4 flex gap-4 pointer-events-auto">
-                <button id="btn-leed" class="text-green-400 font-semibold hover:text-green-300 transition-colors drop-shadow-md bg-black/40 px-4 py-1.5 rounded border border-green-500/30">TIÊU CHUẨN LEED</button>
+            <div class="mt-3 md:mt-4 flex gap-2 md:gap-4 pointer-events-auto">
+                <button id="btn-leed" class="text-green-400 font-semibold hover:text-green-300 transition-colors drop-shadow-md bg-black/40 px-2 py-1.5 md:px-4 md:py-1.5 rounded border border-green-500/30 text-[10px] md:text-base whitespace-nowrap">TIÊU CHUẨN LEED</button>
                 <div class="w-px bg-white/50"></div>
                 <!-- SỬA: Thêm ID btn-register và viền cam cho nút -->
-                <button id="btn-register" class="text-orange-400 font-semibold hover:text-orange-300 transition-colors drop-shadow-md bg-black/40 px-4 py-1.5 rounded border border-orange-500/30">ĐĂNG KÝ THAM QUAN</button>
+                <button id="btn-register" class="text-orange-400 font-semibold hover:text-orange-300 transition-colors drop-shadow-md bg-black/40 px-2 py-1.5 md:px-4 md:py-1.5 rounded border border-orange-500/30 text-[10px] md:text-base whitespace-nowrap">ĐĂNG KÝ THAM QUAN</button>
             </div>
         </div>
 
         <!-- Language Flags -->
-        <div class="interactive-ui absolute top-6 right-6 flex gap-2 z-20">
-            <button id="lang-vi" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white flex justify-center items-center overflow-hidden hover:scale-110 transition-transform shadow-lg relative">
-                <span class="text-yellow-300 font-bold text-[10px]">VN</span>
+        <div class="interactive-ui absolute top-4 right-4 md:top-6 md:right-6 flex gap-1.5 md:gap-2 z-20">
+            <button id="lang-vi" class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-red-600 border border-white md:border-2 flex justify-center items-center overflow-hidden hover:scale-110 transition-transform shadow-lg relative">
+                <span class="text-yellow-300 font-bold text-[8px] md:text-[10px]">VN</span>
             </button>
-            <button id="lang-en" class="w-8 h-8 rounded-full bg-blue-800 border-2 border-white flex justify-center items-center overflow-hidden hover:scale-110 transition-transform shadow-lg relative">
-                <span class="text-white font-bold text-[10px]">EN</span>
+            <button id="lang-en" class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-800 border border-white md:border-2 flex justify-center items-center overflow-hidden hover:scale-110 transition-transform shadow-lg relative">
+                <span class="text-white font-bold text-[8px] md:text-[10px]">EN</span>
             </button>
         </div>
         
         <!-- Bottom Control Bar -->
         <div class="interactive-ui absolute bottom-0 left-0 w-full bg-[#2b3541]/95 backdrop-blur-md z-30 flex flex-col transition-transform duration-300" id="main-bottom-bar">
             <!-- Thumbnail Strip (Gallery) -->
-            <div id="thumbnail-strip" class="w-full overflow-x-auto modern-scrollbar flex gap-3 p-3 transition-all duration-300 max-h-36 items-center">
+            <div id="thumbnail-strip" class="w-full overflow-x-auto modern-scrollbar flex gap-2 md:gap-3 p-2 md:p-3 transition-all duration-300 max-h-32 md:max-h-36 items-center">
                 <!-- Nút sẽ được generate tự động -->
             </div>
 
             <div class="w-full h-[1px] bg-white/20"></div>
 
-            <div class="flex justify-between items-center px-4 py-3 text-white text-2xl">
-                <div class="flex gap-6 items-center">
+            <div class="flex justify-between items-center px-2 py-2 md:px-4 md:py-3 text-white text-lg md:text-2xl">
+                <div class="flex gap-3 md:gap-6 items-center">
                     <button id="ctrl-prev-scene" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-backward-fast"></i></button>
                     <button id="ctrl-toggle-thumbs" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-table-cells"></i></button>
                 </div>
                 
-                <div class="flex gap-6 md:gap-8 items-center">
+                <div class="flex gap-2 md:gap-8 items-center">
                     <button id="ctrl-left" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-left"></i></button>
                     <button id="ctrl-right" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-right"></i></button>
                     <button id="ctrl-up" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-up"></i></button>
@@ -568,7 +574,7 @@
                     <button id="ctrl-zoomout" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-minus"></i></button>
                 </div>
 
-                <div class="flex gap-6 items-center">
+                <div class="flex gap-3 md:gap-6 items-center">
                     <button id="ctrl-fullscreen" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-expand"></i></button>
                     <button id="ctrl-hide-bar" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-caret-down"></i></button>
                     <button id="ctrl-next-scene" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-forward-fast"></i></button>
@@ -694,16 +700,16 @@
         projectData.forEach((item) => {
             // Render menu trái
             menuContainer.innerHTML += `
-                <button class="loc-btn menu-loc-btn w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm tracking-wide" data-id="${item.id}" data-pitch="${item.pitch}" data-yaw="${item.yaw}">
+                <button class="loc-btn menu-loc-btn w-full text-left px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm tracking-wide" data-id="${item.id}" data-pitch="${item.pitch}" data-yaw="${item.yaw}">
                     ${item.id}. ${item.title}
                 </button>
             `;
             // Render thumbnail dưới
             thumbContainer.innerHTML += `
-                <button class="thumb-btn loc-btn shrink-0 focus:outline-none relative group rounded-md overflow-hidden w-40 h-24 border-2 border-white/20 hover:border-white/60 transition-colors" data-id="${item.id}" data-pitch="${item.pitch}" data-yaw="${item.yaw}">
+                <button class="thumb-btn loc-btn shrink-0 focus:outline-none relative group rounded-md overflow-hidden w-28 h-16 md:w-40 md:h-24 border-2 border-white/20 hover:border-white/60 transition-colors" data-id="${item.id}" data-pitch="${item.pitch}" data-yaw="${item.yaw}">
                     <img src="${item.image}" class="w-full h-full object-cover" alt="${item.title}">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors"></div>
-                    <div class="absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-sm text-white text-[11px] font-bold py-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-center tracking-wider">${item.id}. ${item.title}</div>
+                    <div class="absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-sm text-white text-[9px] md:text-[11px] font-bold py-1 md:py-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-center tracking-wider leading-tight px-1">${item.id}. ${item.title}</div>
                 </button>
             `;
             // Tạo mảng cấu hình Hotspots cho Pannellum
@@ -728,9 +734,9 @@
             var tooltip = document.createElement('div');
             tooltip.classList.add('custom-tooltip', 'font-inter');
             tooltip.innerHTML = `
-                <img src="${item.image}" class="w-full h-40 object-cover block border-b border-white/20" alt="${item.title}">
-                <div class="bg-[#16a34a] text-white text-center py-3 px-3 font-bold text-[13px] tracking-wide">
-                    ${item.id}. ${item.title} <br><span class="text-[10px] font-normal opacity-80 mt-1 inline-block uppercase tracking-widest">(Bấm xem chi tiết)</span>
+                <img src="${item.image}" class="w-full h-24 md:h-40 object-cover block border-b border-white/20" alt="${item.title}">
+                <div class="bg-[#16a34a] text-white text-center py-2 px-2 md:py-3 md:px-3 font-bold text-xs md:text-[13px] tracking-wide">
+                    ${item.id}. ${item.title} <br><span class="text-[8px] md:text-[10px] font-normal opacity-80 mt-0.5 md:mt-1 inline-block uppercase tracking-widest">(Bấm xem chi tiết)</span>
                 </div>
             `;
             hotSpotDiv.appendChild(tooltip);
@@ -758,7 +764,7 @@
             var tooltip = document.createElement('div');
             tooltip.classList.add('custom-tooltip', 'font-inter');
             tooltip.innerHTML = `
-                <div class="text-white text-center py-2 px-4 font-bold text-[14px] tracking-wide">
+                <div class="text-white text-center py-1.5 px-3 md:py-2 md:px-4 font-bold text-xs md:text-[14px] tracking-wide">
                     ${args.title}
                 </div>
             `;
@@ -778,7 +784,7 @@
             "scenes": {
                 "mainMap": {
                     "title": "TỔ HỢP CÔNG NGHIỆP THỊNH MINH",
-                    "hfov": 100,            
+                    "hfov": 80,            
                     "pitch": 0,            
                     "yaw": 0,               
                     "type": "equirectangular",
