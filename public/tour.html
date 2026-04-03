@@ -200,6 +200,25 @@
             bottom: calc(100% + 25px);
         }
 
+        /* --- CSS CHO SUB-HOTSPOT (BÊN TRONG CHI TIẾT) --- */
+        .sub-hotspot::after {
+            background-color: #f97316 !important; /* Màu cam để phân biệt với cột mốc chính */
+        }
+        .sub-hotspot .pulse-ring {
+            border-color: rgba(249, 115, 22, 0.8) !important;
+        }
+        
+        /* Đồng bộ giao diện Tooltip cho Sub-hotspot (Cam) */
+        .sub-hotspot .custom-tooltip {
+            width: max-content;
+            min-width: 120px;
+            background: #f97316;
+            border-color: #f97316;
+        }
+        .sub-hotspot .custom-tooltip::after {
+            border-color: #f97316 transparent transparent transparent;
+        }
+
         /* Style cho Menu bên trái */
         .sidebar-menu {
             background: rgba(22, 163, 74, 0.65);
@@ -317,6 +336,14 @@
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
+            
+            <!-- Giới thiệu chung LEED -->
+            <div class="px-6 py-4 bg-black/30 border-b border-white/10 shrink-0">
+                <p class="text-[13px] text-gray-300 leading-relaxed text-justify opacity-90">
+                    <strong class="text-green-400">LEED (Leadership in Energy & Environmental Design)</strong> là hệ thống chứng nhận quốc tế uy tín nhất thế giới về công trình xanh, do <strong class="text-white">Hội đồng Công trình Xanh Hoa Kỳ (USGBC)</strong> phát triển từ năm 1995. LEED đánh giá toàn diện các tiêu chuẩn bền vững từ thiết kế, xây dựng đến vận hành nhằm tối ưu năng lượng, tiết kiệm nước, giảm khí thải và bảo vệ môi trường sống.
+                </p>
+            </div>
+
             <!-- Tabs Header -->
             <div class="flex border-b border-white/10 shrink-0 bg-black/40">
                 <button class="leed-tab-btn flex-1 py-3.5 text-[13px] font-bold text-white bg-green-600/30 border-b-2 border-green-500 transition-all" data-target="leed-bdc">LEED v5 BD+C</button>
@@ -328,7 +355,7 @@
                 <!-- NỘI DUNG: BD+C -->
                 <div id="leed-bdc" class="leed-tab-content block space-y-5 animate-fade-in">
                     <div>
-                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">1. Giới thiệu:</h3>
+                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">1. Giới thiệu chi tiết:</h3>
                         <p class="text-justify">LEED BD+C (Building Design and Construction) là hệ thống đánh giá dành cho các công trình xây dựng mới (New Construction) và các công trình xây dựng phần thô (Core and Shell). Hệ thống này tập trung vào việc thiết lập các nền tảng bền vững ngay từ giai đoạn thiết kế và thi công dự án, đảm bảo tòa nhà được xây dựng với hiệu suất cao nhất về môi trường và năng lượng. Tổng số điểm tối đa mà một dự án có thể đạt được là <strong class="text-green-400">110 điểm</strong>.</p>
                     </div>
                     <div>
@@ -373,7 +400,7 @@
                 <!-- NỘI DUNG: O+M -->
                 <div id="leed-om" class="leed-tab-content hidden space-y-5 animate-fade-in">
                     <div>
-                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">2. Giới thiệu:</h3>
+                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">2. Giới thiệu chi tiết:</h3>
                         <p class="text-justify">LEED O+M (Operations and Maintenance) là hệ thống đánh giá dành cho các tòa nhà hiện hữu (Existing Buildings) đang trong quá trình đi vào hoạt động và bảo trì. Thay vì tập trung vào thiết kế thi công, hệ thống này theo dõi, đo lường và tối ưu hóa hiệu suất vận hành thực tế của tòa nhà theo thời gian, từ việc sử dụng năng lượng, rác thải đến các chính sách quản lý cơ sở vật chất. Giống như BD+C, hệ thống O+M cũng có tổng điểm tối đa là <strong class="text-green-400">110 điểm</strong>.</p>
                     </div>
                     <div>
@@ -496,7 +523,7 @@
 
         <!-- Header Center -->
         <div class="interactive-ui absolute top-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 w-full max-w-3xl pointer-events-none transition-opacity duration-300" id="header-center">
-            <h2 class="text-green-400 font-semibold tracking-widest text-sm drop-shadow-md bg-black/60 px-4 py-1 rounded-md mb-1">VIRTUAL TOUR 360&deg;</h2>
+            <h2 class="text-white font-semibold tracking-widest text-sm drop-shadow-md bg-black px-4 py-1 rounded-md mb-1">VIRTUAL TOUR 360&deg;</h2>
             <h1 class="text-white text-2xl md:text-4xl font-bold mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center uppercase">TỔ HỢP CÔNG NGHIỆP ESG THỊNH MINH</h1>
             
             <div class="mt-4 flex gap-4 pointer-events-auto">
@@ -539,7 +566,6 @@
                     <button id="ctrl-down" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-down"></i></button>
                     <button id="ctrl-zoomin" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-plus"></i></button>
                     <button id="ctrl-zoomout" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-minus"></i></button>
-                    <button id="ctrl-vr" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-vr-cardboard"></i></button>
                 </div>
 
                 <div class="flex gap-6 items-center">
@@ -581,7 +607,11 @@
                 desc: "Tổ hợp xử lý và phân phối nước sạch khép kín, ứng dụng công nghệ lọc thẩm thấu ngược, cam kết chất lượng nước phục vụ đa dạng ngành công nghiệp khắt khe.", 
                 specs: {
                     "Công suất cấp nước": "45.000 m3/ngày đêm", "Công nghệ xử lý": "RO & Siêu lọc (Ultrafiltration)", "Nguồn nước thô đầu vào": "Hồ điều hòa sinh thái nội khu", "Tỷ lệ rò rỉ (NRW)": "Kiểm soát dưới < 3%", "Trạm bơm tăng áp": "Điều khiển biến tần (VFD)", "Bể chứa ngầm dự phòng": "Dung tích 20.000 m3", "Quan trắc tự động": "Real-time chất lượng nước", "Công nghệ khử trùng": "Ozone & UV (Không dùng Clo sinh học)", "Áp lực mạng lưới": "Duy trì ổn định 2.5 - 4.0 bar", "Tiêu chuẩn đầu ra": "Vượt QCVN 01-1:2018/BYT"
-                } 
+                },
+                subHotspots: [
+                    { pitch: -5, yaw: -25, title: "Nguồn đầu vào" },
+                    { pitch: 10, yaw: 20, title: "Trạm bơm tăng áp" }
+                ]
             },
             { 
                 id: 5, pitch: -12, yaw: 10, title: "NM xử lý nước thải", image: "https://images.pexels.com/photos/3280894/pexels-photo-3280894.jpeg?auto=compress&cs=tinysrgb&w=800", 
@@ -659,6 +689,7 @@
         const menuContainer = document.getElementById('left-menu-container');
         const thumbContainer = document.getElementById('thumbnail-strip');
         let hotSpotsConfig = [];
+        let currentActiveId = null; // Thêm biến lưu trạng thái hạng mục đang được chọn
 
         projectData.forEach((item) => {
             // Render menu trái
@@ -706,8 +737,33 @@
 
             // SỰ KIỆN CLICK VÀO CỘT MỐC: CHỈ TẠI ĐÂY MỚI ĐỔI NỀN VÀ HIỆN SIDEBAR
             hotSpotDiv.onclick = function() {
+                // Cập nhật trạng thái active cho Menu và Thumbnail
+                currentActiveId = item.id;
+                document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll(`.loc-btn[data-id="${item.id}"]`).forEach(b => b.classList.add('active'));
+                
                 openItemDetail(item);
             };
+        }
+
+        // --- HÀM TẠO NỘI DUNG HOTSPOT CON TRÊN BẢN ĐỒ CHI TIẾT ---
+        function setupSubHotspotTooltip(hotSpotDiv, args) {
+            hotSpotDiv.innerHTML = ''; 
+            hotSpotDiv.setAttribute('data-label', args.label); 
+            
+            var pulseRing = document.createElement('div');
+            pulseRing.classList.add('pulse-ring');
+            hotSpotDiv.appendChild(pulseRing);
+            
+            var tooltip = document.createElement('div');
+            tooltip.classList.add('custom-tooltip', 'font-inter');
+            tooltip.innerHTML = `
+                <div class="text-white text-center py-2 px-4 font-bold text-[14px] tracking-wide">
+                    ${args.title}
+                </div>
+            `;
+
+            hotSpotDiv.appendChild(tooltip);
         }
 
         // --- CẤU HÌNH PANNELLUM TỔNG QUAN ---
@@ -722,11 +778,11 @@
             "scenes": {
                 "mainMap": {
                     "title": "TỔ HỢP CÔNG NGHIỆP THỊNH MINH",
-                    "hfov": 80,            
+                    "hfov": 100,            
                     "pitch": 0,            
                     "yaw": 0,               
                     "type": "equirectangular",
-                    "panorama": "https://images.pexels.com/photos/6767966/pexels-photo-6767966.jpeg", 
+                    "panorama": "https://thinhminhip-production.up.railway.app/images/overview.png", 
                     "haov": 140, "vaov": 90,         
                     "minYaw": -60, "maxYaw": 60,         
                     "minPitch": -40, "maxPitch": 40,       
@@ -752,12 +808,29 @@
         function openItemDetail(item) {
             const detailSceneId = 'detail_' + item.id;
             if (!viewer.getConfig().scenes[detailSceneId]) {
-                viewer.addScene(detailSceneId, {
+                let sceneConfig = {
                     "type": "equirectangular",
                     "panorama": item.image,
                     "haov": 140, "vaov": 90, 
-                    "minYaw": -60, "maxYaw": 60, "minPitch": -40, "maxPitch": 40
-                });
+                    "minYaw": -60, "maxYaw": 60, "minPitch": -40, "maxPitch": 40,
+                    "hotSpots": []
+                };
+
+                // Nếu hạng mục có định nghĩa các điểm chạm con (subHotspots) thì render chúng
+                if (item.subHotspots) {
+                    sceneConfig.hotSpots = item.subHotspots.map((sub, index) => ({
+                        "pitch": sub.pitch,
+                        "yaw": sub.yaw,
+                        "cssClass": "custom-hotspot sub-hotspot", // Thêm class màu cam
+                        "createTooltipFunc": setupSubHotspotTooltip,
+                        "createTooltipArgs": { 
+                            "label": String.fromCharCode(97 + index), // Gán nhãn a, b, c...
+                            "title": sub.title 
+                        } 
+                    }));
+                }
+
+                viewer.addScene(detailSceneId, sceneConfig);
             }
             viewer.loadScene(detailSceneId);
 
@@ -903,8 +976,10 @@
                 // Xóa trạng thái active cũ
                 locBtns.forEach(b => b.classList.remove('active'));
 
-                // Lấy tọa độ từ data-attribute
-                const targetId = btn.getAttribute('data-id');
+                // Lấy tọa độ từ data-attribute và đảm bảo là số nguyên
+                const targetId = parseInt(btn.getAttribute('data-id'));
+                currentActiveId = targetId; // Lưu trạng thái ID hiện tại
+                
                 const targetPitch = parseFloat(btn.getAttribute('data-pitch'));
                 const targetYaw = parseFloat(btn.getAttribute('data-yaw'));
                 
@@ -938,6 +1013,39 @@
         document.getElementById('ctrl-zoomin').addEventListener('click', () => { viewer.setHfov(viewer.getHfov() - 10); });
         document.getElementById('ctrl-zoomout').addEventListener('click', () => { viewer.setHfov(viewer.getHfov() + 10); });
         document.getElementById('ctrl-fullscreen').addEventListener('click', () => { viewer.toggleFullscreen(); });
+
+        // --- NÚT TIẾN/LÙI HẠNG MỤC (BACK/FORWARD) ---
+        function navigateToItem(direction) {
+            if(currentActiveId === null) currentActiveId = 1;
+            let idx = projectData.findIndex(i => i.id === currentActiveId);
+            if(idx === -1) idx = 0;
+            
+            // Tính toán Index vòng lặp
+            if(direction === 'next') {
+                idx = (idx + 1) % projectData.length;
+            } else {
+                idx = (idx - 1 + projectData.length) % projectData.length;
+            }
+            
+            const targetItem = projectData[idx];
+            currentActiveId = targetItem.id;
+            
+            // Cập nhật Highlight giao diện Menu & Thumbnail
+            document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll(`.loc-btn[data-id="${targetItem.id}"]`).forEach(b => b.classList.add('active'));
+
+            // Hành động linh hoạt tùy theo ngữ cảnh (Context-Aware)
+            if (viewer.getScene() === 'mainMap') {
+                // Nếu đang ở tổng quan -> Tự xoay camera đến điểm mới
+                viewer.lookAt(targetItem.pitch, targetItem.yaw, viewer.getHfov(), 1500);
+            } else {
+                // Nếu đang xem chi tiết -> Chuyển cảnh thẳng sang chi tiết của điểm mới luôn
+                openItemDetail(targetItem);
+            }
+        }
+
+        document.getElementById('ctrl-next-scene').addEventListener('click', () => navigateToItem('next'));
+        document.getElementById('ctrl-prev-scene').addEventListener('click', () => navigateToItem('prev'));
 
         const thumbnailStrip = document.getElementById('thumbnail-strip');
         document.getElementById('ctrl-toggle-thumbs').addEventListener('click', () => {
