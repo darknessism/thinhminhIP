@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour 360</title>
+
+    <!-- Nhúng Font Inter cho thiết kế hiện đại -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Nhúng thư viện Pannellum -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    
+    <!-- Nhúng Tailwind CSS để dựng giao diện UI (Menu, Nút) nhanh chóng và hiện đại -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Bổ sung FontAwesome để sử dụng các icon cho thanh điều khiển bên dưới -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        /* Đặt kích thước toàn màn hình và xóa lề */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Vùng chứa bộ render 360 */
+        #panorama {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Nằm dưới UI */
+        }
+
+        /* Khung giao diện nổi bên trên (UI Overlay) */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; 
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .interactive-ui {
+            pointer-events: auto; 
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* --- THÊM SCROLLBAR HIỆN ĐẠI --- */
+        .modern-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .modern-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .modern-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2); 
+            border-radius: 10px;
+        }
+        .modern-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5); 
+        }
+
+        /* --- CSS CHO CỘT MỐC (HOTSPOT) --- */
+        
+        .custom-hotspot {
+            width: 36px;
+            height: 36px;
+            background-color: white; 
+            border: 2px solid #f3f4f6;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            cursor: pointer;
+            
+            position: absolute !important; 
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            overflow: visible !important;
+            z-index: 50 !important; 
+            margin-top: -71px; 
+            margin-left: -18px;
+        }
+
+        /* ÉP Z-INDEX KHI HOVER ĐỂ KHÔNG BỊ ĐÈ */
+        .custom-hotspot:hover {
+            z-index: 10000 !important;
+        }
+
+        /* Hình vuông bo góc màu xanh lá bên trong - CHỨA SỐ */
+        .custom-hotspot::after {
+            content: attr(data-label); 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px; 
+            height: 20px;
+            background-color: #16a34a; /* Xanh lá */
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* Cái chân (cọc) cắm xuống đất màu trắng */
+        .custom-hotspot::before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2.5px;
+            height: 35px;
+            background-color: white;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* Vòng tròn nhấp nháy */
+        .pulse-ring {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            animation: radarPulse 1.5s infinite ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes radarPulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+
+        /* Tooltip Popup */
+        .custom-tooltip {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 340px; 
+            background: #16a34a; /* Đổi nền pop-up sang xanh lá giống màu cọc */
+            border: 3px solid #16a34a; 
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none; 
+            display: flex;
+            flex-direction: column;
+            z-index: 10001;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+
+        .custom-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -10px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: #16a34a transparent transparent transparent; /* Mũi tên xanh lá */
+        }
+
+        .custom-hotspot:hover .custom-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(100% + 25px);
+        }
+
+        /* Style cho Menu bên trái */
+        .sidebar-menu {
+            background: rgba(22, 163, 74, 0.65);
+            backdrop-filter: blur(8px);
+        }
+        .menu-header {
+            background: #15803d;
+        }
+        .menu-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .menu-item:hover, .menu-item.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-left: 4px solid #facc15;
+        }
+
+        .menu-loc-btn.active {
+            background-color: rgba(34, 197, 94, 0.7) !important;
+            border-left: 4px solid #facc15 !important;
+        }
+
+        .thumb-btn {
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .thumb-btn.active {
+            border-color: white !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <!-- Container cho Pannellum (hiển thị ảnh 360) -->
+    <div id="panorama"></div>
+
+    <!-- Container cho Giao diện nổi (Nút, Menu) -->
+    <div id="ui-layer">
+        
+        <!-- SIDEBAR TRÁI (MENU) -->
+        <div id="sidebar" class="interactive-ui absolute left-0 top-0 h-[calc(100%-145px)] w-64 sidebar-menu text-white flex flex-col shadow-2xl z-20 rounded-br-xl transition-transform duration-300 ease-in-out translate-x-0">
+            
+            <button id="toggle-sidebar-btn" class="absolute top-4 -right-8 w-8 h-10 bg-[#15803d] text-white rounded-r-md flex justify-center items-center shadow-[4px_0_6px_rgba(0,0,0,0.3)] hover:bg-green-600 transition-colors z-30 border-y border-r border-white/20 border-l-0" title="Ẩn/Hiện Menu">
+                <i class="fa-solid fa-chevron-left text-sm transition-transform duration-300" id="toggle-sidebar-icon"></i>
+            </button>
+
+            <div class="py-5 px-4 bg-[#0a0a0a] flex justify-center items-center shrink-0 border-b border-green-900/50">
+                <div class="flex items-center gap-3 justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf text-[#10b981] w-6 h-6">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                    </svg>
+                    <span class="font-serif text-xl tracking-wider text-white">
+                        THINH MINH <span class="text-[#10b981] italic">IP</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto modern-scrollbar pb-4">
+                
+                <div class="menu-header px-4 py-3 font-bold uppercase text-sm mt-2 flex items-center justify-between cursor-pointer select-none hover:bg-green-700/80 transition-colors" id="header-tong-the">
+                    Tổng thể dự án <i class="fa-solid fa-chevron-up text-yellow-400 transition-transform duration-300" id="icon-tong-the"></i>
+                </div>
+                
+                <div class="px-3 flex flex-col gap-2 mt-3 mb-2 transition-all duration-300" id="left-menu-container">
+                    <!-- Nút sẽ được generate tự động ở Script -->
+                </div>
+                
+                <div class="menu-header px-4 py-3 font-bold uppercase text-sm mt-4 flex items-center justify-between cursor-pointer select-none hover:bg-green-700/80 transition-colors" id="header-san-pham">
+                    Sản phẩm <i class="fa-solid fa-chevron-up text-yellow-400 transition-transform duration-300" id="icon-san-pham"></i>
+                </div>
+                
+                <div class="px-3 flex flex-col gap-2 mt-3 mb-2 transition-all duration-300" id="content-san-pham">
+                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Đất công nghiệp cho thuê</button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng xây sẵn</button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng xây theo yêu cầu</button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng cao tầng</button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Nhà xưởng khu công nghệ cao</button>
+                    <button class="w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm">Căn hộ cho thuê</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR PHẢI (CHI TIẾT HẠNG MỤC) -->
+        <div id="right-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-145px)] w-[360px] bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-30 rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-y-auto modern-scrollbar flex flex-col border-l border-white/10">
+            <div class="relative w-full h-52 shrink-0 bg-gray-800">
+                <img id="rs-img" src="" class="w-full h-full object-cover opacity-90" alt="Detail">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent"></div>
+                <button id="close-rs-btn" class="absolute top-4 left-4 w-8 h-8 bg-black/60 hover:bg-black border border-white/20 text-white rounded-full flex items-center justify-center transition-colors shadow-lg" title="Đóng & Quay lại">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <div class="px-6 pb-6 pt-2 flex-1 flex flex-col text-gray-200">
+                <h3 id="rs-title" class="text-[1.35rem] font-bold text-green-400 mb-3 uppercase leading-tight tracking-wide drop-shadow-md"></h3>
+                <p id="rs-desc" class="text-[13px] text-gray-300 mb-6 leading-relaxed text-justify opacity-90 font-light"></p>
+                
+                <h4 class="font-bold text-[13px] text-white border-b border-green-500 pb-1.5 mb-4 inline-block self-start tracking-wider uppercase drop-shadow-sm">Thông Số ESG & Kỹ thuật</h4>
+                
+                <div id="rs-specs" class="space-y-2.5 text-[12.5px] flex-1 pb-4">
+                    <!-- Chứa thông số động sinh ra bằng JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR LEED (MỚI THÊM) -->
+        <div id="leed-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-145px)] w-[420px] max-w-full bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-40 rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-hidden flex flex-col border-l border-white/10">
+            <!-- Header -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-white/10 shrink-0 bg-black/20">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-leaf text-green-400"></i>
+                    <h2 class="text-lg font-bold text-white uppercase tracking-wider">Hệ thống chứng chỉ LEED v5</h2>
+                </div>
+                <button id="close-leed-btn" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors" title="Đóng">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- Tabs Header -->
+            <div class="flex border-b border-white/10 shrink-0 bg-black/40">
+                <button class="leed-tab-btn flex-1 py-3.5 text-[13px] font-bold text-white bg-green-600/30 border-b-2 border-green-500 transition-all" data-target="leed-bdc">LEED v5 BD+C</button>
+                <button class="leed-tab-btn flex-1 py-3.5 text-[13px] font-bold text-gray-400 hover:text-gray-200 border-b-2 border-transparent transition-all" data-target="leed-om">LEED v5 O+M</button>
+            </div>
+            <!-- Tabs Content -->
+            <div class="p-6 flex-1 overflow-y-auto modern-scrollbar text-gray-300 text-[13px] leading-relaxed">
+                
+                <!-- NỘI DUNG: BD+C -->
+                <div id="leed-bdc" class="leed-tab-content block space-y-5 animate-fade-in">
+                    <div>
+                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">1. Giới thiệu:</h3>
+                        <p class="text-justify">LEED BD+C (Building Design and Construction) là hệ thống đánh giá dành cho các công trình xây dựng mới (New Construction) và các công trình xây dựng phần thô (Core and Shell). Hệ thống này tập trung vào việc thiết lập các nền tảng bền vững ngay từ giai đoạn thiết kế và thi công dự án, đảm bảo tòa nhà được xây dựng với hiệu suất cao nhất về môi trường và năng lượng. Tổng số điểm tối đa mà một dự án có thể đạt được là <strong class="text-green-400">110 điểm</strong>.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-green-400 font-bold text-sm mb-3 border-b border-white/10 pb-2 uppercase tracking-wide">Các tiêu chí đánh giá (Credit Categories):</h3>
+                        <ul class="space-y-3.5">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Integrative Process, Planning and Assessments:</strong> Các đánh giá về khả năng phục hồi khí hậu, tác động đến con người, carbon và quy trình thiết kế tích hợp.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Location and Transportation:</strong> Bảo vệ đất nhạy cảm, phát triển kết nối/mật độ cao, quản lý nhu cầu giao thông và hạ tầng cho xe điện.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Sustainable Sites:</strong> Giảm thiểu xáo trộn khu đất, quản lý nước mưa, không gian ngoài trời, giảm đảo nhiệt và ô nhiễm ánh sáng.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Water Efficiency:</strong> Đo lường, phát hiện rò rỉ và tối ưu hóa hiệu quả sử dụng nước trong và ngoài nhà.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Energy and Atmosphere:</strong> Giảm phát thải carbon, hiệu quả năng lượng, quản lý chất làm lạnh, năng lượng tái tạo và điện khí hóa.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Materials and Resources:</strong> Giảm carbon hàm chứa (embodied carbon), tái sử dụng vật liệu, lựa chọn sản phẩm bền vững và quản lý rác thải xây dựng.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Indoor Environmental Quality:</strong> Quản lý không khí, trải nghiệm của người dùng, không gian linh hoạt và ánh sáng tự nhiên.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Project Priorities:</strong> Các điểm thưởng cho các thiết kế đổi mới, ưu tiên khu vực hoặc có chuyên gia LEED AP.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- NỘI DUNG: O+M -->
+                <div id="leed-om" class="leed-tab-content hidden space-y-5 animate-fade-in">
+                    <div>
+                        <h3 class="text-white font-bold text-sm mb-1.5 uppercase tracking-wide">2. Giới thiệu:</h3>
+                        <p class="text-justify">LEED O+M (Operations and Maintenance) là hệ thống đánh giá dành cho các tòa nhà hiện hữu (Existing Buildings) đang trong quá trình đi vào hoạt động và bảo trì. Thay vì tập trung vào thiết kế thi công, hệ thống này theo dõi, đo lường và tối ưu hóa hiệu suất vận hành thực tế của tòa nhà theo thời gian, từ việc sử dụng năng lượng, rác thải đến các chính sách quản lý cơ sở vật chất. Giống như BD+C, hệ thống O+M cũng có tổng điểm tối đa là <strong class="text-green-400">110 điểm</strong>.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-green-400 font-bold text-sm mb-3 border-b border-white/10 pb-2 uppercase tracking-wide">Các tiêu chí đánh giá (Credit Categories):</h3>
+                        <ul class="space-y-3.5">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Integrative Process, Planning, and Assessments:</strong> Yêu cầu các chính sách vận hành, kế hoạch bảo trì hiện tại, an toàn lao động và đào tạo.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Location and Transportation:</strong> Hiệu suất giao thông bền vững, quản lý nhu cầu đi lại và xe điện.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Sustainable Sites:</strong> Giảm hiệu ứng đảo nhiệt, giảm thiểu ô nhiễm ánh sáng và va chạm của chim.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Water Efficiency:</strong> Đo lường và đánh giá hiệu suất sử dụng nước nâng cao.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Energy and Atmosphere:</strong> Hiệu suất giảm phát thải khí nhà kính (GHG), quản lý tải trọng đỉnh, quản lý chất làm lạnh và kế hoạch khử carbon.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Materials and Resources:</strong> Hiệu suất giảm thiểu rác thải và các chiến lược quản lý rác thải thực tế.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Indoor Environmental Quality:</strong> Xác minh hệ thống lọc và thông gió, kiểm tra không khí, làm sạch xanh (green cleaning) và quản lý dịch hại tích hợp (IPM).</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-green-500 mt-1"></i> 
+                                <div><strong class="text-white">Project Priorities:</strong> Tương tự BD+C, đây là điểm cho các chiến lược đổi mới hoặc ưu tiên.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR ĐĂNG KÝ THAM QUAN (MỚI THÊM) -->
+        <div id="register-sidebar" class="font-inter interactive-ui absolute right-0 top-0 h-[calc(100%-145px)] w-[400px] max-w-full bg-[#0f172a]/95 backdrop-blur-lg shadow-2xl z-40 rounded-bl-xl transition-transform duration-300 ease-in-out translate-x-full overflow-hidden flex flex-col border-l border-white/10">
+            <!-- Header -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-white/10 shrink-0 bg-black/20">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <h2 class="text-[15px] font-bold text-white uppercase tracking-wider">Đăng Ký Tham Quan</h2>
+                </div>
+                <button id="close-register-btn" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors" title="Đóng">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Form Content -->
+            <div class="p-6 flex-1 overflow-y-auto modern-scrollbar">
+                <p class="text-[13px] text-gray-300 mb-6 leading-relaxed text-justify opacity-90">
+                    Vui lòng để lại thông tin dưới đây để đăng ký lịch tham quan thực tế Tổ hợp công nghiệp ESG Thịnh Minh. Chuyên viên của chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.
+                </p>
+                
+                <form id="register-form" class="space-y-4">
+                    <div>
+                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Họ và tên <span class="text-orange-500">*</span></label>
+                        <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="Nhập họ và tên...">
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <div class="w-1/2">
+                            <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Số điện thoại <span class="text-orange-500">*</span></label>
+                            <input type="tel" required class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="09xx...">
+                        </div>
+                        <div class="w-1/2">
+                            <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Email <span class="text-orange-500">*</span></label>
+                            <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="email@...">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Công ty / Tổ chức</label>
+                        <input type="text" class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors" placeholder="Tên doanh nghiệp của bạn...">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Sản phẩm quan tâm</label>
+                        <div class="relative">
+                            <select class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors appearance-none cursor-pointer">
+                                <option value="" class="bg-gray-800">-- Lựa chọn sản phẩm --</option>
+                                <option value="1" class="bg-gray-800">Đất công nghiệp cho thuê</option>
+                                <option value="2" class="bg-gray-800">Nhà xưởng xây sẵn / Xây theo YC</option>
+                                <option value="3" class="bg-gray-800">Khu nhà ở chuyên gia</option>
+                                <option value="4" class="bg-gray-800">Trung tâm thương mại / Tiện ích</option>
+                                <option value="5" class="bg-gray-800">Tham quan tổng thể dự án</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none"></i>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Ngày dự kiến tham quan</label>
+                        <input type="date" class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors cursor-pointer" style="color-scheme: dark;">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[12px] font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">Ghi chú thêm</label>
+                        <textarea rows="3" class="w-full bg-white/5 border border-white/10 rounded-md px-3.5 py-2.5 text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:bg-white/10 transition-colors resize-none" placeholder="Bạn có yêu cầu đặc biệt nào không?..."></textarea>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <button type="submit" id="submit-register-btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white text-[13px] font-bold py-3.5 rounded-md shadow-lg transition-all flex items-center justify-center gap-2 tracking-wider">
+                            <i class="fa-solid fa-paper-plane"></i> GỬI YÊU CẦU ĐĂNG KÝ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Header Center -->
+        <div class="interactive-ui absolute top-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 w-full max-w-3xl pointer-events-none transition-opacity duration-300" id="header-center">
+            <h2 class="text-green-400 font-semibold tracking-widest text-sm drop-shadow-md bg-black/60 px-4 py-1 rounded-md mb-1">VIRTUAL TOUR 360&deg;</h2>
+            <h1 class="text-white text-2xl md:text-4xl font-bold mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center uppercase">TỔ HỢP CÔNG NGHIỆP ESG THỊNH MINH</h1>
+            
+            <div class="mt-4 flex gap-4 pointer-events-auto">
+                <button id="btn-leed" class="text-green-400 font-semibold hover:text-green-300 transition-colors drop-shadow-md bg-black/40 px-4 py-1.5 rounded border border-green-500/30">TIÊU CHUẨN LEED</button>
+                <div class="w-px bg-white/50"></div>
+                <!-- SỬA: Thêm ID btn-register và viền cam cho nút -->
+                <button id="btn-register" class="text-orange-400 font-semibold hover:text-orange-300 transition-colors drop-shadow-md bg-black/40 px-4 py-1.5 rounded border border-orange-500/30">ĐĂNG KÝ THAM QUAN</button>
+            </div>
+        </div>
+
+        <!-- Language Flags -->
+        <div class="interactive-ui absolute top-6 right-6 flex gap-2 z-20">
+            <button id="lang-vi" class="w-8 h-8 rounded-full bg-red-600 border-2 border-white flex justify-center items-center overflow-hidden hover:scale-110 transition-transform shadow-lg relative">
+                <span class="text-yellow-300 font-bold text-[10px]">VN</span>
+            </button>
+            <button id="lang-en" class="w-8 h-8 rounded-full bg-blue-800 border-2 border-white flex justify-center items-center overflow-hidden hover:scale-110 transition-transform shadow-lg relative">
+                <span class="text-white font-bold text-[10px]">EN</span>
+            </button>
+        </div>
+        
+        <!-- Bottom Control Bar -->
+        <div class="interactive-ui absolute bottom-0 left-0 w-full bg-[#2b3541]/95 backdrop-blur-md z-30 flex flex-col transition-transform duration-300" id="main-bottom-bar">
+            <!-- Thumbnail Strip (Gallery) -->
+            <div id="thumbnail-strip" class="w-full overflow-x-auto modern-scrollbar flex gap-3 p-3 transition-all duration-300 max-h-36 items-center">
+                <!-- Nút sẽ được generate tự động -->
+            </div>
+
+            <div class="w-full h-[1px] bg-white/20"></div>
+
+            <div class="flex justify-between items-center px-4 py-3 text-white text-2xl">
+                <div class="flex gap-6 items-center">
+                    <button id="ctrl-prev-scene" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-backward-fast"></i></button>
+                    <button id="ctrl-toggle-thumbs" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-table-cells"></i></button>
+                </div>
+                
+                <div class="flex gap-6 md:gap-8 items-center">
+                    <button id="ctrl-left" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button id="ctrl-right" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-right"></i></button>
+                    <button id="ctrl-up" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-up"></i></button>
+                    <button id="ctrl-down" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-arrow-down"></i></button>
+                    <button id="ctrl-zoomin" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-plus"></i></button>
+                    <button id="ctrl-zoomout" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-minus"></i></button>
+                    <button id="ctrl-vr" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-vr-cardboard"></i></button>
+                </div>
+
+                <div class="flex gap-6 items-center">
+                    <button id="ctrl-fullscreen" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-expand"></i></button>
+                    <button id="ctrl-hide-bar" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-caret-down"></i></button>
+                    <button id="ctrl-next-scene" class="hover:text-green-400 hover:scale-110 transition-all"><i class="fa-solid fa-forward-fast"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DỮ LIỆU CÁC HẠNG MỤC TỔNG THỂ ---
+        const projectData = [
+            { 
+                id: 1, pitch: 5, yaw: 0, title: "KCN Thịnh Minh", image: "https://images.pexels.com/photos/2569842/pexels-photo-2569842.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Khu công nghiệp trung tâm được quy hoạch theo mô hình Hệ sinh thái Tuần hoàn (Circular Economy). Phát triển song song không gian sản xuất công nghệ cao và bảo vệ nghiêm ngặt đa dạng sinh học.", 
+                specs: {
+                    "Tổng diện tích": "500 ha", "Tỷ lệ lấp đầy": "85%", "Chứng chỉ quy hoạch": "LEED Platinum (USGBC)", "Mật độ xây dựng": "< 45%", "Ngành nghề trọng tâm": "Vi mạch, AI, Tự động hóa", "Tỷ lệ Không gian xanh": "30% (Tiêu chuẩn EIP)", "Mục tiêu Net Zero": "Đạt 100% vào năm 2035", "Trung tâm R&D": "Quy mô 15 ha", "Hệ thống quản lý AI": "BMS & SCADA v4.0", "Hạ tầng Viễn thông": "5G dùng riêng (Private 5G)"
+                } 
+            },
+            { 
+                id: 2, pitch: 8, yaw: 20, title: "Cụm CN Thịnh Minh", image: "https://images.pexels.com/photos/1125278/pexels-photo-1125278.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Cụm công nghiệp phụ trợ dành riêng cho các doanh nghiệp SMEs toàn cầu. Cung cấp nền tảng logistics và chuỗi cung ứng dùng chung đạt chuẩn quốc tế.", 
+                specs: {
+                    "Quy mô diện tích": "120 ha", "Tiêu chuẩn nhà xưởng": "EDGE Advanced", "Tải trọng sàn": "3.5 - 5.0 Tấn/m2", "Chiều cao thông thủy": "Từ 9.5m đến 12.0m", "Cấp điện áp": "Trạm nội khu 110/22kV", "Logistics dùng chung": "Kho thông minh (AS/RS)", "Hệ thống PCCC": "NFPA (Hoa Kỳ)", "Giao thông bốc dỡ": "Đường nội bộ rộng 40m", "Xử lý rác thải": "Phân loại tại nguồn (Zero Waste)", "Tỷ lệ tái chế vật liệu": "Lên tới 85%"
+                } 
+            },
+            { 
+                id: 3, pitch: -5, yaw: -35, title: "Nhà máy điện", image: "https://images.pexels.com/photos/159397/solar-panel-array-power-sun-electricity-159397.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Trung tâm năng lượng thông minh kết hợp điện mặt trời mái nhà và hệ thống lưu trữ BESS, cung cấp chứng chỉ năng lượng tái tạo (REC) cho doanh nghiệp.", 
+                specs: {
+                    "Công suất thiết kế": "50MWp (Giai đoạn 1)", "Công nghệ Pin": "Monocrystalline PERC", "Lưu trữ năng lượng": "Hệ thống BESS 20MWh", "Hòa lưới điện Quốc gia": "Lưới điện thông minh (Smart Grid)", "Tỷ lệ cung cấp nội khu": "100% xanh cho giờ hành chính", "Giảm phát thải CO2": "Khoảng 65.000 tấn/năm", "Diện tích bao phủ mái": "400.000 m2", "Tín chỉ Carbon": "Cung cấp REC (I-REC)", "Vòng đời hệ thống": "Bảo hành hiệu suất 25 năm", "Điều phối dòng điện": "Tích hợp AI dự báo công suất"
+                } 
+            },
+            { 
+                id: 4, pitch: -8, yaw: -15, title: "Nhà máy nước", image: "https://images.pexels.com/photos/2444403/pexels-photo-2444403.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Tổ hợp xử lý và phân phối nước sạch khép kín, ứng dụng công nghệ lọc thẩm thấu ngược, cam kết chất lượng nước phục vụ đa dạng ngành công nghiệp khắt khe.", 
+                specs: {
+                    "Công suất cấp nước": "45.000 m3/ngày đêm", "Công nghệ xử lý": "RO & Siêu lọc (Ultrafiltration)", "Nguồn nước thô đầu vào": "Hồ điều hòa sinh thái nội khu", "Tỷ lệ rò rỉ (NRW)": "Kiểm soát dưới < 3%", "Trạm bơm tăng áp": "Điều khiển biến tần (VFD)", "Bể chứa ngầm dự phòng": "Dung tích 20.000 m3", "Quan trắc tự động": "Real-time chất lượng nước", "Công nghệ khử trùng": "Ozone & UV (Không dùng Clo sinh học)", "Áp lực mạng lưới": "Duy trì ổn định 2.5 - 4.0 bar", "Tiêu chuẩn đầu ra": "Vượt QCVN 01-1:2018/BYT"
+                } 
+            },
+            { 
+                id: 5, pitch: -12, yaw: 10, title: "NM xử lý nước thải", image: "https://images.pexels.com/photos/3280894/pexels-photo-3280894.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Hệ thống xử lý nước thải trung tâm theo chuẩn kinh tế tuần hoàn, thu hồi nước và chuyển hóa bùn thải thành phân bón hữu cơ.", 
+                specs: {
+                    "Công suất xử lý": "30.000 m3/ngày đêm", "Công nghệ cốt lõi": "MBR & Hóa lý bậc cao", "Tỷ lệ tuần hoàn nước": "Tái sử dụng > 40% cho KCN", "Tiêu chuẩn xả thải": "Chuẩn A (QCVN 40:2011/BTNMT)", "Xử lý mùi hôi": "Công nghệ Biofilter nội bộ", "Thu hồi năng lượng": "Hệ thống thu hồi Biogas", "Diện tích trạm xử lý": "5.5 ha (Thiết kế chìm 1 phần)", "Giám sát quan trắc": "Kết nối trực tiếp Sở TNMT", "Quản lý bùn thải": "Ép bùn băng tải, tạo phân bón", "Điện năng tiêu thụ": "Tối ưu hóa nhờ AI (<=0.4 kWh/m3)"
+                } 
+            },
+            { 
+                id: 6, pitch: -2, yaw: 40, title: "Khu Nhà ở thấp tầng", image: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Phân khu nhà ở thấp tầng (Townhouse) tích hợp hệ sinh thái tiện ích, mang đến môi trường sống cân bằng, xanh mát cho đội ngũ quản lý và kỹ sư.", 
+                specs: {
+                    "Tổng quy mô": "1,200 căn nhà phố/liền kề", "Mật độ xây dựng": "Dưới 35%", "Chứng chỉ công trình": "EDGE Residential", "Mật độ cây xanh": "15 m2 cây xanh/người", "Năng lượng tiêu thụ": "100% sử dụng điện mặt trời mái", "Hạ tầng giao thông": "Đường nội khu lát gạch thấm nước", "Tiện ích cốt lõi": "Clubhouse, công viên, hồ bơi", "Hệ thống an ninh": "Kiểm soát ra vào thông minh", "Quản lý rác tại nguồn": "Thùng rác phân loại 3 ngăn", "Trạm sạc xe điện": "Tích hợp tại 100% gara tư nhân"
+                } 
+            },
+            { 
+                id: 7, pitch: 2, yaw: -45, title: "Khu Nhà ở cao tầng", image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Khu căn hộ phức hợp áp dụng giải pháp thông gió tự nhiên và thiết kế vi khí hậu, tạo lập cộng đồng cư dân hiện đại và tiết kiệm năng lượng.", 
+                specs: {
+                    "Quy mô xây dựng": "6 Block (20-25 tầng)", "Số lượng căn hộ": "2,800 căn hộ (1-3 PN)", "Tiêu chuẩn thiết kế": "BCA Green Mark (Singapore)", "Thiết kế vi khí hậu": "Tối ưu đón gió tự nhiên 85%", "Giải pháp làm mát": "Hệ thống District Cooling", "Quản lý tòa nhà": "Hệ thống AI/BMS thông minh", "Tái sử dụng nước": "Nước xám (Greywater) dùng tưới cây", "Không gian chung": "Vườn treo trên cao (Sky garden)", "Giao thông đứng": "Thang máy tái tạo điện năng", "PCCC Tòa nhà": "Cảnh báo cháy sớm (Smoke Control)"
+                } 
+            },
+            { 
+                id: 8, pitch: 10, yaw: 35, title: "Nhà ở Chuyên gia", image: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Khu biệt thự nghỉ dưỡng lưu trú đặc biệt khép kín, đem lại trải nghiệm sống 5 sao đẳng cấp quốc tế dành riêng cho chuyên gia và lãnh đạo cấp cao.", 
+                specs: {
+                    "Số lượng giới hạn": "150 căn Biệt thự sinh thái", "Tiêu chuẩn Xây dựng": "LEED v4 Platinum", "Quản lý vận hành": "Đơn vị quốc tế (Chuẩn 5 Sao)", "Hệ sinh thái xanh": "Hồ cảnh quan & Vườn Zen", "Vật liệu xây dựng": "Gỗ FSC & Kính Low-E đa lớp", "An ninh cá nhân": "Mã hóa sinh trắc học 3 lớp", "Năng lượng": "Tự cung tự cấp hoàn toàn (Off-grid)", "Trung tâm thể thao": "Golf 3D, Tennis, Yoga Retreat", "Giao thông": "Chỉ sử dụng xe điện nội khu", "Dịch vụ Concierge": "Trợ lý cá nhân 24/7"
+                } 
+            },
+            { 
+                id: 9, pitch: -15, yaw: -5, title: "Bãi đỗ xe", image: "https://images.pexels.com/photos/1756957/pexels-photo-1756957.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Trung tâm đỗ xe và trạm trung chuyển logistics thông minh, trang bị hạ tầng sạc xe điện cỡ lớn, giảm thiểu ách tắc và khí thải nội khu.", 
+                specs: {
+                    "Tổng diện tích bãi": "6.5 ha", "Sức chứa tối đa": "600 Container & Xe tải nặng", "Công nghệ quản lý": "Hệ thống ANPR (Nhận diện biển số)", "Hạ tầng trạm sạc": "50 trụ sạc siêu tốc (350kW) cho EV", "Mái che sinh thái": "Lắp đặt 100% tấm pin năng lượng", "Kiểm soát tải trọng": "Cân điện tử tự động (WIM)", "Bề mặt bãi đỗ": "Bê tông nhựa rỗng giảm ngập", "Chiếu sáng ban đêm": "LED thông minh cảm biến chuyển động", "Phần mềm điều phối": "Cổng thông tin Đặt chỗ tự động", "Tiện ích tài xế": "Khu nghỉ ngơi, phòng tắm, căn tin"
+                } 
+            },
+            { 
+                id: 10, pitch: -10, yaw: 25, title: "Chợ đầu mối", image: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Trung tâm thương mại nông sản quy mô lớn, được vận hành theo tiêu chuẩn chuỗi lạnh (Cold chain) nghiêm ngặt, đảm bảo vệ sinh an toàn thực phẩm.", 
+                specs: {
+                    "Quy mô hoạt động": "4.5 ha tổng diện tích", "Số gian hàng chuẩn": "Hơn 500 gian hàng thương mại", "Hệ thống Chuỗi lạnh": "Kho lạnh & Kho mát công suất 10.000 tấn", "Truy xuất nguồn gốc": "Công nghệ Blockchain tích hợp", "Xử lý rác hữu cơ": "Máy ủ phân vi sinh (Compost) tại chỗ", "An toàn thực phẩm": "Phòng LAB kiểm định ISO 17025", "Nhiệt độ kho lạnh": "Điều khiển độc lập từ -25°C đến 10°C", "Hệ thống PCCC": "Chữa cháy màng nước tự động", "Hạ tầng Logistics": "Dock leveler tải trọng lớn", "Sử dụng năng lượng": "Cách nhiệt bằng Panel PIR chống cháy"
+                } 
+            },
+            { 
+                id: 11, pitch: 0, yaw: -20, title: "TT Thương mại dịch vụ", image: "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Tổ hợp mua sắm, ẩm thực và giải trí đa chức năng. Nơi giao thoa của lối sống hiện đại và kiến trúc không gian mở thân thiện với môi trường.", 
+                specs: {
+                    "Tổng diện tích sàn": "65.000 m2 (GBA)", "Tiêu chuẩn bền vững": "LOTUS Gold (VGBC)", "Tối ưu hóa ánh sáng": "Sử dụng Skylight đón sáng tự nhiên", "Không gian thương mại": "Siêu thị, Food Court, Khu mua sắm", "Phòng họp & Hội nghị": "Trung tâm hội nghị sức chứa 1,000 khách", "Hệ thống ĐHKK": "Chiller từ trường hiệu suất cao", "Cảnh quan xanh": "Khu vườn dạo bộ trên mái (Roof garden)", "Thu gom nước mưa": "Tái sử dụng cho hệ thống xả vệ sinh", "Quản lý tòa nhà": "Facility Management theo chuẩn quốc tế", "Cảm biến tiết kiệm": "Cảm biến CO2 điều chỉnh khí tươi tự động"
+                } 
+            },
+            { 
+                id: 12, pitch: -5, yaw: 45, title: "Trường học", image: "https://images.pexels.com/photos/256455/pexels-photo-256455.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Hệ thống giáo dục liên cấp song ngữ, tạo dựng môi trường học tập lý tưởng bằng vật liệu an toàn, không khí sạch và cảnh quan thiên nhiên.", 
+                specs: {
+                    "Quy mô tiếp nhận": "2,500 học sinh (Từ Mẫu giáo - THPT)", "Chuẩn thiết kế": "Trường học xanh (Green School Program)", "Môi trường học tập": "100% phòng học trang bị lọc bụi mịn HEPA", "Cơ sở vật chất": "Phòng STEM, Thư viện số, Bể bơi bốn mùa", "Sử dụng vật liệu": "Vật liệu VOC thấp (Low-VOC), an toàn hô hấp", "Năng lượng": "Pin mặt trời cung cấp 80% điện tiêu thụ", "Chỉ tiêu cây xanh": "Sân chơi sinh thái đa dạng thực vật", "Hệ thống nước uống": "Công nghệ màng lọc Nano trung tâm", "Bảo vệ thị lực": "Chiếu sáng HCL (Human Centric Lighting)", "Giao thông đưa đón": "Khu vực trả khách an toàn (Drop-off zone)"
+                } 
+            },
+            { 
+                id: 13, pitch: 12, yaw: -25, title: "Bệnh viện", image: "https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Bệnh viện Đa khoa Quốc tế sở hữu thiết bị chẩn đoán y khoa hàng đầu, cam kết chăm sóc sức khỏe toàn diện cho chuyên gia và cộng đồng dân cư.", 
+                specs: {
+                    "Quy mô khám chữa": "400 giường bệnh nội trú", "Tiêu chuẩn y tế": "Đạt chuẩn quốc tế JCI (Mỹ)", "Khí y tế trung tâm": "Hệ thống khí nén và Oxy chuẩn y khoa", "Phòng mổ áp lực": "Công nghệ dòng khí tầng (Laminar Air Flow)", "Chuyển đổi số y tế": "Bệnh án điện tử (EMR) & HIS", "Hạ tầng cấp cứu": "Sân đỗ trực thăng (Helipad) trên mái", "Xử lý rác y tế": "Lò đốt chuyên dụng tiêu hủy vô trùng", "Không gian nghỉ dưỡng": "Phòng bệnh thiết kế chuẩn Healing Architecture", "Nguồn điện dự phòng": "UPS và Máy phát điện Backup trong 10 giây", "Khám bệnh từ xa": "Hệ thống Telemedicine kết nối toàn cầu"
+                } 
+            },
+            { 
+                id: 14, pitch: -18, yaw: 35, title: "Khu An Ninh", image: "https://images.pexels.com/photos/414110/pexels-photo-414110.jpeg?auto=compress&cs=tinysrgb&w=800", 
+                desc: "Trung tâm chỉ huy An ninh & Điều hành tập trung (SOC). Bộ não kỹ thuật số theo dõi, cảnh báo và phản ứng tự động trước mọi rủi ro tại tổ hợp.", 
+                specs: {
+                    "Cấp độ bảo mật": "An ninh lớp 4 (Cấp độ Quốc gia)", "Trung tâm điều hành": "SOC (Security Operations Center) 24/7", "Camera giám sát": "1,500+ Camera tích hợp AI (Nhận diện)", "Hệ thống vành đai": "Cảm biến quang học & Cáp quang báo động", "Tuần tra thông minh": "Sử dụng Drone/Flycam tầm soát từ trên cao", "Kiểm soát ra vào": "Sinh trắc học kết hợp thẻ RFID mã hóa", "Hệ thống phản ứng": "Chống xâm nhập, chống phá hoại tự động", "Mạng viễn thông": "Kênh truyền dẫn quang bảo mật dùng riêng", "Phòng cháy chữa cháy": "Cảnh báo cháy qua Cảm biến khói nhạy sáng", "Thời gian phản hồi": "Lực lượng đặc nhiệm có mặt < 3 phút"
+                } 
+            }
+        ];
+
+        // --- RENDER DỮ LIỆU RA GIAO DIỆN ---
+        const menuContainer = document.getElementById('left-menu-container');
+        const thumbContainer = document.getElementById('thumbnail-strip');
+        let hotSpotsConfig = [];
+
+        projectData.forEach((item) => {
+            // Render menu trái
+            menuContainer.innerHTML += `
+                <button class="loc-btn menu-loc-btn w-full text-left px-4 py-2.5 text-sm transition-all rounded-lg bg-green-500/30 hover:bg-green-500/60 border border-white/20 shadow-sm backdrop-blur-sm tracking-wide" data-id="${item.id}" data-pitch="${item.pitch}" data-yaw="${item.yaw}">
+                    ${item.id}. ${item.title}
+                </button>
+            `;
+            // Render thumbnail dưới
+            thumbContainer.innerHTML += `
+                <button class="thumb-btn loc-btn shrink-0 focus:outline-none relative group rounded-md overflow-hidden w-40 h-24 border-2 border-white/20 hover:border-white/60 transition-colors" data-id="${item.id}" data-pitch="${item.pitch}" data-yaw="${item.yaw}">
+                    <img src="${item.image}" class="w-full h-full object-cover" alt="${item.title}">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors"></div>
+                    <div class="absolute bottom-0 left-0 w-full bg-black/80 backdrop-blur-sm text-white text-[11px] font-bold py-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-center tracking-wider">${item.id}. ${item.title}</div>
+                </button>
+            `;
+            // Tạo mảng cấu hình Hotspots cho Pannellum
+            hotSpotsConfig.push({
+                "pitch": item.pitch,
+                "yaw": item.yaw,
+                "cssClass": "custom-hotspot",
+                "createTooltipFunc": setupCustomTooltip,
+                "createTooltipArgs": item
+            });
+        });
+
+        // --- HÀM TẠO NỘI DUNG HOTSPOT TRÊN BẢN ĐỒ ---
+        function setupCustomTooltip(hotSpotDiv, item) {
+            hotSpotDiv.innerHTML = ''; 
+            hotSpotDiv.setAttribute('data-label', item.id); 
+            
+            var pulseRing = document.createElement('div');
+            pulseRing.classList.add('pulse-ring');
+            hotSpotDiv.appendChild(pulseRing);
+            
+            var tooltip = document.createElement('div');
+            tooltip.classList.add('custom-tooltip', 'font-inter');
+            tooltip.innerHTML = `
+                <img src="${item.image}" class="w-full h-40 object-cover block border-b border-white/20" alt="${item.title}">
+                <div class="bg-[#16a34a] text-white text-center py-3 px-3 font-bold text-[13px] tracking-wide">
+                    ${item.id}. ${item.title} <br><span class="text-[10px] font-normal opacity-80 mt-1 inline-block uppercase tracking-widest">(Bấm xem chi tiết)</span>
+                </div>
+            `;
+            hotSpotDiv.appendChild(tooltip);
+
+            // SỰ KIỆN CLICK VÀO CỘT MỐC: CHỈ TẠI ĐÂY MỚI ĐỔI NỀN VÀ HIỆN SIDEBAR
+            hotSpotDiv.onclick = function() {
+                openItemDetail(item);
+            };
+        }
+
+        // --- CẤU HÌNH PANNELLUM TỔNG QUAN ---
+        const viewer = pannellum.viewer('panorama', {
+            "default": {
+                "firstScene": "mainMap",     
+                "sceneFadeDuration": 1500,  
+                "autoLoad": true,           
+                "compass": false,
+                "showControls": false 
+            },
+            "scenes": {
+                "mainMap": {
+                    "title": "TỔ HỢP CÔNG NGHIỆP THỊNH MINH",
+                    "hfov": 80,            
+                    "pitch": 0,            
+                    "yaw": 0,               
+                    "type": "equirectangular",
+                    "panorama": "https://images.pexels.com/photos/6767966/pexels-photo-6767966.jpeg", 
+                    "haov": 140, "vaov": 90,         
+                    "minYaw": -60, "maxYaw": 60,         
+                    "minPitch": -40, "maxPitch": 40,       
+                    "hotSpots": hotSpotsConfig 
+                }
+            }
+        });
+
+        // --- LOGIC: QUẢN LÝ ẨN/HIỆN HEADER CENTER DỰA TRÊN CÁC SIDEBAR ---
+        function checkHeaderVisibility() {
+            const isRightSidebarOpen = !document.getElementById('right-sidebar').classList.contains('translate-x-full');
+            const isLeedSidebarOpen = !document.getElementById('leed-sidebar').classList.contains('translate-x-full');
+            const isRegisterSidebarOpen = !document.getElementById('register-sidebar').classList.contains('translate-x-full'); // Mới thêm
+            
+            if (!isRightSidebarOpen && !isLeedSidebarOpen && !isRegisterSidebarOpen) {
+                document.getElementById('header-center').classList.remove('opacity-0');
+            } else {
+                document.getElementById('header-center').classList.add('opacity-0');
+            }
+        }
+
+        // --- LOGIC: HIỂN THỊ CHI TIẾT 1 HẠNG MỤC (Đổi nền + Mở Sidebar) ---
+        function openItemDetail(item) {
+            const detailSceneId = 'detail_' + item.id;
+            if (!viewer.getConfig().scenes[detailSceneId]) {
+                viewer.addScene(detailSceneId, {
+                    "type": "equirectangular",
+                    "panorama": item.image,
+                    "haov": 140, "vaov": 90, 
+                    "minYaw": -60, "maxYaw": 60, "minPitch": -40, "maxPitch": 40
+                });
+            }
+            viewer.loadScene(detailSceneId);
+
+            // Cập nhật giao diện Sidebar Phải (Dark Mode)
+            document.getElementById('rs-img').src = item.image;
+            document.getElementById('rs-title').innerText = item.id + ". " + item.title;
+            document.getElementById('rs-desc').innerText = item.desc;
+            
+            const specsHtml = Object.entries(item.specs).map(([k, v]) => `
+                <div class="flex justify-between items-center border-b border-gray-700/60 pb-2.5 pt-1 hover:bg-white/5 transition-colors px-1 rounded-sm">
+                    <span class="font-medium text-gray-400 w-1/2 pr-2 leading-tight">${k}</span>
+                    <span class="text-right text-green-400 font-semibold w-1/2 leading-tight drop-shadow-sm">${v}</span>
+                </div>
+            `).join('');
+            document.getElementById('rs-specs').innerHTML = specsHtml;
+
+            // Mở Sidebar chi tiết, tự động đóng Sidebar LEED và Đăng ký (nếu đang mở)
+            document.getElementById('right-sidebar').classList.remove('translate-x-full');
+            document.getElementById('leed-sidebar').classList.add('translate-x-full'); 
+            document.getElementById('register-sidebar').classList.add('translate-x-full'); 
+            checkHeaderVisibility();
+        }
+
+        // --- SỰ KIỆN: NÚT ĐÓNG CHI TIẾT (QUAY LẠI TỔNG QUAN) ---
+        document.getElementById('close-rs-btn').addEventListener('click', () => {
+            document.getElementById('right-sidebar').classList.add('translate-x-full');
+            viewer.loadScene('mainMap');
+            checkHeaderVisibility();
+        });
+
+        // --- SỰ KIỆN: SIDEBAR TIÊU CHUẨN LEED ---
+        const btnLeed = document.getElementById('btn-leed');
+        const leedSidebar = document.getElementById('leed-sidebar');
+        const closeLeedBtn = document.getElementById('close-leed-btn');
+
+        btnLeed.addEventListener('click', () => {
+            // Mở sidebar LEED, tự động đóng các Sidebar khác
+            leedSidebar.classList.remove('translate-x-full');
+            document.getElementById('right-sidebar').classList.add('translate-x-full');
+            document.getElementById('register-sidebar').classList.add('translate-x-full');
+            
+            if (viewer.getScene() !== 'mainMap') {
+                viewer.loadScene('mainMap');
+            }
+            checkHeaderVisibility();
+        });
+
+        closeLeedBtn.addEventListener('click', () => {
+            leedSidebar.classList.add('translate-x-full');
+            checkHeaderVisibility();
+        });
+
+        // --- SỰ KIỆN: SIDEBAR ĐĂNG KÝ THAM QUAN (MỚI THÊM) ---
+        const btnRegister = document.getElementById('btn-register');
+        const registerSidebar = document.getElementById('register-sidebar');
+        const closeRegisterBtn = document.getElementById('close-register-btn');
+
+        btnRegister.addEventListener('click', () => {
+            // Mở sidebar Đăng ký, tự động đóng các Sidebar khác
+            registerSidebar.classList.remove('translate-x-full');
+            document.getElementById('right-sidebar').classList.add('translate-x-full');
+            document.getElementById('leed-sidebar').classList.add('translate-x-full');
+            
+            if (viewer.getScene() !== 'mainMap') {
+                viewer.loadScene('mainMap');
+            }
+            checkHeaderVisibility();
+        });
+
+        closeRegisterBtn.addEventListener('click', () => {
+            registerSidebar.classList.add('translate-x-full');
+            checkHeaderVisibility();
+        });
+
+        // --- LOGIC: XỬ LÝ SUBMIT FORM ĐĂNG KÝ ---
+        const registerForm = document.getElementById('register-form');
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Ngăn chặn form tải lại trang
+            
+            const submitBtn = document.getElementById('submit-register-btn');
+            const originalContent = submitBtn.innerHTML;
+            
+            // 1. Hiệu ứng đang gửi
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG XỬ LÝ...';
+            submitBtn.classList.remove('bg-orange-500', 'hover:bg-orange-600');
+            submitBtn.classList.add('bg-gray-500', 'cursor-not-allowed');
+            
+            // Giả lập thời gian gửi dữ liệu API (1.5 giây)
+            setTimeout(() => {
+                // 2. Hiệu ứng gửi thành công
+                submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ĐĂNG KÝ THÀNH CÔNG!';
+                submitBtn.classList.remove('bg-gray-500', 'cursor-not-allowed');
+                submitBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                
+                // 3. Tự động đóng sidebar và reset form sau 2 giây
+                setTimeout(() => {
+                    registerSidebar.classList.add('translate-x-full');
+                    checkHeaderVisibility();
+                    
+                    // Reset lại giao diện gốc cho lần mở sau
+                    registerForm.reset();
+                    submitBtn.innerHTML = originalContent;
+                    submitBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                    submitBtn.classList.add('bg-orange-500', 'hover:bg-orange-600');
+                }, 2000);
+                
+            }, 1500);
+        });
+
+        // --- LOGIC: CHUYỂN ĐỔI TABS TRONG SIDEBAR LEED ---
+        const leedTabBtns = document.querySelectorAll('.leed-tab-btn');
+        const leedTabContents = document.querySelectorAll('.leed-tab-content');
+
+        leedTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Đặt lại trạng thái tất cả các nút
+                leedTabBtns.forEach(b => {
+                    b.classList.remove('text-white', 'bg-green-600/30', 'border-green-500');
+                    b.classList.add('text-gray-400', 'border-transparent');
+                });
+                
+                // Kích hoạt nút được bấm
+                btn.classList.add('text-white', 'bg-green-600/30', 'border-green-500');
+                btn.classList.remove('text-gray-400', 'border-transparent');
+
+                // Ẩn tất cả nội dung
+                leedTabContents.forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('block');
+                });
+
+                // Hiển thị nội dung tương ứng
+                const targetId = btn.getAttribute('data-target');
+                document.getElementById(targetId).classList.remove('hidden');
+                document.getElementById(targetId).classList.add('block');
+            });
+        });
+
+        // --- ĐỒNG BỘ NÚT MENU TRÁI & THUMBNAIL DƯỚI ---
+        const locBtns = document.querySelectorAll('.loc-btn');
+        locBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Xóa trạng thái active cũ
+                locBtns.forEach(b => b.classList.remove('active'));
+
+                // Lấy tọa độ từ data-attribute
+                const targetId = btn.getAttribute('data-id');
+                const targetPitch = parseFloat(btn.getAttribute('data-pitch'));
+                const targetYaw = parseFloat(btn.getAttribute('data-yaw'));
+                
+                // Highlight các nút (Menu/Thumb) đang được chọn
+                const matchingBtns = document.querySelectorAll(`.loc-btn[data-id="${targetId}"]`);
+                matchingBtns.forEach(b => b.classList.add('active'));
+
+                // KHI BẤM Ở MENU/THUMBNAIL THÌ CHỈ DI CHUYỂN CAMERA (KHÔNG ĐỔI NỀN)
+                // Đảm bảo đang ở scene tổng quan trước khi xoay camera
+                if (viewer.getScene() !== 'mainMap') {
+                    // Nếu đang ở chi tiết, đóng chi tiết lại trước
+                    document.getElementById('right-sidebar').classList.add('translate-x-full');
+                    document.getElementById('header-center').classList.remove('opacity-0');
+                    viewer.loadScene('mainMap');
+                    // Chờ scene chuyển xong rồi mới xoay camera
+                    setTimeout(() => {
+                        viewer.lookAt(targetPitch, targetYaw, viewer.getHfov(), 1500);
+                    }, 500);
+                } else {
+                    viewer.lookAt(targetPitch, targetYaw, viewer.getHfov(), 1500);
+                }
+            });
+        });
+
+        // --- ĐIỀU KHIỂN CAMERA ---
+        const stepAmt = 15; 
+        document.getElementById('ctrl-up').addEventListener('click', () => { viewer.setPitch(viewer.getPitch() + stepAmt); });
+        document.getElementById('ctrl-down').addEventListener('click', () => { viewer.setPitch(viewer.getPitch() - stepAmt); });
+        document.getElementById('ctrl-left').addEventListener('click', () => { viewer.setYaw(viewer.getYaw() - stepAmt); });
+        document.getElementById('ctrl-right').addEventListener('click', () => { viewer.setYaw(viewer.getYaw() + stepAmt); });
+        document.getElementById('ctrl-zoomin').addEventListener('click', () => { viewer.setHfov(viewer.getHfov() - 10); });
+        document.getElementById('ctrl-zoomout').addEventListener('click', () => { viewer.setHfov(viewer.getHfov() + 10); });
+        document.getElementById('ctrl-fullscreen').addEventListener('click', () => { viewer.toggleFullscreen(); });
+
+        const thumbnailStrip = document.getElementById('thumbnail-strip');
+        document.getElementById('ctrl-toggle-thumbs').addEventListener('click', () => {
+            if (thumbnailStrip.style.maxHeight === '0px') {
+                thumbnailStrip.style.maxHeight = '150px';
+                thumbnailStrip.style.padding = '0.75rem';
+                thumbnailStrip.style.opacity = '1';
+            } else {
+                thumbnailStrip.style.maxHeight = '0px';
+                thumbnailStrip.style.padding = '0';
+                thumbnailStrip.style.opacity = '0';
+            }
+        });
+
+        const mainBottomBar = document.getElementById('main-bottom-bar');
+        let isBottomBarHidden = false;
+        document.getElementById('ctrl-hide-bar').addEventListener('click', () => {
+            if(!isBottomBarHidden) {
+                mainBottomBar.style.transform = 'translateY(100%)';
+                isBottomBarHidden = true;
+                
+                let showBtn = document.createElement('button');
+                showBtn.id = 'show-bar-btn';
+                showBtn.innerHTML = '<i class="fa-solid fa-caret-up"></i>';
+                showBtn.className = 'interactive-ui absolute bottom-0 right-1/2 translate-x-1/2 bg-[#2b3541] text-white px-6 py-2 rounded-t-lg z-40 hover:text-green-400 transition-colors text-2xl shadow-[0_-5px_15px_rgba(0,0,0,0.5)] border border-b-0 border-white/20';
+                document.getElementById('ui-layer').appendChild(showBtn);
+                
+                showBtn.addEventListener('click', () => {
+                    mainBottomBar.style.transform = 'translateY(0)';
+                    isBottomBarHidden = false;
+                    showBtn.remove();
+                });
+            }
+        });
+
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+        const toggleSidebarIcon = document.getElementById('toggle-sidebar-icon');
+        let isSidebarOpen = true;
+
+        toggleSidebarBtn.addEventListener('click', () => {
+            isSidebarOpen = !isSidebarOpen;
+            if (isSidebarOpen) {
+                sidebar.style.transform = 'translateX(0)';
+                toggleSidebarIcon.classList.remove('fa-chevron-right');
+                toggleSidebarIcon.classList.add('fa-chevron-left');
+            } else {
+                sidebar.style.transform = 'translateX(-100%)';
+                toggleSidebarIcon.classList.remove('fa-chevron-left');
+                toggleSidebarIcon.classList.add('fa-chevron-right');
+            }
+        });
+
+        function setupAccordion(headerId, contentId, iconId) {
+            const header = document.getElementById(headerId);
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+
+            header.addEventListener('click', () => {
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        }
+
+        setupAccordion('header-tong-the', 'left-menu-container', 'icon-tong-the');
+        setupAccordion('header-san-pham', 'content-san-pham', 'icon-san-pham');
+
+    </script>
+</body>
+</html>
