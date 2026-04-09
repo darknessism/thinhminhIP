@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>360° Virtual Tour Builder</title>
+    <!-- Tailwind CSS for UI styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js for 3D rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #000; }
+        #canvas-container { width: 100vw; height: 100vh; touch-action: none; cursor: grab; }
+        #canvas-container:active { cursor: grabbing; }
+        
+        /* Custom scrollbar for the UI panels and horizontal carousel (Dark/Emerald Theme) */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(17, 24, 39, 0.5); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #10b981, #059669); border-radius: 4px; } /* Emerald */
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, #34d399, #10b981); }
+
+        /* Prevent text selection and zoom on control bar */
+        .control-btn {
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Pin Highlighting Animation */
+        @keyframes pulse-highlight {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.7); background-color: #ef4444; }
+            50% { transform: scale(1.5); box-shadow: 0 0 0 15px rgba(234, 179, 8, 0); background-color: #eab308; }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); background-color: #ef4444; }
+        }
+        .highlight-pin {
+            animation: pulse-highlight 1.2s ease-in-out 3;
+            z-index: 100 !important;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- 3D Hotspot Pins Container -->
+    <div id="pins-container" class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-10">
+        <!-- Pins injected via JS -->
+    </div>
+
+    <!-- Toggle Menu Button (Visible when side menu is hidden) -->
+    <button id="toggle-btn" onclick="toggleMenu()" class="absolute top-4 left-4 z-20 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-transform transform hidden flex items-center gap-2 border border-emerald-400/30">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        Open Menu
+    </button>
+
+    <!-- Upload UI Panel (Side) -->
+    <div id="ui-panel" class="absolute top-0 left-0 h-full w-80 sm:w-96 bg-[#111827] text-white p-6 overflow-y-auto transition-transform duration-300 z-20 shadow-[4px_0_30px_rgba(0,0,0,0.5)] border-r border-gray-800">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h1 id="builder-title" class="text-2xl font-bold text-emerald-400">360° SPACE Builder</h1>
+                <p class="text-sm text-gray-400 mt-1">Upload 6 faces to build your tour.</p>
+            </div>
+            <button onclick="toggleMenu()" class="text-emerald-400 hover:text-white p-1 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <div class="space-y-5" id="upload-container">
+            <!-- Upload inputs will be injected here via JS -->
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-800">
+            <h3 class="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3">Controls</h3>
+            <ul class="text-sm text-gray-300 space-y-2">
+                <li><span class="font-bold text-white">Drag/Swipe:</span> Look around</li>
+                <li><span class="font-bold text-white">Scroll/Pinch:</span> Zoom in/out</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Info Panel (Left Sidetab for Pin Details) -->
+    <div id="info-panel" class="absolute top-0 left-0 h-full w-80 sm:w-[420px] bg-[#0f172a] text-white p-8 overflow-y-auto transition-transform duration-300 z-30 shadow-[4px_0_30px_rgba(0,0,0,0.8)] border-r border-gray-800 -translate-x-full">
+        <div class="flex justify-between items-start mb-4">
+            <h2 id="info-title" class="text-[22px] font-bold text-emerald-400 uppercase tracking-wide leading-tight pr-4">Location Title</h2>
+            <button onclick="closeInfoPanel()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded-full p-1.5 transition-colors shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div id="info-content" class="mt-2">
+            <!-- Content injected via JS -->
+        </div>
+    </div>
+
+    <!-- Toggle Right Menu Button -->
+    <button id="toggle-right-btn" onclick="toggleRightMenu()" class="absolute top-4 right-4 z-20 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-transform transform hidden flex items-center gap-2 border border-emerald-400/30">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        Scenes
+    </button>
+
+    <!-- Right Side Panel (Scenes List) -->
+    <div id="right-panel" class="absolute top-0 right-0 h-full w-72 bg-[#111827]/95 backdrop-blur-xl text-white p-6 overflow-y-auto transition-transform duration-300 z-20 shadow-[-4px_0_30px_rgba(0,0,0,0.5)] border-l border-gray-800">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h2 class="text-xl font-bold text-emerald-400">Tour Scenes</h2>
+                <p class="text-xs text-gray-400 mt-1">Select a scene to view</p>
+            </div>
+            <button onclick="toggleRightMenu()" class="text-emerald-400 hover:text-white p-1 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <ul id="scene-list-container" class="space-y-2">
+            <!-- Scene list injected here via JS -->
+        </ul>
+    </div>
+
+    <!-- Mini Show Button (Visible when bottom bar is hidden) -->
+    <button id="show-bottom-bar-btn" onclick="toggleBottomBar()" class="hidden absolute bottom-0 right-4 z-20 bg-[#475569]/90 text-white px-4 py-2 rounded-t-lg shadow-lg hover:bg-[#334155] transition-colors flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <!-- Bottom UI Wrapper (Contains both Carousel and Controls) -->
+    <div id="bottom-ui-wrapper" class="absolute bottom-0 left-0 w-full z-30 transition-transform duration-300 shadow-2xl">
+        
+        <!-- Horizontal Locations Carousel (Visible by default) -->
+        <div id="locations-carousel" class="w-full bg-[#111827]/90 backdrop-blur-md px-2 pb-1 border-b border-gray-800 overflow-x-auto">
+            <div id="locations-track" class="flex gap-4 px-2 py-4 items-center">
+                <!-- Location thumbnails injected via JS -->
+            </div>
+        </div>
+
+        <!-- Bottom Control Panel -->
+        <div id="bottom-control-bar" class="w-full bg-[#1f2937]/95 backdrop-blur-md flex justify-between items-center px-2 py-1.5 border-t border-gray-800">
+            
+            <!-- Left Group -->
+            <div class="flex items-center gap-1 sm:gap-2">
+                <button onclick="navigateScene(-1)" class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" title="Previous Scene">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+                </button>
+                <button onclick="toggleLocationsMenu()" class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" title="Grid View">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>
+                </button>
+            </div>
+
+            <!-- Middle Group (Navigation) -->
+            <div class="flex items-center gap-1 sm:gap-3">
+                <button class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" onpointerdown="startAction('left')" onpointerup="stopAction('left')" onpointerleave="stopAction('left')" title="Pan Left">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                </button>
+                <button class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" onpointerdown="startAction('right')" onpointerup="stopAction('right')" onpointerleave="stopAction('right')" title="Pan Right">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg>
+                </button>
+                <button class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" onpointerdown="startAction('up')" onpointerup="stopAction('up')" onpointerleave="stopAction('up')" title="Pan Up">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+                </button>
+                <button class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" onpointerdown="startAction('down')" onpointerup="stopAction('down')" onpointerleave="stopAction('down')" title="Pan Down">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/></svg>
+                </button>
+                <div class="w-px h-6 bg-gray-600 mx-1"></div> <!-- Separator -->
+                <button class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" onpointerdown="startAction('zoomIn')" onpointerup="stopAction('zoomIn')" onpointerleave="stopAction('zoomIn')" title="Zoom In">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                </button>
+                <button class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" onpointerdown="startAction('zoomOut')" onpointerup="stopAction('zoomOut')" onpointerleave="stopAction('zoomOut')" title="Zoom Out">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H5v-2h14v2z"/></svg>
+                </button>
+            </div>
+
+            <!-- Right Group -->
+            <div class="flex items-center gap-1 sm:gap-2">
+                <button onclick="toggleFullScreen()" class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" title="Fullscreen">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                </button>
+                <button onclick="toggleBottomBar()" class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" title="Hide Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                </button>
+                <button onclick="navigateScene(1)" class="control-btn text-gray-300 p-2 hover:bg-gray-700 hover:text-white rounded transition-colors" title="Next Scene">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let camera, scene, renderer, mesh;
+        
+        // Interaction & Auto-rotation variables
+        let isUserInteracting = false;
+        let onPointerDownPointerX = 0, onPointerDownPointerY = 0;
+        let lon = -90, onPointerDownLon = 0; // Start facing Front (-Z axis)
+        let lat = 0, onPointerDownLat = 0;
+        let phi = 0, theta = 0;
+        let currentSceneIndex = 'main';
+
+        // Camera Transition Variables
+        let isTransitioning = false;
+        let targetLon = 0;
+        let targetLat = 0;
+
+        // Custom User Uploads for ALL Scenes
+        // Stores custom textures organized by scene ID/Index
+        const customTextures = {
+            'main': [null, null, null, null, null, null],
+            0: [null, null, null, null, null, null],
+            1: [null, null, null, null, null, null],
+            2: [null, null, null, null, null, null],
+            3: [null, null, null, null, null, null],
+            4: [null, null, null, null, null, null],
+            5: [null, null, null, null, null, null],
+            6: [null, null, null, null, null, null],
+            7: [null, null, null, null, null, null],
+            8: [null, null, null, null, null, null],
+            9: [null, null, null, null, null, null],
+            10: [null, null, null, null, null, null],
+            11: [null, null, null, null, null, null],
+            12: [null, null, null, null, null, null],
+            13: [null, null, null, null, null, null]
+        };
+
+        // Define 14 Urban & Industrial Scenes with Pexels Thumbnails
+        const scenes = [
+            { id: 1, title: '1. KCN Thịnh Minh', thumb: 'https://images.pexels.com/photos/21968623/pexels-photo-21968623.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 220 },
+            { id: 2, title: '2. Cụm CN Thịnh Minh', thumb: 'https://images.pexels.com/photos/6060193/pexels-photo-6060193.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 140 },
+            { id: 3, title: '3. Nhà máy điện', thumb: 'https://images.pexels.com/photos/5462683/pexels-photo-5462683.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 20 },
+            { id: 4, title: '4. Nhà máy nước', thumb: 'https://images.pexels.com/photos/6754763/pexels-photo-6754763.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 280 },
+            { id: 5, title: '5. NM xử lý nước thải', thumb: 'https://images.pexels.com/photos/12634302/pexels-photo-12634302.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 40 },
+            { id: 6, title: '6. Khu Nhà ở thấp tầng', thumb: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 180 },
+            { id: 7, title: '7. Khu Nhà ở cao tầng', thumb: 'https://images.pexels.com/photos/27075286/pexels-photo-27075286.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 340 },
+            { id: 8, title: '8. Nhà ở Chuyên gia', thumb: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 200 },
+            { id: 9, title: '9. Bãi đỗ xe', thumb: 'https://images.pexels.com/photos/9083321/pexels-photo-9083321.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 60 },
+            { id: 10, title: '10. Chợ đầu mối', thumb: 'https://images.pexels.com/photos/27523707/pexels-photo-27523707.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 100 },
+            { id: 11, title: '11. TT Thương mại dịch vụ', thumb: 'https://images.pexels.com/photos/31994188/pexels-photo-31994188.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 300 },
+            { id: 12, title: '12. Trường học', thumb: 'https://images.pexels.com/photos/256455/pexels-photo-256455.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 160 },
+            { id: 13, title: '13. Bệnh viện', thumb: 'https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 320 },
+            { id: 14, title: '14. Khu An Ninh', thumb: 'https://images.pexels.com/photos/10143239/pexels-photo-10143239.jpeg?auto=compress&cs=tinysrgb&w=400', baseHue: 240 }
+        ];
+
+        // Hotspot Pins Data - Separated per scene!
+        const allPinsData = {
+            'main': [] // Will be populated dynamically below
+        };
+
+        // Data dictionary storing detailed descriptions for each specific scene
+        const sceneDetails = {
+            0: `Khu công nghiệp trung tâm được quy hoạch theo mô hình Hệ sinh thái Tuần hoàn (Circular Economy). Phát triển song song không gian sản xuất công nghệ cao và bảo vệ nghiêm ngặt đa dạng sinh học.|THÔNG SỐ ESG & KỸ THUẬT|Tổng diện tích:500 ha|Tỷ lệ lấp đầy:85%|Chứng chỉ quy hoạch:LEED Platinum (USGBC)|Mật độ xây dựng:< 45%|Ngành nghề trọng tâm:Vi mạch, AI, Tự động hóa|Tỷ lệ Không gian xanh:30% (Tiêu chuẩn EIP)|Mục tiêu Net Zero:Đạt 100% vào năm 2035`,
+            1: `Cụm công nghiệp phụ trợ dành riêng cho các doanh nghiệp SMEs toàn cầu. Cung cấp nền tảng logistics và chuỗi cung ứng dùng chung đạt chuẩn quốc tế.|THÔNG SỐ ESG & KỸ THUẬT|Quy mô diện tích:120 ha|Tiêu chuẩn nhà xưởng:EDGE Advanced|Tải trọng sàn:3.5 - 5.0 Tấn/m2|Chiều cao thông thủy:Từ 9.5m đến 12.0m|Cấp điện áp:Trạm nội khu 110/22kV|Logistics dùng chung:Kho thông minh (AS/RS)|Hệ thống PCCC:NFPA (Hoa Kỳ)|Giao thông bốc dỡ:Đường nội bộ rộng 40m|Xử lý rác thải:Phân loại tại nguồn (Zero Waste)|Tỷ lệ tái chế vật liệu:Lên tới 85%`
+        };
+
+        // Helper to fetch exact details or fallback to default
+        function getSceneDetails(index) {
+            return sceneDetails[index] || sceneDetails[0];
+        }
+
+        // Automatically generate 6 demo pins for each of the 14 library scenes
+        scenes.forEach((scene, index) => {
+            const details = getSceneDetails(index);
+            allPinsData[index] = [
+                { id: 'A', title: `${scene.title} - Khu A`, desc: `Khu vực A thuộc ${scene.title}.`, detailedDesc: details, img: 'https://images.pexels.com/photos/1216889/pexels-photo-1216889.jpeg?auto=compress&cs=tinysrgb&w=200', position: new THREE.Vector3(-45, -5, -48) },
+                { id: 'B', title: `${scene.title} - Khu B`, desc: `Khu vực B thuộc ${scene.title}.`, detailedDesc: details, img: 'https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=200', position: new THREE.Vector3(48, -25, 15) },
+                { id: 'C', title: `${scene.title} - Khu C`, desc: `Khu vực C thuộc ${scene.title}.`, detailedDesc: details, img: 'https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?auto=compress&cs=tinysrgb&w=200', position: new THREE.Vector3(-25, -15, 48) },
+                { id: 'D', title: `${scene.title} - Khu D`, desc: `Khu vực D thuộc ${scene.title}.`, detailedDesc: details, img: 'https://images.pexels.com/photos/247763/pexels-photo-247763.jpeg?auto=compress&cs=tinysrgb&w=200', position: new THREE.Vector3(-48, -25, -5) },
+                { id: 'E', title: `${scene.title} - Khu E`, desc: `Khu vực E thuộc ${scene.title}.`, detailedDesc: details, img: 'https://images.pexels.com/photos/18468459/pexels-photo-18468459.jpeg?auto=compress&cs=tinysrgb&w=200', position: new THREE.Vector3(25, -25, -48) },
+                { id: 'F', title: `${scene.title} - Khu F`, desc: `Khu vực F thuộc ${scene.title}.`, detailedDesc: details, img: 'https://images.pexels.com/photos/3862365/pexels-photo-3862365.jpeg?auto=compress&cs=tinysrgb&w=200', position: new THREE.Vector3(-45, -25, 48) }
+            ];
+        });
+
+        // Generate 14 pins for the main scene mapping to the 14 library scenes
+        const mainPositions = [
+            new THREE.Vector3(-25, 0, -48),  // Front Left
+            new THREE.Vector3(0, 15, -48),   // Front Center
+            new THREE.Vector3(25, -15, -48), // Front Right
+            new THREE.Vector3(48, 10, -20),  // Right Top
+            new THREE.Vector3(48, -5, 0),    // Right Center
+            new THREE.Vector3(48, 20, 25),   // Right Back
+            new THREE.Vector3(25, 0, 48),    // Back Right
+            new THREE.Vector3(0, -20, 48),   // Back Center
+            new THREE.Vector3(-25, 15, 48),  // Back Left
+            new THREE.Vector3(-48, -10, 20), // Left Back
+            new THREE.Vector3(-48, 5, 0),    // Left Center
+            new THREE.Vector3(-48, 25, -25), // Left Top
+            new THREE.Vector3(0, 48, 0),     // Top Face
+            new THREE.Vector3(0, -48, 0)     // Bottom Face
+        ];
+
+        scenes.forEach((scene, index) => {
+            allPinsData['main'].push({
+                id: scene.id.toString(),
+                title: scene.title,
+                desc: `Nhấn vào đây để đi đến không gian: ${scene.title}`,
+                detailedDesc: getSceneDetails(index),
+                img: scene.thumb,
+                position: mainPositions[index],
+                targetSceneIndex: index // We store this to navigate on click
+            });
+        });
+
+        // Button control states
+        const activeActions = {
+            left: false, right: false, up: false, down: false, zoomIn: false, zoomOut: false
+        };
+
+        // Definition of the 6 box faces
+        const faceConfigs = [
+            { label: 'Face 1 (Left)', direction: 'Left', color: '#991b1b', index: 0 },
+            { label: 'Face 2 (Right)', direction: 'Right', color: '#075985', index: 1 },
+            { label: 'Face 3 (Top)', direction: 'Top', color: '#065f46', index: 2 },
+            { label: 'Face 4 (Bottom)', direction: 'Bottom', color: '#86198f', index: 3 },
+            { label: 'Face 5 (Back)', direction: 'Back', color: '#9a3412', index: 4 },
+            { label: 'Face 6 (Front)', direction: 'Front', color: '#3730a3', index: 5 }
+        ];
+
+        window.onload = function() {
+            initThreeJS();
+            initUI();
+            initRightPanel();
+            renderScenePins();
+            renderSceneCarousel();
+            animate();
+        };
+
+        function renderScenePins() {
+            const container = document.getElementById('pins-container');
+            container.innerHTML = ''; // Clear previous pins
+            
+            const currentPins = allPinsData[currentSceneIndex] || [];
+            
+            currentPins.forEach((pin, index) => {
+                const pinElement = document.createElement('div');
+                pinElement.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group pointer-events-auto';
+                
+                // Add interaction: navigate to a scene OR focus on the pin
+                pinElement.onclick = () => {
+                    if (pin.targetSceneIndex !== undefined) {
+                        loadScene(pin.targetSceneIndex);
+                        openInfoPanel(pin);
+                    } else {
+                        focusOnLocation(index);
+                    }
+                };
+
+                pinElement.innerHTML = `
+                    <!-- Marker -->
+                    <div class="marker-div w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg border-2 border-white group-hover:scale-110 transition-transform group-hover:bg-red-500 relative">
+                        ${pin.id}
+                    </div>
+                `;
+                container.appendChild(pinElement);
+                // Save reference to element for 3D updating
+                pin.element = pinElement;
+            });
+        }
+
+        function updatePins() {
+            const container = document.getElementById('pins-container');
+            const currentPins = allPinsData[currentSceneIndex] || [];
+            
+            if (currentPins.length === 0) {
+                container.style.display = 'none';
+                return;
+            } else {
+                container.style.display = 'block';
+            }
+
+            const widthHalf = window.innerWidth / 2;
+            const heightHalf = window.innerHeight / 2;
+
+            currentPins.forEach(pin => {
+                if (!pin.element) return;
+                
+                const vector = pin.position.clone();
+                vector.project(camera);
+
+                if (vector.z > 1) {
+                    pin.element.style.display = 'none';
+                } else {
+                    pin.element.style.display = 'block';
+                    pin.element.style.left = (vector.x * widthHalf + widthHalf) + 'px';
+                    pin.element.style.top = (-(vector.y * heightHalf) + heightHalf) + 'px';
+                }
+            });
+        }
+
+        function initRightPanel() {
+            const container = document.getElementById('scene-list-container');
+            container.innerHTML = ''; 
+
+            const mainLi = document.createElement('li');
+            mainLi.className = `cursor-pointer p-3 rounded-lg border transition-all flex items-center gap-3 ${currentSceneIndex === 'main' ? 'bg-emerald-600/20 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.2)]' : 'bg-[#1f2937]/50 border-gray-700/50 hover:border-emerald-500/50'}`;
+            mainLi.onclick = () => loadScene('main');
+            mainLi.innerHTML = `
+                <div class="w-10 h-10 rounded bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center shrink-0 shadow-md">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-bold text-white truncate">Tổng quan</p>
+                    <p class="text-xs text-gray-400 truncate">Your custom upload</p>
+                </div>
+            `;
+            container.appendChild(mainLi);
+
+            scenes.forEach((scene, index) => {
+                const li = document.createElement('li');
+                li.className = `cursor-pointer p-3 rounded-lg border transition-all flex items-center gap-3 ${currentSceneIndex === index ? 'bg-emerald-600/20 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.2)]' : 'bg-[#1f2937]/50 border-gray-700/50 hover:border-emerald-500/50'}`;
+                li.onclick = () => loadScene(index);
+                li.innerHTML = `
+                    <div class="w-10 h-10 rounded overflow-hidden shrink-0 border border-gray-700">
+                        <img src="${scene.thumb}" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-white truncate">${scene.title}</p>
+                        <p class="text-xs text-gray-400 truncate">Library Scene</p>
+                    </div>
+                `;
+                container.appendChild(li);
+            });
+        }
+
+        function renderSceneCarousel() {
+            const track = document.getElementById('locations-track');
+            track.innerHTML = '';
+            
+            const currentPins = allPinsData[currentSceneIndex] || [];
+
+            if (currentPins.length === 0) {
+                track.innerHTML = `<div class="text-gray-400 text-sm italic px-4 py-8">No specific locations mapped for this scene.</div>`;
+                return;
+            }
+            
+            currentPins.forEach((pin, index) => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item relative w-48 h-28 flex-shrink-0 cursor-pointer border-[3px] border-transparent hover:border-emerald-500/50 transition-all shadow-lg rounded overflow-hidden group';
+                item.onclick = () => focusOnLocation(index);
+                item.innerHTML = `
+                    <img src="${pin.img}" alt="${pin.title}" class="w-full h-full object-cover" loading="lazy" />
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                    <div class="absolute top-1 left-1 bg-red-600 text-white font-bold text-xs w-5 h-5 flex items-center justify-center rounded-full shadow border border-white/50">
+                        ${pin.id}
+                    </div>
+                    <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-2 pt-6">
+                        <span class="block text-xs font-semibold text-white truncate shadow-black drop-shadow-md">${pin.title}</span>
+                    </div>
+                `;
+                track.appendChild(item);
+            });
+        }
+
+        window.toggleLocationsMenu = function() {
+            const carousel = document.getElementById('locations-carousel');
+            if (carousel.classList.contains('hidden')) {
+                carousel.classList.remove('hidden');
+            } else {
+                carousel.classList.add('hidden');
+            }
+        };
+
+        window.focusOnLocation = function(index) {
+            const carousel = document.getElementById('locations-carousel');
+            if (carousel.classList.contains('hidden')) {
+                carousel.classList.remove('hidden');
+            }
+
+            const items = document.querySelectorAll('.carousel-item');
+            items.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.replace('border-transparent', 'border-emerald-400');
+                    item.classList.replace('hover:border-emerald-500/50', 'border-emerald-400');
+                } else {
+                    item.classList.replace('border-emerald-400', 'border-transparent');
+                    item.classList.add('hover:border-emerald-500/50');
+                }
+            });
+
+            isUserInteracting = false;
+            
+            const currentPins = allPinsData[currentSceneIndex] || [];
+            if (!currentPins[index]) return;
+            
+            const pin = currentPins[index];
+            const pos = pin.position;
+
+            const radius = pos.length();
+            const phiCalc = Math.acos(pos.y / radius);
+            const thetaCalc = Math.atan2(pos.z, pos.x);
+
+            targetLat = 90 - THREE.MathUtils.radToDeg(phiCalc);
+            let rawTargetLon = THREE.MathUtils.radToDeg(thetaCalc);
+
+            while (rawTargetLon - lon > 180) rawTargetLon -= 360;
+            while (rawTargetLon - lon < -180) rawTargetLon += 360;
+            targetLon = rawTargetLon;
+
+            isTransitioning = true;
+
+            currentPins.forEach(p => {
+                if (p.element) {
+                    const marker = p.element.querySelector('.marker-div');
+                    if (marker) marker.classList.remove('highlight-pin');
+                }
+            });
+
+            if (pin.element) {
+                const targetMarker = pin.element.querySelector('.marker-div');
+                if (targetMarker) {
+                    setTimeout(() => {
+                        targetMarker.classList.add('highlight-pin');
+                        setTimeout(() => targetMarker.classList.remove('highlight-pin'), 3600);
+                    }, 100);
+                }
+            }
+
+            openInfoPanel(pin);
+        };
+
+        window.openInfoPanel = function(pin) {
+            const panel = document.getElementById('info-panel');
+            const title = document.getElementById('info-title');
+            const content = document.getElementById('info-content');
+
+            title.innerText = pin.title;
+
+            // Updated Layout exactly matching user's reference image
+            if (pin.detailedDesc) {
+                const parts = pin.detailedDesc.split('|');
+                let html = `<p class="text-[15px] text-gray-300 leading-relaxed text-justify">${parts[0]}</p>`;
+                if (parts.length > 1) {
+                    html += `
+                        <div class="mt-8">
+                            <h3 class="text-white font-bold tracking-wide uppercase text-[16px] inline-block border-b-2 border-emerald-500 pb-1 mb-4">
+                                ${parts[1]}
+                            </h3>
+                            <ul class="space-y-0">
+                    `;
+                    for(let i=2; i<parts.length; i++) {
+                        const lineParts = parts[i].split(':');
+                        if (lineParts.length > 1) {
+                            html += `<li class="text-[14px] flex justify-between items-center border-b border-gray-800 py-3"><span class="text-gray-400 font-medium">${lineParts[0]}</span> <span class="text-emerald-400 font-bold text-right ml-4 max-w-[60%]">${lineParts.slice(1).join(':')}</span></li>`;
+                        } else {
+                            html += `<li class="text-[14px] text-gray-300 py-3 border-b border-gray-800">${parts[i]}</li>`;
+                        }
+                    }
+                    html += `</ul></div>`;
+                }
+                content.innerHTML = html;
+            } else {
+                content.innerHTML = `<p class="text-sm text-gray-300">${pin.desc}</p>`;
+            }
+
+            panel.style.transform = 'translateX(0)';
+
+            // Hide the builder menu if open so they don't overlap awkwardly
+            if (sideMenuVisible) {
+                toggleMenu();
+            }
+        };
+
+        window.closeInfoPanel = function() {
+            document.getElementById('info-panel').style.transform = 'translateX(-100%)';
+        };
+
+        window.loadScene = function(sceneIndex) {
+            currentSceneIndex = sceneIndex;
+            
+            // Update UI Builder Title
+            const builderTitle = document.getElementById('builder-title');
+            if (sceneIndex === 'main') {
+                builderTitle.innerText = "360° SPACE Builder";
+            } else {
+                builderTitle.innerText = `${scenes[sceneIndex].title}`;
+            }
+
+            // Clear file input visuals so the user knows they can upload for the new scene
+            const fileInputs = document.querySelectorAll('#upload-container input[type="file"]');
+            fileInputs.forEach(input => input.value = '');
+
+            faceConfigs.forEach((config, i) => {
+                // If the user has already uploaded a custom texture for this specific scene & face, use it
+                if (customTextures[currentSceneIndex][i]) {
+                    mesh.material[i].map = customTextures[currentSceneIndex][i];
+                } else {
+                    // Otherwise, render the default placeholder
+                    let texture;
+                    if (sceneIndex === 'main') {
+                        texture = createPlaceholderTexture(config.label, config.color);
+                    } else {
+                        const sceneData = scenes[sceneIndex];
+                        const faceHue = (sceneData.baseHue + (i * 45)) % 360;
+                        const faceColor = `hsl(${faceHue}, 70%, 25%)`;
+                        const titleText = `${sceneData.title}\n(${config.direction} Face)`;
+                        texture = createPlaceholderTexture(titleText, faceColor);
+                    }
+                    
+                    if (i === 2 || i === 3) {
+                        texture.center.set(0.5, 0.5);
+                        texture.rotation = Math.PI;
+                    }
+                    mesh.material[i].map = texture;
+                }
+                mesh.material[i].needsUpdate = true;
+            });
+            
+            initRightPanel();
+            
+            // Re-render pins and carousel for the newly selected scene
+            renderScenePins();
+            renderSceneCarousel();
+            
+            // Tự động cập nhật Sidetab thông tin theo Scene đang xem
+            if (sceneIndex === 'main') {
+                openInfoPanel({
+                    title: "360° SPACE Builder",
+                    desc: "Khu vực không gian tùy chỉnh. Hãy sử dụng menu Upload để thiết lập hình ảnh của riêng bạn.",
+                    detailedDesc: ""
+                });
+            } else {
+                const sceneData = scenes[sceneIndex];
+                openInfoPanel({
+                    title: sceneData.title,
+                    desc: `Thông tin tổng quan về: ${sceneData.title}`,
+                    detailedDesc: getSceneDetails(sceneIndex)
+                });
+            }
+            
+            // Stop any ongoing transitions from the previous scene
+            isTransitioning = false;
+        };
+
+        window.navigateScene = function(direction) {
+            // Treat 'main' scene as index -1 for calculation purposes
+            let currentIndex = currentSceneIndex === 'main' ? -1 : currentSceneIndex;
+            let nextIndex = currentIndex + direction;
+            
+            // Wrap around logic
+            if (nextIndex < -1) {
+                nextIndex = scenes.length - 1; // Wrap to last library scene
+            } else if (nextIndex >= scenes.length) {
+                nextIndex = -1; // Wrap back to main scene
+            }
+            
+            const targetScene = nextIndex === -1 ? 'main' : nextIndex;
+            loadScene(targetScene);
+        };
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100);
+            scene = new THREE.Scene();
+
+            const geometry = new THREE.BoxGeometry(100, 100, 100);
+            geometry.scale(-1, 1, 1);
+
+            const materials = faceConfigs.map(config => {
+                const texture = createPlaceholderTexture(config.label, config.color);
+                
+                if (config.index === 2 || config.index === 3) {
+                    texture.center.set(0.5, 0.5);
+                    texture.rotation = Math.PI;
+                }
+
+                return new THREE.MeshBasicMaterial({ map: texture });
+            });
+
+            mesh = new THREE.Mesh(geometry, materials);
+            scene.add(mesh);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            container.addEventListener('pointerdown', onPointerDown);
+            document.addEventListener('wheel', onDocumentMouseWheel);
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function createPlaceholderTexture(text, bgColor) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1024;
+            canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, 1024, 1024);
+
+            // --- Detailed Alphanumeric Grid ---
+            const cols = 10;
+            const rows = 10;
+            const cellSize = 1024 / cols;
+
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.font = 'bold 24px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const x = c * cellSize;
+                    const y = r * cellSize;
+                    
+                    // Draw cell border
+                    ctx.strokeRect(x, y, cellSize, cellSize);
+                    
+                    // Draw cell identifier (e.g., A1, B5, J10)
+                    const colName = String.fromCharCode(65 + c); // 65 is 'A' in ASCII
+                    const rowName = r + 1;
+                    ctx.fillText(`${colName}${rowName}`, x + cellSize / 2, y + cellSize / 2);
+                }
+            }
+
+            // Outer Border
+            ctx.lineWidth = 20;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.strokeRect(20, 20, 984, 984);
+
+            // --- Main Face Text ---
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Add a text shadow so the main title is highly readable over the grid
+            ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = 3;
+            ctx.shadowOffsetY = 3;
+            
+            const lines = text.split('\n');
+            if (lines.length > 1) {
+                ctx.font = 'bold 70px sans-serif';
+                ctx.fillText(lines[0], 512, 450);
+                
+                ctx.font = 'normal 50px sans-serif';
+                ctx.fillStyle = '#cccccc'; 
+                ctx.fillText(lines[1], 512, 540);
+            } else {
+                ctx.font = 'bold 80px sans-serif';
+                ctx.fillText(text, 512, 512);
+            }
+
+            // Reset shadow to avoid affecting other potential renders
+            ctx.shadowColor = "transparent";
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.minFilter = THREE.LinearFilter;
+            return texture;
+        }
+
+        function initUI() {
+            const container = document.getElementById('upload-container');
+            faceConfigs.forEach(config => {
+                const item = document.createElement('div');
+                item.className = "bg-[#1f2937] p-3 rounded-lg border border-gray-700 hover:border-emerald-500/60 transition-colors shadow-inner";
+                item.innerHTML = `
+                    <label class="block text-sm font-medium text-white/90 mb-2 flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full" style="background-color: ${config.color}"></div>
+                        ${config.label}
+                    </label>
+                    <input type="file" accept="image/*" onchange="handleUpload(${config.index}, event)" 
+                           class="block w-full text-sm text-gray-400 
+                                  file:mr-4 file:py-2 file:px-4 
+                                  file:rounded-md file:border-0 
+                                  file:text-sm file:font-bold 
+                                  file:bg-emerald-600 file:text-white 
+                                  hover:file:bg-emerald-500 file:cursor-pointer cursor-pointer transition-colors"/>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        window.handleUpload = function(index, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const image = new Image();
+                image.onload = function() {
+                    const texture = new THREE.Texture(image);
+                    texture.needsUpdate = true;
+                    texture.minFilter = THREE.LinearFilter; 
+                    texture.generateMipmaps = true;
+
+                    if (index === 2 || index === 3) {
+                        texture.center.set(0.5, 0.5);
+                        texture.rotation = Math.PI;
+                    }
+
+                    // Store the uploaded texture for the CURRENTly active scene
+                    customTextures[currentSceneIndex][index] = texture;
+
+                    // Apply the texture to the mesh immediately
+                    mesh.material[index].map = texture;
+                    mesh.material[index].needsUpdate = true;
+                };
+                image.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        };
+
+        // --- Camera & Interaction Controls ---
+
+        function onPointerDown(event) {
+            if (event.isPrimary === false) return;
+            isUserInteracting = true;
+            isTransitioning = false; 
+
+            onPointerDownPointerX = event.clientX;
+            onPointerDownPointerY = event.clientY;
+            onPointerDownLon = lon;
+            onPointerDownLat = lat;
+
+            document.addEventListener('pointermove', onPointerMove);
+            document.addEventListener('pointerup', onPointerUp);
+        }
+
+        function onPointerMove(event) {
+            if (event.isPrimary === false) return;
+            lon = (onPointerDownPointerX - event.clientX) * 0.15 + onPointerDownLon;
+            lat = (event.clientY - onPointerDownPointerY) * 0.15 + onPointerDownLat;
+        }
+
+        function onPointerUp(event) {
+            if (event.isPrimary === false) return;
+            isUserInteracting = false;
+            document.removeEventListener('pointermove', onPointerMove);
+            document.removeEventListener('pointerup', onPointerUp);
+        }
+
+        function onDocumentMouseWheel(event) {
+            const fov = camera.fov + event.deltaY * 0.05;
+            camera.fov = THREE.MathUtils.clamp(fov, 20, 100);
+            camera.updateProjectionMatrix();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // --- Bottom Bar Button Controls ---
+        window.startAction = function(action) {
+            activeActions[action] = true;
+            isUserInteracting = true; 
+            isTransitioning = false;  
+        };
+
+        window.stopAction = function(action) {
+            activeActions[action] = false;
+            isUserInteracting = false;
+        };
+
+        function processActiveActions() {
+            let fovChanged = false;
+            
+            if (activeActions.left) lon -= 1.5;
+            if (activeActions.right) lon += 1.5;
+            if (activeActions.up) lat += 1.5;
+            if (activeActions.down) lat -= 1.5;
+            
+            if (activeActions.zoomIn) {
+                camera.fov = Math.max(20, camera.fov - 1);
+                fovChanged = true;
+            }
+            if (activeActions.zoomOut) {
+                camera.fov = Math.min(100, camera.fov + 1);
+                fovChanged = true;
+            }
+
+            if (fovChanged) camera.updateProjectionMatrix();
+        }
+
+        // --- Main Animation Loop ---
+
+        function animate() {
+            requestAnimationFrame(animate);
+            update();
+        }
+
+        function update() {
+            processActiveActions();
+
+            if (isTransitioning) {
+                lon += (targetLon - lon) * 0.05;
+                lat += (targetLat - lat) * 0.05;
+                
+                if (Math.abs(targetLon - lon) < 0.1 && Math.abs(targetLat - lat) < 0.1) {
+                    isTransitioning = false;
+                }
+            } else if (!isUserInteracting) {
+                lon += 0.05;
+            }
+
+            lat = Math.max(-85, Math.min(85, lat));
+            
+            phi = THREE.MathUtils.degToRad(90 - lat);
+            theta = THREE.MathUtils.degToRad(lon);
+
+            const targetX = 500 * Math.sin(phi) * Math.cos(theta);
+            const targetY = 500 * Math.cos(phi);
+            const targetZ = 500 * Math.sin(phi) * Math.sin(theta);
+
+            camera.lookAt(targetX, targetY, targetZ);
+            renderer.render(scene, camera);
+
+            updatePins();
+        }
+
+        // --- UI Toggles & Features ---
+        let sideMenuVisible = true;
+        const uiPanel = document.getElementById('ui-panel');
+        const toggleBtn = document.getElementById('toggle-btn');
+
+        let rightMenuVisible = true;
+        const rightPanel = document.getElementById('right-panel');
+        const toggleRightBtn = document.getElementById('toggle-right-btn');
+
+        window.toggleMenu = function() {
+            sideMenuVisible = !sideMenuVisible;
+            if (sideMenuVisible) {
+                uiPanel.style.transform = 'translateX(0)';
+                toggleBtn.classList.add('hidden');
+            } else {
+                uiPanel.style.transform = 'translateX(-100%)';
+                toggleBtn.classList.remove('hidden');
+            }
+        };
+
+        window.toggleRightMenu = function() {
+            rightMenuVisible = !rightMenuVisible;
+            if (rightMenuVisible) {
+                rightPanel.style.transform = 'translateX(0)';
+                toggleRightBtn.classList.add('hidden');
+            } else {
+                rightPanel.style.transform = 'translateX(100%)';
+                toggleRightBtn.classList.remove('hidden');
+            }
+        };
+
+        window.toggleBottomBar = function() {
+            // Target the wrapper instead of just the control bar so the carousel moves too
+            const wrapper = document.getElementById('bottom-ui-wrapper');
+            const showBtn = document.getElementById('show-bottom-bar-btn');
+            
+            if (wrapper.classList.contains('translate-y-full')) {
+                wrapper.classList.remove('translate-y-full');
+                showBtn.classList.add('hidden');
+            } else {
+                wrapper.classList.add('translate-y-full');
+                showBtn.classList.remove('hidden');
+            }
+        };
+
+        window.toggleFullScreen = function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        };
+    </script>
+</body>
+</html>
